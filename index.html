@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IFR | Examen simulación 2 ECOEMS</title>
+  <meta
+    name="description"
+    content="Simulador institucional IFR del examen ECOEMS con cronómetro, avance secuencial, métricas en vivo y repaso inteligente por áreas y bloques."
+  >
+  <link rel="icon" href="escudo-ifr-real.jpg" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="exam-styles.css?v=20260507a">
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <div class="brand">
+        <img src="escudo-ifr-real.jpg" alt="Escudo del Instituto Fernando Ramírez">
+        <div>
+          <strong>Instituto Fernando Ramírez</strong>
+          <small>ECOEMS 2026</small>
+          <span>Examen simulación 2 · modo evaluación</span>
+        </div>
+      </div>
+
+      <div class="top-panel">
+        <article class="metric metric-timer metric-primary" id="timerMetric">
+          <span class="metric-label">Tiempo restante</span>
+          <strong class="metric-value" id="timerValue">03:00:00</strong>
+          <small class="metric-note" id="timerNote"></small>
+        </article>
+
+        <div class="metric-grid">
+          <article class="metric metric-primary metric-progress">
+            <span class="metric-label">Contestados</span>
+            <strong class="metric-value" id="answeredValue">0</strong>
+            <small class="metric-note">de <span id="totalValue">0</span></small>
+          </article>
+          <article class="metric metric-secondary">
+            <span class="metric-label">Correctos</span>
+            <strong class="metric-value metric-ok" id="correctValue">0</strong>
+            <small class="metric-note">aciertos</small>
+          </article>
+          <article class="metric metric-secondary">
+            <span class="metric-label">Incorrectos</span>
+            <strong class="metric-value metric-bad" id="incorrectValue">0</strong>
+            <small class="metric-note">errores</small>
+          </article>
+          <article class="metric metric-secondary">
+            <span class="metric-label">Puntaje</span>
+            <strong class="metric-value" id="scoreValue">0/128</strong>
+            <small class="metric-note" id="scorePercentValue">0.0/100</small>
+          </article>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="cover" id="cover">
+      <div class="cover-main">
+        <h1>Examen simulación 2 ECOEMS</h1>
+        <ul class="lead-list" aria-label="Instrucciones generales del simulador">
+          <li>Responde un reactivo a la vez. El siguiente se abre cuando terminas el actual.</li>
+          <li>Tienes 3 horas para completar la evaluación y el cronómetro corre una sola vez.</li>
+          <li>Tu avance, aciertos, errores y puntaje se actualizan mientras respondes.</li>
+          <li>Al final verás tu resultado y los bloques temáticos que conviene repasar.</li>
+        </ul>
+
+        <div class="alert alert-warn">
+          <strong>No refresques la página.</strong>
+          <p>Si recargas o cierras esta pestaña durante la evaluación, todo el avance se reinicia y tendrás que comenzar desde cero.</p>
+        </div>
+
+        <div class="cover-facts" id="coverFacts"></div>
+
+        <section class="cover-section" aria-labelledby="areasIncluidasTitle">
+          <div class="cover-section-head">
+            <h2 id="areasIncluidasTitle">Áreas incluidas</h2>
+            <p>Revisa las áreas del examen y el rango de reactivos que corresponde a cada una.</p>
+          </div>
+          <div class="area-list" id="areaList"></div>
+        </section>
+
+        <div class="cover-actions">
+          <button class="start-btn" id="startExam" type="button">Iniciar examen</button>
+          <p class="start-state" id="startState">La evaluación está detenida. El tiempo no corre hasta que presiones «Iniciar examen».</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="exam-bar" id="examBar" hidden>
+      <div class="exam-bar-copy">
+        <strong id="examBarTitle">Modo evaluación activo</strong>
+        <p id="examBarText">Responde en orden. El siguiente reactivo solo se habilita cuando resuelves el actual.</p>
+      </div>
+      <div class="exam-bar-chips">
+        <span class="bar-chip">Secuencia vertical</span>
+        <span class="bar-chip">Sin pausa</span>
+        <span class="bar-chip">Sin reinicio parcial</span>
+      </div>
+    </section>
+
+    <section class="exam-content" id="content" hidden></section>
+  </main>
+
+  <section class="modal-shell" id="modalShell" hidden aria-live="polite" aria-modal="true" role="dialog">
+    <div class="modal-scrim"></div>
+    <div class="modal-card" id="modalCard"></div>
+  </section>
+
+  <script src="exam-data.js?v=20260507a"></script>
+  <script src="exam-app.js?v=20260507a"></script>
+</body>
+</html>
