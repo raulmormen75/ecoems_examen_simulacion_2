@@ -246,7 +246,7 @@
     }
 
     if (STATE.status === 'running') {
-      nodes.timerNote.textContent = 'No refresques ni cierres la pestaña durante la evaluación.';
+      nodes.timerNote.textContent = 'Responde en orden hasta completar la evaluación.';
       return;
     }
 
