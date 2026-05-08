@@ -20,6 +20,7 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
    - Detener build si faltan Física 105-116.
    - Detener build si faltan assets obligatorios.
    - No generar `exam-data.js` de producción con 116 reactivos.
+   - Permitir `exam-data.js` parcial solo como revisión interna visible.
 
 4. Preparar documentación.
    - Registrar estado real del contenido.
@@ -35,6 +36,7 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
 
 - Base técnica V2 presente en local.
 - Parser V2 ejecuta y falla de forma controlada por Física faltante.
+- Build parcial permite revisar los 116 reactivos disponibles.
 - QA editorial confirma el bloqueo esperado.
 - Documentación declara estado no publicable.
 - Cambios guardados en GitHub.

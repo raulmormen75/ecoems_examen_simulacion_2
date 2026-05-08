@@ -20,7 +20,7 @@
 - Reactivos detectados: 116.
 - Reactivos faltantes: 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115 y 116.
 - Áreas detectadas: 9.
-- Estado: no publicable.
+- Estado: visible en modo revisión interna, no publicable como examen completo.
 
 ## Distribución de respuestas actual, sin Física
 
@@ -62,7 +62,7 @@ No se detectaron tres respuestas iguales consecutivas en el contenido actual.
 
 - Falta Física 105-116.
 - Falta generar o incorporar assets visuales V2.
-- No existe `exam-data.js` de producción porque el build fue detenido correctamente.
+- `exam-data.js` existe en modo parcial para que puedan revisarse los 116 reactivos disponibles.
 
 ## Correcciones aplicadas
 
@@ -71,3 +71,4 @@ No se detectaron tres respuestas iguales consecutivas en el contenido actual.
 - Se reemplazó el render hardcodeado de cápsulas por datos derivados del TXT.
 - Se agregó render de tablas con desplazamiento horizontal.
 - Se limpió la carpeta `assets/` para no conservar visuales reciclados de la simulación 1.
+- Se agregó modo `--partial` para mostrar contenido disponible sin declarar completo el examen.

@@ -4,6 +4,8 @@
   const EXERCISES = DATA.exercises || [];
   const TOTAL = EXERCISES.length;
   const DURATION = DATA.meta.durationSeconds || 10800;
+  const EXPECTED_TOTAL = DATA.meta.expectedTotalExercises || DATA.meta.totalExercises || TOTAL;
+  const CONTENT_STATUS = DATA.meta.contentStatus || {};
   const EXERCISE_INDEX = new Map(EXERCISES.map((exercise, index) => [exercise.id, index]));
 
   const STATE = {
@@ -201,6 +203,22 @@
   }
 
   function buildCoverFacts() {
+    if (CONTENT_STATUS.partial) {
+      return [
+        { value: `${TOTAL}/${EXPECTED_TOTAL}`, label: 'reactivos disponibles' },
+        { value: AREAS.length, label: 'áreas esperadas' },
+        { value: 'Física', label: 'pendiente 105 a 116' },
+        { value: '3 h', label: 'tiempo límite' }
+      ]
+        .map(
+          (fact) => `<article class="fact">
+          <strong>${esc(fact.value)}</strong>
+          <span>${esc(fact.label)}</span>
+        </article>`
+        )
+        .join('');
+    }
+
     return [
       { value: TOTAL, label: 'reactivos totales' },
       { value: AREAS.length, label: 'áreas temáticas' },
@@ -223,7 +241,7 @@
           <strong>${esc(area.name)}</strong>
           <span class="area-range">Reactivos ${esc(area.rangeStart)} a ${esc(area.rangeEnd)}</span>
         </div>
-        <span>${esc(area.totalExercises)} reactivos</span>
+        <span>${area.totalExercises ? `${esc(area.totalExercises)} reactivos disponibles` : 'Pendiente'}</span>
       </article>`
     ).join('');
   }
@@ -273,7 +291,7 @@
     nodes.startExam.textContent = STATE.status === 'running' ? 'Examen en curso' : 'Examen concluido';
 
     if (STATE.status === 'running') {
-      nodes.startState.textContent = 'La evaluación está activa. Si refrescas esta página, el examen se reinicia completo.';
+      nodes.startState.textContent = 'La evaluación está activa. Responde en orden para avanzar por los reactivos disponibles.';
       return;
     }
 
@@ -338,6 +356,13 @@
 
     if (visual.kind === 'preformatted') {
       return `<div class="visual-panel visual-panel-preformatted" role="region" aria-label="Tabla con desplazamiento horizontal" tabindex="0"><pre>${esc(visual.content)}</pre></div>`;
+    }
+
+    if (visual.kind === 'pending-image') {
+      return `<div class="visual-panel visual-panel-pending" role="note">
+        <strong>Apoyo visual pendiente</strong>
+        <p>Este reactivo requiere una imagen que todavía debe generarse y validarse antes de publicar el examen completo.</p>
+      </div>`;
     }
 
     if (visual.kind === 'table') {
@@ -991,11 +1016,6 @@
     }
   }
 
-  function syncBeforeUnloadWarning() {
-    if (!isRunning()) return '';
-    return 'Si refrescas esta página, el examen se reinicia y perderás todo el avance.';
-  }
-
   function startTimer() {
     clearTimer();
     STATE.timerId = window.setInterval(() => {
@@ -1462,13 +1482,6 @@
       downloadResultsPng();
     }
   }
-
-  window.addEventListener('beforeunload', (event) => {
-    const message = syncBeforeUnloadWarning();
-    if (!message) return;
-    event.preventDefault();
-    event.returnValue = message;
-  });
 
   window.addEventListener('scroll', queueTopStateSync, { passive: true });
   window.addEventListener('resize', queueTopStateSync);

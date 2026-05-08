@@ -10,9 +10,11 @@ Aplicación web estática institucional IFR para una segunda evaluación tipo EC
 
 ## Estado actual
 
-Estado: no listo para publicación.
+Estado: revisión interna con contenido parcial visible.
 
 El archivo `Examen simulación 2.txt` contiene 116 reactivos. Faltan los reactivos 105 al 116 del área Física. Por esta razón, `build-exam-data.js` bloquea la generación de `exam-data.js` de producción.
+
+Para revisión interna, el comando `node build-exam-data.js --partial` genera `exam-data.js` con los 116 reactivos disponibles, 10 áreas esperadas y avisos de assets pendientes. Esta salida no debe considerarse examen completo.
 
 También faltan los assets visuales obligatorios indicados en el TXT. La carpeta `assets/` conserva la estructura de trabajo, pero no contiene todavía las imágenes finales.
 
@@ -20,11 +22,12 @@ También faltan los assets visuales obligatorios indicados en el TXT. La carpeta
 
 ```powershell
 node build-exam-data.js
+node build-exam-data.js --partial
 node qa/run-exam-qa.js
 python -m http.server 4173
 ```
 
-Abrir `http://127.0.0.1:4173/` solo cuando exista `exam-data.js` generado con los 128 reactivos.
+Abrir `http://127.0.0.1:4173/` para revisar los 116 reactivos disponibles. La publicación como examen completo sigue bloqueada hasta integrar Física.
 
 ## Requisitos para publicar
 

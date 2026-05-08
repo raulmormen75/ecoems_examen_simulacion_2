@@ -46,6 +46,8 @@ El TXT actual contiene 116 reactivos:
 
 Falta Física, reactivos 105 al 116. Por esta razón, el build de producción está bloqueado.
 
+Para revisar el contenido ya disponible, existe modo parcial con `node build-exam-data.js --partial`. Este modo genera `exam-data.js` con 116 reactivos visibles, conserva Física como pendiente y no debe usarse para declarar el examen completo.
+
 ## Validaciones nuevas del parser
 
 - Total esperado de 128 reactivos.

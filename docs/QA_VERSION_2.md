@@ -4,7 +4,7 @@
 
 Fecha de revisión: 7 de mayo de 2026.
 
-Estado general: listo solo para revisión técnica interna. No listo para Vercel.
+Estado general: visible para revisión técnica interna. No listo como examen completo.
 
 ## Pruebas ejecutadas
 
@@ -34,9 +34,26 @@ Comando:
 node qa/run-exam-qa.js
 ```
 
-Resultado esperado mientras falte Física: confirmar que el build queda bloqueado por el motivo correcto.
+Resultado esperado mientras falte Física: confirmar que el build de producción queda bloqueado por el motivo correcto.
 
 Resultado ejecutado: pasó como puerta editorial. El script confirmó que el build de producción quedó bloqueado correctamente por Física faltante y que el estado solo sirve para revisión técnica interna.
+
+### Build parcial de revisión interna
+
+Comando:
+
+```powershell
+node build-exam-data.js --partial
+```
+
+Resultado: pasó.
+
+Hallazgos:
+
+- Se generó `exam-data.js` con 116 reactivos disponibles.
+- Se conservaron 10 áreas esperadas; Física aparece pendiente.
+- Los assets faltantes se muestran como apoyos visuales pendientes, sin imágenes rotas.
+- El contenido visible no contiene instrucciones internas.
 
 ## Pruebas pendientes
 
@@ -60,6 +77,6 @@ Estas pruebas se ejecutarán cuando exista `exam-data.js` completo:
 
 ## Estado de publicación
 
-No listo.
+No listo como examen completo.
 
 Motivo: falta Física 105-116 y faltan assets visuales obligatorios.

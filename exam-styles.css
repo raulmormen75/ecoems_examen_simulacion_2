@@ -934,6 +934,24 @@ main{
   height:auto;
 }
 
+.visual-panel-pending{
+  border:1px dashed rgba(28,30,90,.35);
+  background:rgba(238,244,255,.8);
+}
+
+.visual-panel-pending strong{
+  display:block;
+  color:var(--n1);
+  font-size:1rem;
+}
+
+.visual-panel-pending p{
+  margin-top:6px;
+  color:var(--n2);
+  line-height:1.55;
+  font-weight:650;
+}
+
 #reactivo-94 .visual-panel-image img{
   width:min(100%,680px);
   margin:0 auto;

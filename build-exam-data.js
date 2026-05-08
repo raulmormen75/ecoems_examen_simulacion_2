@@ -5,6 +5,7 @@ const ROOT = __dirname;
 const SOURCE_FILE = path.join(ROOT, 'Examen simulación 2.txt');
 const OUTPUT_FILE = path.join(ROOT, 'exam-data.js');
 const EXPECTED_TOTAL = 128;
+const ALLOW_PARTIAL = process.argv.includes('--partial') || process.env.IFR_ALLOW_PARTIAL === 'true';
 
 const EXPECTED_AREAS = [
   { id: 'habilidad-matematica', name: 'Habilidad matemática', rangeStart: 1, rangeEnd: 16 },
@@ -68,6 +69,25 @@ function isFieldLabel(line) {
   return FIELD_LABELS.includes(clean);
 }
 
+function isOperationalLine(line) {
+  const clean = normalizeLine(line);
+  return [
+    /^ÁREA TEMÁTICA:/i,
+    /^RANGO:/i,
+    /^VERSIÓN:/i,
+    /^CRITERIO GENERAL:/i,
+    /^TABLA DE CONTROL/i,
+    /^REVISIÓN DE DISTRIBUCIÓN/i,
+    /^OBSERVACIONES/i,
+    /^SECUENCIA DE RESPUESTAS/i,
+    /^DISTRIBUCIÓN/i,
+    /^=== FIN DEL ÁREA TEMÁTICA:/i,
+    /^LISTO PARA PEGAR/i,
+    /^Los reactivos \d+/i,
+    /^El reactivo \d+ requiere apoyo visual/i
+  ].some((pattern) => pattern.test(clean));
+}
+
 function findFieldIndex(lines, aliases) {
   return lines.findIndex((line) => aliases.includes(normalizeLine(line)));
 }
@@ -91,6 +111,7 @@ function parseLabeledItems(lines) {
 
   for (const rawLine of trimBlock(lines)) {
     const line = rawLine.trimEnd();
+    if (isOperationalLine(line)) break;
     const match = line.match(/^([a-eA-E])\)\s*(.*)$/);
     if (match) {
       if (current) items.push(current);
@@ -552,11 +573,71 @@ function validateExercises(exercises) {
   return { errors, warnings, distribution };
 }
 
-function buildData(exercises) {
+function getMissingNumbers(exercises) {
+  const byNumber = new Set(exercises.map((exercise) => exercise.number));
+  const missing = [];
+  for (let number = 1; number <= EXPECTED_TOTAL; number += 1) {
+    if (!byNumber.has(number)) missing.push(number);
+  }
+  return missing;
+}
+
+function getMissingAssets(exercises) {
+  return exercises
+    .filter((exercise) => exercise.visual && exercise.visual.kind === 'image' && exercise.visual.required)
+    .filter((exercise) => !fs.existsSync(path.join(ROOT, exercise.visual.src)))
+    .map((exercise) => ({
+      number: exercise.number,
+      src: exercise.visual.src
+    }));
+}
+
+function isAllowedPartialError(error) {
+  return [
+    /^ERROR: Faltan reactivos 105 al 116 del área Física\./,
+    /^ERROR: Faltan reactivos: 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116\./,
+    /^ERROR: Se detectaron 116 reactivos\. El examen simulación 2 requiere 128 reactivos\./,
+    /^ERROR: Falta el área Física \(105-116\)\./,
+    /^ERROR: Se detectaron 9 áreas\. El examen simulación 2 requiere 10 áreas\./,
+    /^ERROR: El reactivo \d+ requiere imagen, pero no se encontró el asset en /
+  ].some((pattern) => pattern.test(error));
+}
+
+function prepareExercisesForOutput(exercises, allowPartial) {
+  return [...exercises]
+    .sort((a, b) => a.number - b.number)
+    .map((exercise) => {
+      const visual = exercise.visual;
+      if (
+        allowPartial
+        && visual
+        && visual.kind === 'image'
+        && visual.required
+        && !fs.existsSync(path.join(ROOT, visual.src))
+      ) {
+        return {
+          ...exercise,
+          visual: {
+            kind: 'pending-image',
+            position: visual.position || 'base',
+            required: true,
+            src: visual.src,
+            alt: visual.alt,
+            content: `Apoyo visual pendiente: ${visual.src}`
+          }
+        };
+      }
+      return exercise;
+    });
+}
+
+function buildData(exercises, validation, allowPartial = false) {
   const areaCountMap = exercises.reduce((accumulator, exercise) => {
     accumulator[exercise.areaId] = (accumulator[exercise.areaId] || 0) + 1;
     return accumulator;
   }, {});
+  const missingNumbers = getMissingNumbers(exercises);
+  const missingAssets = getMissingAssets(exercises);
 
   return {
     meta: {
@@ -566,13 +647,22 @@ function buildData(exercises) {
       durationSeconds: 10800,
       totalExercises: exercises.length,
       expectedTotalExercises: EXPECTED_TOTAL,
-      scoreMode: 'raw-and-percent'
+      scoreMode: 'raw-and-percent',
+      contentStatus: {
+        partial: allowPartial,
+        label: allowPartial ? 'Revisión interna' : 'Completo',
+        message: allowPartial
+          ? 'Contenido disponible para revisión interna: faltan Física 105-116 y assets visuales obligatorios.'
+          : 'Contenido completo validado.',
+        missingNumbers,
+        missingAssets
+      }
     },
     areas: EXPECTED_AREAS.map((area) => ({
       ...area,
       totalExercises: areaCountMap[area.id] || 0
     })),
-    exercises: [...exercises].sort((a, b) => a.number - b.number)
+    exercises: prepareExercisesForOutput(exercises, allowPartial)
   };
 }
 
@@ -592,7 +682,24 @@ function main() {
     console.warn(warning);
   }
 
-  if (validation.errors.length) {
+  const blockingErrors = ALLOW_PARTIAL
+    ? validation.errors.filter((error) => !isAllowedPartialError(error))
+    : validation.errors;
+
+  if (blockingErrors.length) {
+    console.error('\nValidación detenida:');
+    for (const error of blockingErrors) {
+      console.error(error);
+    }
+    process.exit(1);
+  }
+
+  if (validation.errors.length && ALLOW_PARTIAL) {
+    console.warn('\nBuild parcial de revisión interna:');
+    for (const error of validation.errors) {
+      console.warn(error);
+    }
+  } else if (validation.errors.length) {
     console.error('\nValidación detenida:');
     for (const error of validation.errors) {
       console.error(error);
@@ -600,10 +707,10 @@ function main() {
     process.exit(1);
   }
 
-  const data = buildData(exercises);
+  const data = buildData(exercises, validation, ALLOW_PARTIAL);
   const output = `window.IFR_APP_DATA = ${JSON.stringify(data, null, 2)};\n`;
   fs.writeFileSync(OUTPUT_FILE, output, 'utf8');
-  console.log(`Generado ${path.basename(OUTPUT_FILE)} con ${data.meta.totalExercises} reactivos y ${data.areas.length} áreas.`);
+  console.log(`Generado ${path.basename(OUTPUT_FILE)} con ${data.meta.totalExercises} reactivos y ${data.areas.length} áreas${ALLOW_PARTIAL ? ' en modo revisión interna' : ''}.`);
 }
 
 main();

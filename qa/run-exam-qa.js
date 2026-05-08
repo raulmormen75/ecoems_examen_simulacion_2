@@ -35,8 +35,8 @@ function log(message) {
   console.log(`[qa-v2] ${message}`);
 }
 
-function runBuildGate() {
-  const result = spawnSync(process.execPath, [BUILD_FILE], {
+function runBuildGate(args = []) {
+  const result = spawnSync(process.execPath, [BUILD_FILE, ...args], {
     cwd: ROOT,
     encoding: 'utf8'
   });
@@ -78,13 +78,20 @@ function visibleTextForExercise(exercise) {
   ].filter(Boolean).join('\n');
 }
 
-function validateData(data) {
+function validateData(data, { partial = false } = {}) {
   assert.ok(data, 'No se cargó window.IFR_APP_DATA.');
   assert.equal(data.meta.title, 'Examen simulación 2 ECOEMS');
   assert.equal(data.meta.durationSeconds, 10800);
-  assert.equal(data.meta.totalExercises, EXPECTED_TOTAL);
+  assert.equal(data.meta.totalExercises, data.exercises.length);
   assert.equal(data.areas.length, EXPECTED_AREAS.length);
-  assert.equal(data.exercises.length, EXPECTED_TOTAL);
+
+  if (partial) {
+    assert.equal(data.meta.contentStatus.partial, true, 'El build parcial debe marcar contentStatus.partial.');
+    assert.equal(data.exercises.length, 116, 'El build parcial debe exponer los 116 reactivos disponibles.');
+    assert.deepEqual(data.meta.contentStatus.missingNumbers, [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116], 'El build parcial debe declarar Física faltante.');
+  } else {
+    assert.equal(data.exercises.length, EXPECTED_TOTAL);
+  }
 
   for (const [name, start, end] of EXPECTED_AREAS) {
     const area = data.areas.find((item) => item.name === name);
@@ -94,7 +101,10 @@ function validateData(data) {
   }
 
   const numbers = data.exercises.map((exercise) => exercise.number).sort((a, b) => a - b);
-  assert.deepEqual(numbers, Array.from({ length: EXPECTED_TOTAL }, (_, index) => index + 1), 'La numeración no cubre 1-128 sin huecos.');
+  const expectedNumbers = partial
+    ? [...Array.from({ length: 104 }, (_, index) => index + 1), ...Array.from({ length: 12 }, (_, index) => index + 117)]
+    : Array.from({ length: EXPECTED_TOTAL }, (_, index) => index + 1);
+  assert.deepEqual(numbers, expectedNumbers, partial ? 'La numeración parcial no coincide con los 116 reactivos disponibles.' : 'La numeración no cubre 1-128 sin huecos.');
 
   const distribution = LETTERS.reduce((accumulator, letter) => {
     accumulator[letter] = [];
@@ -122,6 +132,11 @@ function validateData(data) {
       assert.ok(fs.existsSync(path.join(ROOT, exercise.visual.src)), `Reactivo ${exercise.number}: asset faltante ${exercise.visual.src}.`);
     }
 
+    if (exercise.visual && exercise.visual.kind === 'pending-image') {
+      assert.equal(partial, true, `Reactivo ${exercise.number}: solo el build parcial puede exponer imagen pendiente.`);
+      assert.ok(exercise.visual.content.includes('Apoyo visual pendiente'), `Reactivo ${exercise.number}: placeholder visual inválido.`);
+    }
+
     if (exercise.visual && exercise.visual.kind === 'table') {
       assert.equal(exercise.visual.hasHorizontalScroll, true, `Reactivo ${exercise.number}: tabla sin scroll horizontal.`);
       assert.ok(exercise.visual.headers.length > 0, `Reactivo ${exercise.number}: tabla sin encabezados.`);
@@ -131,9 +146,11 @@ function validateData(data) {
     distribution[exercise.correctOption].push(exercise.number);
   }
 
-  for (const letter of LETTERS) {
-    const count = distribution[letter].length;
-    assert.ok(count >= 25 && count <= 26, `Distribución fuera de rango para ${letter}): ${count}.`);
+  if (!partial) {
+    for (const letter of LETTERS) {
+      const count = distribution[letter].length;
+      assert.ok(count >= 25 && count <= 26, `Distribución fuera de rango para ${letter}): ${count}.`);
+    }
   }
 
   for (let index = 0; index <= data.exercises.length - 3; index += 1) {
@@ -147,16 +164,32 @@ function validateData(data) {
     );
   }
 
-  log('Datos completos validados: 128 reactivos, 10 áreas, opciones, pistas, argumentos, assets y distribución.');
+  log(partial
+    ? 'Datos parciales validados: 116 reactivos disponibles, 10 áreas esperadas, contenido limpio y placeholders de assets.'
+    : 'Datos completos validados: 128 reactivos, 10 áreas, opciones, pistas, argumentos, assets y distribución.');
 }
 
 function main() {
   const buildSucceeded = runBuildGate();
-  if (!buildSucceeded) return;
+  if (buildSucceeded) {
+    assert.ok(fs.existsSync(DATA_FILE), 'El build indicó éxito, pero no existe exam-data.js.');
+    validateData(loadData());
+    log('QA automatizada de datos completada. Ejecutar validación de navegador real antes de publicar en Vercel.');
+    return;
+  }
 
+  log('Generando exam-data.js parcial para que la app muestre los reactivos disponibles.');
+  const partialResult = spawnSync(process.execPath, [BUILD_FILE, '--partial'], {
+    cwd: ROOT,
+    encoding: 'utf8'
+  });
+  if (partialResult.status !== 0) {
+    console.error(`${partialResult.stdout || ''}${partialResult.stderr || ''}`);
+    throw new Error('No se pudo generar el build parcial de revisión interna.');
+  }
   assert.ok(fs.existsSync(DATA_FILE), 'El build indicó éxito, pero no existe exam-data.js.');
-  validateData(loadData());
-  log('QA automatizada de datos completada. Ejecutar validación de navegador real antes de publicar en Vercel.');
+  validateData(loadData(), { partial: true });
+  log('QA parcial completada. Sigue pendiente Física 105-116 antes de publicar como examen completo.');
 }
 
 main();

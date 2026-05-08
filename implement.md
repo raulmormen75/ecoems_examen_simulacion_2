@@ -7,8 +7,9 @@
    `https://github.com/raulmormen75/ecoems_examen_simulacion_2.git`.
 3. No editar el contenido académico para inventar Física ni completar assets.
 4. Ejecutar `node build-exam-data.js` después de cambios de parser o contenido.
-5. Ejecutar `node qa/run-exam-qa.js` antes de commit.
-6. Hacer commit y push al terminar cada entrega solicitada.
+5. Ejecutar `node build-exam-data.js --partial` cuando se necesite publicar una revisión interna con los reactivos disponibles.
+6. Ejecutar `node qa/run-exam-qa.js` antes de commit.
+7. Hacer commit y push al terminar cada entrega solicitada.
 
 ## Qué no debe alterarse
 
@@ -30,6 +31,8 @@ Mensaje principal esperado:
 ```text
 ERROR: Faltan reactivos 105 al 116 del área Física. El examen simulación 2 requiere 128 reactivos. No se generó build de producción.
 ```
+
+Para revisión interna, `node build-exam-data.js --partial` genera `exam-data.js` con los 116 reactivos disponibles y placeholders de assets pendientes.
 
 ## Validación posterior a Física
 
