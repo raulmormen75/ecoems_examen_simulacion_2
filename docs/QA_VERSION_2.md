@@ -47,6 +47,7 @@ Validó:
 - Argumentos de opciones incorrectas.
 - Assets existentes.
 - Tablas con desplazamiento horizontal.
+- Ausencia de artefactos visibles tipo LaTeX o Markdown en planteamientos, opciones, pistas, argumentos y celdas de tablas.
 - Distribución de respuestas dentro de rango.
 - Sin tres respuestas iguales consecutivas.
 - Sin instrucciones internas en `exam-data.js`.
@@ -78,6 +79,8 @@ Validado:
 - El panel de advertencia sobre refrescar página ya no aparece.
 - Botón `Iniciar examen` funciona.
 - Reactivo 1 se muestra como reactivo activo.
+- Reactivos 3 y 4 muestran tablas visuales, no pipes Markdown en el planteamiento.
+- Reactivos numéricos representativos muestran operaciones limpias sin `\(`, `\[`, `\frac`, `\text{}` ni comandos similares.
 - Reactivo 5 carga imagen real en vista móvil.
 
 ## Evidencia

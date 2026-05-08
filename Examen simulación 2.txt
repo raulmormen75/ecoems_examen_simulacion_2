@@ -9,8 +9,8 @@ TABLA DE CONTROL DEL PAQUETE
 |---:|---|---|---|---|---|---|---|
 | 1 | Habilidad matemática | Series con dos reglas que se turnan | d) | No | No | No | Bajo: verificar que se distingan posiciones pares e impares |
 | 2 | Habilidad matemática | Series por ciclos | b) | No | No | No | Bajo: el ciclo de operaciones debe explicarse sin adelantar la respuesta |
-| 3 | Habilidad matemática | Tablas con números | e) | No | No | No | Bajo: tabla corta, sin riesgo de desbordamiento |
-| 4 | Habilidad matemática | Tablas con números | a) | No | No | No | Bajo: regla horizontal simple, revisar alineación de columnas |
+| 3 | Habilidad matemática | Tablas con números | e) | No | Sí | No | Bajo: tabla corta, con render visual para evitar pipes visibles |
+| 4 | Habilidad matemática | Tablas con números | a) | No | Sí | No | Bajo: regla horizontal simple, con render visual para evitar pipes visibles |
 | 5 | Habilidad matemática | Figuras en secuencia | c) | Sí | No | No | Medio: la imagen debe mostrar con precisión posición del punto y triángulo |
 | 6 | Habilidad matemática | Figuras en secuencia | a) | Sí | No | No | Medio: la imagen debe evitar que el conteo de mosaicos sea ambiguo |
 | 7 | Habilidad matemática | Giros de figuras, rotación de 90° | e) | Sí | No | No | Medio: validar que la rotación sea horaria y no espejo |
@@ -59,17 +59,17 @@ La sucesión combina dos reglas. En las posiciones impares aparecen:
 96, 84, 72, __
 
 Cada término disminuye 12:
-\(96 - 12 = 84\)
-\(84 - 12 = 72\)
-\(72 - 12 = 60\)
+96 - 12 = 84
+84 - 12 = 72
+72 - 12 = 60
 
 En las posiciones pares aparecen:
 24, 27, 30, __
 
 Cada término aumenta 3:
-\(24 + 3 = 27\)
-\(27 + 3 = 30\)
-\(30 + 3 = 33\)
+24 + 3 = 27
+27 + 3 = 30
+30 + 3 = 33
 
 Por eso los números que continúan son 60 y 33.
 
@@ -115,15 +115,15 @@ La cadena sigue este ciclo de operaciones:
 Multiplicar por 3, restar 3, multiplicar por 2, restar 3.
 
 Se comprueba así:
-\(5 \times 3 = 15\)
-\(15 - 3 = 12\)
-\(12 \times 2 = 24\)
-\(24 - 3 = 21\)
-\(21 \times 3 = 63\)
+5 × 3 = 15
+15 - 3 = 12
+12 × 2 = 24
+24 - 3 = 21
+21 × 3 = 63
 
 Ahora continúa:
-\(63 - 3 = 60\)
-\(60 \times 2 = 120\)
+63 - 3 = 60
+60 × 2 = 120
 
 Por eso los números faltantes son 60 y 120.
 
@@ -143,16 +143,18 @@ Bloque que corresponde al área temática:
 Tablas con números
 
 Texto base:
-No aplica.
-
-Planteamiento:
-¿Cuál es el número que falta en la siguiente tabla?
+[RENDERIZAR COMO TABLA CON CONTENEDOR DE DESPLAZAMIENTO HORIZONTAL Y BARRA VISIBLE]
+La siguiente tabla muestra tres filas con números y un resultado.
 
 | Número 1 | Número 2 | Número 3 | Resultado |
 |---:|---:|---:|---:|
 | 4 | 7 | 3 | 31 |
 | 6 | 5 | 4 | 34 |
-| 8 | 9 | 2 | __ |
+| 8 | 9 | 2 | valor faltante |
+[/TABLA]
+
+Planteamiento:
+¿Qué valor falta en la tercera fila?
 
 Opciones:
 a) 70
@@ -170,30 +172,22 @@ e) 74
 Argumento de la respuesta correcta:
 La regla de cada fila es:
 
-\[
-\text{Resultado} = (\text{Número 1} \times \text{Número 2}) + \text{Número 3}
-\]
+Resultado = (Número 1 × Número 2) + Número 3
 
 Fila 1:
-\[
-4 \times 7 + 3 = 28 + 3 = 31
-\]
+4 × 7 + 3 = 28 + 3 = 31
 
 Fila 2:
-\[
-6 \times 5 + 4 = 30 + 4 = 34
-\]
+6 × 5 + 4 = 30 + 4 = 34
 
 Fila 3:
-\[
-8 \times 9 + 2 = 72 + 2 = 74
-\]
+8 × 9 + 2 = 72 + 2 = 74
 
 Por eso el número faltante es 74.
 
 Argumentos de las respuestas incorrectas:
-a) 70: queda por debajo del producto \(8 \times 9\), por lo que no puede cumplir la regla.
-b) 72: solo considera \(8 \times 9\), pero omite sumar el tercer número.
+a) 70: queda por debajo del producto 8 × 9, por lo que no puede cumplir la regla.
+b) 72: solo considera 8 × 9, pero omite sumar el tercer número.
 c) 73: suma 1 en lugar de sumar 2.
 d) 76: suma 4, pero el tercer número de la fila es 2.
 
@@ -207,16 +201,18 @@ Bloque que corresponde al área temática:
 Tablas con números
 
 Texto base:
-No aplica.
-
-Planteamiento:
-¿Cuál es el número que falta en el siguiente cuadro?
+[RENDERIZAR COMO TABLA CON CONTENEDOR DE DESPLAZAMIENTO HORIZONTAL Y BARRA VISIBLE]
+El siguiente cuadro muestra dos números y el resultado de cada fila.
 
 | Primer número | Segundo número | Resultado |
 |---:|---:|---:|
 | 2 | 6 | 14 |
 | 3 | 8 | 19 |
-| 5 | 12 | __ |
+| 5 | 12 | valor faltante |
+[/TABLA]
+
+Planteamiento:
+¿Qué valor falta en la tercera fila?
 
 Opciones:
 a) 29
@@ -234,24 +230,16 @@ a) 29
 Argumento de la respuesta correcta:
 La regla horizontal es:
 
-\[
-\text{Resultado} = \text{Primer número} + 2(\text{Segundo número})
-\]
+Resultado = Primer número + 2(Segundo número)
 
 Fila 1:
-\[
 2 + 2(6) = 2 + 12 = 14
-\]
 
 Fila 2:
-\[
 3 + 2(8) = 3 + 16 = 19
-\]
 
 Fila 3:
-\[
 5 + 2(12) = 5 + 24 = 29
-\]
 
 Por eso el número faltante es 29.
 
@@ -398,23 +386,13 @@ La cantidad de mosaicos sigue esta sucesión:
 5, 9, 13, 17, __, __
 
 Cada figura aumenta 4 mosaicos:
-\[
 5 + 4 = 9
-\]
-\[
 9 + 4 = 13
-\]
-\[
 13 + 4 = 17
-\]
 
 Entonces:
-\[
 17 + 4 = 21
-\]
-\[
 21 + 4 = 25
-\]
 
 La figura 6 tendrá 25 mosaicos.
 
@@ -641,24 +619,16 @@ Argumento de la respuesta correcta:
 En una cuadrícula 3 × 3 hay:
 
 Cuadrados pequeños de 1 × 1:
-\[
 9
-\]
 
 Cuadrados medianos de 2 × 2:
-\[
 4
-\]
 
 Cuadrado grande de 3 × 3:
-\[
 1
-\]
 
 Total:
-\[
 9 + 4 + 1 = 14
-\]
 
 Por eso hay 14 cuadrados.
 
@@ -716,29 +686,19 @@ Argumento de la respuesta correcta:
 La base queda dividida en cuatro partes. Los triángulos posibles se cuentan así:
 
 Triángulos de una parte:
-\[
 4
-\]
 
 Triángulos formados por dos partes:
-\[
 3
-\]
 
 Triángulos formados por tres partes:
-\[
 2
-\]
 
 Triángulo formado por las cuatro partes:
-\[
 1
-\]
 
 Total:
-\[
 4 + 3 + 2 + 1 = 10
-\]
 
 Por eso hay 10 triángulos.
 
@@ -783,32 +743,20 @@ La sucesión alterna dos operaciones:
 
 Sumar 5 y multiplicar por 2.
 
-\[
 4 + 5 = 9
-\]
-\[
-9 \times 2 = 18
-\]
-\[
+9 × 2 = 18
 18 + 5 = 23
-\]
-\[
-23 \times 2 = 46
-\]
-\[
+23 × 2 = 46
 46 + 5 = 51
-\]
 
 La operación que sigue es multiplicar por 2:
-\[
-51 \times 2 = 102
-\]
+51 × 2 = 102
 
 Por eso el número que sigue es 102.
 
 Argumentos de las respuestas incorrectas:
 b) 56: resultaría de volver a sumar 5, pero en ese lugar corresponde multiplicar por 2.
-c) 101: está cerca del resultado, pero \(51 \times 2\) da 102.
+c) 101: está cerca del resultado, pero 51 × 2 da 102.
 d) 92: no corresponde a la operación que sigue.
 e) 108: multiplica o suma de forma incorrecta y rompe la alternancia.
 
@@ -843,38 +791,26 @@ Respuesta correcta:
 e) 6
 
 Argumento de la respuesta correcta:
-Sea \(v\) la cantidad de fichas verdes.
+Sea v la cantidad de fichas verdes.
 
 Entonces:
 Rojas:
-\[
 2v
-\]
 
 Azules:
-\[
 v + 5
-\]
 
 Total:
-\[
 v + 2v + (v + 5) = 29
-\]
 
 Se simplifica:
-\[
 4v + 5 = 29
-\]
 
 Restamos 5:
-\[
 4v = 24
-\]
 
 Dividimos entre 4:
-\[
 v = 6
-\]
 
 Por eso hay 6 fichas verdes.
 
@@ -916,16 +852,12 @@ Argumento de la respuesta correcta:
 El trabajo total puede medirse en «llave minutos».
 
 Cuatro llaves tardan 18 minutos:
-\[
-4 \times 18 = 72
-\]
+4 × 18 = 72
 
 Eso significa que el tanque requiere 72 llave minutos.
 
 Si trabajan 6 llaves:
-\[
-72 \div 6 = 12
-\]
+72 ÷ 6 = 12
 
 Por eso el tanque se llenará en 12 minutos.
 
@@ -1025,29 +957,19 @@ Argumento de la respuesta correcta:
 Calculamos el rendimiento de cada equipo:
 
 Equipo A:
-\[
-48 \div 6 = 8
-\]
+48 ÷ 6 = 8
 
 Equipo B:
-\[
-54 \div 9 = 6
-\]
+54 ÷ 9 = 6
 
 Equipo C:
-\[
-63 \div 7 = 9
-\]
+63 ÷ 7 = 9
 
 Equipo D:
-\[
-72 \div 12 = 6
-\]
+72 ÷ 12 = 6
 
 Equipo E:
-\[
-84 \div 14 = 6
-\]
+84 ÷ 14 = 6
 
 El mayor rendimiento es 9 paquetes por minuto, correspondiente al Equipo C.
 
@@ -1089,28 +1011,20 @@ Argumento de la respuesta correcta:
 Primero calculamos el trabajo por estudiante y por hora.
 
 Cinco estudiantes en 2 horas equivalen a:
-\[
-5 \times 2 = 10
-\]
+5 × 2 = 10
 estudiante horas.
 
 En 10 estudiante horas organizan 30 sobres:
-\[
-30 \div 10 = 3
-\]
+30 ÷ 10 = 3
 
 Cada estudiante organiza 3 sobres por hora.
 
 Ahora calculamos el trabajo de 8 estudiantes durante 3 horas:
-\[
-8 \times 3 = 24
-\]
+8 × 3 = 24
 estudiante horas.
 
 Entonces:
-\[
-24 \times 3 = 72
-\]
+24 × 3 = 72
 
 Por eso organizarán 72 sobres.
 
@@ -1118,7 +1032,7 @@ Argumentos de las respuestas incorrectas:
 a) 48: no considera correctamente el aumento de estudiantes y horas.
 b) 54: queda por debajo del resultado al calcular el ritmo por estudiante y por hora.
 c) 60: aumenta la producción, pero no lo suficiente para 8 estudiantes durante 3 horas.
-d) 66: se acerca, pero no corresponde al producto \(24 \times 3\).
+d) 66: se acerca, pero no corresponde al producto 24 × 3.
 
 
 REVISIÓN DE DISTRIBUCIÓN DE RESPUESTAS DEL PAQUETE
@@ -2400,31 +2314,23 @@ a) 3 g/cm³
 Argumento de la respuesta correcta:
 La densidad se calcula con la expresión:
 
-\[
-\text{densidad} = \frac{\text{masa}}{\text{volumen}}
-\]
+densidad = masa/volumen
 
 Sustituimos los datos:
 
-\[
-\text{densidad} = \frac{72\ \text{g}}{24\ \text{cm}^3}
-\]
+densidad = 72 g/24 cm³
 
-\[
-72 \div 24 = 3
-\]
+72 ÷ 24 = 3
 
 Por lo tanto, la densidad es:
 
-\[
-3\ \text{g/cm}^3
-\]
+3 g/cm³
 
 Argumentos de las respuestas incorrectas:
 b) 24 g/cm³: corresponde al volumen dado, no al resultado de dividir masa entre volumen.
-c) 48 g/cm³: resulta de restar \(72 - 24\), pero la densidad no se calcula con resta.
+c) 48 g/cm³: resulta de restar 72 - 24, pero la densidad no se calcula con resta.
 d) 72 g/cm³: corresponde a la masa, no a la densidad.
-e) 96 g/cm³: resulta de sumar \(72 + 24\), operación que no permite calcular densidad.
+e) 96 g/cm³: resulta de sumar 72 + 24, operación que no permite calcular densidad.
 
 
 REACTIVO 43
@@ -2597,31 +2503,21 @@ e) 14
 Argumento de la respuesta correcta:
 El número de masa se obtiene sumando protones y neutrones:
 
-\[
 A = p + n
-\]
 
 El número atómico indica los protones:
 
-\[
 p = 13
-\]
 
 El número de masa es:
 
-\[
 A = 27
-\]
 
 Entonces:
 
-\[
 n = A - p
-\]
 
-\[
 n = 27 - 13 = 14
-\]
 
 Por lo tanto, el átomo tiene 14 neutrones.
 
@@ -2644,7 +2540,7 @@ Texto base:
 No aplica.
 
 Planteamiento:
-En la fórmula \(Ca(OH)_2\), ¿cuántos átomos hay en total dentro de una unidad de la sustancia?
+En la fórmula Ca(OH)₂, ¿cuántos átomos hay en total dentro de una unidad de la sustancia?
 
 Opciones:
 a) 2 átomos
@@ -2660,35 +2556,27 @@ Respuesta correcta:
 d) 5 átomos
 
 Argumento de la respuesta correcta:
-La fórmula \(Ca(OH)_2\) se interpreta así:
+La fórmula Ca(OH)₂ se interpreta así:
 
 Hay 1 átomo de calcio:
 
-\[
 Ca = 1
-\]
 
-Dentro del paréntesis hay \(O\) y \(H\). El subíndice 2 multiplica a ambos:
+Dentro del paréntesis hay O y H. El subíndice 2 multiplica a ambos:
 
-\[
 O = 2
-\]
 
-\[
 H = 2
-\]
 
 Total de átomos:
 
-\[
 1 + 2 + 2 = 5
-\]
 
 Por eso hay 5 átomos en total.
 
 Argumentos de las respuestas incorrectas:
 a) 2 átomos: solo toma el subíndice 2 y omite el resto de la fórmula.
-b) 3 átomos: cuenta \(Ca\), \(O\) y \(H\), pero no aplica el subíndice fuera del paréntesis.
+b) 3 átomos: cuenta Ca, O y H, pero no aplica el subíndice fuera del paréntesis.
 c) 4 átomos: deja fuera uno de los átomos al hacer el conteo.
 e) 6 átomos: multiplica de más y no respeta la estructura de la fórmula.
 
@@ -2820,9 +2708,7 @@ No aplica.
 Planteamiento:
 Interpreta la siguiente ecuación química:
 
-\[
-N_2 + 3H_2 \rightarrow 2NH_3
-\]
+N₂ + 3H₂ → 2NH₃
 
 ¿Cuál lectura corresponde a los coeficientes de la ecuación?
 
@@ -2842,15 +2728,13 @@ b) 1 molécula de nitrógeno más 3 moléculas de hidrógeno forman 2 moléculas
 Argumento de la respuesta correcta:
 En la ecuación:
 
-\[
-N_2 + 3H_2 \rightarrow 2NH_3
-\]
+N₂ + 3H₂ → 2NH₃
 
-El \(N_2\) no tiene coeficiente escrito, por lo que se interpreta como 1 molécula de nitrógeno. El \(3H_2\) indica 3 moléculas de hidrógeno. El \(2NH_3\) indica 2 moléculas de amoniaco. Por eso la lectura correcta es: 1 molécula de nitrógeno más 3 moléculas de hidrógeno forman 2 moléculas de amoniaco.
+El N₂ no tiene coeficiente escrito, por lo que se interpreta como 1 molécula de nitrógeno. El 3H₂ indica 3 moléculas de hidrógeno. El 2NH₃ indica 2 moléculas de amoniaco. Por eso la lectura correcta es: 1 molécula de nitrógeno más 3 moléculas de hidrógeno forman 2 moléculas de amoniaco.
 
 Argumentos de las respuestas incorrectas:
 a) Cambia los coeficientes de hidrógeno y amoniaco, por lo que no respeta la ecuación.
-c) Usa 2 moléculas de nitrógeno, pero el coeficiente de \(N_2\) es 1.
+c) Usa 2 moléculas de nitrógeno, pero el coeficiente de N₂ es 1.
 d) Invierte la proporción de nitrógeno e hidrógeno.
 e) Ignora los coeficientes 3 y 2 que aparecen en la ecuación.
 
@@ -3504,57 +3388,45 @@ No aplica.
 Planteamiento:
 ¿Cuál es el resultado de la siguiente operación?
 
-\[
--18 + 4(-3) - [(-20) \div 5]
-\]
+-18 + 4(-3) - [(-20) ÷ 5]
 
 Opciones:
-a) \(-34\)
-b) \(-30\)
-c) \(-26\)
-d) \(-22\)
-e) \(26\)
+a) -34
+b) -30
+c) -26
+d) -22
+e) 26
 
 Pista:
 Primero resuelve la multiplicación y la división; después cuida el signo al restar un número negativo.
 
 Respuesta correcta:
-c) \(-26\)
+c) -26
 
 Argumento de la respuesta correcta:
 Primero se resuelven multiplicación y división:
 
-\[
 4(-3) = -12
-\]
 
-\[
-(-20) \div 5 = -4
-\]
+(-20) ÷ 5 = -4
 
 Ahora sustituimos en la expresión:
 
-\[
 -18 + (-12) - (-4)
-\]
 
 Restar un número negativo equivale a sumar:
 
-\[
 -18 - 12 + 4
-\]
 
-\[
 -30 + 4 = -26
-\]
 
-Por eso el resultado correcto es \(-26\).
+Por eso el resultado correcto es -26.
 
 Argumentos de las respuestas incorrectas:
-a) \(-34\): resulta de restar \(4\) al final, pero se debía sumar porque aparece \(-(-4)\).
-b) \(-30\): omite el efecto de restar el resultado de la división.
-d) \(-22\): cambia incorrectamente el signo de uno de los términos.
-e) \(26\): conserva la cantidad, pero cambia el signo del resultado final.
+a) -34: resulta de restar 4 al final, pero se debía sumar porque aparece -(-4).
+b) -30: omite el efecto de restar el resultado de la división.
+d) -22: cambia incorrectamente el signo de uno de los términos.
+e) 26: conserva la cantidad, pero cambia el signo del resultado final.
 
 
 REACTIVO 66
@@ -3571,69 +3443,53 @@ No aplica.
 Planteamiento:
 ¿Cuál es el resultado de la siguiente operación?
 
-\[
-\frac{5}{6} - 0.25 + \frac{2}{3}
-\]
+5/6 - 0.25 + 2/3
 
 Opciones:
-a) \(1.25\)
-b) \(0.75\)
-c) \(1.50\)
-d) \(1.75\)
-e) \(2.25\)
+a) 1.25
+b) 0.75
+c) 1.50
+d) 1.75
+e) 2.25
 
 Pista:
-Convierte \(0.25\) a fracción y usa denominadores comunes.
+Convierte 0.25 a fracción y usa denominadores comunes.
 
 Respuesta correcta:
-a) \(1.25\)
+a) 1.25
 
 Argumento de la respuesta correcta:
 Primero convertimos el decimal:
 
-\[
-0.25 = \frac{1}{4}
-\]
+0.25 = 1/4
 
 La operación queda:
 
-\[
-\frac{5}{6} - \frac{1}{4} + \frac{2}{3}
-\]
+5/6 - 1/4 + 2/3
 
 Sumamos primero las fracciones con denominador 6:
 
-\[
-\frac{5}{6} + \frac{2}{3} = \frac{5}{6} + \frac{4}{6} = \frac{9}{6} = \frac{3}{2}
-\]
+5/6 + 2/3 = 5/6 + 4/6 = 9/6 = 3/2
 
 Ahora restamos:
 
-\[
-\frac{3}{2} - \frac{1}{4}
-\]
+3/2 - 1/4
 
 Convertimos a cuartos:
 
-\[
-\frac{3}{2} = \frac{6}{4}
-\]
+3/2 = 6/4
 
-\[
-\frac{6}{4} - \frac{1}{4} = \frac{5}{4}
-\]
+6/4 - 1/4 = 5/4
 
-\[
-\frac{5}{4} = 1.25
-\]
+5/4 = 1.25
 
-Por eso el resultado correcto es \(1.25\).
+Por eso el resultado correcto es 1.25.
 
 Argumentos de las respuestas incorrectas:
-b) \(0.75\): aparece si se resta demasiado al convertir el decimal.
-c) \(1.50\): corresponde a sumar \(\frac{5}{6} + \frac{2}{3}\), pero omite restar \(0.25\).
-d) \(1.75\): suma el decimal en lugar de restarlo.
-e) \(2.25\): excede el resultado porque combina mal las fracciones y el decimal.
+b) 0.75: aparece si se resta demasiado al convertir el decimal.
+c) 1.50: corresponde a sumar 5/6 + 2/3, pero omite restar 0.25.
+d) 1.75: suma el decimal en lugar de restarlo.
+e) 2.25: excede el resultado porque combina mal las fracciones y el decimal.
 
 
 REACTIVO 67
@@ -3668,35 +3524,23 @@ e) 372.60 pesos
 Argumento de la respuesta correcta:
 Primero calculamos el aumento de 15% sobre 360:
 
-\[
-15\% = 0.15
-\]
+15% = 0.15
 
-\[
 360(0.15) = 54
-\]
 
 Nuevo precio:
 
-\[
 360 + 54 = 414
-\]
 
 Después se aplica 10% de descuento sobre 414:
 
-\[
-10\% = 0.10
-\]
+10% = 0.10
 
-\[
 414(0.10) = 41.40
-\]
 
 Precio final:
 
-\[
 414 - 41.40 = 372.60
-\]
 
 Por eso el precio final fue 372.60 pesos.
 
@@ -3721,59 +3565,47 @@ No aplica.
 Planteamiento:
 Simplifica la siguiente expresión:
 
-\[
 5x - 2(3x - 4) + 7
-\]
 
 Opciones:
-a) \(x + 15\)
-b) \(-x + 8\)
-c) \(-x + 15\)
-d) \(11x - 1\)
-e) \(-x - 15\)
+a) x + 15
+b) -x + 8
+c) -x + 15
+d) 11x - 1
+e) -x - 15
 
 Pista:
-Distribuye el \(-2\) en todo el paréntesis antes de juntar términos semejantes.
+Distribuye el -2 en todo el paréntesis antes de juntar términos semejantes.
 
 Respuesta correcta:
-c) \(-x + 15\)
+c) -x + 15
 
 Argumento de la respuesta correcta:
-Primero distribuimos \(-2\):
+Primero distribuimos -2:
 
-\[
 -2(3x - 4) = -6x + 8
-\]
 
 La expresión queda:
 
-\[
 5x - 6x + 8 + 7
-\]
 
 Juntamos términos semejantes:
 
-\[
 5x - 6x = -x
-\]
 
-\[
 8 + 7 = 15
-\]
 
 Entonces:
 
-\[
 5x - 2(3x - 4) + 7 = -x + 15
-\]
 
-Por eso la expresión simplificada es \(-x + 15\).
+Por eso la expresión simplificada es -x + 15.
 
 Argumentos de las respuestas incorrectas:
-a) \(x + 15\): distribuye mal el signo negativo y deja positivo el término con \(x\).
-b) \(-x + 8\): omite sumar el \(7\) final.
-d) \(11x - 1\): suma los coeficientes como si no hubiera distribución negativa.
-e) \(-x - 15\): cambia el signo de los términos independientes.
+a) x + 15: distribuye mal el signo negativo y deja positivo el término con x.
+b) -x + 8: omite sumar el 7 final.
+d) 11x - 1: suma los coeficientes como si no hubiera distribución negativa.
+e) -x - 15: cambia el signo de los términos independientes.
 
 
 REACTIVO 69
@@ -3806,49 +3638,37 @@ Respuesta correcta:
 b) 14
 
 Argumento de la respuesta correcta:
-Sea \(x\) el número.
+Sea x el número.
 
 «Cuatro veces un número menos 6» se representa como:
 
-\[
 4x - 6
-\]
 
 «Dos veces ese mismo número más 22» se representa como:
 
-\[
 2x + 22
-\]
 
 La ecuación es:
 
-\[
 4x - 6 = 2x + 22
-\]
 
-Restamos \(2x\) en ambos lados:
+Restamos 2x en ambos lados:
 
-\[
 2x - 6 = 22
-\]
 
 Sumamos 6:
 
-\[
 2x = 28
-\]
 
 Dividimos entre 2:
 
-\[
 x = 14
-\]
 
 Por eso el número es 14.
 
 Argumentos de las respuestas incorrectas:
-a) 12: al sustituirlo, \(4(12)-6 = 42\) y \(2(12)+22 = 46\); no son iguales.
-c) 16: al sustituirlo, \(4(16)-6 = 58\) y \(2(16)+22 = 54\); no son iguales.
+a) 12: al sustituirlo, 4(12)-6 = 42 y 2(12)+22 = 46; no son iguales.
+c) 16: al sustituirlo, 4(16)-6 = 58 y 2(16)+22 = 54; no son iguales.
 d) 18: produce valores más altos y no satisface la igualdad.
 e) 28: corresponde a un paso intermedio, no al valor final del número.
 
@@ -3867,81 +3687,61 @@ No aplica.
 Planteamiento:
 Resuelve el siguiente sistema de ecuaciones:
 
-\[
 3x + 2y = 22
-\]
 
-\[
 x + y = 8
-\]
 
 Opciones:
-a) \(x = 4,\; y = 4\)
-b) \(x = 5,\; y = 3\)
-c) \(x = 2,\; y = 6\)
-d) \(x = 6,\; y = 2\)
-e) \(x = 7,\; y = 1\)
+a) x = 4,  y = 4
+b) x = 5,  y = 3
+c) x = 2,  y = 6
+d) x = 6,  y = 2
+e) x = 7,  y = 1
 
 Pista:
 Despeja una variable en la segunda ecuación y sustitúyela en la primera.
 
 Respuesta correcta:
-d) \(x = 6,\; y = 2\)
+d) x = 6,  y = 2
 
 Argumento de la respuesta correcta:
 De la segunda ecuación:
 
-\[
 x + y = 8
-\]
 
-Despejamos \(y\):
+Despejamos y:
 
-\[
 y = 8 - x
-\]
 
 Sustituimos en la primera ecuación:
 
-\[
 3x + 2(8 - x) = 22
-\]
 
 Distribuimos:
 
-\[
 3x + 16 - 2x = 22
-\]
 
 Simplificamos:
 
-\[
 x + 16 = 22
-\]
 
 Restamos 16:
 
-\[
 x = 6
-\]
 
-Sustituimos en \(y = 8 - x\):
+Sustituimos en y = 8 - x:
 
-\[
 y = 8 - 6 = 2
-\]
 
 Por eso la solución es:
 
-\[
-x = 6,\quad y = 2
-\]
+x = 6, y = 2
 
 Argumentos de las respuestas incorrectas:
-a) \(x = 4,\; y = 4\): cumple \(x + y = 8\), pero \(3(4) + 2(4) = 20\), no 22.
-b) \(x = 5,\; y = 3\): cumple \(x + y = 8\), pero \(3(5) + 2(3) = 21\), no 22.
-c) \(x = 2,\; y = 6\): cumple \(x + y = 8\), pero \(3(2) + 2(6) = 18\), no 22.
-e) \(x = 7,\; y = 1\): cumple \(x + y = 8\), pero \(3(7) + 2(1) = 23\), no 22.
+a) x = 4,  y = 4: cumple x + y = 8, pero 3(4) + 2(4) = 20, no 22.
+b) x = 5,  y = 3: cumple x + y = 8, pero 3(5) + 2(3) = 21, no 22.
+c) x = 2,  y = 6: cumple x + y = 8, pero 3(2) + 2(6) = 18, no 22.
+e) x = 7,  y = 1: cumple x + y = 8, pero 3(7) + 2(1) = 23, no 22.
 
 
 REACTIVO 71
@@ -3956,17 +3756,15 @@ Texto base:
 No aplica.
 
 Planteamiento:
-Selecciona los valores de \(x\) que satisfacen la ecuación:
+Selecciona los valores de x que satisfacen la ecuación:
 
-\[
-x^2 - 8x + 15 = 0
-\]
+x² - 8x + 15 = 0
 
 Opciones:
 a) 1 y 15
 b) 2 y 6
 c) 3 y 5
-d) \(-3\) y \(-5\)
+d) -3 y -5
 e) 4 y 4
 
 Pista:
@@ -3978,40 +3776,30 @@ c) 3 y 5
 Argumento de la respuesta correcta:
 La ecuación se factoriza así:
 
-\[
-x^2 - 8x + 15 = (x - 3)(x - 5)
-\]
+x² - 8x + 15 = (x - 3)(x - 5)
 
 Para que el producto sea cero:
 
-\[
 x - 3 = 0
-\]
 
 o
 
-\[
 x - 5 = 0
-\]
 
 Entonces:
 
-\[
 x = 3
-\]
 
 y
 
-\[
 x = 5
-\]
 
 Por eso los valores que satisfacen la ecuación son 3 y 5.
 
 Argumentos de las respuestas incorrectas:
 a) 1 y 15: multiplican 15, pero suman 16, no 8.
 b) 2 y 6: suman 8, pero multiplican 12, no 15.
-d) \(-3\) y \(-5\): sus signos no corresponden, porque la ecuación se factoriza con \(x - 3\) y \(x - 5\).
+d) -3 y -5: sus signos no corresponden, porque la ecuación se factoriza con x - 3 y x - 5.
 e) 4 y 4: suman 8, pero multiplican 16, no 15.
 
 
@@ -4056,27 +3844,19 @@ Sumamos la asistencia semanal de cada taller.
 
 Taller A:
 
-\[
 18 + 20 + 15 + 17 + 16 = 86
-\]
 
 Taller B:
 
-\[
 14 + 24 + 19 + 18 + 15 = 90
-\]
 
 Taller C:
 
-\[
 20 + 16 + 18 + 12 + 17 = 83
-\]
 
 Taller D:
 
-\[
 16 + 17 + 20 + 19 + 14 = 86
-\]
 
 El total mayor es 90, correspondiente al Taller B.
 
@@ -4142,27 +3922,19 @@ Calculamos los cambios entre días consecutivos:
 
 De lunes a martes:
 
-\[
 96 - 88 = 8
-\]
 
 De martes a miércoles:
 
-\[
 88 - 78 = 10
-\]
 
 De miércoles a jueves no hubo disminución, sino aumento:
 
-\[
 82 - 78 = 4
-\]
 
 De jueves a viernes:
 
-\[
 82 - 66 = 16
-\]
 
 La mayor disminución fue de 16 litros, entre jueves y viernes.
 
@@ -4182,7 +3954,7 @@ Bloque que corresponde al área temática:
 Geometría: ángulos alternos internos
 
 Texto base:
-Dos rectas paralelas \(r\) y \(s\) son cortadas por una transversal.
+Dos rectas paralelas r y s son cortadas por una transversal.
 
 En la intersección superior:
 1 está arriba a la izquierda.
@@ -4231,9 +4003,7 @@ d) 3 y 6
 Argumento de la respuesta correcta:
 Los ángulos interiores son los que quedan entre las rectas paralelas:
 
-\[
-3,\; 4,\; 5,\; 6
-\]
+3,  4,  5,  6
 
 Los alternos internos deben estar dentro de las paralelas y en lados opuestos de la transversal. El ángulo 3 está en el interior y a un lado de la transversal; el ángulo 6 también está en el interior, pero al lado opuesto. Por eso 3 y 6 forman un par de ángulos alternos internos.
 
@@ -4261,68 +4031,52 @@ Un terreno está formado por un rectángulo de 18 m de largo y 9 m de ancho. A u
 ¿Cuál es el área total del terreno?
 
 Opciones:
-a) \(162\ \text{m}^2\)
-b) \(189\ \text{m}^2\)
-c) \(216\ \text{m}^2\)
-d) \(243\ \text{m}^2\)
-e) \(270\ \text{m}^2\)
+a) 162 m²
+b) 189 m²
+c) 216 m²
+d) 243 m²
+e) 270 m²
 
 Pista:
 Calcula por separado el área del rectángulo y el área del triángulo; después suma ambas.
 
 Respuesta correcta:
-b) \(189\ \text{m}^2\)
+b) 189 m²
 
 Argumento de la respuesta correcta:
 Primero calculamos el área del rectángulo:
 
-\[
-A = 18 \times 9 = 162
-\]
+A = 18 × 9 = 162
 
 El área del rectángulo es:
 
-\[
-162\ \text{m}^2
-\]
+162 m²
 
 Ahora calculamos el área del triángulo:
 
-\[
-A = \frac{b \times h}{2}
-\]
+A = b × h/2
 
-\[
-A = \frac{6 \times 9}{2}
-\]
+A = 6 × 9/2
 
-\[
-A = \frac{54}{2} = 27
-\]
+A = 54/2 = 27
 
 El área del triángulo es:
 
-\[
-27\ \text{m}^2
-\]
+27 m²
 
 Área total:
 
-\[
 162 + 27 = 189
-\]
 
 Por eso el área total del terreno es:
 
-\[
-189\ \text{m}^2
-\]
+189 m²
 
 Argumentos de las respuestas incorrectas:
-a) \(162\ \text{m}^2\): solo considera el rectángulo y omite el jardín triangular.
-c) \(216\ \text{m}^2\): suma una región mayor que la del triángulo descrito.
-d) \(243\ \text{m}^2\): se obtiene al tratar incorrectamente el triángulo como si fuera otro rectángulo completo.
-e) \(270\ \text{m}^2\): excede el área real porque no respeta las fórmulas de las figuras.
+a) 162 m²: solo considera el rectángulo y omite el jardín triangular.
+c) 216 m²: suma una región mayor que la del triángulo descrito.
+d) 243 m²: se obtiene al tratar incorrectamente el triángulo como si fuera otro rectángulo completo.
+e) 270 m²: excede el área real porque no respeta las fórmulas de las figuras.
 
 
 REACTIVO 76
@@ -4342,68 +4096,52 @@ Un cubo tiene aristas de 7 cm. Un prisma rectangular mide 10 cm de largo, 4 cm d
 ¿Por cuántos centímetros cúbicos es mayor el volumen del cubo que el volumen del prisma?
 
 Opciones:
-a) \(83\ \text{cm}^3\)
-b) \(120\ \text{cm}^3\)
-c) \(143\ \text{cm}^3\)
-d) \(200\ \text{cm}^3\)
-e) \(343\ \text{cm}^3\)
+a) 83 cm³
+b) 120 cm³
+c) 143 cm³
+d) 200 cm³
+e) 343 cm³
 
 Pista:
 Calcula primero el volumen de cada sólido y después resta el menor al mayor.
 
 Respuesta correcta:
-c) \(143\ \text{cm}^3\)
+c) 143 cm³
 
 Argumento de la respuesta correcta:
 El volumen del cubo se calcula elevando la arista al cubo:
 
-\[
-V = 7^3
-\]
+V = 7³
 
-\[
-V = 7 \times 7 \times 7 = 343
-\]
+V = 7 × 7 × 7 = 343
 
 El volumen del cubo es:
 
-\[
-343\ \text{cm}^3
-\]
+343 cm³
 
 El volumen del prisma rectangular se calcula multiplicando largo, ancho y alto:
 
-\[
-V = 10 \times 4 \times 5
-\]
+V = 10 × 4 × 5
 
-\[
 V = 200
-\]
 
 El volumen del prisma es:
 
-\[
-200\ \text{cm}^3
-\]
+200 cm³
 
 Ahora restamos:
 
-\[
 343 - 200 = 143
-\]
 
 Por eso el volumen del cubo es mayor por:
 
-\[
-143\ \text{cm}^3
-\]
+143 cm³
 
 Argumentos de las respuestas incorrectas:
-a) \(83\ \text{cm}^3\): corresponde a una resta incorrecta entre los volúmenes.
-b) \(120\ \text{cm}^3\): no corresponde al volumen de ninguno de los dos sólidos ni a su diferencia.
-d) \(200\ \text{cm}^3\): es el volumen del prisma rectangular, no la diferencia.
-e) \(343\ \text{cm}^3\): es el volumen del cubo, pero el planteamiento pide cuánto mayor es respecto al prisma.
+a) 83 cm³: corresponde a una resta incorrecta entre los volúmenes.
+b) 120 cm³: no corresponde al volumen de ninguno de los dos sólidos ni a su diferencia.
+d) 200 cm³: es el volumen del prisma rectangular, no la diferencia.
+e) 343 cm³: es el volumen del cubo, pero el planteamiento pide cuánto mayor es respecto al prisma.
 
 
 REVISIÓN DE DISTRIBUCIÓN DE RESPUESTAS DEL PAQUETE
@@ -5845,54 +5583,44 @@ Planteamiento:
 Un ciclista recorre 540 metros en línea recta durante 3 minutos. Si mantiene el mismo sentido de movimiento, ¿cuál es su rapidez promedio?
 
 Opciones:
-a) \(1\ \text{m/s}\)
-b) \(2\ \text{m/s}\)
-c) \(3\ \text{m/s}\)
-d) \(9\ \text{m/s}\)
-e) \(180\ \text{m/s}\)
+a) 1 m/s
+b) 2 m/s
+c) 3 m/s
+d) 9 m/s
+e) 180 m/s
 
 Pista:
 Convierte los minutos a segundos antes de dividir la distancia entre el tiempo.
 
 Respuesta correcta:
-c) \(3\ \text{m/s}\)
+c) 3 m/s
 
 Argumento de la respuesta correcta:
 La rapidez promedio se calcula con la expresión:
 
-\[
-v = \frac{d}{t}
-\]
+v = d/t
 
 La distancia es:
 
-\[
-d = 540\ \text{m}
-\]
+d = 540 m
 
 El tiempo es de 3 minutos. Convertimos a segundos:
 
-\[
-3\ \text{min} = 3 \times 60 = 180\ \text{s}
-\]
+3 min = 3 × 60 = 180 s
 
 Ahora calculamos:
 
-\[
-v = \frac{540}{180} = 3
-\]
+v = 540/180 = 3
 
 Por eso la rapidez promedio es:
 
-\[
-3\ \text{m/s}
-\]
+3 m/s
 
 Argumentos de las respuestas incorrectas:
-a) \(1\ \text{m/s}\): resulta de dividir de manera incorrecta la distancia entre el tiempo.
-b) \(2\ \text{m/s}\): queda por debajo del valor obtenido al convertir correctamente los minutos a segundos.
-d) \(9\ \text{m/s}\): no corresponde a la división \(540 \div 180\).
-e) \(180\ \text{m/s}\): corresponde al tiempo en segundos, no a la rapidez.
+a) 1 m/s: resulta de dividir de manera incorrecta la distancia entre el tiempo.
+b) 2 m/s: queda por debajo del valor obtenido al convertir correctamente los minutos a segundos.
+d) 9 m/s: no corresponde a la división 540 ÷ 180.
+e) 180 m/s: corresponde al tiempo en segundos, no a la rapidez.
 
 
 REACTIVO 106
@@ -5907,9 +5635,9 @@ Texto base:
 [RENDERIZAR COMO TABLA CON CONTENEDOR DE DESPLAZAMIENTO HORIZONTAL Y BARRA VISIBLE]
 La siguiente tabla muestra la posición de un carrito en distintos tiempos.
 
-| Tiempo \(t\) en segundos | 0 | 2 | 4 | 6 | 8 |
+| Tiempo t en segundos | 0 | 2 | 4 | 6 | 8 |
 |---|---:|---:|---:|---:|---:|
-| Posición \(x\) en metros | 0 | 5 | 20 | 45 | 80 |
+| Posición x en metros | 0 | 5 | 20 | 45 | 80 |
 [/TABLA]
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
@@ -5949,27 +5677,19 @@ Calculamos el cambio de posición en cada intervalo:
 
 De 0 s a 2 s:
 
-\[
-5 - 0 = 5\ \text{m}
-\]
+5 - 0 = 5 m
 
 De 2 s a 4 s:
 
-\[
-20 - 5 = 15\ \text{m}
-\]
+20 - 5 = 15 m
 
 De 4 s a 6 s:
 
-\[
-45 - 20 = 25\ \text{m}
-\]
+45 - 20 = 25 m
 
 De 6 s a 8 s:
 
-\[
-80 - 45 = 35\ \text{m}
-\]
+80 - 45 = 35 m
 
 Todos los intervalos duran 2 segundos, así que el mayor cambio de posición corresponde a la mayor rapidez media. El mayor cambio es de 35 m, entre 6 s y 8 s.
 
@@ -5992,55 +5712,45 @@ Texto base:
 No aplica.
 
 Planteamiento:
-Sobre un carrito de \(6\ \text{kg}\) actúa una fuerza neta de \(24\ \text{N}\). ¿Qué aceleración adquiere?
+Sobre un carrito de 6 kg actúa una fuerza neta de 24 N. ¿Qué aceleración adquiere?
 
 Opciones:
-a) \(2\ \text{m/s}^2\)
-b) \(3\ \text{m/s}^2\)
-c) \(6\ \text{m/s}^2\)
-d) \(24\ \text{m/s}^2\)
-e) \(4\ \text{m/s}^2\)
+a) 2 m/s²
+b) 3 m/s²
+c) 6 m/s²
+d) 24 m/s²
+e) 4 m/s²
 
 Pista:
-Usa la relación \(F = ma\) y despeja la aceleración.
+Usa la relación F = ma y despeja la aceleración.
 
 Respuesta correcta:
-e) \(4\ \text{m/s}^2\)
+e) 4 m/s²
 
 Argumento de la respuesta correcta:
 La relación entre fuerza, masa y aceleración es:
 
-\[
 F = ma
-\]
 
 Despejamos la aceleración:
 
-\[
-a = \frac{F}{m}
-\]
+a = F/m
 
 Sustituimos los datos:
 
-\[
-a = \frac{24\ \text{N}}{6\ \text{kg}}
-\]
+a = 24 N/6 kg
 
-\[
-a = 4\ \text{m/s}^2
-\]
+a = 4 m/s²
 
 Por eso la aceleración del carrito es:
 
-\[
-4\ \text{m/s}^2
-\]
+4 m/s²
 
 Argumentos de las respuestas incorrectas:
-a) \(2\ \text{m/s}^2\): no corresponde a dividir \(24\) entre \(6\).
-b) \(3\ \text{m/s}^2\): resulta de una división incorrecta.
-c) \(6\ \text{m/s}^2\): corresponde a la masa dada, no a la aceleración.
-d) \(24\ \text{m/s}^2\): corresponde a la fuerza numérica, pero no al resultado de aplicar \(a = \frac{F}{m}\).
+a) 2 m/s²: no corresponde a dividir 24 entre 6.
+b) 3 m/s²: resulta de una división incorrecta.
+c) 6 m/s²: corresponde a la masa dada, no a la aceleración.
+d) 24 m/s²: corresponde a la fuerza numérica, pero no al resultado de aplicar a = F/m.
 
 
 REACTIVO 108
@@ -6052,7 +5762,7 @@ Bloque que corresponde al área temática:
 Equilibrio: resultante R = 0 en situaciones simples
 
 Texto base:
-Una caja está sobre una mesa. Dos personas la jalan hacia la derecha con fuerzas de \(18\ \text{N}\) y \(7\ \text{N}\). Para que la caja permanezca en equilibrio, otra persona debe jalarla hacia la izquierda.
+Una caja está sobre una mesa. Dos personas la jalan hacia la derecha con fuerzas de 18 N y 7 N. Para que la caja permanezca en equilibrio, otra persona debe jalarla hacia la izquierda.
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Física
@@ -6074,44 +5784,38 @@ Planteamiento:
 ¿Qué fuerza debe aplicarse hacia la izquierda para que la caja esté en equilibrio?
 
 Opciones:
-a) \(11\ \text{N}\)
-b) \(25\ \text{N}\)
-c) \(18\ \text{N}\)
-d) \(7\ \text{N}\)
-e) \(30\ \text{N}\)
+a) 11 N
+b) 25 N
+c) 18 N
+d) 7 N
+e) 30 N
 
 Pista:
 Para que haya equilibrio, la suma de fuerzas hacia la derecha debe igualar la fuerza hacia la izquierda.
 
 Respuesta correcta:
-b) \(25\ \text{N}\)
+b) 25 N
 
 Argumento de la respuesta correcta:
 En equilibrio, la fuerza resultante debe ser cero:
 
-\[
 R = 0
-\]
 
 Primero sumamos las fuerzas hacia la derecha:
 
-\[
-18\ \text{N} + 7\ \text{N} = 25\ \text{N}
-\]
+18 N + 7 N = 25 N
 
 Para equilibrarlas, se necesita una fuerza igual hacia la izquierda:
 
-\[
-F = 25\ \text{N}
-\]
+F = 25 N
 
-Por eso la fuerza requerida es \(25\ \text{N}\) hacia la izquierda.
+Por eso la fuerza requerida es 25 N hacia la izquierda.
 
 Argumentos de las respuestas incorrectas:
-a) \(11\ \text{N}\): resulta de restar \(18 - 7\), pero las fuerzas dadas van en la misma dirección y deben sumarse.
-c) \(18\ \text{N}\): solo iguala una de las fuerzas hacia la derecha, pero deja sin equilibrar la de \(7\ \text{N}\).
-d) \(7\ \text{N}\): solo iguala la fuerza menor, no la suma total.
-e) \(30\ \text{N}\): excede la suma de las fuerzas hacia la derecha, por lo que la caja ya no estaría en equilibrio.
+a) 11 N: resulta de restar 18 - 7, pero las fuerzas dadas van en la misma dirección y deben sumarse.
+c) 18 N: solo iguala una de las fuerzas hacia la derecha, pero deja sin equilibrar la de 7 N.
+d) 7 N: solo iguala la fuerza menor, no la suma total.
+e) 30 N: excede la suma de las fuerzas hacia la derecha, por lo que la caja ya no estaría en equilibrio.
 
 
 REACTIVO 109
@@ -6165,51 +5869,43 @@ Texto base:
 No aplica.
 
 Planteamiento:
-Una persona empuja una caja con una fuerza constante de \(30\ \text{N}\) y la desplaza \(4\ \text{m}\) en la misma dirección de la fuerza.
+Una persona empuja una caja con una fuerza constante de 30 N y la desplaza 4 m en la misma dirección de la fuerza.
 
 ¿Cuánto trabajo mecánico realiza?
 
 Opciones:
-a) \(7.5\ \text{J}\)
-b) \(26\ \text{J}\)
-c) \(34\ \text{J}\)
-d) \(120\ \text{J}\)
-e) \(300\ \text{J}\)
+a) 7.5 J
+b) 26 J
+c) 34 J
+d) 120 J
+e) 300 J
 
 Pista:
 Cuando la fuerza y el desplazamiento tienen la misma dirección, el trabajo se calcula multiplicando fuerza por distancia.
 
 Respuesta correcta:
-d) \(120\ \text{J}\)
+d) 120 J
 
 Argumento de la respuesta correcta:
 El trabajo mecánico se calcula con:
 
-\[
 W = Fd
-\]
 
 Sustituimos los datos:
 
-\[
-W = 30\ \text{N} \times 4\ \text{m}
-\]
+W = 30 N × 4 m
 
-\[
-W = 120\ \text{J}
-\]
+W = 120 J
 
 Por eso el trabajo realizado es:
 
-\[
-120\ \text{J}
-\]
+120 J
 
 Argumentos de las respuestas incorrectas:
-a) \(7.5\ \text{J}\): resulta de dividir \(30\) entre \(4\), pero el trabajo se calcula multiplicando.
-b) \(26\ \text{J}\): se obtiene al restar los datos, operación que no corresponde.
-c) \(34\ \text{J}\): se obtiene al sumar los datos, pero el trabajo no se calcula así.
-e) \(300\ \text{J}\): multiplica por un valor que no corresponde al desplazamiento dado.
+a) 7.5 J: resulta de dividir 30 entre 4, pero el trabajo se calcula multiplicando.
+b) 26 J: se obtiene al restar los datos, operación que no corresponde.
+c) 34 J: se obtiene al sumar los datos, pero el trabajo no se calcula así.
+e) 300 J: multiplica por un valor que no corresponde al desplazamiento dado.
 
 
 REACTIVO 111

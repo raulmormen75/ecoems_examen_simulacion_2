@@ -14,6 +14,7 @@ El contenido ya está completo: 128 reactivos, 10 áreas y Física integrada del
 - Las instrucciones internas del TXT se filtran y no forman parte de `exam-data.js`.
 - Las píldoras visuales se derivan del TXT.
 - Las tablas marcadas se convierten en tablas renderizables con desplazamiento horizontal.
+- Los planteamientos y argumentos de áreas numéricas deben mostrarse con notación escolar limpia, sin sintaxis tipo LaTeX o Markdown visible para el alumno.
 - El nombre de descarga queda como `resultado-ecoems-ifr-simulacion-2.png`.
 
 ## Comandos
@@ -28,7 +29,7 @@ python -m http.server 4173
 
 `node build-exam-data.js` generó `exam-data.js` con 128 reactivos y 10 áreas.
 
-`node qa/run-exam-qa.js` validó datos, opciones, pistas, argumentos, assets, distribución de respuestas y ausencia de contenido interno en `exam-data.js`.
+`node qa/run-exam-qa.js` validó datos, opciones, pistas, argumentos, assets, distribución de respuestas, ausencia de contenido interno en `exam-data.js` y ausencia de artefactos LaTeX/Markdown en textos visibles.
 
 Validación en navegador local:
 
@@ -37,6 +38,7 @@ Validación en navegador local:
 - Física aparece como presente con 12 reactivos disponibles.
 - No aparece el panel de advertencia sobre refrescar página.
 - Inicio de examen funcional.
+- Reactivos 3 y 4 con tablas visuales en lugar de tablas Markdown crudas.
 - Reactivo 5 carga imagen real en móvil.
 
 ## Siguiente hito

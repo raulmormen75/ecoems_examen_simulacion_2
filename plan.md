@@ -27,7 +27,12 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
    - Distribución de respuestas documentada.
    - Assets, tablas y píldoras registrados.
 
-5. Cerrar en GitHub.
+5. Ejecutar primera edición gráfica y visual.
+   - Notación matemática visible limpiada en áreas numéricas.
+   - Reactivos 3 y 4 convertidos a tablas visuales.
+   - QA reforzada contra artefactos LaTeX o Markdown visibles.
+
+6. Cerrar en GitHub.
    - Commit y push a `main` después de QA.
 
 ## Criterios de aceptación actuales
@@ -37,6 +42,7 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
 - Física presente del 105 al 116.
 - Assets obligatorios existentes.
 - QA automatizada sin errores.
+- Sin artefactos tipo LaTeX o Markdown en contenido visible para el alumno.
 - Revisión local en navegador realizada.
 - Documentación actualizada.
 

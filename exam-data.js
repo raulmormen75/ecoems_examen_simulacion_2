@@ -122,7 +122,7 @@ window.IFR_APP_DATA = {
       "correctOption": "d",
       "correctOptionText": "60, 33",
       "hint": "Separa los términos que están en posiciones impares y los que están en posiciones pares.",
-      "correctArgument": "La sucesión combina dos reglas. En las posiciones impares aparecen:\n96, 84, 72, __\n\nCada término disminuye 12:\n\\(96 - 12 = 84\\)\n\\(84 - 12 = 72\\)\n\\(72 - 12 = 60\\)\n\nEn las posiciones pares aparecen:\n24, 27, 30, __\n\nCada término aumenta 3:\n\\(24 + 3 = 27\\)\n\\(27 + 3 = 30\\)\n\\(30 + 3 = 33\\)\n\nPor eso los números que continúan son 60 y 33.",
+      "correctArgument": "La sucesión combina dos reglas. En las posiciones impares aparecen:\n96, 84, 72, __\n\nCada término disminuye 12:\n96 - 12 = 84\n84 - 12 = 72\n72 - 12 = 60\n\nEn las posiciones pares aparecen:\n24, 27, 30, __\n\nCada término aumenta 3:\n24 + 3 = 27\n27 + 3 = 30\n30 + 3 = 33\n\nPor eso los números que continúan son 60 y 33.",
       "incorrectArgumentsByOption": {
         "a": "60, 30: el 60 sí respeta la serie impar, pero 30 repite el término par anterior y no avanza a 33.",
         "b": "72, 33: el 33 sí respeta la serie par, pero 72 repite el término impar anterior.",
@@ -172,7 +172,7 @@ window.IFR_APP_DATA = {
       "correctOption": "b",
       "correctOptionText": "60, 120",
       "hint": "El patrón no usa una sola operación; observa el ciclo completo de movimientos.",
-      "correctArgument": "La cadena sigue este ciclo de operaciones:\n\nMultiplicar por 3, restar 3, multiplicar por 2, restar 3.\n\nSe comprueba así:\n\\(5 \\times 3 = 15\\)\n\\(15 - 3 = 12\\)\n\\(12 \\times 2 = 24\\)\n\\(24 - 3 = 21\\)\n\\(21 \\times 3 = 63\\)\n\nAhora continúa:\n\\(63 - 3 = 60\\)\n\\(60 \\times 2 = 120\\)\n\nPor eso los números faltantes son 60 y 120.",
+      "correctArgument": "La cadena sigue este ciclo de operaciones:\n\nMultiplicar por 3, restar 3, multiplicar por 2, restar 3.\n\nSe comprueba así:\n5 × 3 = 15\n15 - 3 = 12\n12 × 2 = 24\n24 - 3 = 21\n21 × 3 = 63\n\nAhora continúa:\n63 - 3 = 60\n60 × 2 = 120\n\nPor eso los números faltantes son 60 y 120.",
       "incorrectArgumentsByOption": {
         "a": "60, 117: el primer número sí es correcto, pero después de 60 corresponde multiplicar por 2.",
         "c": "66, 132: suma 3 después de 63, pero el ciclo indica restar 3.",
@@ -194,9 +194,9 @@ window.IFR_APP_DATA = {
       "areaId": "habilidad-matematica",
       "areaName": "Habilidad matemática",
       "block": "Tablas con números",
-      "baseText": null,
+      "baseText": "La siguiente tabla muestra tres filas con números y un resultado.",
       "basePill": null,
-      "prompt": "¿Cuál es el número que falta en la siguiente tabla?\n\n| Número 1 | Número 2 | Número 3 | Resultado |\n|---:|---:|---:|---:|\n| 4 | 7 | 3 | 31 |\n| 6 | 5 | 4 | 34 |\n| 8 | 9 | 2 | __ |",
+      "prompt": "¿Qué valor falta en la tercera fila?",
       "options": [
         {
           "label": "a",
@@ -222,18 +222,79 @@ window.IFR_APP_DATA = {
       "correctOption": "e",
       "correctOptionText": "74",
       "hint": "En cada fila, primero se multiplican los dos primeros números y luego se usa el tercer número.",
-      "correctArgument": "La regla de cada fila es:\n\n\\[\n\\text{Resultado} = (\\text{Número 1} \\times \\text{Número 2}) + \\text{Número 3}\n\\]\n\nFila 1:\n\\[\n4 \\times 7 + 3 = 28 + 3 = 31\n\\]\n\nFila 2:\n\\[\n6 \\times 5 + 4 = 30 + 4 = 34\n\\]\n\nFila 3:\n\\[\n8 \\times 9 + 2 = 72 + 2 = 74\n\\]\n\nPor eso el número faltante es 74.",
+      "correctArgument": "La regla de cada fila es:\n\nResultado = (Número 1 × Número 2) + Número 3\n\nFila 1:\n4 × 7 + 3 = 28 + 3 = 31\n\nFila 2:\n6 × 5 + 4 = 30 + 4 = 34\n\nFila 3:\n8 × 9 + 2 = 72 + 2 = 74\n\nPor eso el número faltante es 74.",
       "incorrectArgumentsByOption": {
-        "a": "70: queda por debajo del producto \\(8 \\times 9\\), por lo que no puede cumplir la regla.",
-        "b": "72: solo considera \\(8 \\times 9\\), pero omite sumar el tercer número.",
+        "a": "70: queda por debajo del producto 8 × 9, por lo que no puede cumplir la regla.",
+        "b": "72: solo considera 8 × 9, pero omite sumar el tercer número.",
         "c": "73: suma 1 en lugar de sumar 2.",
         "d": "76: suma 4, pero el tercer número de la fila es 2."
       },
       "visual": {
-        "kind": "none",
-        "content": ""
+        "kind": "table",
+        "position": "base",
+        "hasHorizontalScroll": true,
+        "caption": "La siguiente tabla muestra tres filas con números y un resultado.",
+        "headers": [
+          "Número 1",
+          "Número 2",
+          "Número 3",
+          "Resultado"
+        ],
+        "rows": [
+          [
+            "4",
+            "7",
+            "3",
+            "31"
+          ],
+          [
+            "6",
+            "5",
+            "4",
+            "34"
+          ],
+          [
+            "8",
+            "9",
+            "2",
+            "valor faltante"
+          ]
+        ]
       },
-      "visuals": [],
+      "visuals": [
+        {
+          "kind": "table",
+          "position": "base",
+          "hasHorizontalScroll": true,
+          "caption": "La siguiente tabla muestra tres filas con números y un resultado.",
+          "headers": [
+            "Número 1",
+            "Número 2",
+            "Número 3",
+            "Resultado"
+          ],
+          "rows": [
+            [
+              "4",
+              "7",
+              "3",
+              "31"
+            ],
+            [
+              "6",
+              "5",
+              "4",
+              "34"
+            ],
+            [
+              "8",
+              "9",
+              "2",
+              "valor faltante"
+            ]
+          ]
+        }
+      ],
       "sourceOrder": 3,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -244,9 +305,9 @@ window.IFR_APP_DATA = {
       "areaId": "habilidad-matematica",
       "areaName": "Habilidad matemática",
       "block": "Tablas con números",
-      "baseText": null,
+      "baseText": "El siguiente cuadro muestra dos números y el resultado de cada fila.",
       "basePill": null,
-      "prompt": "¿Cuál es el número que falta en el siguiente cuadro?\n\n| Primer número | Segundo número | Resultado |\n|---:|---:|---:|\n| 2 | 6 | 14 |\n| 3 | 8 | 19 |\n| 5 | 12 | __ |",
+      "prompt": "¿Qué valor falta en la tercera fila?",
       "options": [
         {
           "label": "a",
@@ -272,7 +333,7 @@ window.IFR_APP_DATA = {
       "correctOption": "a",
       "correctOptionText": "29",
       "hint": "Revisa si el resultado se obtiene duplicando uno de los números y luego sumando el otro.",
-      "correctArgument": "La regla horizontal es:\n\n\\[\n\\text{Resultado} = \\text{Primer número} + 2(\\text{Segundo número})\n\\]\n\nFila 1:\n\\[\n2 + 2(6) = 2 + 12 = 14\n\\]\n\nFila 2:\n\\[\n3 + 2(8) = 3 + 16 = 19\n\\]\n\nFila 3:\n\\[\n5 + 2(12) = 5 + 24 = 29\n\\]\n\nPor eso el número faltante es 29.",
+      "correctArgument": "La regla horizontal es:\n\nResultado = Primer número + 2(Segundo número)\n\nFila 1:\n2 + 2(6) = 2 + 12 = 14\n\nFila 2:\n3 + 2(8) = 3 + 16 = 19\n\nFila 3:\n5 + 2(12) = 5 + 24 = 29\n\nPor eso el número faltante es 29.",
       "incorrectArgumentsByOption": {
         "b": "27: no duplica correctamente el segundo número antes de sumar.",
         "c": "28: queda una unidad abajo del resultado de aplicar la regla.",
@@ -280,10 +341,63 @@ window.IFR_APP_DATA = {
         "e": "31: no respeta la relación de las dos primeras filas."
       },
       "visual": {
-        "kind": "none",
-        "content": ""
+        "kind": "table",
+        "position": "base",
+        "hasHorizontalScroll": true,
+        "caption": "El siguiente cuadro muestra dos números y el resultado de cada fila.",
+        "headers": [
+          "Primer número",
+          "Segundo número",
+          "Resultado"
+        ],
+        "rows": [
+          [
+            "2",
+            "6",
+            "14"
+          ],
+          [
+            "3",
+            "8",
+            "19"
+          ],
+          [
+            "5",
+            "12",
+            "valor faltante"
+          ]
+        ]
       },
-      "visuals": [],
+      "visuals": [
+        {
+          "kind": "table",
+          "position": "base",
+          "hasHorizontalScroll": true,
+          "caption": "El siguiente cuadro muestra dos números y el resultado de cada fila.",
+          "headers": [
+            "Primer número",
+            "Segundo número",
+            "Resultado"
+          ],
+          "rows": [
+            [
+              "2",
+              "6",
+              "14"
+            ],
+            [
+              "3",
+              "8",
+              "19"
+            ],
+            [
+              "5",
+              "12",
+              "valor faltante"
+            ]
+          ]
+        }
+      ],
       "sourceOrder": 4,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -385,7 +499,7 @@ window.IFR_APP_DATA = {
       "correctOption": "a",
       "correctOptionText": "25",
       "hint": "Revisa cuántos mosaicos se agregan de una figura a la siguiente.",
-      "correctArgument": "La cantidad de mosaicos sigue esta sucesión:\n\n5, 9, 13, 17, __, __\n\nCada figura aumenta 4 mosaicos:\n\\[\n5 + 4 = 9\n\\]\n\\[\n9 + 4 = 13\n\\]\n\\[\n13 + 4 = 17\n\\]\n\nEntonces:\n\\[\n17 + 4 = 21\n\\]\n\\[\n21 + 4 = 25\n\\]\n\nLa figura 6 tendrá 25 mosaicos.",
+      "correctArgument": "La cantidad de mosaicos sigue esta sucesión:\n\n5, 9, 13, 17, __, __\n\nCada figura aumenta 4 mosaicos:\n5 + 4 = 9\n9 + 4 = 13\n13 + 4 = 17\n\nEntonces:\n17 + 4 = 21\n21 + 4 = 25\n\nLa figura 6 tendrá 25 mosaicos.",
       "incorrectArgumentsByOption": {
         "b": "21: corresponde a la figura 5, no a la figura 6.",
         "c": "24: queda una unidad abajo del valor que resulta al sumar 4 dos veces desde la figura 4.",
@@ -574,7 +688,7 @@ window.IFR_APP_DATA = {
       "correctOption": "d",
       "correctOptionText": "14",
       "hint": "Cuenta los cuadrados de tamaño 1 × 1, luego los de tamaño 2 × 2 y finalmente el de tamaño 3 × 3.",
-      "correctArgument": "En una cuadrícula 3 × 3 hay:\n\nCuadrados pequeños de 1 × 1:\n\\[\n9\n\\]\n\nCuadrados medianos de 2 × 2:\n\\[\n4\n\\]\n\nCuadrado grande de 3 × 3:\n\\[\n1\n\\]\n\nTotal:\n\\[\n9 + 4 + 1 = 14\n\\]\n\nPor eso hay 14 cuadrados.",
+      "correctArgument": "En una cuadrícula 3 × 3 hay:\n\nCuadrados pequeños de 1 × 1:\n9\n\nCuadrados medianos de 2 × 2:\n4\n\nCuadrado grande de 3 × 3:\n1\n\nTotal:\n9 + 4 + 1 = 14\n\nPor eso hay 14 cuadrados.",
       "incorrectArgumentsByOption": {
         "a": "9: solo cuenta los cuadrados pequeños y omite los cuadrados mayores.",
         "b": "12: reconoce algunos cuadrados grandes, pero deja fuera varios de 2 × 2.",
@@ -637,7 +751,7 @@ window.IFR_APP_DATA = {
       "correctOption": "c",
       "correctOptionText": "10",
       "hint": "No cuentes solo los triángulos pequeños; también considera los que se forman al unir dos, tres o cuatro partes de la base.",
-      "correctArgument": "La base queda dividida en cuatro partes. Los triángulos posibles se cuentan así:\n\nTriángulos de una parte:\n\\[\n4\n\\]\n\nTriángulos formados por dos partes:\n\\[\n3\n\\]\n\nTriángulos formados por tres partes:\n\\[\n2\n\\]\n\nTriángulo formado por las cuatro partes:\n\\[\n1\n\\]\n\nTotal:\n\\[\n4 + 3 + 2 + 1 = 10\n\\]\n\nPor eso hay 10 triángulos.",
+      "correctArgument": "La base queda dividida en cuatro partes. Los triángulos posibles se cuentan así:\n\nTriángulos de una parte:\n4\n\nTriángulos formados por dos partes:\n3\n\nTriángulos formados por tres partes:\n2\n\nTriángulo formado por las cuatro partes:\n1\n\nTotal:\n4 + 3 + 2 + 1 = 10\n\nPor eso hay 10 triángulos.",
       "incorrectArgumentsByOption": {
         "a": "6: cuenta algunos triángulos pequeños y medianos, pero omite varios.",
         "b": "8: reconoce que hay triángulos compuestos, pero no todos.",
@@ -700,10 +814,10 @@ window.IFR_APP_DATA = {
       "correctOption": "a",
       "correctOptionText": "102",
       "hint": "La sucesión alterna entre sumar una cantidad fija y duplicar el resultado.",
-      "correctArgument": "La sucesión alterna dos operaciones:\n\nSumar 5 y multiplicar por 2.\n\n\\[\n4 + 5 = 9\n\\]\n\\[\n9 \\times 2 = 18\n\\]\n\\[\n18 + 5 = 23\n\\]\n\\[\n23 \\times 2 = 46\n\\]\n\\[\n46 + 5 = 51\n\\]\n\nLa operación que sigue es multiplicar por 2:\n\\[\n51 \\times 2 = 102\n\\]\n\nPor eso el número que sigue es 102.",
+      "correctArgument": "La sucesión alterna dos operaciones:\n\nSumar 5 y multiplicar por 2.\n\n4 + 5 = 9\n9 × 2 = 18\n18 + 5 = 23\n23 × 2 = 46\n46 + 5 = 51\n\nLa operación que sigue es multiplicar por 2:\n51 × 2 = 102\n\nPor eso el número que sigue es 102.",
       "incorrectArgumentsByOption": {
         "b": "56: resultaría de volver a sumar 5, pero en ese lugar corresponde multiplicar por 2.",
-        "c": "101: está cerca del resultado, pero \\(51 \\times 2\\) da 102.",
+        "c": "101: está cerca del resultado, pero 51 × 2 da 102.",
         "d": "92: no corresponde a la operación que sigue.",
         "e": "108: multiplica o suma de forma incorrecta y rompe la alternancia."
       },
@@ -750,7 +864,7 @@ window.IFR_APP_DATA = {
       "correctOption": "e",
       "correctOptionText": "6",
       "hint": "Representa las fichas verdes con una cantidad desconocida y expresa las demás en función de esa cantidad.",
-      "correctArgument": "Sea \\(v\\) la cantidad de fichas verdes.\n\nEntonces:\nRojas:\n\\[\n2v\n\\]\n\nAzules:\n\\[\nv + 5\n\\]\n\nTotal:\n\\[\nv + 2v + (v + 5) = 29\n\\]\n\nSe simplifica:\n\\[\n4v + 5 = 29\n\\]\n\nRestamos 5:\n\\[\n4v = 24\n\\]\n\nDividimos entre 4:\n\\[\nv = 6\n\\]\n\nPor eso hay 6 fichas verdes.",
+      "correctArgument": "Sea v la cantidad de fichas verdes.\n\nEntonces:\nRojas:\n2v\n\nAzules:\nv + 5\n\nTotal:\nv + 2v + (v + 5) = 29\n\nSe simplifica:\n4v + 5 = 29\n\nRestamos 5:\n4v = 24\n\nDividimos entre 4:\nv = 6\n\nPor eso hay 6 fichas verdes.",
       "incorrectArgumentsByOption": {
         "a": "4: si hubiera 4 verdes, habría 8 rojas y 9 azules; el total sería 21.",
         "b": "5: si hubiera 5 verdes, habría 10 rojas y 10 azules; el total sería 25.",
@@ -800,7 +914,7 @@ window.IFR_APP_DATA = {
       "correctOption": "b",
       "correctOptionText": "12",
       "hint": "Más llaves trabajando al mismo ritmo llenan el tanque en menos tiempo. Usa una proporción inversa.",
-      "correctArgument": "El trabajo total puede medirse en «llave minutos».\n\nCuatro llaves tardan 18 minutos:\n\\[\n4 \\times 18 = 72\n\\]\n\nEso significa que el tanque requiere 72 llave minutos.\n\nSi trabajan 6 llaves:\n\\[\n72 \\div 6 = 12\n\\]\n\nPor eso el tanque se llenará en 12 minutos.",
+      "correctArgument": "El trabajo total puede medirse en «llave minutos».\n\nCuatro llaves tardan 18 minutos:\n4 × 18 = 72\n\nEso significa que el tanque requiere 72 llave minutos.\n\nSi trabajan 6 llaves:\n72 ÷ 6 = 12\n\nPor eso el tanque se llenará en 12 minutos.",
       "incorrectArgumentsByOption": {
         "a": "10: reduce demasiado el tiempo y no conserva el trabajo total.",
         "c": "14: no corresponde a dividir 72 entre 6.",
@@ -900,7 +1014,7 @@ window.IFR_APP_DATA = {
       "correctOption": "c",
       "correctOptionText": "Equipo C",
       "hint": "Calcula cuántos paquetes entrega cada equipo en un minuto y compara los resultados.",
-      "correctArgument": "Calculamos el rendimiento de cada equipo:\n\nEquipo A:\n\\[\n48 \\div 6 = 8\n\\]\n\nEquipo B:\n\\[\n54 \\div 9 = 6\n\\]\n\nEquipo C:\n\\[\n63 \\div 7 = 9\n\\]\n\nEquipo D:\n\\[\n72 \\div 12 = 6\n\\]\n\nEquipo E:\n\\[\n84 \\div 14 = 6\n\\]\n\nEl mayor rendimiento es 9 paquetes por minuto, correspondiente al Equipo C.",
+      "correctArgument": "Calculamos el rendimiento de cada equipo:\n\nEquipo A:\n48 ÷ 6 = 8\n\nEquipo B:\n54 ÷ 9 = 6\n\nEquipo C:\n63 ÷ 7 = 9\n\nEquipo D:\n72 ÷ 12 = 6\n\nEquipo E:\n84 ÷ 14 = 6\n\nEl mayor rendimiento es 9 paquetes por minuto, correspondiente al Equipo C.",
       "incorrectArgumentsByOption": {
         "a": "Equipo A: entrega 8 paquetes por minuto, menos que el Equipo C.",
         "b": "Equipo B: entrega 6 paquetes por minuto, no es el mayor rendimiento.",
@@ -1011,12 +1125,12 @@ window.IFR_APP_DATA = {
       "correctOption": "e",
       "correctOptionText": "72",
       "hint": "Primero calcula cuántos sobres organiza un estudiante en una hora.",
-      "correctArgument": "Primero calculamos el trabajo por estudiante y por hora.\n\nCinco estudiantes en 2 horas equivalen a:\n\\[\n5 \\times 2 = 10\n\\]\nestudiante horas.\n\nEn 10 estudiante horas organizan 30 sobres:\n\\[\n30 \\div 10 = 3\n\\]\n\nCada estudiante organiza 3 sobres por hora.\n\nAhora calculamos el trabajo de 8 estudiantes durante 3 horas:\n\\[\n8 \\times 3 = 24\n\\]\nestudiante horas.\n\nEntonces:\n\\[\n24 \\times 3 = 72\n\\]\n\nPor eso organizarán 72 sobres.",
+      "correctArgument": "Primero calculamos el trabajo por estudiante y por hora.\n\nCinco estudiantes en 2 horas equivalen a:\n5 × 2 = 10\nestudiante horas.\n\nEn 10 estudiante horas organizan 30 sobres:\n30 ÷ 10 = 3\n\nCada estudiante organiza 3 sobres por hora.\n\nAhora calculamos el trabajo de 8 estudiantes durante 3 horas:\n8 × 3 = 24\nestudiante horas.\n\nEntonces:\n24 × 3 = 72\n\nPor eso organizarán 72 sobres.",
       "incorrectArgumentsByOption": {
         "a": "48: no considera correctamente el aumento de estudiantes y horas.",
         "b": "54: queda por debajo del resultado al calcular el ritmo por estudiante y por hora.",
         "c": "60: aumenta la producción, pero no lo suficiente para 8 estudiantes durante 3 horas.",
-        "d": "66: se acerca, pero no corresponde al producto \\(24 \\times 3\\)."
+        "d": "66: se acerca, pero no corresponde al producto 24 × 3."
       },
       "visual": {
         "kind": "none",
@@ -2452,12 +2566,12 @@ window.IFR_APP_DATA = {
       "correctOption": "a",
       "correctOptionText": "3 g/cm³",
       "hint": "La densidad se obtiene dividiendo la masa entre el volumen.",
-      "correctArgument": "La densidad se calcula con la expresión:\n\n\\[\n\\text{densidad} = \\frac{\\text{masa}}{\\text{volumen}}\n\\]\n\nSustituimos los datos:\n\n\\[\n\\text{densidad} = \\frac{72\\ \\text{g}}{24\\ \\text{cm}^3}\n\\]\n\n\\[\n72 \\div 24 = 3\n\\]\n\nPor lo tanto, la densidad es:\n\n\\[\n3\\ \\text{g/cm}^3\n\\]",
+      "correctArgument": "La densidad se calcula con la expresión:\n\ndensidad = masa/volumen\n\nSustituimos los datos:\n\ndensidad = 72 g/24 cm³\n\n72 ÷ 24 = 3\n\nPor lo tanto, la densidad es:\n\n3 g/cm³",
       "incorrectArgumentsByOption": {
         "b": "24 g/cm³: corresponde al volumen dado, no al resultado de dividir masa entre volumen.",
-        "c": "48 g/cm³: resulta de restar \\(72 - 24\\), pero la densidad no se calcula con resta.",
+        "c": "48 g/cm³: resulta de restar 72 - 24, pero la densidad no se calcula con resta.",
         "d": "72 g/cm³: corresponde a la masa, no a la densidad.",
-        "e": "96 g/cm³: resulta de sumar \\(72 + 24\\), operación que no permite calcular densidad."
+        "e": "96 g/cm³: resulta de sumar 72 + 24, operación que no permite calcular densidad."
       },
       "visual": {
         "kind": "none",
@@ -2665,7 +2779,7 @@ window.IFR_APP_DATA = {
       "correctOption": "e",
       "correctOptionText": "14",
       "hint": "El número atómico indica la cantidad de protones. Para obtener los neutrones, compara ese dato con el número de masa.",
-      "correctArgument": "El número de masa se obtiene sumando protones y neutrones:\n\n\\[\nA = p + n\n\\]\n\nEl número atómico indica los protones:\n\n\\[\np = 13\n\\]\n\nEl número de masa es:\n\n\\[\nA = 27\n\\]\n\nEntonces:\n\n\\[\nn = A - p\n\\]\n\n\\[\nn = 27 - 13 = 14\n\\]\n\nPor lo tanto, el átomo tiene 14 neutrones.",
+      "correctArgument": "El número de masa se obtiene sumando protones y neutrones:\n\nA = p + n\n\nEl número atómico indica los protones:\n\np = 13\n\nEl número de masa es:\n\nA = 27\n\nEntonces:\n\nn = A - p\n\nn = 27 - 13 = 14\n\nPor lo tanto, el átomo tiene 14 neutrones.",
       "incorrectArgumentsByOption": {
         "a": "13: corresponde al número de protones, no al número de neutrones.",
         "b": "15: resulta de una resta incorrecta.",
@@ -2689,7 +2803,7 @@ window.IFR_APP_DATA = {
       "block": "Fórmulas químicas: conteo de átomos",
       "baseText": null,
       "basePill": null,
-      "prompt": "En la fórmula \\(Ca(OH)_2\\), ¿cuántos átomos hay en total dentro de una unidad de la sustancia?",
+      "prompt": "En la fórmula Ca(OH)₂, ¿cuántos átomos hay en total dentro de una unidad de la sustancia?",
       "options": [
         {
           "label": "a",
@@ -2715,10 +2829,10 @@ window.IFR_APP_DATA = {
       "correctOption": "d",
       "correctOptionText": "5 átomos",
       "hint": "El subíndice fuera del paréntesis multiplica a todos los átomos que están dentro de él.",
-      "correctArgument": "La fórmula \\(Ca(OH)_2\\) se interpreta así:\n\nHay 1 átomo de calcio:\n\n\\[\nCa = 1\n\\]\n\nDentro del paréntesis hay \\(O\\) y \\(H\\). El subíndice 2 multiplica a ambos:\n\n\\[\nO = 2\n\\]\n\n\\[\nH = 2\n\\]\n\nTotal de átomos:\n\n\\[\n1 + 2 + 2 = 5\n\\]\n\nPor eso hay 5 átomos en total.",
+      "correctArgument": "La fórmula Ca(OH)₂ se interpreta así:\n\nHay 1 átomo de calcio:\n\nCa = 1\n\nDentro del paréntesis hay O y H. El subíndice 2 multiplica a ambos:\n\nO = 2\n\nH = 2\n\nTotal de átomos:\n\n1 + 2 + 2 = 5\n\nPor eso hay 5 átomos en total.",
       "incorrectArgumentsByOption": {
         "a": "2 átomos: solo toma el subíndice 2 y omite el resto de la fórmula.",
-        "b": "3 átomos: cuenta \\(Ca\\), \\(O\\) y \\(H\\), pero no aplica el subíndice fuera del paréntesis.",
+        "b": "3 átomos: cuenta Ca, O y H, pero no aplica el subíndice fuera del paréntesis.",
         "c": "4 átomos: deja fuera uno de los átomos al hacer el conteo.",
         "e": "6 átomos: multiplica de más y no respeta la estructura de la fórmula."
       },
@@ -2889,7 +3003,7 @@ window.IFR_APP_DATA = {
       "block": "Ecuaciones químicas: lectura de coeficientes",
       "baseText": null,
       "basePill": null,
-      "prompt": "Interpreta la siguiente ecuación química:\n\n\\[\nN_2 + 3H_2 \\rightarrow 2NH_3\n\\]\n\n¿Cuál lectura corresponde a los coeficientes de la ecuación?",
+      "prompt": "Interpreta la siguiente ecuación química:\n\nN₂ + 3H₂ → 2NH₃\n\n¿Cuál lectura corresponde a los coeficientes de la ecuación?",
       "options": [
         {
           "label": "a",
@@ -2915,10 +3029,10 @@ window.IFR_APP_DATA = {
       "correctOption": "b",
       "correctOptionText": "1 molécula de nitrógeno más 3 moléculas de hidrógeno forman 2 moléculas de amoniaco.",
       "hint": "Cuando no aparece número antes de una fórmula, se entiende que el coeficiente es 1.",
-      "correctArgument": "En la ecuación:\n\n\\[\nN_2 + 3H_2 \\rightarrow 2NH_3\n\\]\n\nEl \\(N_2\\) no tiene coeficiente escrito, por lo que se interpreta como 1 molécula de nitrógeno. El \\(3H_2\\) indica 3 moléculas de hidrógeno. El \\(2NH_3\\) indica 2 moléculas de amoniaco. Por eso la lectura correcta es: 1 molécula de nitrógeno más 3 moléculas de hidrógeno forman 2 moléculas de amoniaco.",
+      "correctArgument": "En la ecuación:\n\nN₂ + 3H₂ → 2NH₃\n\nEl N₂ no tiene coeficiente escrito, por lo que se interpreta como 1 molécula de nitrógeno. El 3H₂ indica 3 moléculas de hidrógeno. El 2NH₃ indica 2 moléculas de amoniaco. Por eso la lectura correcta es: 1 molécula de nitrógeno más 3 moléculas de hidrógeno forman 2 moléculas de amoniaco.",
       "incorrectArgumentsByOption": {
         "a": "Cambia los coeficientes de hidrógeno y amoniaco, por lo que no respeta la ecuación.",
-        "c": "Usa 2 moléculas de nitrógeno, pero el coeficiente de \\(N_2\\) es 1.",
+        "c": "Usa 2 moléculas de nitrógeno, pero el coeficiente de N₂ es 1.",
         "d": "Invierte la proporción de nitrógeno e hidrógeno.",
         "e": "Ignora los coeficientes 3 y 2 que aparecen en la ecuación."
       },
@@ -3589,38 +3703,38 @@ window.IFR_APP_DATA = {
       "block": "Operaciones con números con signo y jerarquía básica",
       "baseText": null,
       "basePill": null,
-      "prompt": "¿Cuál es el resultado de la siguiente operación?\n\n\\[\n-18 + 4(-3) - [(-20) \\div 5]\n\\]",
+      "prompt": "¿Cuál es el resultado de la siguiente operación?\n\n-18 + 4(-3) - [(-20) ÷ 5]",
       "options": [
         {
           "label": "a",
-          "text": "\\(-34\\)"
+          "text": "-34"
         },
         {
           "label": "b",
-          "text": "\\(-30\\)"
+          "text": "-30"
         },
         {
           "label": "c",
-          "text": "\\(-26\\)"
+          "text": "-26"
         },
         {
           "label": "d",
-          "text": "\\(-22\\)"
+          "text": "-22"
         },
         {
           "label": "e",
-          "text": "\\(26\\)"
+          "text": "26"
         }
       ],
       "correctOption": "c",
-      "correctOptionText": "\\(-26\\)",
+      "correctOptionText": "-26",
       "hint": "Primero resuelve la multiplicación y la división; después cuida el signo al restar un número negativo.",
-      "correctArgument": "Primero se resuelven multiplicación y división:\n\n\\[\n4(-3) = -12\n\\]\n\n\\[\n(-20) \\div 5 = -4\n\\]\n\nAhora sustituimos en la expresión:\n\n\\[\n-18 + (-12) - (-4)\n\\]\n\nRestar un número negativo equivale a sumar:\n\n\\[\n-18 - 12 + 4\n\\]\n\n\\[\n-30 + 4 = -26\n\\]\n\nPor eso el resultado correcto es \\(-26\\).",
+      "correctArgument": "Primero se resuelven multiplicación y división:\n\n4(-3) = -12\n\n(-20) ÷ 5 = -4\n\nAhora sustituimos en la expresión:\n\n-18 + (-12) - (-4)\n\nRestar un número negativo equivale a sumar:\n\n-18 - 12 + 4\n\n-30 + 4 = -26\n\nPor eso el resultado correcto es -26.",
       "incorrectArgumentsByOption": {
-        "a": "\\(-34\\): resulta de restar \\(4\\) al final, pero se debía sumar porque aparece \\(-(-4)\\).",
-        "b": "\\(-30\\): omite el efecto de restar el resultado de la división.",
-        "d": "\\(-22\\): cambia incorrectamente el signo de uno de los términos.",
-        "e": "\\(26\\): conserva la cantidad, pero cambia el signo del resultado final."
+        "a": "-34: resulta de restar 4 al final, pero se debía sumar porque aparece -(-4).",
+        "b": "-30: omite el efecto de restar el resultado de la división.",
+        "d": "-22: cambia incorrectamente el signo de uno de los términos.",
+        "e": "26: conserva la cantidad, pero cambia el signo del resultado final."
       },
       "visual": {
         "kind": "none",
@@ -3639,38 +3753,38 @@ window.IFR_APP_DATA = {
       "block": "Fracciones y decimales: conversión y operación",
       "baseText": null,
       "basePill": null,
-      "prompt": "¿Cuál es el resultado de la siguiente operación?\n\n\\[\n\\frac{5}{6} - 0.25 + \\frac{2}{3}\n\\]",
+      "prompt": "¿Cuál es el resultado de la siguiente operación?\n\n5/6 - 0.25 + 2/3",
       "options": [
         {
           "label": "a",
-          "text": "\\(1.25\\)"
+          "text": "1.25"
         },
         {
           "label": "b",
-          "text": "\\(0.75\\)"
+          "text": "0.75"
         },
         {
           "label": "c",
-          "text": "\\(1.50\\)"
+          "text": "1.50"
         },
         {
           "label": "d",
-          "text": "\\(1.75\\)"
+          "text": "1.75"
         },
         {
           "label": "e",
-          "text": "\\(2.25\\)"
+          "text": "2.25"
         }
       ],
       "correctOption": "a",
-      "correctOptionText": "\\(1.25\\)",
-      "hint": "Convierte \\(0.25\\) a fracción y usa denominadores comunes.",
-      "correctArgument": "Primero convertimos el decimal:\n\n\\[\n0.25 = \\frac{1}{4}\n\\]\n\nLa operación queda:\n\n\\[\n\\frac{5}{6} - \\frac{1}{4} + \\frac{2}{3}\n\\]\n\nSumamos primero las fracciones con denominador 6:\n\n\\[\n\\frac{5}{6} + \\frac{2}{3} = \\frac{5}{6} + \\frac{4}{6} = \\frac{9}{6} = \\frac{3}{2}\n\\]\n\nAhora restamos:\n\n\\[\n\\frac{3}{2} - \\frac{1}{4}\n\\]\n\nConvertimos a cuartos:\n\n\\[\n\\frac{3}{2} = \\frac{6}{4}\n\\]\n\n\\[\n\\frac{6}{4} - \\frac{1}{4} = \\frac{5}{4}\n\\]\n\n\\[\n\\frac{5}{4} = 1.25\n\\]\n\nPor eso el resultado correcto es \\(1.25\\).",
+      "correctOptionText": "1.25",
+      "hint": "Convierte 0.25 a fracción y usa denominadores comunes.",
+      "correctArgument": "Primero convertimos el decimal:\n\n0.25 = 1/4\n\nLa operación queda:\n\n5/6 - 1/4 + 2/3\n\nSumamos primero las fracciones con denominador 6:\n\n5/6 + 2/3 = 5/6 + 4/6 = 9/6 = 3/2\n\nAhora restamos:\n\n3/2 - 1/4\n\nConvertimos a cuartos:\n\n3/2 = 6/4\n\n6/4 - 1/4 = 5/4\n\n5/4 = 1.25\n\nPor eso el resultado correcto es 1.25.",
       "incorrectArgumentsByOption": {
-        "b": "\\(0.75\\): aparece si se resta demasiado al convertir el decimal.",
-        "c": "\\(1.50\\): corresponde a sumar \\(\\frac{5}{6} + \\frac{2}{3}\\), pero omite restar \\(0.25\\).",
-        "d": "\\(1.75\\): suma el decimal en lugar de restarlo.",
-        "e": "\\(2.25\\): excede el resultado porque combina mal las fracciones y el decimal."
+        "b": "0.75: aparece si se resta demasiado al convertir el decimal.",
+        "c": "1.50: corresponde a sumar 5/6 + 2/3, pero omite restar 0.25.",
+        "d": "1.75: suma el decimal en lugar de restarlo.",
+        "e": "2.25: excede el resultado porque combina mal las fracciones y el decimal."
       },
       "visual": {
         "kind": "none",
@@ -3715,7 +3829,7 @@ window.IFR_APP_DATA = {
       "correctOption": "e",
       "correctOptionText": "372.60 pesos",
       "hint": "El descuento se aplica después del aumento, no sobre el precio original.",
-      "correctArgument": "Primero calculamos el aumento de 15% sobre 360:\n\n\\[\n15\\% = 0.15\n\\]\n\n\\[\n360(0.15) = 54\n\\]\n\nNuevo precio:\n\n\\[\n360 + 54 = 414\n\\]\n\nDespués se aplica 10% de descuento sobre 414:\n\n\\[\n10\\% = 0.10\n\\]\n\n\\[\n414(0.10) = 41.40\n\\]\n\nPrecio final:\n\n\\[\n414 - 41.40 = 372.60\n\\]\n\nPor eso el precio final fue 372.60 pesos.",
+      "correctArgument": "Primero calculamos el aumento de 15% sobre 360:\n\n15% = 0.15\n\n360(0.15) = 54\n\nNuevo precio:\n\n360 + 54 = 414\n\nDespués se aplica 10% de descuento sobre 414:\n\n10% = 0.10\n\n414(0.10) = 41.40\n\nPrecio final:\n\n414 - 41.40 = 372.60\n\nPor eso el precio final fue 372.60 pesos.",
       "incorrectArgumentsByOption": {
         "a": "342 pesos: aplica una disminución directa de 5% sobre el precio original, pero los porcentajes sucesivos no se combinan así.",
         "b": "360 pesos: supone que el aumento de 15% y el descuento de 10% se cancelan, pero se aplican sobre cantidades distintas.",
@@ -3739,38 +3853,38 @@ window.IFR_APP_DATA = {
       "block": "Álgebra básica: simplificación de expresiones",
       "baseText": null,
       "basePill": null,
-      "prompt": "Simplifica la siguiente expresión:\n\n\\[\n5x - 2(3x - 4) + 7\n\\]",
+      "prompt": "Simplifica la siguiente expresión:\n\n5x - 2(3x - 4) + 7",
       "options": [
         {
           "label": "a",
-          "text": "\\(x + 15\\)"
+          "text": "x + 15"
         },
         {
           "label": "b",
-          "text": "\\(-x + 8\\)"
+          "text": "-x + 8"
         },
         {
           "label": "c",
-          "text": "\\(-x + 15\\)"
+          "text": "-x + 15"
         },
         {
           "label": "d",
-          "text": "\\(11x - 1\\)"
+          "text": "11x - 1"
         },
         {
           "label": "e",
-          "text": "\\(-x - 15\\)"
+          "text": "-x - 15"
         }
       ],
       "correctOption": "c",
-      "correctOptionText": "\\(-x + 15\\)",
-      "hint": "Distribuye el \\(-2\\) en todo el paréntesis antes de juntar términos semejantes.",
-      "correctArgument": "Primero distribuimos \\(-2\\):\n\n\\[\n-2(3x - 4) = -6x + 8\n\\]\n\nLa expresión queda:\n\n\\[\n5x - 6x + 8 + 7\n\\]\n\nJuntamos términos semejantes:\n\n\\[\n5x - 6x = -x\n\\]\n\n\\[\n8 + 7 = 15\n\\]\n\nEntonces:\n\n\\[\n5x - 2(3x - 4) + 7 = -x + 15\n\\]\n\nPor eso la expresión simplificada es \\(-x + 15\\).",
+      "correctOptionText": "-x + 15",
+      "hint": "Distribuye el -2 en todo el paréntesis antes de juntar términos semejantes.",
+      "correctArgument": "Primero distribuimos -2:\n\n-2(3x - 4) = -6x + 8\n\nLa expresión queda:\n\n5x - 6x + 8 + 7\n\nJuntamos términos semejantes:\n\n5x - 6x = -x\n\n8 + 7 = 15\n\nEntonces:\n\n5x - 2(3x - 4) + 7 = -x + 15\n\nPor eso la expresión simplificada es -x + 15.",
       "incorrectArgumentsByOption": {
-        "a": "\\(x + 15\\): distribuye mal el signo negativo y deja positivo el término con \\(x\\).",
-        "b": "\\(-x + 8\\): omite sumar el \\(7\\) final.",
-        "d": "\\(11x - 1\\): suma los coeficientes como si no hubiera distribución negativa.",
-        "e": "\\(-x - 15\\): cambia el signo de los términos independientes."
+        "a": "x + 15: distribuye mal el signo negativo y deja positivo el término con x.",
+        "b": "-x + 8: omite sumar el 7 final.",
+        "d": "11x - 1: suma los coeficientes como si no hubiera distribución negativa.",
+        "e": "-x - 15: cambia el signo de los términos independientes."
       },
       "visual": {
         "kind": "none",
@@ -3815,10 +3929,10 @@ window.IFR_APP_DATA = {
       "correctOption": "b",
       "correctOptionText": "14",
       "hint": "Traduce el enunciado a una ecuación y reúne los términos con la incógnita en un solo lado.",
-      "correctArgument": "Sea \\(x\\) el número.\n\n«Cuatro veces un número menos 6» se representa como:\n\n\\[\n4x - 6\n\\]\n\n«Dos veces ese mismo número más 22» se representa como:\n\n\\[\n2x + 22\n\\]\n\nLa ecuación es:\n\n\\[\n4x - 6 = 2x + 22\n\\]\n\nRestamos \\(2x\\) en ambos lados:\n\n\\[\n2x - 6 = 22\n\\]\n\nSumamos 6:\n\n\\[\n2x = 28\n\\]\n\nDividimos entre 2:\n\n\\[\nx = 14\n\\]\n\nPor eso el número es 14.",
+      "correctArgument": "Sea x el número.\n\n«Cuatro veces un número menos 6» se representa como:\n\n4x - 6\n\n«Dos veces ese mismo número más 22» se representa como:\n\n2x + 22\n\nLa ecuación es:\n\n4x - 6 = 2x + 22\n\nRestamos 2x en ambos lados:\n\n2x - 6 = 22\n\nSumamos 6:\n\n2x = 28\n\nDividimos entre 2:\n\nx = 14\n\nPor eso el número es 14.",
       "incorrectArgumentsByOption": {
-        "a": "12: al sustituirlo, \\(4(12)-6 = 42\\) y \\(2(12)+22 = 46\\); no son iguales.",
-        "c": "16: al sustituirlo, \\(4(16)-6 = 58\\) y \\(2(16)+22 = 54\\); no son iguales.",
+        "a": "12: al sustituirlo, 4(12)-6 = 42 y 2(12)+22 = 46; no son iguales.",
+        "c": "16: al sustituirlo, 4(16)-6 = 58 y 2(16)+22 = 54; no son iguales.",
         "d": "18: produce valores más altos y no satisface la igualdad.",
         "e": "28: corresponde a un paso intermedio, no al valor final del número."
       },
@@ -3839,38 +3953,38 @@ window.IFR_APP_DATA = {
       "block": "Sistemas de 2 × 2",
       "baseText": null,
       "basePill": null,
-      "prompt": "Resuelve el siguiente sistema de ecuaciones:\n\n\\[\n3x + 2y = 22\n\\]\n\n\\[\nx + y = 8\n\\]",
+      "prompt": "Resuelve el siguiente sistema de ecuaciones:\n\n3x + 2y = 22\n\nx + y = 8",
       "options": [
         {
           "label": "a",
-          "text": "\\(x = 4,\\; y = 4\\)"
+          "text": "x = 4,  y = 4"
         },
         {
           "label": "b",
-          "text": "\\(x = 5,\\; y = 3\\)"
+          "text": "x = 5,  y = 3"
         },
         {
           "label": "c",
-          "text": "\\(x = 2,\\; y = 6\\)"
+          "text": "x = 2,  y = 6"
         },
         {
           "label": "d",
-          "text": "\\(x = 6,\\; y = 2\\)"
+          "text": "x = 6,  y = 2"
         },
         {
           "label": "e",
-          "text": "\\(x = 7,\\; y = 1\\)"
+          "text": "x = 7,  y = 1"
         }
       ],
       "correctOption": "d",
-      "correctOptionText": "\\(x = 6,\\; y = 2\\)",
+      "correctOptionText": "x = 6,  y = 2",
       "hint": "Despeja una variable en la segunda ecuación y sustitúyela en la primera.",
-      "correctArgument": "De la segunda ecuación:\n\n\\[\nx + y = 8\n\\]\n\nDespejamos \\(y\\):\n\n\\[\ny = 8 - x\n\\]\n\nSustituimos en la primera ecuación:\n\n\\[\n3x + 2(8 - x) = 22\n\\]\n\nDistribuimos:\n\n\\[\n3x + 16 - 2x = 22\n\\]\n\nSimplificamos:\n\n\\[\nx + 16 = 22\n\\]\n\nRestamos 16:\n\n\\[\nx = 6\n\\]\n\nSustituimos en \\(y = 8 - x\\):\n\n\\[\ny = 8 - 6 = 2\n\\]\n\nPor eso la solución es:\n\n\\[\nx = 6,\\quad y = 2\n\\]",
+      "correctArgument": "De la segunda ecuación:\n\nx + y = 8\n\nDespejamos y:\n\ny = 8 - x\n\nSustituimos en la primera ecuación:\n\n3x + 2(8 - x) = 22\n\nDistribuimos:\n\n3x + 16 - 2x = 22\n\nSimplificamos:\n\nx + 16 = 22\n\nRestamos 16:\n\nx = 6\n\nSustituimos en y = 8 - x:\n\ny = 8 - 6 = 2\n\nPor eso la solución es:\n\nx = 6, y = 2",
       "incorrectArgumentsByOption": {
-        "a": "\\(x = 4,\\; y = 4\\): cumple \\(x + y = 8\\), pero \\(3(4) + 2(4) = 20\\), no 22.",
-        "b": "\\(x = 5,\\; y = 3\\): cumple \\(x + y = 8\\), pero \\(3(5) + 2(3) = 21\\), no 22.",
-        "c": "\\(x = 2,\\; y = 6\\): cumple \\(x + y = 8\\), pero \\(3(2) + 2(6) = 18\\), no 22.",
-        "e": "\\(x = 7,\\; y = 1\\): cumple \\(x + y = 8\\), pero \\(3(7) + 2(1) = 23\\), no 22."
+        "a": "x = 4,  y = 4: cumple x + y = 8, pero 3(4) + 2(4) = 20, no 22.",
+        "b": "x = 5,  y = 3: cumple x + y = 8, pero 3(5) + 2(3) = 21, no 22.",
+        "c": "x = 2,  y = 6: cumple x + y = 8, pero 3(2) + 2(6) = 18, no 22.",
+        "e": "x = 7,  y = 1: cumple x + y = 8, pero 3(7) + 2(1) = 23, no 22."
       },
       "visual": {
         "kind": "none",
@@ -3889,7 +4003,7 @@ window.IFR_APP_DATA = {
       "block": "Ecuación cuadrática por factorización",
       "baseText": null,
       "basePill": null,
-      "prompt": "Selecciona los valores de \\(x\\) que satisfacen la ecuación:\n\n\\[\nx^2 - 8x + 15 = 0\n\\]",
+      "prompt": "Selecciona los valores de x que satisfacen la ecuación:\n\nx² - 8x + 15 = 0",
       "options": [
         {
           "label": "a",
@@ -3905,7 +4019,7 @@ window.IFR_APP_DATA = {
         },
         {
           "label": "d",
-          "text": "\\(-3\\) y \\(-5\\)"
+          "text": "-3 y -5"
         },
         {
           "label": "e",
@@ -3915,11 +4029,11 @@ window.IFR_APP_DATA = {
       "correctOption": "c",
       "correctOptionText": "3 y 5",
       "hint": "Busca dos números que multiplicados den 15 y sumados den 8.",
-      "correctArgument": "La ecuación se factoriza así:\n\n\\[\nx^2 - 8x + 15 = (x - 3)(x - 5)\n\\]\n\nPara que el producto sea cero:\n\n\\[\nx - 3 = 0\n\\]\n\no\n\n\\[\nx - 5 = 0\n\\]\n\nEntonces:\n\n\\[\nx = 3\n\\]\n\ny\n\n\\[\nx = 5\n\\]\n\nPor eso los valores que satisfacen la ecuación son 3 y 5.",
+      "correctArgument": "La ecuación se factoriza así:\n\nx² - 8x + 15 = (x - 3)(x - 5)\n\nPara que el producto sea cero:\n\nx - 3 = 0\n\no\n\nx - 5 = 0\n\nEntonces:\n\nx = 3\n\ny\n\nx = 5\n\nPor eso los valores que satisfacen la ecuación son 3 y 5.",
       "incorrectArgumentsByOption": {
         "a": "1 y 15: multiplican 15, pero suman 16, no 8.",
         "b": "2 y 6: suman 8, pero multiplican 12, no 15.",
-        "d": "\\(-3\\) y \\(-5\\): sus signos no corresponden, porque la ecuación se factoriza con \\(x - 3\\) y \\(x - 5\\).",
+        "d": "-3 y -5: sus signos no corresponden, porque la ecuación se factoriza con x - 3 y x - 5.",
         "e": "4 y 4: suman 8, pero multiplican 16, no 15."
       },
       "visual": {
@@ -3965,7 +4079,7 @@ window.IFR_APP_DATA = {
       "correctOption": "a",
       "correctOptionText": "Taller B",
       "hint": "Suma la asistencia de cada taller durante los cinco días y compara los totales.",
-      "correctArgument": "Sumamos la asistencia semanal de cada taller.\n\nTaller A:\n\n\\[\n18 + 20 + 15 + 17 + 16 = 86\n\\]\n\nTaller B:\n\n\\[\n14 + 24 + 19 + 18 + 15 = 90\n\\]\n\nTaller C:\n\n\\[\n20 + 16 + 18 + 12 + 17 = 83\n\\]\n\nTaller D:\n\n\\[\n16 + 17 + 20 + 19 + 14 = 86\n\\]\n\nEl total mayor es 90, correspondiente al Taller B.",
+      "correctArgument": "Sumamos la asistencia semanal de cada taller.\n\nTaller A:\n\n18 + 20 + 15 + 17 + 16 = 86\n\nTaller B:\n\n14 + 24 + 19 + 18 + 15 = 90\n\nTaller C:\n\n20 + 16 + 18 + 12 + 17 = 83\n\nTaller D:\n\n16 + 17 + 20 + 19 + 14 = 86\n\nEl total mayor es 90, correspondiente al Taller B.",
       "incorrectArgumentsByOption": {
         "b": "Taller A: tuvo 86 asistentes en total, menos que el Taller B.",
         "c": "Taller C: tuvo 83 asistentes, que es el total menor de la tabla.",
@@ -4108,7 +4222,7 @@ window.IFR_APP_DATA = {
       "correctOption": "e",
       "correctOptionText": "Jueves a viernes",
       "hint": "Compara cuánto baja la gráfica de un día al siguiente, no solo cuál día tuvo el menor consumo.",
-      "correctArgument": "Calculamos los cambios entre días consecutivos:\n\nDe lunes a martes:\n\n\\[\n96 - 88 = 8\n\\]\n\nDe martes a miércoles:\n\n\\[\n88 - 78 = 10\n\\]\n\nDe miércoles a jueves no hubo disminución, sino aumento:\n\n\\[\n82 - 78 = 4\n\\]\n\nDe jueves a viernes:\n\n\\[\n82 - 66 = 16\n\\]\n\nLa mayor disminución fue de 16 litros, entre jueves y viernes.",
+      "correctArgument": "Calculamos los cambios entre días consecutivos:\n\nDe lunes a martes:\n\n96 - 88 = 8\n\nDe martes a miércoles:\n\n88 - 78 = 10\n\nDe miércoles a jueves no hubo disminución, sino aumento:\n\n82 - 78 = 4\n\nDe jueves a viernes:\n\n82 - 66 = 16\n\nLa mayor disminución fue de 16 litros, entre jueves y viernes.",
       "incorrectArgumentsByOption": {
         "a": "Lunes a martes: hubo disminución de 8 litros, pero no fue la mayor.",
         "b": "Martes a miércoles: hubo disminución de 10 litros, menor que 16.",
@@ -4143,7 +4257,7 @@ window.IFR_APP_DATA = {
       "areaId": "matematicas",
       "areaName": "Matemáticas",
       "block": "Geometría: ángulos alternos internos",
-      "baseText": "Dos rectas paralelas \\(r\\) y \\(s\\) son cortadas por una transversal.\n\nEn la intersección superior:\n1 está arriba a la izquierda.\n2 está arriba a la derecha.\n3 está abajo a la izquierda.\n4 está abajo a la derecha.\n\nEn la intersección inferior:\n5 está arriba a la izquierda.\n6 está arriba a la derecha.\n7 está abajo a la izquierda.\n8 está abajo a la derecha.",
+      "baseText": "Dos rectas paralelas r y s son cortadas por una transversal.\n\nEn la intersección superior:\n1 está arriba a la izquierda.\n2 está arriba a la derecha.\n3 está abajo a la izquierda.\n4 está abajo a la derecha.\n\nEn la intersección inferior:\n5 está arriba a la izquierda.\n6 está arriba a la derecha.\n7 está abajo a la izquierda.\n8 está abajo a la derecha.",
       "basePill": null,
       "prompt": "¿Cuál de los siguientes pares forma ángulos alternos internos?",
       "options": [
@@ -4171,7 +4285,7 @@ window.IFR_APP_DATA = {
       "correctOption": "d",
       "correctOptionText": "3 y 6",
       "hint": "Los ángulos alternos internos están entre las dos rectas paralelas y en lados opuestos de la transversal.",
-      "correctArgument": "Los ángulos interiores son los que quedan entre las rectas paralelas:\n\n\\[\n3,\\; 4,\\; 5,\\; 6\n\\]\n\nLos alternos internos deben estar dentro de las paralelas y en lados opuestos de la transversal. El ángulo 3 está en el interior y a un lado de la transversal; el ángulo 6 también está en el interior, pero al lado opuesto. Por eso 3 y 6 forman un par de ángulos alternos internos.",
+      "correctArgument": "Los ángulos interiores son los que quedan entre las rectas paralelas:\n\n3,  4,  5,  6\n\nLos alternos internos deben estar dentro de las paralelas y en lados opuestos de la transversal. El ángulo 3 está en el interior y a un lado de la transversal; el ángulo 6 también está en el interior, pero al lado opuesto. Por eso 3 y 6 forman un par de ángulos alternos internos.",
       "incorrectArgumentsByOption": {
         "a": "1 y 5: el ángulo 1 es exterior, por lo que no puede formar un par alterno interno.",
         "b": "3 y 4: ambos son interiores, pero están en la misma intersección, no alternan entre las dos rectas.",
@@ -4212,34 +4326,34 @@ window.IFR_APP_DATA = {
       "options": [
         {
           "label": "a",
-          "text": "\\(162\\ \\text{m}^2\\)"
+          "text": "162 m²"
         },
         {
           "label": "b",
-          "text": "\\(189\\ \\text{m}^2\\)"
+          "text": "189 m²"
         },
         {
           "label": "c",
-          "text": "\\(216\\ \\text{m}^2\\)"
+          "text": "216 m²"
         },
         {
           "label": "d",
-          "text": "\\(243\\ \\text{m}^2\\)"
+          "text": "243 m²"
         },
         {
           "label": "e",
-          "text": "\\(270\\ \\text{m}^2\\)"
+          "text": "270 m²"
         }
       ],
       "correctOption": "b",
-      "correctOptionText": "\\(189\\ \\text{m}^2\\)",
+      "correctOptionText": "189 m²",
       "hint": "Calcula por separado el área del rectángulo y el área del triángulo; después suma ambas.",
-      "correctArgument": "Primero calculamos el área del rectángulo:\n\n\\[\nA = 18 \\times 9 = 162\n\\]\n\nEl área del rectángulo es:\n\n\\[\n162\\ \\text{m}^2\n\\]\n\nAhora calculamos el área del triángulo:\n\n\\[\nA = \\frac{b \\times h}{2}\n\\]\n\n\\[\nA = \\frac{6 \\times 9}{2}\n\\]\n\n\\[\nA = \\frac{54}{2} = 27\n\\]\n\nEl área del triángulo es:\n\n\\[\n27\\ \\text{m}^2\n\\]\n\nÁrea total:\n\n\\[\n162 + 27 = 189\n\\]\n\nPor eso el área total del terreno es:\n\n\\[\n189\\ \\text{m}^2\n\\]",
+      "correctArgument": "Primero calculamos el área del rectángulo:\n\nA = 18 × 9 = 162\n\nEl área del rectángulo es:\n\n162 m²\n\nAhora calculamos el área del triángulo:\n\nA = b × h/2\n\nA = 6 × 9/2\n\nA = 54/2 = 27\n\nEl área del triángulo es:\n\n27 m²\n\nÁrea total:\n\n162 + 27 = 189\n\nPor eso el área total del terreno es:\n\n189 m²",
       "incorrectArgumentsByOption": {
-        "a": "\\(162\\ \\text{m}^2\\): solo considera el rectángulo y omite el jardín triangular.",
-        "c": "\\(216\\ \\text{m}^2\\): suma una región mayor que la del triángulo descrito.",
-        "d": "\\(243\\ \\text{m}^2\\): se obtiene al tratar incorrectamente el triángulo como si fuera otro rectángulo completo.",
-        "e": "\\(270\\ \\text{m}^2\\): excede el área real porque no respeta las fórmulas de las figuras."
+        "a": "162 m²: solo considera el rectángulo y omite el jardín triangular.",
+        "c": "216 m²: suma una región mayor que la del triángulo descrito.",
+        "d": "243 m²: se obtiene al tratar incorrectamente el triángulo como si fuera otro rectángulo completo.",
+        "e": "270 m²: excede el área real porque no respeta las fórmulas de las figuras."
       },
       "visual": {
         "kind": "none",
@@ -4262,34 +4376,34 @@ window.IFR_APP_DATA = {
       "options": [
         {
           "label": "a",
-          "text": "\\(83\\ \\text{cm}^3\\)"
+          "text": "83 cm³"
         },
         {
           "label": "b",
-          "text": "\\(120\\ \\text{cm}^3\\)"
+          "text": "120 cm³"
         },
         {
           "label": "c",
-          "text": "\\(143\\ \\text{cm}^3\\)"
+          "text": "143 cm³"
         },
         {
           "label": "d",
-          "text": "\\(200\\ \\text{cm}^3\\)"
+          "text": "200 cm³"
         },
         {
           "label": "e",
-          "text": "\\(343\\ \\text{cm}^3\\)"
+          "text": "343 cm³"
         }
       ],
       "correctOption": "c",
-      "correctOptionText": "\\(143\\ \\text{cm}^3\\)",
+      "correctOptionText": "143 cm³",
       "hint": "Calcula primero el volumen de cada sólido y después resta el menor al mayor.",
-      "correctArgument": "El volumen del cubo se calcula elevando la arista al cubo:\n\n\\[\nV = 7^3\n\\]\n\n\\[\nV = 7 \\times 7 \\times 7 = 343\n\\]\n\nEl volumen del cubo es:\n\n\\[\n343\\ \\text{cm}^3\n\\]\n\nEl volumen del prisma rectangular se calcula multiplicando largo, ancho y alto:\n\n\\[\nV = 10 \\times 4 \\times 5\n\\]\n\n\\[\nV = 200\n\\]\n\nEl volumen del prisma es:\n\n\\[\n200\\ \\text{cm}^3\n\\]\n\nAhora restamos:\n\n\\[\n343 - 200 = 143\n\\]\n\nPor eso el volumen del cubo es mayor por:\n\n\\[\n143\\ \\text{cm}^3\n\\]",
+      "correctArgument": "El volumen del cubo se calcula elevando la arista al cubo:\n\nV = 7³\n\nV = 7 × 7 × 7 = 343\n\nEl volumen del cubo es:\n\n343 cm³\n\nEl volumen del prisma rectangular se calcula multiplicando largo, ancho y alto:\n\nV = 10 × 4 × 5\n\nV = 200\n\nEl volumen del prisma es:\n\n200 cm³\n\nAhora restamos:\n\n343 - 200 = 143\n\nPor eso el volumen del cubo es mayor por:\n\n143 cm³",
       "incorrectArgumentsByOption": {
-        "a": "\\(83\\ \\text{cm}^3\\): corresponde a una resta incorrecta entre los volúmenes.",
-        "b": "\\(120\\ \\text{cm}^3\\): no corresponde al volumen de ninguno de los dos sólidos ni a su diferencia.",
-        "d": "\\(200\\ \\text{cm}^3\\): es el volumen del prisma rectangular, no la diferencia.",
-        "e": "\\(343\\ \\text{cm}^3\\): es el volumen del cubo, pero el planteamiento pide cuánto mayor es respecto al prisma."
+        "a": "83 cm³: corresponde a una resta incorrecta entre los volúmenes.",
+        "b": "120 cm³: no corresponde al volumen de ninguno de los dos sólidos ni a su diferencia.",
+        "d": "200 cm³: es el volumen del prisma rectangular, no la diferencia.",
+        "e": "343 cm³: es el volumen del cubo, pero el planteamiento pide cuánto mayor es respecto al prisma."
       },
       "visual": {
         "kind": "none",
@@ -5883,34 +5997,34 @@ window.IFR_APP_DATA = {
       "options": [
         {
           "label": "a",
-          "text": "\\(1\\ \\text{m/s}\\)"
+          "text": "1 m/s"
         },
         {
           "label": "b",
-          "text": "\\(2\\ \\text{m/s}\\)"
+          "text": "2 m/s"
         },
         {
           "label": "c",
-          "text": "\\(3\\ \\text{m/s}\\)"
+          "text": "3 m/s"
         },
         {
           "label": "d",
-          "text": "\\(9\\ \\text{m/s}\\)"
+          "text": "9 m/s"
         },
         {
           "label": "e",
-          "text": "\\(180\\ \\text{m/s}\\)"
+          "text": "180 m/s"
         }
       ],
       "correctOption": "c",
-      "correctOptionText": "\\(3\\ \\text{m/s}\\)",
+      "correctOptionText": "3 m/s",
       "hint": "Convierte los minutos a segundos antes de dividir la distancia entre el tiempo.",
-      "correctArgument": "La rapidez promedio se calcula con la expresión:\n\n\\[\nv = \\frac{d}{t}\n\\]\n\nLa distancia es:\n\n\\[\nd = 540\\ \\text{m}\n\\]\n\nEl tiempo es de 3 minutos. Convertimos a segundos:\n\n\\[\n3\\ \\text{min} = 3 \\times 60 = 180\\ \\text{s}\n\\]\n\nAhora calculamos:\n\n\\[\nv = \\frac{540}{180} = 3\n\\]\n\nPor eso la rapidez promedio es:\n\n\\[\n3\\ \\text{m/s}\n\\]",
+      "correctArgument": "La rapidez promedio se calcula con la expresión:\n\nv = d/t\n\nLa distancia es:\n\nd = 540 m\n\nEl tiempo es de 3 minutos. Convertimos a segundos:\n\n3 min = 3 × 60 = 180 s\n\nAhora calculamos:\n\nv = 540/180 = 3\n\nPor eso la rapidez promedio es:\n\n3 m/s",
       "incorrectArgumentsByOption": {
-        "a": "\\(1\\ \\text{m/s}\\): resulta de dividir de manera incorrecta la distancia entre el tiempo.",
-        "b": "\\(2\\ \\text{m/s}\\): queda por debajo del valor obtenido al convertir correctamente los minutos a segundos.",
-        "d": "\\(9\\ \\text{m/s}\\): no corresponde a la división \\(540 \\div 180\\).",
-        "e": "\\(180\\ \\text{m/s}\\): corresponde al tiempo en segundos, no a la rapidez."
+        "a": "1 m/s: resulta de dividir de manera incorrecta la distancia entre el tiempo.",
+        "b": "2 m/s: queda por debajo del valor obtenido al convertir correctamente los minutos a segundos.",
+        "d": "9 m/s: no corresponde a la división 540 ÷ 180.",
+        "e": "180 m/s: corresponde al tiempo en segundos, no a la rapidez."
       },
       "visual": {
         "kind": "none",
@@ -5955,7 +6069,7 @@ window.IFR_APP_DATA = {
       "correctOption": "a",
       "correctOptionText": "De 6 s a 8 s",
       "hint": "Compara cuánto cambia la posición en cada intervalo de 2 segundos.",
-      "correctArgument": "Calculamos el cambio de posición en cada intervalo:\n\nDe 0 s a 2 s:\n\n\\[\n5 - 0 = 5\\ \\text{m}\n\\]\n\nDe 2 s a 4 s:\n\n\\[\n20 - 5 = 15\\ \\text{m}\n\\]\n\nDe 4 s a 6 s:\n\n\\[\n45 - 20 = 25\\ \\text{m}\n\\]\n\nDe 6 s a 8 s:\n\n\\[\n80 - 45 = 35\\ \\text{m}\n\\]\n\nTodos los intervalos duran 2 segundos, así que el mayor cambio de posición corresponde a la mayor rapidez media. El mayor cambio es de 35 m, entre 6 s y 8 s.",
+      "correctArgument": "Calculamos el cambio de posición en cada intervalo:\n\nDe 0 s a 2 s:\n\n5 - 0 = 5 m\n\nDe 2 s a 4 s:\n\n20 - 5 = 15 m\n\nDe 4 s a 6 s:\n\n45 - 20 = 25 m\n\nDe 6 s a 8 s:\n\n80 - 45 = 35 m\n\nTodos los intervalos duran 2 segundos, así que el mayor cambio de posición corresponde a la mayor rapidez media. El mayor cambio es de 35 m, entre 6 s y 8 s.",
       "incorrectArgumentsByOption": {
         "b": "De 0 s a 2 s: solo avanza 5 m, que es el menor cambio de la tabla.",
         "c": "De 2 s a 4 s: avanza 15 m, pero no es el mayor cambio.",
@@ -5968,7 +6082,7 @@ window.IFR_APP_DATA = {
         "hasHorizontalScroll": true,
         "caption": "La siguiente tabla muestra la posición de un carrito en distintos tiempos.",
         "headers": [
-          "Tiempo \\(t\\) en segundos",
+          "Tiempo t en segundos",
           "0",
           "2",
           "4",
@@ -5977,7 +6091,7 @@ window.IFR_APP_DATA = {
         ],
         "rows": [
           [
-            "Posición \\(x\\) en metros",
+            "Posición x en metros",
             "0",
             "5",
             "20",
@@ -5993,7 +6107,7 @@ window.IFR_APP_DATA = {
           "hasHorizontalScroll": true,
           "caption": "La siguiente tabla muestra la posición de un carrito en distintos tiempos.",
           "headers": [
-            "Tiempo \\(t\\) en segundos",
+            "Tiempo t en segundos",
             "0",
             "2",
             "4",
@@ -6002,7 +6116,7 @@ window.IFR_APP_DATA = {
           ],
           "rows": [
             [
-              "Posición \\(x\\) en metros",
+              "Posición x en metros",
               "0",
               "5",
               "20",
@@ -6032,38 +6146,38 @@ window.IFR_APP_DATA = {
       "block": "Fuerza y aceleración: uso de F = ma en problemas",
       "baseText": null,
       "basePill": null,
-      "prompt": "Sobre un carrito de \\(6\\ \\text{kg}\\) actúa una fuerza neta de \\(24\\ \\text{N}\\). ¿Qué aceleración adquiere?",
+      "prompt": "Sobre un carrito de 6 kg actúa una fuerza neta de 24 N. ¿Qué aceleración adquiere?",
       "options": [
         {
           "label": "a",
-          "text": "\\(2\\ \\text{m/s}^2\\)"
+          "text": "2 m/s²"
         },
         {
           "label": "b",
-          "text": "\\(3\\ \\text{m/s}^2\\)"
+          "text": "3 m/s²"
         },
         {
           "label": "c",
-          "text": "\\(6\\ \\text{m/s}^2\\)"
+          "text": "6 m/s²"
         },
         {
           "label": "d",
-          "text": "\\(24\\ \\text{m/s}^2\\)"
+          "text": "24 m/s²"
         },
         {
           "label": "e",
-          "text": "\\(4\\ \\text{m/s}^2\\)"
+          "text": "4 m/s²"
         }
       ],
       "correctOption": "e",
-      "correctOptionText": "\\(4\\ \\text{m/s}^2\\)",
-      "hint": "Usa la relación \\(F = ma\\) y despeja la aceleración.",
-      "correctArgument": "La relación entre fuerza, masa y aceleración es:\n\n\\[\nF = ma\n\\]\n\nDespejamos la aceleración:\n\n\\[\na = \\frac{F}{m}\n\\]\n\nSustituimos los datos:\n\n\\[\na = \\frac{24\\ \\text{N}}{6\\ \\text{kg}}\n\\]\n\n\\[\na = 4\\ \\text{m/s}^2\n\\]\n\nPor eso la aceleración del carrito es:\n\n\\[\n4\\ \\text{m/s}^2\n\\]",
+      "correctOptionText": "4 m/s²",
+      "hint": "Usa la relación F = ma y despeja la aceleración.",
+      "correctArgument": "La relación entre fuerza, masa y aceleración es:\n\nF = ma\n\nDespejamos la aceleración:\n\na = F/m\n\nSustituimos los datos:\n\na = 24 N/6 kg\n\na = 4 m/s²\n\nPor eso la aceleración del carrito es:\n\n4 m/s²",
       "incorrectArgumentsByOption": {
-        "a": "\\(2\\ \\text{m/s}^2\\): no corresponde a dividir \\(24\\) entre \\(6\\).",
-        "b": "\\(3\\ \\text{m/s}^2\\): resulta de una división incorrecta.",
-        "c": "\\(6\\ \\text{m/s}^2\\): corresponde a la masa dada, no a la aceleración.",
-        "d": "\\(24\\ \\text{m/s}^2\\): corresponde a la fuerza numérica, pero no al resultado de aplicar \\(a = \\frac{F}{m}\\)."
+        "a": "2 m/s²: no corresponde a dividir 24 entre 6.",
+        "b": "3 m/s²: resulta de una división incorrecta.",
+        "c": "6 m/s²: corresponde a la masa dada, no a la aceleración.",
+        "d": "24 m/s²: corresponde a la fuerza numérica, pero no al resultado de aplicar a = F/m."
       },
       "visual": {
         "kind": "none",
@@ -6080,40 +6194,40 @@ window.IFR_APP_DATA = {
       "areaId": "fisica",
       "areaName": "Física",
       "block": "Equilibrio: resultante R = 0 en situaciones simples",
-      "baseText": "Una caja está sobre una mesa. Dos personas la jalan hacia la derecha con fuerzas de \\(18\\ \\text{N}\\) y \\(7\\ \\text{N}\\). Para que la caja permanezca en equilibrio, otra persona debe jalarla hacia la izquierda.",
+      "baseText": "Una caja está sobre una mesa. Dos personas la jalan hacia la derecha con fuerzas de 18 N y 7 N. Para que la caja permanezca en equilibrio, otra persona debe jalarla hacia la izquierda.",
       "basePill": null,
       "prompt": "¿Qué fuerza debe aplicarse hacia la izquierda para que la caja esté en equilibrio?",
       "options": [
         {
           "label": "a",
-          "text": "\\(11\\ \\text{N}\\)"
+          "text": "11 N"
         },
         {
           "label": "b",
-          "text": "\\(25\\ \\text{N}\\)"
+          "text": "25 N"
         },
         {
           "label": "c",
-          "text": "\\(18\\ \\text{N}\\)"
+          "text": "18 N"
         },
         {
           "label": "d",
-          "text": "\\(7\\ \\text{N}\\)"
+          "text": "7 N"
         },
         {
           "label": "e",
-          "text": "\\(30\\ \\text{N}\\)"
+          "text": "30 N"
         }
       ],
       "correctOption": "b",
-      "correctOptionText": "\\(25\\ \\text{N}\\)",
+      "correctOptionText": "25 N",
       "hint": "Para que haya equilibrio, la suma de fuerzas hacia la derecha debe igualar la fuerza hacia la izquierda.",
-      "correctArgument": "En equilibrio, la fuerza resultante debe ser cero:\n\n\\[\nR = 0\n\\]\n\nPrimero sumamos las fuerzas hacia la derecha:\n\n\\[\n18\\ \\text{N} + 7\\ \\text{N} = 25\\ \\text{N}\n\\]\n\nPara equilibrarlas, se necesita una fuerza igual hacia la izquierda:\n\n\\[\nF = 25\\ \\text{N}\n\\]\n\nPor eso la fuerza requerida es \\(25\\ \\text{N}\\) hacia la izquierda.",
+      "correctArgument": "En equilibrio, la fuerza resultante debe ser cero:\n\nR = 0\n\nPrimero sumamos las fuerzas hacia la derecha:\n\n18 N + 7 N = 25 N\n\nPara equilibrarlas, se necesita una fuerza igual hacia la izquierda:\n\nF = 25 N\n\nPor eso la fuerza requerida es 25 N hacia la izquierda.",
       "incorrectArgumentsByOption": {
-        "a": "\\(11\\ \\text{N}\\): resulta de restar \\(18 - 7\\), pero las fuerzas dadas van en la misma dirección y deben sumarse.",
-        "c": "\\(18\\ \\text{N}\\): solo iguala una de las fuerzas hacia la derecha, pero deja sin equilibrar la de \\(7\\ \\text{N}\\).",
-        "d": "\\(7\\ \\text{N}\\): solo iguala la fuerza menor, no la suma total.",
-        "e": "\\(30\\ \\text{N}\\): excede la suma de las fuerzas hacia la derecha, por lo que la caja ya no estaría en equilibrio."
+        "a": "11 N: resulta de restar 18 - 7, pero las fuerzas dadas van en la misma dirección y deben sumarse.",
+        "c": "18 N: solo iguala una de las fuerzas hacia la derecha, pero deja sin equilibrar la de 7 N.",
+        "d": "7 N: solo iguala la fuerza menor, no la suma total.",
+        "e": "30 N: excede la suma de las fuerzas hacia la derecha, por lo que la caja ya no estaría en equilibrio."
       },
       "visual": {
         "kind": "image",
@@ -6195,38 +6309,38 @@ window.IFR_APP_DATA = {
       "block": "Trabajo y energía: significado de trabajo mecánico",
       "baseText": null,
       "basePill": null,
-      "prompt": "Una persona empuja una caja con una fuerza constante de \\(30\\ \\text{N}\\) y la desplaza \\(4\\ \\text{m}\\) en la misma dirección de la fuerza.\n\n¿Cuánto trabajo mecánico realiza?",
+      "prompt": "Una persona empuja una caja con una fuerza constante de 30 N y la desplaza 4 m en la misma dirección de la fuerza.\n\n¿Cuánto trabajo mecánico realiza?",
       "options": [
         {
           "label": "a",
-          "text": "\\(7.5\\ \\text{J}\\)"
+          "text": "7.5 J"
         },
         {
           "label": "b",
-          "text": "\\(26\\ \\text{J}\\)"
+          "text": "26 J"
         },
         {
           "label": "c",
-          "text": "\\(34\\ \\text{J}\\)"
+          "text": "34 J"
         },
         {
           "label": "d",
-          "text": "\\(120\\ \\text{J}\\)"
+          "text": "120 J"
         },
         {
           "label": "e",
-          "text": "\\(300\\ \\text{J}\\)"
+          "text": "300 J"
         }
       ],
       "correctOption": "d",
-      "correctOptionText": "\\(120\\ \\text{J}\\)",
+      "correctOptionText": "120 J",
       "hint": "Cuando la fuerza y el desplazamiento tienen la misma dirección, el trabajo se calcula multiplicando fuerza por distancia.",
-      "correctArgument": "El trabajo mecánico se calcula con:\n\n\\[\nW = Fd\n\\]\n\nSustituimos los datos:\n\n\\[\nW = 30\\ \\text{N} \\times 4\\ \\text{m}\n\\]\n\n\\[\nW = 120\\ \\text{J}\n\\]\n\nPor eso el trabajo realizado es:\n\n\\[\n120\\ \\text{J}\n\\]",
+      "correctArgument": "El trabajo mecánico se calcula con:\n\nW = Fd\n\nSustituimos los datos:\n\nW = 30 N × 4 m\n\nW = 120 J\n\nPor eso el trabajo realizado es:\n\n120 J",
       "incorrectArgumentsByOption": {
-        "a": "\\(7.5\\ \\text{J}\\): resulta de dividir \\(30\\) entre \\(4\\), pero el trabajo se calcula multiplicando.",
-        "b": "\\(26\\ \\text{J}\\): se obtiene al restar los datos, operación que no corresponde.",
-        "c": "\\(34\\ \\text{J}\\): se obtiene al sumar los datos, pero el trabajo no se calcula así.",
-        "e": "\\(300\\ \\text{J}\\): multiplica por un valor que no corresponde al desplazamiento dado."
+        "a": "7.5 J: resulta de dividir 30 entre 4, pero el trabajo se calcula multiplicando.",
+        "b": "26 J: se obtiene al restar los datos, operación que no corresponde.",
+        "c": "34 J: se obtiene al sumar los datos, pero el trabajo no se calcula así.",
+        "e": "300 J: multiplica por un valor que no corresponde al desplazamiento dado."
       },
       "visual": {
         "kind": "none",

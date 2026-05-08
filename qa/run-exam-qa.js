@@ -30,6 +30,27 @@ const INTERNAL_PATTERNS = [
   'TEXTO EN PÍLDORA VISUAL ESPECIAL',
   'RENDERIZAR COMO TABLA'
 ];
+const FORBIDDEN_STUDENT_MARKUP_PATTERNS = [
+  ['delimitador \\(', /\\\(/],
+  ['delimitador \\)', /\\\)/],
+  ['delimitador \\[', /\\\[/],
+  ['delimitador \\]', /\\\]/],
+  ['comando \\frac', /\\frac\b/],
+  ['comando \\text', /\\text\b/],
+  ['comando \\times', /\\times\b/],
+  ['comando \\div', /\\div\b/],
+  ['comando \\sqrt', /\\sqrt\b/],
+  ['comando \\cdot', /\\cdot\b/],
+  ['comando \\rightarrow', /\\rightarrow\b/],
+  ['espaciado \\quad', /\\quad\b/],
+  ['espaciado \\;', /\\;/],
+  ['porcentaje escapado \\%', /\\%/],
+  ['bloque $$', /\$\$/],
+  ['backticks Markdown', /`/],
+  ['negritas Markdown', /\*\*/],
+  ['salto HTML <br>', /<br\s*\/?>/i],
+  ['espacio HTML &nbsp;', /&nbsp;/i]
+];
 
 function log(message) {
   console.log(`[qa-v2] ${message}`);
@@ -94,6 +115,36 @@ function getExerciseVisuals(exercise) {
   return [];
 }
 
+function visibleArtifactEntriesForExercise(exercise) {
+  const entries = [
+    ['areaName', exercise.areaName],
+    ['block', exercise.block],
+    ['baseText', exercise.baseText],
+    ['basePill.content', exercise.basePill && exercise.basePill.content],
+    ['prompt', exercise.prompt],
+    ['hint', exercise.hint],
+    ['correctArgument', exercise.correctArgument],
+    ['correctOptionText', exercise.correctOptionText],
+    ...exercise.options.map((option) => [`option ${option.label}`, option.text]),
+    ...Object.entries(exercise.incorrectArgumentsByOption || {}).map(([letter, value]) => [`incorrect ${letter}`, value])
+  ];
+
+  for (const visual of getExerciseVisuals(exercise)) {
+    if (visual.caption) entries.push(['visual.caption', visual.caption]);
+    if (visual.content) entries.push(['visual.content', visual.content]);
+    if (Array.isArray(visual.headers)) {
+      visual.headers.forEach((header, index) => entries.push([`visual.header ${index + 1}`, header]));
+    }
+    if (Array.isArray(visual.rows)) {
+      visual.rows.forEach((row, rowIndex) => {
+        row.forEach((cell, cellIndex) => entries.push([`visual.row ${rowIndex + 1}.${cellIndex + 1}`, cell]));
+      });
+    }
+  }
+
+  return entries.filter(([, value]) => value !== null && value !== undefined && String(value).trim());
+}
+
 function validateData(data, { partial = false } = {}) {
   assert.ok(data, 'No se cargó window.IFR_APP_DATA.');
   assert.equal(data.meta.title, 'Examen simulación 2 ECOEMS');
@@ -147,6 +198,17 @@ function validateData(data, { partial = false } = {}) {
     const visibleText = visibleTextForExercise(exercise);
     for (const pattern of INTERNAL_PATTERNS) {
       assert.equal(visibleText.includes(pattern), false, `Reactivo ${exercise.number}: contenido interno visible: ${pattern}.`);
+    }
+
+    for (const [field, value] of visibleArtifactEntriesForExercise(exercise)) {
+      const cleanValue = String(value || '');
+      for (const [name, pattern] of FORBIDDEN_STUDENT_MARKUP_PATTERNS) {
+        assert.equal(
+          pattern.test(cleanValue),
+          false,
+          `Reactivo ${exercise.number}: ${field} conserva artefacto visible (${name}).`
+        );
+      }
     }
 
     for (const visual of getExerciseVisuals(exercise)) {

@@ -55,6 +55,8 @@ No se detectaron tres respuestas iguales consecutivas.
 
 ## Reactivos con tabla horizontal
 
+- 3.
+- 4.
 - 15.
 - 72.
 - 106.
@@ -71,3 +73,5 @@ No se detectaron tres respuestas iguales consecutivas.
 - Se agregó soporte para tabla e imagen simultáneas en el reactivo 106.
 - Se eliminó de `exam-data.js` cualquier metadato interno de `$imagegen` o `GPT-Image 2`.
 - Se quitó de la portada el panel de advertencia sobre refrescar página.
+- Se limpió la notación matemática visible para que los argumentos y planteamientos no muestren sintaxis tipo LaTeX o Markdown.
+- Los reactivos 3 y 4 pasaron de tablas crudas en el planteamiento a tablas visuales con desplazamiento horizontal.

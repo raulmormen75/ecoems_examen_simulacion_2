@@ -41,8 +41,9 @@ Generado exam-data.js con 128 reactivos y 10 áreas.
 ## Validación requerida
 
 1. Confirmar que `exam-data.js` no contiene instrucciones internas, `$imagegen`, `GPT-Image 2` ni tablas de control.
-2. Confirmar que Física tiene 12 reactivos disponibles.
-3. Confirmar que los reactivos con imagen cargan assets reales.
-4. Confirmar que las tablas 15, 72 y 106 conservan desplazamiento horizontal.
-5. Confirmar que Español y Habilidad verbal conservan píldoras visuales.
-6. Commit y push.
+2. Confirmar que no quedan artefactos visibles tipo LaTeX o Markdown en planteamientos, opciones, pistas, argumentos ni tablas.
+3. Confirmar que Física tiene 12 reactivos disponibles.
+4. Confirmar que los reactivos con imagen cargan assets reales.
+5. Confirmar que las tablas 3, 4, 15, 72 y 106 conservan desplazamiento horizontal.
+6. Confirmar que Español y Habilidad verbal conservan píldoras visuales.
+7. Commit y push.
