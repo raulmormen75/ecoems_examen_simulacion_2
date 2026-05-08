@@ -1660,6 +1660,50 @@ main{
   gap:12px;
 }
 
+.resume-choice-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+
+.resume-choice-card{
+  display:grid;
+  gap:8px;
+  padding:16px;
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.9);
+}
+
+.resume-choice-card span,
+.resume-choice-note{
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.resume-choice-card span{
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+.resume-choice-card strong{
+  color:var(--n2);
+  font-size:1.35rem;
+  letter-spacing:-.04em;
+}
+
+.resume-warning{
+  padding:14px 16px;
+  border-radius:18px;
+  border:1px solid rgba(194,69,41,.2);
+  background:var(--bad-soft);
+  color:var(--bad);
+  font-weight:750;
+  line-height:1.6;
+}
+
 .summary-card{
   display:grid;
   gap:8px;
@@ -1735,6 +1779,12 @@ main{
   border:none;
   background:linear-gradient(180deg,rgba(44,229,30,.98),rgba(35,202,25,.94));
   color:#08110a;
+}
+
+.modal-btn.warning{
+  border-color:rgba(194,69,41,.24);
+  background:var(--bad-soft);
+  color:var(--bad);
 }
 
 .empty-review{
@@ -1980,6 +2030,7 @@ main{
 
   .cover-facts,
   .modal-grid,
+  .resume-choice-grid,
   .final-metrics{
     grid-template-columns:1fr;
   }

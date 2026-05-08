@@ -7,6 +7,11 @@
   const EXPECTED_TOTAL = DATA.meta.expectedTotalExercises || DATA.meta.totalExercises || TOTAL;
   const CONTENT_STATUS = DATA.meta.contentStatus || {};
   const EXERCISE_INDEX = new Map(EXERCISES.map((exercise, index) => [exercise.id, index]));
+  const STORAGE_KEY = 'ifr:ecoems:simulacion-2:progress:v1';
+  const STORAGE_VERSION = 1;
+  const STORAGE_WRITE_INTERVAL_MS = 10000;
+  const PERSISTABLE_STATUSES = new Set(['running', 'finished', 'time_expired']);
+  const CONTENT_FINGERPRINT = createContentFingerprint();
 
   const STATE = {
     status: 'idle',
@@ -17,8 +22,10 @@
     hintsOpen: Object.create(null),
     expandedAnswered: Object.create(null),
     floatingReviewId: null,
+    pendingSavedProgress: null,
     summary: null,
     modalStep: null,
+    deadlineAt: null,
     timerId: null
   };
 
@@ -48,6 +55,7 @@
   };
 
   let topStateFrame = 0;
+  let lastPersistedAt = 0;
 
   function clamp(value, min = 0, max = 1) {
     return Math.min(max, Math.max(min, value));
@@ -84,6 +92,57 @@
     topStateFrame = window.requestAnimationFrame(() => {
       topStateFrame = 0;
       syncTopState();
+    });
+  }
+
+  function stableHash(value) {
+    const source = JSON.stringify(value);
+    let hash = 2166136261;
+    for (let index = 0; index < source.length; index += 1) {
+      hash ^= source.charCodeAt(index);
+      hash = Math.imul(hash, 16777619);
+    }
+    return (hash >>> 0).toString(16);
+  }
+
+  function createContentFingerprint() {
+    return stableHash({
+      meta: {
+        title: DATA.meta.title || 'Examen simulación 2 ECOEMS',
+        total: TOTAL,
+        duration: DURATION
+      },
+      areas: AREAS.map((area) => ({
+        id: area.id,
+        name: area.name,
+        rangeStart: area.rangeStart,
+        rangeEnd: area.rangeEnd
+      })),
+      exercises: EXERCISES.map((exercise) => ({
+        id: exercise.id,
+        number: exercise.number,
+        areaId: exercise.areaId,
+        areaName: exercise.areaName,
+        block: exercise.block,
+        baseText: exercise.baseText,
+        prompt: exercise.prompt,
+        hint: exercise.hint,
+        options: exercise.options.map((option) => ({ label: option.label, text: option.text })),
+        correctOption: exercise.correctOption,
+        correctOptionText: exercise.correctOptionText,
+        correctArgument: exercise.correctArgument,
+        incorrectArgumentsByOption: exercise.incorrectArgumentsByOption,
+        basePill: exercise.basePill,
+        visuals: getExerciseVisuals(exercise).map((visual) => ({
+          kind: visual.kind,
+          src: visual.src,
+          alt: visual.alt,
+          caption: visual.caption,
+          headers: visual.headers,
+          rows: visual.rows,
+          hasHorizontalScroll: visual.hasHorizontalScroll
+        }))
+      }))
     });
   }
 
@@ -178,6 +237,205 @@
     return `${hours}:${minutes}:${seconds}`;
   }
 
+  function remainingSecondsUntil(deadlineAt, fallbackSeconds = STATE.remainingSeconds) {
+    const safeDeadline = Number(deadlineAt);
+    if (!Number.isFinite(safeDeadline) || safeDeadline <= 0) {
+      return Math.max(0, Number(fallbackSeconds) || 0);
+    }
+    return Math.max(0, Math.ceil((safeDeadline - Date.now()) / 1000));
+  }
+
+  function setDeadlineFromRemaining(seconds) {
+    const safeSeconds = Math.max(0, Number(seconds) || 0);
+    STATE.deadlineAt = safeSeconds > 0 ? Date.now() + safeSeconds * 1000 : Date.now();
+    STATE.remainingSeconds = safeSeconds;
+  }
+
+  function syncRemainingTime() {
+    if (STATE.status !== 'running') return STATE.remainingSeconds;
+    STATE.remainingSeconds = remainingSecondsUntil(STATE.deadlineAt, STATE.remainingSeconds);
+    return STATE.remainingSeconds;
+  }
+
+  function formatSavedAt(timestamp) {
+    const date = new Date(Number(timestamp) || Date.now());
+    try {
+      return new Intl.DateTimeFormat('es-MX', {
+        dateStyle: 'medium',
+        timeStyle: 'short'
+      }).format(date);
+    } catch (error) {
+      return date.toLocaleString();
+    }
+  }
+
+  function plainRecord(record) {
+    return Object.entries(record || {}).reduce((accumulator, [key, value]) => {
+      accumulator[key] = value;
+      return accumulator;
+    }, {});
+  }
+
+  function booleanRecord(record, validIds) {
+    const output = Object.create(null);
+    const allowed = new Set(validIds);
+    for (const [key, value] of Object.entries(record || {})) {
+      if (allowed.has(key)) {
+        output[key] = Boolean(value);
+      }
+    }
+    return output;
+  }
+
+  function canUseStorage() {
+    try {
+      return Boolean(window.localStorage);
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function createProgressSnapshot(savedAt = Date.now()) {
+    if (STATE.status === 'running') {
+      syncRemainingTime();
+    }
+
+    return {
+      version: STORAGE_VERSION,
+      contentFingerprint: CONTENT_FINGERPRINT,
+      title: DATA.meta.title || 'Examen simulación 2 ECOEMS',
+      total: TOTAL,
+      savedAt,
+      status: STATE.status,
+      activeIndex: STATE.activeIndex,
+      remainingSeconds: Math.max(0, STATE.remainingSeconds),
+      deadlineAt: STATE.deadlineAt,
+      answersById: plainRecord(STATE.answersById),
+      reinforcementLog: STATE.reinforcementLog.filter((exerciseId) => Boolean(STATE.answersById[exerciseId])),
+      hintsOpen: plainRecord(STATE.hintsOpen),
+      expandedAnswered: plainRecord(STATE.expandedAnswered),
+      floatingReviewId: STATE.floatingReviewId
+    };
+  }
+
+  function persistProgress({ force = false } = {}) {
+    if (!canUseStorage() || !PERSISTABLE_STATUSES.has(STATE.status)) return;
+
+    const now = Date.now();
+    if (!force && STATE.status === 'running' && now - lastPersistedAt < STORAGE_WRITE_INTERVAL_MS) {
+      return;
+    }
+
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(createProgressSnapshot(now)));
+      lastPersistedAt = now;
+    } catch (error) {
+      // Algunos modos privados bloquean localStorage; la evaluación sigue funcionando en memoria.
+    }
+  }
+
+  function clearPersistedProgress() {
+    if (!canUseStorage()) return;
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+      lastPersistedAt = 0;
+    } catch (error) {
+      lastPersistedAt = 0;
+    }
+  }
+
+  function sanitizeSavedProgress(rawSnapshot) {
+    if (!rawSnapshot || rawSnapshot.version !== STORAGE_VERSION) return null;
+    if (rawSnapshot.contentFingerprint !== CONTENT_FINGERPRINT) return null;
+    if (!PERSISTABLE_STATUSES.has(rawSnapshot.status)) return null;
+
+    const rawAnswers = rawSnapshot.answersById || {};
+    const answersById = Object.create(null);
+    let firstUnansweredIndex = 0;
+
+    for (const exercise of EXERCISES) {
+      const savedAnswer = rawAnswers[exercise.id];
+      if (!savedAnswer) break;
+
+      const selectedOption = String(savedAnswer.selectedOption || '').toLowerCase();
+      const validOptionLabels = new Set(exercise.options.map((option) => option.label));
+      if (!validOptionLabels.has(selectedOption)) break;
+
+      answersById[exercise.id] = {
+        selectedOption,
+        isCorrect: selectedOption === exercise.correctOption
+      };
+      firstUnansweredIndex += 1;
+    }
+
+    const answeredIds = Object.keys(answersById);
+    if (!answeredIds.length && rawSnapshot.status === 'finished') return null;
+
+    let status = rawSnapshot.status;
+    let remainingSeconds = Math.max(0, Number(rawSnapshot.remainingSeconds) || 0);
+    const savedAt = Number(rawSnapshot.savedAt) || Date.now();
+    const rawDeadlineAt = Number(rawSnapshot.deadlineAt);
+    const fallbackDeadlineAt = savedAt + remainingSeconds * 1000;
+    const deadlineAt = Number.isFinite(rawDeadlineAt) && rawDeadlineAt > 0
+      ? rawDeadlineAt
+      : fallbackDeadlineAt;
+
+    if (status === 'running') {
+      remainingSeconds = remainingSecondsUntil(deadlineAt, remainingSeconds);
+      if (remainingSeconds <= 0) {
+        status = 'time_expired';
+      }
+    }
+
+    if (status === 'running' && firstUnansweredIndex >= TOTAL) {
+      status = 'finished';
+    }
+
+    const activeIndex = status === 'running'
+      ? Math.min(firstUnansweredIndex, Math.max(TOTAL - 1, 0))
+      : Math.min(Math.max(Number(rawSnapshot.activeIndex) || firstUnansweredIndex, 0), Math.max(TOTAL - 1, 0));
+
+    const incorrectIds = answeredIds.filter((exerciseId) => answersById[exerciseId] && !answersById[exerciseId].isCorrect);
+    const savedLog = Array.isArray(rawSnapshot.reinforcementLog) ? rawSnapshot.reinforcementLog : [];
+    const reinforcementLog = savedLog.length
+      ? savedLog.filter((exerciseId) => incorrectIds.includes(exerciseId))
+      : incorrectIds;
+
+    const floatingReviewId = answeredIds.includes(rawSnapshot.floatingReviewId) && status === 'running'
+      ? rawSnapshot.floatingReviewId
+      : null;
+
+    return {
+      status,
+      activeIndex,
+      remainingSeconds,
+      deadlineAt: status === 'running' ? deadlineAt : null,
+      answersById,
+      reinforcementLog,
+      hintsOpen: booleanRecord(rawSnapshot.hintsOpen, EXERCISES.map((exercise) => exercise.id)),
+      expandedAnswered: booleanRecord(rawSnapshot.expandedAnswered, answeredIds),
+      floatingReviewId,
+      savedAt,
+      answeredCount: answeredIds.length
+    };
+  }
+
+  function readSavedProgress() {
+    if (!canUseStorage()) return null;
+    try {
+      const rawValue = window.localStorage.getItem(STORAGE_KEY);
+      if (!rawValue) return null;
+      const savedProgress = sanitizeSavedProgress(JSON.parse(rawValue));
+      if (!savedProgress) {
+        clearPersistedProgress();
+      }
+      return savedProgress;
+    } catch (error) {
+      clearPersistedProgress();
+      return null;
+    }
+  }
+
   function formatPercent(value) {
     return `${value.toFixed(1)}/100`;
   }
@@ -247,6 +505,10 @@
   }
 
   function renderTopMetrics() {
+    if (STATE.status === 'running') {
+      syncRemainingTime();
+    }
+
     const metrics = getMetrics();
     nodes.totalValue.textContent = String(TOTAL);
     nodes.answeredValue.textContent = String(metrics.answered);
@@ -912,6 +1174,52 @@
     };
   }
 
+  function renderResumeChoiceModal(snapshot) {
+    const isRunningSnapshot = snapshot.status === 'running';
+    const statusLabel = snapshot.status === 'time_expired'
+      ? 'Tiempo agotado'
+      : snapshot.status === 'finished'
+        ? 'Examen concluido'
+        : 'Examen en curso';
+    const currentExerciseNumber = isRunningSnapshot && EXERCISES[snapshot.activeIndex]
+      ? EXERCISES[snapshot.activeIndex].number
+      : snapshot.answeredCount;
+    const progressLabel = isRunningSnapshot ? 'Reactivo' : 'Avance';
+    const warningText = isRunningSnapshot
+      ? 'Si reinicias, se borrarán tus respuestas guardadas, el avance y el tiempo registrado de este intento.'
+      : 'Si reinicias, se borrará el intento guardado y volverás a la portada inicial.';
+
+    return `<div class="modal-head resume-choice-head">
+      <span class="pill">Recarga protegida</span>
+      <h2 id="resumeChoiceTitle">🔄 Hay un avance guardado</h2>
+      <p id="resumeChoiceText">Encontramos un intento anterior de esta evaluación. Puedes continuar sin reiniciar el progreso o borrar el intento para empezar desde cero.</p>
+    </div>
+    <section class="resume-choice-grid" aria-label="Resumen del intento guardado">
+      <article class="resume-choice-card">
+        <span>Estado</span>
+        <strong>${esc(statusLabel)}</strong>
+      </article>
+      <article class="resume-choice-card">
+        <span>${esc(progressLabel)}</span>
+        <strong>${esc(currentExerciseNumber)}/${esc(TOTAL)}</strong>
+      </article>
+      <article class="resume-choice-card">
+        <span>Contestados</span>
+        <strong>${esc(snapshot.answeredCount)}</strong>
+      </article>
+      <article class="resume-choice-card">
+        <span>Tiempo</span>
+        <strong>${esc(formatTime(snapshot.remainingSeconds))}</strong>
+      </article>
+    </section>
+    <p class="resume-choice-note">🕒 Guardado: ${esc(formatSavedAt(snapshot.savedAt))}</p>
+    <p class="resume-warning">⚠️ ${esc(warningText)}</p>
+    <div class="modal-actions resume-choice-actions">
+      <button class="modal-btn primary" type="button" data-action="restore-progress" data-autofocus="true">🔄 Continuar sin reiniciar</button>
+      <button class="modal-btn warning" type="button" data-action="reset-progress">🧹 Reiniciar desde cero</button>
+    </div>`;
+  }
+
   function renderSummaryModal(summary) {
     const title = summary.mode === 'time_expired' ? 'Tiempo límite alcanzado' : 'Examen concluido';
     const message = summary.mode === 'time_expired'
@@ -1003,16 +1311,30 @@
   }
 
   function renderModal() {
+    if (STATE.modalStep === 'resumeChoice' && STATE.pendingSavedProgress) {
+      nodes.modalShell.hidden = false;
+      nodes.modalShell.setAttribute('aria-labelledby', 'resumeChoiceTitle');
+      nodes.modalShell.setAttribute('aria-describedby', 'resumeChoiceText');
+      nodes.modalCard.innerHTML = renderResumeChoiceModal(STATE.pendingSavedProgress);
+      window.requestAnimationFrame(focusModalPrimaryAction);
+      return;
+    }
+
     if (!STATE.modalStep || !STATE.summary) {
       nodes.modalShell.hidden = true;
+      nodes.modalShell.removeAttribute('aria-labelledby');
+      nodes.modalShell.removeAttribute('aria-describedby');
       nodes.modalCard.innerHTML = '';
       return;
     }
 
     nodes.modalShell.hidden = false;
+    nodes.modalShell.removeAttribute('aria-labelledby');
+    nodes.modalShell.removeAttribute('aria-describedby');
     nodes.modalCard.innerHTML = STATE.modalStep === 'summary'
       ? renderSummaryModal(STATE.summary)
       : renderReviewModal(STATE.summary);
+    window.requestAnimationFrame(focusModalPrimaryAction);
   }
 
   function render() {
@@ -1022,6 +1344,45 @@
     renderExamBar();
     renderContent();
     renderModal();
+  }
+
+  function getModalFocusableElements() {
+    if (nodes.modalShell.hidden) return [];
+    return Array.from(nodes.modalCard.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+      .filter((element) => !element.disabled && element.offsetParent !== null);
+  }
+
+  function focusModalPrimaryAction() {
+    const target = nodes.modalCard.querySelector('[data-autofocus="true"], .modal-btn.primary');
+    if (target && typeof target.focus === 'function') {
+      target.focus({ preventScroll: true });
+    }
+  }
+
+  function handleModalKeydown(event) {
+    if (nodes.modalShell.hidden || event.key !== 'Tab') return;
+
+    const focusableElements = getModalFocusableElements();
+    if (!focusableElements.length) {
+      event.preventDefault();
+      nodes.modalCard.focus({ preventScroll: true });
+      return;
+    }
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+    const activeElement = document.activeElement;
+
+    if (event.shiftKey && activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus({ preventScroll: true });
+      return;
+    }
+
+    if (!event.shiftKey && activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus({ preventScroll: true });
+    }
   }
 
   function clearTimer() {
@@ -1036,7 +1397,7 @@
     STATE.timerId = window.setInterval(() => {
       if (!isRunning()) return;
 
-      STATE.remainingSeconds -= 1;
+      syncRemainingTime();
       if (STATE.remainingSeconds <= 0) {
         STATE.remainingSeconds = 0;
         clearTimer();
@@ -1045,6 +1406,7 @@
       }
 
       renderTopMetrics();
+      persistProgress();
     }, 1000);
   }
 
@@ -1064,17 +1426,99 @@
     }, 80);
   }
 
+  function resetExamProgress() {
+    clearTimer();
+    STATE.status = 'idle';
+    STATE.activeIndex = 0;
+    STATE.remainingSeconds = DURATION;
+    STATE.deadlineAt = null;
+    STATE.answersById = Object.create(null);
+    STATE.reinforcementLog = [];
+    STATE.hintsOpen = Object.create(null);
+    STATE.expandedAnswered = Object.create(null);
+    STATE.floatingReviewId = null;
+    STATE.pendingSavedProgress = null;
+    STATE.summary = null;
+    STATE.modalStep = null;
+    clearPersistedProgress();
+    render();
+    window.setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (nodes.startExam) nodes.startExam.focus({ preventScroll: true });
+    }, 80);
+  }
+
+  function applySavedProgress(snapshot) {
+    if (!snapshot) {
+      resetExamProgress();
+      return;
+    }
+
+    clearTimer();
+    let nextStatus = snapshot.status;
+    let nextRemainingSeconds = snapshot.remainingSeconds;
+    let nextDeadlineAt = snapshot.deadlineAt;
+    if (nextStatus === 'running') {
+      nextRemainingSeconds = remainingSecondsUntil(nextDeadlineAt, nextRemainingSeconds);
+      if (nextRemainingSeconds <= 0) {
+        nextStatus = 'time_expired';
+        nextDeadlineAt = null;
+      }
+    }
+
+    STATE.status = nextStatus;
+    STATE.activeIndex = snapshot.activeIndex;
+    STATE.remainingSeconds = nextRemainingSeconds;
+    STATE.deadlineAt = nextStatus === 'running' ? nextDeadlineAt : null;
+    STATE.answersById = snapshot.answersById;
+    STATE.reinforcementLog = snapshot.reinforcementLog;
+    STATE.hintsOpen = snapshot.hintsOpen;
+    STATE.expandedAnswered = snapshot.expandedAnswered;
+    STATE.floatingReviewId = snapshot.floatingReviewId;
+    STATE.pendingSavedProgress = null;
+    STATE.summary = isClosedStatus(nextStatus) ? buildSummary(nextStatus) : null;
+    STATE.modalStep = null;
+
+    if (STATE.status === 'running') {
+      startTimer();
+    }
+
+    persistProgress({ force: true });
+    render();
+
+    if (STATE.status === 'running' && EXERCISES[STATE.activeIndex]) {
+      scrollToExercise(EXERCISES[STATE.activeIndex].id);
+      return;
+    }
+
+    if (isClosedStatus()) {
+      scrollToFinalResult();
+    }
+  }
+
+  function initializeSavedProgressPrompt() {
+    const savedProgress = readSavedProgress();
+    if (!savedProgress) return;
+    STATE.pendingSavedProgress = savedProgress;
+    STATE.modalStep = 'resumeChoice';
+  }
+
   function startExam() {
     if (STATE.status !== 'idle') return;
     STATE.status = 'running';
     STATE.activeIndex = 0;
-    STATE.remainingSeconds = DURATION;
+    setDeadlineFromRemaining(DURATION);
+    STATE.answersById = Object.create(null);
+    STATE.hintsOpen = Object.create(null);
+    STATE.expandedAnswered = Object.create(null);
     STATE.reinforcementLog = [];
     STATE.floatingReviewId = null;
+    STATE.pendingSavedProgress = null;
     STATE.summary = null;
     STATE.modalStep = null;
     startTimer();
     render();
+    persistProgress({ force: true });
     scrollToExercise(EXERCISES[0].id);
   }
 
@@ -1082,15 +1526,23 @@
     if (STATE.status !== 'running') return;
     clearTimer();
     STATE.status = mode;
+    STATE.deadlineAt = null;
     STATE.floatingReviewId = null;
+    STATE.pendingSavedProgress = null;
     STATE.summary = buildSummary(mode);
     STATE.modalStep = null;
     render();
+    persistProgress({ force: true });
     scrollToFinalResult();
   }
 
   function registerAnswer(exerciseId, selectedOption) {
     if (!isRunning()) return;
+    if (syncRemainingTime() <= 0) {
+      finishExam('time_expired');
+      return;
+    }
+
     const index = EXERCISE_INDEX.get(exerciseId);
     if (index !== STATE.activeIndex) return;
     if (STATE.answersById[exerciseId]) return;
@@ -1117,6 +1569,7 @@
     STATE.floatingReviewId = exerciseId;
     STATE.activeIndex = index + 1;
     render();
+    persistProgress({ force: true });
     scrollToExercise(EXERCISES[STATE.activeIndex].id);
   }
 
@@ -1125,6 +1578,7 @@
     if (EXERCISES[STATE.activeIndex].id !== exerciseId) return;
     STATE.hintsOpen[exerciseId] = !STATE.hintsOpen[exerciseId];
     render();
+    persistProgress({ force: true });
   }
 
   function toggleCard(exerciseId) {
@@ -1136,6 +1590,7 @@
       STATE.floatingReviewId = null;
     }
     render();
+    persistProgress({ force: true });
   }
 
   function openFloatingReview(exerciseId) {
@@ -1144,6 +1599,7 @@
     STATE.expandedAnswered[exerciseId] = true;
     STATE.floatingReviewId = null;
     render();
+    persistProgress({ force: true });
     scrollToExercise(exerciseId);
   }
 
@@ -1151,9 +1607,20 @@
     if (STATE.floatingReviewId !== exerciseId) return;
     STATE.floatingReviewId = null;
     render();
+    persistProgress({ force: true });
   }
 
   function handleModalAction(action) {
+    if (action === 'restore-progress') {
+      applySavedProgress(STATE.pendingSavedProgress);
+      return;
+    }
+
+    if (action === 'reset-progress') {
+      resetExamProgress();
+      return;
+    }
+
     if (action === 'modal-review') {
       STATE.modalStep = 'review';
       renderModal();
@@ -1488,7 +1955,7 @@
       return;
     }
 
-    if (action === 'modal-review' || action === 'modal-close') {
+    if (action === 'restore-progress' || action === 'reset-progress' || action === 'modal-review' || action === 'modal-close') {
       handleModalAction(action);
       return;
     }
@@ -1500,28 +1967,54 @@
 
   window.addEventListener('scroll', queueTopStateSync, { passive: true });
   window.addEventListener('resize', queueTopStateSync);
+  window.addEventListener('pagehide', () => persistProgress({ force: true }));
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      persistProgress({ force: true });
+      return;
+    }
+
+    if (document.visibilityState === 'visible' && isRunning()) {
+      syncRemainingTime();
+      if (STATE.remainingSeconds <= 0) {
+        finishExam('time_expired');
+        return;
+      }
+      renderTopMetrics();
+      persistProgress({ force: true });
+    }
+  });
   document.addEventListener('click', handleClick);
+  document.addEventListener('keydown', handleModalKeydown);
   nodes.startExam.addEventListener('click', startExam);
 
   if (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') {
     window.__IFR_EXAM_DEBUG__ = {
       startExam,
       finishExam,
+      resetExamProgress,
       setRemainingSeconds(value) {
-        STATE.remainingSeconds = Math.max(0, Number(value) || 0);
+        setDeadlineFromRemaining(value);
         renderTopMetrics();
+        persistProgress({ force: true });
       },
       downloadResultsPng,
+      clearSavedProgress: clearPersistedProgress,
+      readSavedProgress,
       getState() {
         return {
           status: STATE.status,
           activeIndex: STATE.activeIndex,
           remainingSeconds: STATE.remainingSeconds,
-          answersById: { ...STATE.answersById }
+          deadlineAt: STATE.deadlineAt,
+          answersById: { ...STATE.answersById },
+          modalStep: STATE.modalStep,
+          hasPendingSavedProgress: Boolean(STATE.pendingSavedProgress)
         };
       }
     };
   }
 
+  initializeSavedProgressPrompt();
   render();
 })();

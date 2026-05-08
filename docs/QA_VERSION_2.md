@@ -51,6 +51,7 @@ Validó:
 - Textos base breves en reactivos con imagen revisados: 5, 6, 7, 8, 9, 10, 44, 73, 74, 94, 106, 108 y 112.
 - Opciones visuales compactas en reactivos 5, 7 y 8.
 - Textos alternativos de imágenes sin frases de generación ni instrucciones internas.
+- Flujo de persistencia de progreso: llave exclusiva, firma completa del contenido, fecha límite real del cronómetro, modal de recarga, botones con emojis, guardado en `pagehide` y `visibilitychange`.
 - Distribución de respuestas dentro de rango.
 - Sin tres respuestas iguales consecutivas.
 - Sin instrucciones internas en `exam-data.js`.
@@ -87,6 +88,12 @@ Validado:
 - Reactivo 5 carga imagen real en vista móvil y ya no muestra el bloque descriptivo de «Figura 1» a «Figura 4».
 - Reactivos 5, 7 y 8 muestran opciones visuales compactas A-E, no matrices o descripciones largas duplicadas.
 - Reactivos con imagen representativos muestran una instrucción breve u objetivo de resolución, no una descripción redundante de la imagen.
+- Después de contestar reactivos y refrescar, aparece la modal `🔄 Hay un avance guardado`.
+- `🔄 Continuar sin reiniciar` conserva respuestas, reactivo activo, métricas y cronómetro.
+- `🧹 Reiniciar desde cero` borra el intento guardado y restaura portada, contador en cero y cronómetro `03:00:00`.
+- En móvil, la modal no genera desplazamiento horizontal y los botones se ajustan al ancho disponible.
+- Storage corrupto o inválido se descarta sin romper la aplicación.
+- El cronómetro cierra por tiempo aunque el hilo del navegador quede bloqueado más tiempo que el restante.
 
 ## Evidencia
 

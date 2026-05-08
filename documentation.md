@@ -2,7 +2,7 @@
 
 ## Estado general
 
-La simulación 2 está preparada en local a partir de la simulación 1. El proyecto conserva identidad IFR, estructura estática, app shell, cronómetro, métricas, bloqueo secuencial, retroalimentación y resultado final descargable.
+La simulación 2 está preparada en local a partir de la simulación 1. El proyecto conserva identidad IFR, estructura estática, app shell, cronómetro, métricas, bloqueo secuencial, retroalimentación, recarga segura del progreso y resultado final descargable.
 
 El contenido ya está completo: 128 reactivos, 10 áreas y Física integrada del 105 al 116.
 
@@ -18,6 +18,8 @@ El contenido ya está completo: 128 reactivos, 10 áreas y Física integrada del
 - En reactivos con apoyo visual, el texto base visible debe funcionar como instrucción u objetivo; las descripciones largas de la imagen se reservan para el apoyo visual o el texto alternativo.
 - Cuando las opciones ya están representadas en la imagen, el texto visible de las opciones puede compactarse como «Opción visual A-E».
 - Los textos alternativos de imágenes deben ser útiles para el alumno y no conservar frases internas de generación.
+- El progreso del intento se guarda en `localStorage` con una llave exclusiva de simulación 2 y una firma del contenido completo; al recargar, la app muestra una modal para continuar sin reiniciar o borrar el intento.
+- La modal de recarga usa el tono IFR, botones con emojis y conserva el cronómetro con una fecha límite real, incluso si el navegador pausa temporizadores.
 - El nombre de descarga queda como `resultado-ecoems-ifr-simulacion-2.png`.
 
 ## Comandos
@@ -32,7 +34,7 @@ python -m http.server 4173
 
 `node build-exam-data.js` generó `exam-data.js` con 128 reactivos y 10 áreas.
 
-`node qa/run-exam-qa.js` validó datos, opciones, pistas, argumentos, assets, distribución de respuestas, ausencia de contenido interno en `exam-data.js`, ausencia de artefactos LaTeX/Markdown en textos visibles, textos base breves en reactivos con imagen revisados y textos alternativos sin frases de generación.
+`node qa/run-exam-qa.js` validó datos, opciones, pistas, argumentos, assets, distribución de respuestas, ausencia de contenido interno en `exam-data.js`, ausencia de artefactos LaTeX/Markdown en textos visibles, textos base breves en reactivos con imagen revisados, textos alternativos sin frases de generación y presencia del flujo de persistencia de progreso.
 
 Validación en navegador local:
 
@@ -41,6 +43,11 @@ Validación en navegador local:
 - Física aparece como presente con 12 reactivos disponibles.
 - No aparece el panel de advertencia sobre refrescar página.
 - Inicio de examen funcional.
+- Recarga después de contestar reactivos muestra la modal `🔄 Hay un avance guardado`.
+- Botón `🔄 Continuar sin reiniciar` restaura respuestas, reactivo activo, métricas y cronómetro.
+- Botón `🧹 Reiniciar desde cero` borra el intento guardado y vuelve a portada limpia.
+- Storage corrupto se descarta sin romper la app.
+- Cronómetro probado con pestaña bloqueada: cierra por tiempo al reconciliar contra la fecha límite real.
 - Reactivos 3 y 4 con tablas visuales en lugar de tablas Markdown crudas.
 - Reactivo 5 carga imagen real en móvil y muestra una instrucción breve, sin el bloque descriptivo de figuras.
 - Reactivos con imagen revisados mantienen objetivo de trabajo visible y assets reales.

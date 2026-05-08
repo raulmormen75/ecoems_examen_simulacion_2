@@ -78,3 +78,6 @@ No se detectaron tres respuestas iguales consecutivas.
 - Se simplificó el texto visible de los reactivos con imagen 5, 6, 7, 8, 9, 10, 44, 73, 74, 94, 106, 108 y 112 para que presenten objetivo o instrucción, no descripciones redundantes de la figura.
 - Las opciones visibles de los reactivos 5, 7 y 8 se compactaron como opciones visuales A-E para no duplicar la imagen.
 - Los textos alternativos de imágenes se ajustaron para describir el apoyo visual al alumno, con más contexto accesible en 5, 7 y 8, y ya no conservar frases de generación.
+- Se agregó recarga segura del intento: si existe progreso guardado, la app pregunta si se quiere continuar sin reiniciar o borrar el intento desde cero.
+- El avance guardado conserva respuestas, reactivo activo, métricas y cronómetro; el tiempo se calcula contra una fecha límite real para evitar pausas por suspensión o pestaña inactiva.
+- El intento guardado se invalida si cambia la firma del contenido estructurado del examen.

@@ -11,7 +11,8 @@
 6. Servir con `python -m http.server 4173` y probar en navegador real.
 7. En reactivos con imagen, mantener texto visible breve y orientado a la tarea; evitar descripciones largas que repitan la figura.
 8. En reactivos cuyas opciones ya están dibujadas en la imagen, usar opciones visibles compactas A-E.
-9. Hacer commit y push al terminar cada entrega solicitada.
+9. Conservar la recarga segura: si existe progreso guardado, mostrar una modal para continuar sin reiniciar o borrar el intento.
+10. Hacer commit y push al terminar cada entrega solicitada.
 
 ## Qué no debe alterarse
 
@@ -22,6 +23,7 @@
 - Pista obligatoria.
 - Retroalimentación diferenciada para respuesta correcta e incorrecta.
 - Resultado final y descarga PNG.
+- Persistencia de progreso con decisión explícita al recargar.
 - Identidad IFR, escudo institucional y Plus Jakarta Sans.
 
 ## Estado actual esperado
@@ -51,4 +53,7 @@ Generado exam-data.js con 128 reactivos y 10 áreas.
 7. Confirmar que los reactivos con imagen revisados usan instrucción u objetivo visible, no descripción redundante.
 8. Confirmar que las opciones visuales compactas no dupliquen matrices o descripciones largas.
 9. Confirmar que los textos alternativos de imagen no conserven frases de generación.
-10. Commit y push.
+10. Confirmar que la recarga restaura avance, respuestas, reactivo activo y cronómetro.
+11. Confirmar que el cronómetro se calcula contra una fecha límite real, no solo contra `setInterval`.
+12. Confirmar que `🧹 Reiniciar desde cero` borra el storage y vuelve a estado inicial.
+13. Commit y push.

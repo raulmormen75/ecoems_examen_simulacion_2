@@ -16,6 +16,8 @@ El archivo `Examen simulación 2.txt` contiene 128 reactivos distribuidos en 10 
 
 También se generaron los assets visuales obligatorios en `assets/` y se validó que las instrucciones internas del TXT no queden en `exam-data.js`.
 
+La aplicación conserva el progreso del intento si se refresca la página. Al volver a cargar, muestra una notificación con dos opciones: continuar sin reiniciar o borrar el intento para empezar desde cero.
+
 ## Comandos locales
 
 ```powershell
@@ -34,6 +36,7 @@ Abrir `http://127.0.0.1:4173/` para revisar la aplicación.
 - Opciones por reactivo: 5.
 - Pistas: obligatorias en todos los reactivos.
 - Resultado final: descargable como `resultado-ecoems-ifr-simulacion-2.png`.
+- Recarga segura: progreso persistente con decisión explícita.
 
 ## Requisitos para publicar
 

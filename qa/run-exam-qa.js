@@ -7,6 +7,8 @@ const vm = require('vm');
 const ROOT = path.resolve(__dirname, '..');
 const DATA_FILE = path.join(ROOT, 'exam-data.js');
 const BUILD_FILE = path.join(ROOT, 'build-exam-data.js');
+const APP_FILE = path.join(ROOT, 'exam-app.js');
+const HTML_FILE = path.join(ROOT, 'index.html');
 const EXPECTED_TOTAL = 128;
 const EXPECTED_AREAS = [
   ['Habilidad matemática', 1, 16],
@@ -308,11 +310,48 @@ function validateData(data, { partial = false } = {}) {
     : 'Datos completos validados: 128 reactivos, 10 áreas, opciones, pistas, argumentos, assets y distribución.');
 }
 
+function validateProgressPersistenceControls() {
+  const appSource = fs.readFileSync(APP_FILE, 'utf8');
+  const htmlSource = fs.readFileSync(HTML_FILE, 'utf8');
+
+  const requiredAppFragments = [
+    ['llave de almacenamiento de simulación 2', 'ifr:ecoems:simulacion-2:progress:v1'],
+    ['versión de esquema de progreso', 'STORAGE_VERSION'],
+    ['firma completa del contenido', 'createContentFingerprint'],
+    ['hash estable del contenido', 'stableHash'],
+    ['fecha límite del cronómetro persistida', 'deadlineAt'],
+    ['sincronización del cronómetro contra tiempo real', 'syncRemainingTime'],
+    ['cálculo de tiempo restante por fecha límite', 'remainingSecondsUntil'],
+    ['guardado automático de progreso', 'persistProgress'],
+    ['lectura de avance guardado', 'readSavedProgress'],
+    ['sanitización de avance guardado', 'sanitizeSavedProgress'],
+    ['modal de avance guardado', 'renderResumeChoiceModal'],
+    ['acción para continuar sin reiniciar', 'restore-progress'],
+    ['acción para reiniciar desde cero', 'reset-progress'],
+    ['guardado al salir o refrescar', "window.addEventListener('pagehide'"],
+    ['guardado al suspender pestaña', "document.addEventListener('visibilitychange'"],
+    ['API de depuración conserva lectura de estado', 'readSavedProgress']
+  ];
+
+  for (const [label, fragment] of requiredAppFragments) {
+    assert.ok(appSource.includes(fragment), `Persistencia de progreso: falta ${label}.`);
+  }
+
+  assert.ok(/🔄\s*Continuar sin reiniciar/.test(appSource), 'Persistencia de progreso: falta botón con emoji para continuar sin reiniciar.');
+  assert.ok(/🧹\s*Reiniciar desde cero/.test(appSource), 'Persistencia de progreso: falta botón con emoji para reiniciar desde cero.');
+  assert.ok(/Hay un avance guardado/.test(appSource), 'Persistencia de progreso: falta título de la notificación de recarga.');
+  assert.ok(!/beforeunload/.test(appSource), 'Persistencia de progreso: no debe depender de beforeunload para una decisión personalizada.');
+  assert.ok(htmlSource.includes('Recarga segura'), 'Portada/barra del examen debe comunicar la recarga segura.');
+
+  log('QA de persistencia: guardado, modal de recarga y reinicio explícito presentes.');
+}
+
 function main() {
   const buildSucceeded = runBuildGate();
   if (buildSucceeded) {
     assert.ok(fs.existsSync(DATA_FILE), 'El build indicó éxito, pero no existe exam-data.js.');
     validateData(loadData());
+    validateProgressPersistenceControls();
     log('QA automatizada de datos completada. Ejecutar validación de navegador real antes de publicar en Vercel.');
     return;
   }
