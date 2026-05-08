@@ -2,9 +2,9 @@
 
 ## Estado
 
-Fecha de revisión: 7 de mayo de 2026.
+Fecha de revisión: 8 de mayo de 2026.
 
-Estado general: visible para revisión técnica interna. No listo como examen completo.
+Estado general: completo en local y listo para revisión de despliegue.
 
 ## Pruebas ejecutadas
 
@@ -16,17 +16,18 @@ Comando:
 node build-exam-data.js
 ```
 
-Resultado: falló de forma controlada.
+Resultado: pasó.
 
 Hallazgos:
 
-- 116 reactivos detectados.
-- 9 áreas detectadas.
-- Física 105-116 faltante.
-- 11 assets obligatorios faltantes.
-- No se generó `exam-data.js` de producción.
+- 128 reactivos detectados.
+- 10 áreas detectadas.
+- Física 105-116 presente.
+- Sin reactivos faltantes.
+- Sin assets faltantes.
+- Distribución final: a) 26, b) 26, c) 26, d) 25, e) 25.
 
-### QA automatizada de puerta editorial
+### QA automatizada
 
 Comando:
 
@@ -34,49 +35,59 @@ Comando:
 node qa/run-exam-qa.js
 ```
 
-Resultado esperado mientras falte Física: confirmar que el build de producción queda bloqueado por el motivo correcto.
+Resultado: pasó.
 
-Resultado ejecutado: pasó como puerta editorial. El script confirmó que el build de producción quedó bloqueado correctamente por Física faltante y que el estado solo sirve para revisión técnica interna.
+Validó:
 
-### Build parcial de revisión interna
+- Total de 128 reactivos.
+- 10 áreas con rangos correctos.
+- Cinco opciones por reactivo.
+- Pistas obligatorias.
+- Argumento correcto por reactivo.
+- Argumentos de opciones incorrectas.
+- Assets existentes.
+- Tablas con desplazamiento horizontal.
+- Distribución de respuestas dentro de rango.
+- Sin tres respuestas iguales consecutivas.
+- Sin instrucciones internas en `exam-data.js`.
 
-Comando:
+### Revisión en navegador local
+
+Servidor:
 
 ```powershell
-node build-exam-data.js --partial
+python -m http.server 4173
+```
+
+URL revisada:
+
+```text
+http://127.0.0.1:4173/
 ```
 
 Resultado: pasó.
 
-Hallazgos:
+Validado:
 
-- Se generó `exam-data.js` con 116 reactivos disponibles.
-- Se conservaron 10 áreas esperadas; Física aparece pendiente.
-- Los assets faltantes se muestran como apoyos visuales pendientes, sin imágenes rotas.
-- El contenido visible no contiene instrucciones internas.
+- Título visible `Examen simulación 2 ECOEMS`.
+- Escudo IFR visible.
+- Cronómetro inicial `03:00:00`.
+- Conteo inicial: 128 reactivos, 10 áreas, 3 h, 5 opciones.
+- Física aparece con `Reactivos 105 a 116` y 12 reactivos disponibles.
+- Los paneles iniciales conservan los emojis de la simulación 1: `📝`, `⏱️`, `📊` y `📚`.
+- El panel de advertencia sobre refrescar página ya no aparece.
+- Botón `Iniciar examen` funciona.
+- Reactivo 1 se muestra como reactivo activo.
+- Reactivo 5 carga imagen real en vista móvil.
 
-## Pruebas pendientes
+## Evidencia
 
-Estas pruebas se ejecutarán cuando exista `exam-data.js` completo:
-
-- Carga inicial en navegador.
-- Portada con escudo IFR.
-- Título `Examen simulación 2 ECOEMS`.
-- Cronómetro en `03:00:00`.
-- Inicio del examen.
-- Bloqueo secuencial.
-- Respuesta correcta e incorrecta.
-- Métricas en vivo.
-- Píldoras visuales en Español y Habilidad verbal.
-- Tablas con desplazamiento horizontal en móvil.
-- Imágenes cargadas con tamaño real.
-- Cierre natural.
-- Cierre por tiempo.
-- Descarga PNG válida.
-- Revisión de escritorio, tableta y móvil.
+- Captura local generada por Playwright MCP: `docs/qa/ecoems-simulacion-2-mobile-reactivo-5.png`.
 
 ## Estado de publicación
 
-No listo como examen completo.
+Listo para revisión de despliegue después de commit y push.
 
-Motivo: falta Física 105-116 y faltan assets visuales obligatorios.
+Pendiente externo:
+
+- Confirmar que Vercel haya tomado el último commit y que la URL pública muestre 128 reactivos.

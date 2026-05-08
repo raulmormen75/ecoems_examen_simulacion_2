@@ -5807,6 +5807,730 @@ La instrucción interna del reactivo 94 no debe mostrarse en la app.
 === FIN DEL ÁREA TEMÁTICA: GEOGRAFÍA ===
 === LISTO PARA PEGAR EN TXT Y ANALIZAR CON CODEX ===
 
+ÁREA TEMÁTICA: FÍSICA
+RANGO: REACTIVOS 105 AL 116
+VERSIÓN: ECOEMS IFR, SEGUNDA EVALUACIÓN
+CRITERIO GENERAL: contenido nuevo, dificultad mayor que versión 1, nivel secundaria México
+
+TABLA DE CONTROL DEL PAQUETE
+
+| Reactivo | Área | Bloque | Letra correcta | Requiere imagen | Tabla con desplazamiento horizontal | Texto en píldora visual | Riesgo editorial o técnico detectado |
+|---:|---|---|---|---|---|---|---|
+| 105 | Física | Rapidez y velocidad: interpretación y cálculo básico | c) | No | No | No | Bajo: distinguir rapidez promedio de dirección del movimiento |
+| 106 | Física | Tablas y gráficas: leer movimiento y cambios con el tiempo | a) | Sí | Sí | No | Medio: tabla con varias columnas y gráfica deben coincidir exactamente |
+| 107 | Física | Fuerza y aceleración: uso de F = ma en problemas | e) | No | No | No | Bajo: cálculo directo con unidades |
+| 108 | Física | Equilibrio: resultante R = 0 en situaciones simples | b) | Sí | No | No | Medio: la imagen debe mostrar dirección de fuerzas sin resolver el reactivo |
+| 109 | Física | Calor y temperatura: diferencias y ejemplos en la vida diaria | c) | No | No | No | Bajo: distinguir transferencia de energía de lectura de temperatura |
+| 110 | Física | Trabajo y energía: significado de trabajo mecánico | d) | No | No | No | Bajo: aplicar trabajo como fuerza por desplazamiento en la misma dirección |
+| 111 | Física | Electricidad estática: carga por frotamiento y atracción | a) | No | No | No | Bajo: explicar carga eléctrica sin entrar a modelo avanzado |
+| 112 | Física | Magnetismo: brújula y campo magnético terrestre | e) | Sí | No | No | Medio: la imagen debe mostrar brújula sin marcar la respuesta |
+| 113 | Física | Corriente y magnetismo: corriente que genera campo magnético | b) | Sí | No | No | Medio: cuidar que no parezca electricidad estática |
+| 114 | Física | Gases: teoría cinética, partículas en movimiento y temperatura | c) | No | No | No | Bajo: relacionar temperatura con movimiento de partículas |
+| 115 | Física | Ondas: transmisión de energía | a) | Sí | No | No | Medio: mostrar onda en cuerda sin indicar directamente la conclusión |
+| 116 | Física | Luz visible: relación entre longitud de onda y color | b) | No | No | No | Bajo: comparar rojo y azul sin usar temas avanzados |
+
+
+REACTIVO 105
+
+Área temática:
+Física
+
+Bloque que corresponde al área temática:
+Rapidez y velocidad: interpretación y cálculo básico
+
+Texto base:
+No aplica.
+
+Planteamiento:
+Un ciclista recorre 540 metros en línea recta durante 3 minutos. Si mantiene el mismo sentido de movimiento, ¿cuál es su rapidez promedio?
+
+Opciones:
+a) \(1\ \text{m/s}\)
+b) \(2\ \text{m/s}\)
+c) \(3\ \text{m/s}\)
+d) \(9\ \text{m/s}\)
+e) \(180\ \text{m/s}\)
+
+Pista:
+Convierte los minutos a segundos antes de dividir la distancia entre el tiempo.
+
+Respuesta correcta:
+c) \(3\ \text{m/s}\)
+
+Argumento de la respuesta correcta:
+La rapidez promedio se calcula con la expresión:
+
+\[
+v = \frac{d}{t}
+\]
+
+La distancia es:
+
+\[
+d = 540\ \text{m}
+\]
+
+El tiempo es de 3 minutos. Convertimos a segundos:
+
+\[
+3\ \text{min} = 3 \times 60 = 180\ \text{s}
+\]
+
+Ahora calculamos:
+
+\[
+v = \frac{540}{180} = 3
+\]
+
+Por eso la rapidez promedio es:
+
+\[
+3\ \text{m/s}
+\]
+
+Argumentos de las respuestas incorrectas:
+a) \(1\ \text{m/s}\): resulta de dividir de manera incorrecta la distancia entre el tiempo.
+b) \(2\ \text{m/s}\): queda por debajo del valor obtenido al convertir correctamente los minutos a segundos.
+d) \(9\ \text{m/s}\): no corresponde a la división \(540 \div 180\).
+e) \(180\ \text{m/s}\): corresponde al tiempo en segundos, no a la rapidez.
+
+
+REACTIVO 106
+
+Área temática:
+Física
+
+Bloque que corresponde al área temática:
+Tablas y gráficas: leer movimiento y cambios con el tiempo
+
+Texto base:
+[RENDERIZAR COMO TABLA CON CONTENEDOR DE DESPLAZAMIENTO HORIZONTAL Y BARRA VISIBLE]
+La siguiente tabla muestra la posición de un carrito en distintos tiempos.
+
+| Tiempo \(t\) en segundos | 0 | 2 | 4 | 6 | 8 |
+|---|---:|---:|---:|---:|---:|
+| Posición \(x\) en metros | 0 | 5 | 20 | 45 | 80 |
+[/TABLA]
+
+[INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
+Área: Física
+Reactivo: 106
+Uso: Generar apoyo visual de gráfica posición tiempo para interpretar rapidez media por intervalos.
+Herramienta: $imagegen con GPT-Image 2.
+Tipo de imagen: gráfica de línea posición contra tiempo.
+Descripción técnica:
+Crear una gráfica cartesiana con eje horizontal «Tiempo (s)» y eje vertical «Posición (m)». Colocar los puntos: (0,0), (2,5), (4,20), (6,45), (8,80). Unir los puntos con línea continua. Usar escala clara: eje x de 0 a 8 segundos, eje y de 0 a 80 metros. No señalar con flechas el intervalo de mayor aumento.
+Estilo: limpio, académico, legible, sin elementos decorativos innecesarios, con contraste suficiente.
+Texto visible permitido: «Tiempo (s)», «Posición (m)», valores numéricos de escala.
+Texto visible prohibido: no incluir respuesta correcta, pista, explicación ni marcas que resuelvan el reactivo.
+Formato sugerido: PNG o WebP, 1024 × 768 px.
+Destino sugerido: /assets/fisica/reactivo-106-grafica-posicion-tiempo.png
+Validación: la gráfica debe coincidir exactamente con los valores de la tabla.
+[/INSTRUCCIÓN INTERNA PARA CODEX]
+
+Planteamiento:
+¿En qué intervalo de tiempo el carrito tuvo la mayor rapidez media?
+
+Opciones:
+a) De 6 s a 8 s
+b) De 0 s a 2 s
+c) De 2 s a 4 s
+d) De 4 s a 6 s
+e) De 0 s a 8 s
+
+Pista:
+Compara cuánto cambia la posición en cada intervalo de 2 segundos.
+
+Respuesta correcta:
+a) De 6 s a 8 s
+
+Argumento de la respuesta correcta:
+Calculamos el cambio de posición en cada intervalo:
+
+De 0 s a 2 s:
+
+\[
+5 - 0 = 5\ \text{m}
+\]
+
+De 2 s a 4 s:
+
+\[
+20 - 5 = 15\ \text{m}
+\]
+
+De 4 s a 6 s:
+
+\[
+45 - 20 = 25\ \text{m}
+\]
+
+De 6 s a 8 s:
+
+\[
+80 - 45 = 35\ \text{m}
+\]
+
+Todos los intervalos duran 2 segundos, así que el mayor cambio de posición corresponde a la mayor rapidez media. El mayor cambio es de 35 m, entre 6 s y 8 s.
+
+Argumentos de las respuestas incorrectas:
+b) De 0 s a 2 s: solo avanza 5 m, que es el menor cambio de la tabla.
+c) De 2 s a 4 s: avanza 15 m, pero no es el mayor cambio.
+d) De 4 s a 6 s: avanza 25 m, menos que en el intervalo de 6 s a 8 s.
+e) De 0 s a 8 s: compara todo el recorrido, pero el planteamiento pide el intervalo donde la rapidez media fue mayor.
+
+
+REACTIVO 107
+
+Área temática:
+Física
+
+Bloque que corresponde al área temática:
+Fuerza y aceleración: uso de F = ma en problemas
+
+Texto base:
+No aplica.
+
+Planteamiento:
+Sobre un carrito de \(6\ \text{kg}\) actúa una fuerza neta de \(24\ \text{N}\). ¿Qué aceleración adquiere?
+
+Opciones:
+a) \(2\ \text{m/s}^2\)
+b) \(3\ \text{m/s}^2\)
+c) \(6\ \text{m/s}^2\)
+d) \(24\ \text{m/s}^2\)
+e) \(4\ \text{m/s}^2\)
+
+Pista:
+Usa la relación \(F = ma\) y despeja la aceleración.
+
+Respuesta correcta:
+e) \(4\ \text{m/s}^2\)
+
+Argumento de la respuesta correcta:
+La relación entre fuerza, masa y aceleración es:
+
+\[
+F = ma
+\]
+
+Despejamos la aceleración:
+
+\[
+a = \frac{F}{m}
+\]
+
+Sustituimos los datos:
+
+\[
+a = \frac{24\ \text{N}}{6\ \text{kg}}
+\]
+
+\[
+a = 4\ \text{m/s}^2
+\]
+
+Por eso la aceleración del carrito es:
+
+\[
+4\ \text{m/s}^2
+\]
+
+Argumentos de las respuestas incorrectas:
+a) \(2\ \text{m/s}^2\): no corresponde a dividir \(24\) entre \(6\).
+b) \(3\ \text{m/s}^2\): resulta de una división incorrecta.
+c) \(6\ \text{m/s}^2\): corresponde a la masa dada, no a la aceleración.
+d) \(24\ \text{m/s}^2\): corresponde a la fuerza numérica, pero no al resultado de aplicar \(a = \frac{F}{m}\).
+
+
+REACTIVO 108
+
+Área temática:
+Física
+
+Bloque que corresponde al área temática:
+Equilibrio: resultante R = 0 en situaciones simples
+
+Texto base:
+Una caja está sobre una mesa. Dos personas la jalan hacia la derecha con fuerzas de \(18\ \text{N}\) y \(7\ \text{N}\). Para que la caja permanezca en equilibrio, otra persona debe jalarla hacia la izquierda.
+
+[INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
+Área: Física
+Reactivo: 108
+Uso: Generar apoyo visual de equilibrio de fuerzas horizontales sobre una caja.
+Herramienta: $imagegen con GPT-Image 2.
+Tipo de imagen: diagrama de cuerpo simple con flechas horizontales.
+Descripción técnica:
+Dibujar una caja sobre una mesa. Hacia la derecha colocar dos flechas separadas con etiquetas «18 N» y «7 N». Hacia la izquierda colocar una flecha sin valor numérico, etiquetada como «F». No agregar suma ni resultado.
+Estilo: limpio, académico, legible, sin elementos decorativos innecesarios, con contraste suficiente.
+Texto visible permitido: «18 N», «7 N», «F».
+Texto visible prohibido: no incluir respuesta correcta, pista, explicación, suma total ni la palabra equilibrio como conclusión.
+Formato sugerido: PNG o WebP, 1024 × 768 px.
+Destino sugerido: /assets/fisica/reactivo-108-equilibrio-fuerzas.png
+Validación: las dos flechas de 18 N y 7 N deben apuntar a la derecha; la flecha F debe apuntar a la izquierda.
+[/INSTRUCCIÓN INTERNA PARA CODEX]
+
+Planteamiento:
+¿Qué fuerza debe aplicarse hacia la izquierda para que la caja esté en equilibrio?
+
+Opciones:
+a) \(11\ \text{N}\)
+b) \(25\ \text{N}\)
+c) \(18\ \text{N}\)
+d) \(7\ \text{N}\)
+e) \(30\ \text{N}\)
+
+Pista:
+Para que haya equilibrio, la suma de fuerzas hacia la derecha debe igualar la fuerza hacia la izquierda.
+
+Respuesta correcta:
+b) \(25\ \text{N}\)
+
+Argumento de la respuesta correcta:
+En equilibrio, la fuerza resultante debe ser cero:
+
+\[
+R = 0
+\]
+
+Primero sumamos las fuerzas hacia la derecha:
+
+\[
+18\ \text{N} + 7\ \text{N} = 25\ \text{N}
+\]
+
+Para equilibrarlas, se necesita una fuerza igual hacia la izquierda:
+
+\[
+F = 25\ \text{N}
+\]
+
+Por eso la fuerza requerida es \(25\ \text{N}\) hacia la izquierda.
+
+Argumentos de las respuestas incorrectas:
+a) \(11\ \text{N}\): resulta de restar \(18 - 7\), pero las fuerzas dadas van en la misma dirección y deben sumarse.
+c) \(18\ \text{N}\): solo iguala una de las fuerzas hacia la derecha, pero deja sin equilibrar la de \(7\ \text{N}\).
+d) \(7\ \text{N}\): solo iguala la fuerza menor, no la suma total.
+e) \(30\ \text{N}\): excede la suma de las fuerzas hacia la derecha, por lo que la caja ya no estaría en equilibrio.
+
+
+REACTIVO 109
+
+Área temática:
+Física
+
+Bloque que corresponde al área temática:
+Calor y temperatura: diferencias y ejemplos en la vida diaria
+
+Texto base:
+No aplica.
+
+Planteamiento:
+Una cuchara metálica se deja dentro de una taza con agua caliente. Después de unos minutos, el mango de la cuchara también se siente caliente.
+
+¿Qué explicación es la más adecuada?
+
+Opciones:
+a) La temperatura es una sustancia que se mueve por la cuchara.
+b) El metal impide por completo el paso de energía.
+c) El calor se transfiere del agua caliente hacia la cuchara por conducción.
+d) La cuchara produce frío para equilibrar el agua.
+e) El agua deja de tener energía cuando toca el metal.
+
+Pista:
+Piensa en cómo se transfiere energía térmica a través de un sólido.
+
+Respuesta correcta:
+c) El calor se transfiere del agua caliente hacia la cuchara por conducción.
+
+Argumento de la respuesta correcta:
+El calor es energía que se transfiere de un cuerpo con mayor temperatura a otro con menor temperatura. En este caso, la energía térmica pasa del agua caliente a la cuchara metálica y se distribuye por el metal mediante conducción.
+
+Argumentos de las respuestas incorrectas:
+a) La temperatura es una sustancia que se mueve por la cuchara: la temperatura no es una sustancia, sino una medida relacionada con el movimiento de las partículas.
+b) El metal impide por completo el paso de energía: los metales suelen conducir bien el calor.
+d) La cuchara produce frío para equilibrar el agua: la cuchara no produce frío; recibe energía térmica.
+e) El agua deja de tener energía cuando toca el metal: el agua puede transferir parte de su energía, pero no se queda sin energía.
+
+
+REACTIVO 110
+
+Área temática:
+Física
+
+Bloque que corresponde al área temática:
+Trabajo y energía: significado de trabajo mecánico
+
+Texto base:
+No aplica.
+
+Planteamiento:
+Una persona empuja una caja con una fuerza constante de \(30\ \text{N}\) y la desplaza \(4\ \text{m}\) en la misma dirección de la fuerza.
+
+¿Cuánto trabajo mecánico realiza?
+
+Opciones:
+a) \(7.5\ \text{J}\)
+b) \(26\ \text{J}\)
+c) \(34\ \text{J}\)
+d) \(120\ \text{J}\)
+e) \(300\ \text{J}\)
+
+Pista:
+Cuando la fuerza y el desplazamiento tienen la misma dirección, el trabajo se calcula multiplicando fuerza por distancia.
+
+Respuesta correcta:
+d) \(120\ \text{J}\)
+
+Argumento de la respuesta correcta:
+El trabajo mecánico se calcula con:
+
+\[
+W = Fd
+\]
+
+Sustituimos los datos:
+
+\[
+W = 30\ \text{N} \times 4\ \text{m}
+\]
+
+\[
+W = 120\ \text{J}
+\]
+
+Por eso el trabajo realizado es:
+
+\[
+120\ \text{J}
+\]
+
+Argumentos de las respuestas incorrectas:
+a) \(7.5\ \text{J}\): resulta de dividir \(30\) entre \(4\), pero el trabajo se calcula multiplicando.
+b) \(26\ \text{J}\): se obtiene al restar los datos, operación que no corresponde.
+c) \(34\ \text{J}\): se obtiene al sumar los datos, pero el trabajo no se calcula así.
+e) \(300\ \text{J}\): multiplica por un valor que no corresponde al desplazamiento dado.
+
+
+REACTIVO 111
+
+Área temática:
+Física
+
+Bloque que corresponde al área temática:
+Electricidad estática: carga por frotamiento y atracción
+
+Texto base:
+No aplica.
+
+Planteamiento:
+Después de frotar un globo con el cabello seco, el globo puede atraer pequeños pedazos de papel.
+
+¿Qué fenómeno explica mejor esta situación?
+
+Opciones:
+a) Electricidad estática producida por frotamiento
+b) Magnetismo producido por una pila
+c) Corriente eléctrica en un cable
+d) Reflexión de la luz en el papel
+e) Evaporación del agua del cabello
+
+Pista:
+La fricción puede provocar que un objeto gane o pierda carga eléctrica.
+
+Respuesta correcta:
+a) Electricidad estática producida por frotamiento
+
+Argumento de la respuesta correcta:
+Al frotar el globo con el cabello, puede transferirse carga eléctrica entre ambos. Esa acumulación de carga produce electricidad estática, capaz de atraer objetos ligeros como pequeños pedazos de papel.
+
+Argumentos de las respuestas incorrectas:
+b) Magnetismo producido por una pila: no hay imanes ni corriente de una pila en la situación.
+c) Corriente eléctrica en un cable: no se menciona un circuito ni flujo continuo de carga.
+d) Reflexión de la luz en el papel: la luz no explica la atracción de los pedazos de papel.
+e) Evaporación del agua del cabello: no es el fenómeno que provoca la atracción eléctrica.
+
+
+REACTIVO 112
+
+Área temática:
+Física
+
+Bloque que corresponde al área temática:
+Magnetismo: brújula y campo magnético terrestre
+
+Texto base:
+Una brújula se coloca sobre una mesa lejos de objetos metálicos. Después de moverse un poco, su aguja se orienta aproximadamente en dirección norte sur.
+
+[INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
+Área: Física
+Reactivo: 112
+Uso: Generar apoyo visual de brújula orientada por el campo magnético terrestre.
+Herramienta: $imagegen con GPT-Image 2.
+Tipo de imagen: ilustración escolar de una brújula.
+Descripción técnica:
+Dibujar una brújula vista desde arriba sobre una mesa. La aguja debe estar orientada de norte a sur. Incluir letras N, S, E y O alrededor de la brújula. No incluir campo magnético dibujado con flechas ni texto explicativo.
+Estilo: limpio, académico, legible, sin elementos decorativos innecesarios, con contraste suficiente.
+Texto visible permitido: «N», «S», «E», «O».
+Texto visible prohibido: no incluir respuesta correcta, pista, explicación ni marcas que indiquen «campo magnético terrestre».
+Formato sugerido: PNG o WebP, 900 × 900 px.
+Destino sugerido: /assets/fisica/reactivo-112-brujula.png
+Validación: la aguja debe verse alineada aproximadamente norte sur.
+[/INSTRUCCIÓN INTERNA PARA CODEX]
+
+Planteamiento:
+¿Por qué la aguja de la brújula se orienta de esa manera?
+
+Opciones:
+a) Porque la brújula mide la temperatura del aire.
+b) Porque la aguja responde al sonido del ambiente.
+c) Porque la gravedad cambia de dirección cada minuto.
+d) Porque la luz del Sol empuja la aguja hacia el norte.
+e) Porque la aguja imantada interactúa con el campo magnético terrestre.
+
+Pista:
+La brújula funciona gracias al magnetismo, no por calor, sonido o luz.
+
+Respuesta correcta:
+e) Porque la aguja imantada interactúa con el campo magnético terrestre.
+
+Argumento de la respuesta correcta:
+La aguja de una brújula es un pequeño imán. Como la Tierra tiene un campo magnético, la aguja se orienta aproximadamente en la dirección norte sur al interactuar con ese campo.
+
+Argumentos de las respuestas incorrectas:
+a) Porque la brújula mide la temperatura del aire: la brújula no mide temperatura; para eso se usa un termómetro.
+b) Porque la aguja responde al sonido del ambiente: el sonido no orienta la aguja de la brújula.
+c) Porque la gravedad cambia de dirección cada minuto: la gravedad no cambia así ni explica la orientación norte sur.
+d) Porque la luz del Sol empuja la aguja hacia el norte: la luz no es la causa del funcionamiento normal de una brújula.
+
+
+REACTIVO 113
+
+Área temática:
+Física
+
+Bloque que corresponde al área temática:
+Corriente y magnetismo: corriente que genera campo magnético
+
+Texto base:
+Un alambre conectado a una pila pasa cerca de una brújula. Cuando se cierra el circuito y circula corriente, la aguja de la brújula se desvía.
+
+[INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
+Área: Física
+Reactivo: 113
+Uso: Generar apoyo visual de corriente eléctrica que desvía una brújula.
+Herramienta: $imagegen con GPT-Image 2.
+Tipo de imagen: diagrama escolar de circuito simple con brújula cercana.
+Descripción técnica:
+Dibujar una pila, un interruptor cerrado, un alambre recto y una brújula cerca del alambre. Mostrar una flecha pequeña sobre el alambre indicando corriente eléctrica, sin explicar el resultado. La brújula debe verse desviada levemente respecto a norte sur.
+Estilo: limpio, académico, legible, sin elementos decorativos innecesarios, con contraste suficiente.
+Texto visible permitido: «pila», «interruptor», «brújula», «corriente».
+Texto visible prohibido: no incluir respuesta correcta, pista, explicación ni la frase «la corriente genera campo magnético».
+Formato sugerido: PNG o WebP, 1024 × 768 px.
+Destino sugerido: /assets/fisica/reactivo-113-corriente-brujula.png
+Validación: debe distinguirse que hay un circuito cerrado y una brújula cerca del alambre.
+[/INSTRUCCIÓN INTERNA PARA CODEX]
+
+Planteamiento:
+¿Qué muestra mejor este experimento?
+
+Opciones:
+a) Que una brújula solo funciona dentro del agua.
+b) Que una corriente eléctrica puede generar un campo magnético.
+c) Que la pila enfría el alambre hasta mover la aguja.
+d) Que el alambre pierde toda su masa cuando circula corriente.
+e) Que el interruptor cambia la gravedad alrededor de la brújula.
+
+Pista:
+Observa qué ocurre cuando empieza a circular corriente por el alambre.
+
+Respuesta correcta:
+b) Que una corriente eléctrica puede generar un campo magnético.
+
+Argumento de la respuesta correcta:
+Cuando circula corriente por un alambre, se produce un campo magnético alrededor de él. Ese campo puede interactuar con la aguja imantada de la brújula y desviarla.
+
+Argumentos de las respuestas incorrectas:
+a) Que una brújula solo funciona dentro del agua: la brújula puede funcionar fuera del agua.
+c) Que la pila enfría el alambre hasta mover la aguja: el movimiento de la aguja se relaciona con magnetismo, no con enfriamiento.
+d) Que el alambre pierde toda su masa cuando circula corriente: la corriente no implica pérdida total de masa.
+e) Que el interruptor cambia la gravedad alrededor de la brújula: el interruptor permite o impide el paso de corriente, no modifica la gravedad.
+
+
+REACTIVO 114
+
+Área temática:
+Física
+
+Bloque que corresponde al área temática:
+Gases: teoría cinética, partículas en movimiento y temperatura
+
+Texto base:
+No aplica.
+
+Planteamiento:
+Un globo con aire se coloca en agua tibia durante algunos minutos. Después se observa que el globo aumenta ligeramente su tamaño.
+
+¿Cuál explicación se relaciona mejor con la teoría cinética de los gases?
+
+Opciones:
+a) Las partículas del aire se detienen y ocupan menos espacio.
+b) El aire se transforma en metal dentro del globo.
+c) Al aumentar la temperatura, las partículas del gas se mueven más rápido y chocan más con las paredes del globo.
+d) El agua tibia elimina todas las partículas del gas.
+e) El globo crece porque la masa del aire se duplica de inmediato.
+
+Pista:
+Relaciona temperatura con movimiento de partículas.
+
+Respuesta correcta:
+c) Al aumentar la temperatura, las partículas del gas se mueven más rápido y chocan más con las paredes del globo.
+
+Argumento de la respuesta correcta:
+Según la teoría cinética, las partículas de un gas están en movimiento constante. Cuando aumenta la temperatura, se mueven más rápido y chocan con mayor frecuencia e intensidad contra las paredes del recipiente. Por eso el globo puede expandirse.
+
+Argumentos de las respuestas incorrectas:
+a) Las partículas del aire se detienen y ocupan menos espacio: ocurre lo contrario, al calentarse se mueven más.
+b) El aire se transforma en metal dentro del globo: no hay cambio de sustancia de ese tipo.
+d) El agua tibia elimina todas las partículas del gas: el aire sigue dentro del globo.
+e) El globo crece porque la masa del aire se duplica de inmediato: el aumento de tamaño se explica por el movimiento de partículas, no por duplicación inmediata de masa.
+
+
+REACTIVO 115
+
+Área temática:
+Física
+
+Bloque que corresponde al área temática:
+Ondas: transmisión de energía
+
+Texto base:
+Una estudiante mueve hacia arriba y abajo un extremo de una cuerda tensa. Se observa una perturbación que avanza por la cuerda hasta llegar al otro extremo.
+
+[INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
+Área: Física
+Reactivo: 115
+Uso: Generar apoyo visual de una onda transversal en una cuerda.
+Herramienta: $imagegen con GPT-Image 2.
+Tipo de imagen: diagrama escolar de onda en cuerda.
+Descripción técnica:
+Dibujar una cuerda horizontal con una onda transversal avanzando hacia la derecha. En el extremo izquierdo, mostrar una mano moviendo la cuerda arriba y abajo. Incluir una flecha discreta que indique dirección de avance de la perturbación, sin explicar el concepto.
+Estilo: limpio, académico, legible, sin elementos decorativos innecesarios, con contraste suficiente.
+Texto visible permitido: ninguno, salvo una flecha simple sin texto.
+Texto visible prohibido: no incluir respuesta correcta, pista, explicación, «energía» ni «materia».
+Formato sugerido: PNG o WebP, 1024 × 768 px.
+Destino sugerido: /assets/fisica/reactivo-115-onda-cuerda.png
+Validación: debe verse que la cuerda se perturba y que la onda avanza a lo largo de ella.
+[/INSTRUCCIÓN INTERNA PARA CODEX]
+
+Planteamiento:
+¿Qué se transmite principalmente mediante la onda que avanza por la cuerda?
+
+Opciones:
+a) Energía
+b) Masa de toda la cuerda
+c) Aire caliente
+d) Carga eléctrica permanente
+e) Luz visible
+
+Pista:
+La cuerda vibra, pero no viaja completa de un extremo al otro.
+
+Respuesta correcta:
+a) Energía
+
+Argumento de la respuesta correcta:
+Una onda transporta energía de un punto a otro sin trasladar toda la materia del medio. En este caso, la cuerda vibra, pero lo que se propaga a lo largo de ella es la perturbación que transporta energía.
+
+Argumentos de las respuestas incorrectas:
+b) Masa de toda la cuerda: la cuerda no se mueve completa de un extremo al otro.
+c) Aire caliente: no es lo que se propaga por la cuerda.
+d) Carga eléctrica permanente: no corresponde al fenómeno descrito.
+e) Luz visible: la situación describe una onda mecánica en una cuerda, no una onda luminosa.
+
+
+REACTIVO 116
+
+Área temática:
+Física
+
+Bloque que corresponde al área temática:
+Luz visible: relación entre longitud de onda y color
+
+Texto base:
+No aplica.
+
+Planteamiento:
+En la luz visible, el color rojo tiene una longitud de onda mayor que el color azul.
+
+Con base en esta relación, ¿cuál afirmación es correcta?
+
+Opciones:
+a) La luz azul tiene siempre mayor longitud de onda que la roja.
+b) La luz roja tiene mayor longitud de onda que la azul.
+c) Todos los colores visibles tienen exactamente la misma longitud de onda.
+d) La longitud de onda no se relaciona con el color.
+e) La luz visible no forma parte de las ondas electromagnéticas.
+
+Pista:
+Compara solo la longitud de onda entre rojo y azul dentro del espectro visible.
+
+Respuesta correcta:
+b) La luz roja tiene mayor longitud de onda que la azul.
+
+Argumento de la respuesta correcta:
+Dentro del espectro visible, los colores se relacionan con diferentes longitudes de onda. El rojo tiene una longitud de onda mayor que el azul, por eso la afirmación correcta es que la luz roja tiene mayor longitud de onda.
+
+Argumentos de las respuestas incorrectas:
+a) La luz azul tiene siempre mayor longitud de onda que la roja: invierte la relación indicada.
+c) Todos los colores visibles tienen exactamente la misma longitud de onda: si fueran iguales, no se distinguirían por color.
+d) La longitud de onda no se relaciona con el color: en la luz visible, el color sí se relaciona con la longitud de onda.
+e) La luz visible no forma parte de las ondas electromagnéticas: la luz visible sí pertenece al espectro electromagnético.
+
+
+REVISIÓN DE DISTRIBUCIÓN DE RESPUESTAS DEL PAQUETE
+
+a) 3 respuestas correctas: reactivos 106, 111, 115
+b) 3 respuestas correctas: reactivos 108, 113, 116
+c) 3 respuestas correctas: reactivos 105, 109, 114
+d) 1 respuesta correcta: reactivo 110
+e) 2 respuestas correctas: reactivos 107, 112
+
+Secuencia de respuestas correctas:
+105 c), 106 a), 107 e), 108 b), 109 c), 110 d), 111 a), 112 e), 113 b), 114 c), 115 a), 116 b)
+
+Patrones detectados:
+No hay respuestas iguales consecutivas.
+No hay tres respuestas iguales seguidas.
+No hay ciclo directo a), b), c), d), e).
+La distribución compensa el acumulado previo del examen completo.
+
+Corrección aplicada:
+Se asignaron más respuestas a a), b) y c), y menos a d) y e), para cerrar el balance general del examen.
+
+Distribución acumulada final del examen completo, considerando las 10 áreas:
+a) 26 respuestas correctas
+b) 26 respuestas correctas
+c) 26 respuestas correctas
+d) 25 respuestas correctas
+e) 25 respuestas correctas
+
+Observaciones editoriales:
+Los 12 reactivos son nuevos.
+No se reutilizan planteamientos, datos, tablas, gráficas ni ejemplos de la primera evaluación ni de las guías resueltas.
+La dificultad aumenta mediante interpretación de movimiento, comparación de intervalos, aplicación de fórmulas, equilibrio de fuerzas, fenómenos térmicos, electricidad, magnetismo, gases, ondas y luz.
+Todos los contenidos se mantienen en nivel secundaria.
+
+Observaciones técnicas:
+Los reactivos 106, 108, 112, 113 y 115 requieren apoyo visual con instrucción interna para Codex usando $imagegen con GPT-Image 2.
+El reactivo 106 requiere tabla con contenedor de desplazamiento horizontal y barra visible.
+No hay textos que requieran píldora visual especial en esta área.
+Las instrucciones internas no deben mostrarse en la app.
+
+=== FIN DEL ÁREA TEMÁTICA: FÍSICA ===
+=== LISTO PARA PEGAR EN TXT Y ANALIZAR CON CODEX ===
+
+
 ÁREA TEMÁTICA: FORMACIÓN CÍVICA Y ÉTICA
 RANGO: REACTIVOS 117 AL 128
 VERSIÓN: ECOEMS IFR, SEGUNDA EVALUACIÓN

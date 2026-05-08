@@ -2,39 +2,39 @@
 
 ## Áreas y rangos
 
-| Área | Rango esperado | Estado |
-|---|---:|---|
-| Habilidad matemática | 1-16 | Presente |
-| Biología | 17-28 | Presente |
-| Español | 29-40 | Presente |
-| Química | 41-52 | Presente |
-| Historia | 53-64 | Presente |
-| Matemáticas | 65-76 | Presente |
-| Habilidad verbal | 77-92 | Presente |
-| Geografía | 93-104 | Presente |
-| Física | 105-116 | Faltante |
-| Formación cívica y ética | 117-128 | Presente |
+| Área | Rango esperado | Cantidad | Estado |
+|---|---:|---:|---|
+| Habilidad matemática | 1-16 | 16 | Presente |
+| Biología | 17-28 | 12 | Presente |
+| Español | 29-40 | 12 | Presente |
+| Química | 41-52 | 12 | Presente |
+| Historia | 53-64 | 12 | Presente |
+| Matemáticas | 65-76 | 12 | Presente |
+| Habilidad verbal | 77-92 | 16 | Presente |
+| Geografía | 93-104 | 12 | Presente |
+| Física | 105-116 | 12 | Presente |
+| Formación cívica y ética | 117-128 | 12 | Presente |
 
 ## Conteo actual
 
-- Reactivos detectados: 116.
-- Reactivos faltantes: 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115 y 116.
-- Áreas detectadas: 9.
-- Estado: visible en modo revisión interna, no publicable como examen completo.
+- Reactivos detectados: 128.
+- Reactivos faltantes: ninguno.
+- Áreas detectadas: 10.
+- Estado: completo para revisión final de publicación.
 
-## Distribución de respuestas actual, sin Física
+## Distribución de respuestas
 
-| Letra | Cantidad |
-|---|---:|
-| a) | 23 |
-| b) | 23 |
-| c) | 23 |
-| d) | 24 |
-| e) | 23 |
+| Letra | Cantidad | Reactivos |
+|---|---:|---|
+| a) | 26 | 4, 6, 11, 19, 23, 27, 32, 37, 42, 49, 55, 59, 62, 66, 72, 80, 85, 89, 94, 97, 101, 106, 111, 115, 120, 127 |
+| b) | 26 | 2, 8, 13, 17, 22, 31, 35, 40, 45, 51, 54, 58, 64, 69, 75, 78, 83, 87, 96, 99, 104, 108, 113, 116, 118, 124 |
+| c) | 26 | 5, 10, 15, 21, 26, 29, 34, 39, 44, 48, 56, 61, 65, 68, 71, 76, 81, 90, 93, 98, 103, 105, 109, 114, 122, 126 |
+| d) | 25 | 1, 9, 14, 18, 24, 28, 33, 38, 41, 47, 52, 57, 63, 70, 74, 77, 84, 88, 92, 95, 102, 110, 119, 123, 128 |
+| e) | 25 | 3, 7, 12, 16, 20, 25, 30, 36, 43, 46, 50, 53, 60, 67, 73, 79, 82, 86, 91, 100, 107, 112, 117, 121, 125 |
 
-No se detectaron tres respuestas iguales consecutivas en el contenido actual.
+No se detectaron tres respuestas iguales consecutivas.
 
-## Reactivos con imagen pendiente
+## Reactivos con imagen
 
 - 5: `assets/habilidad-matematica/reactivo-05-serie-cuadricula.png`
 - 6: `assets/habilidad-matematica/reactivo-06-cruces-mosaicos.png`
@@ -47,28 +47,27 @@ No se detectaron tres respuestas iguales consecutivas en el contenido actual.
 - 73: `assets/matematicas/reactivo-73-grafica-consumo-agua.png`
 - 74: `assets/matematicas/reactivo-74-angulos-alternos-internos.png`
 - 94: `assets/geografia/reactivo-94-coordenadas-p.png`
+- 106: `assets/fisica/reactivo-106-grafica-posicion-tiempo.png`
+- 108: `assets/fisica/reactivo-108-equilibrio-fuerzas.png`
+- 112: `assets/fisica/reactivo-112-brujula.png`
+- 113: `assets/fisica/reactivo-113-corriente-brujula.png`
+- 115: `assets/fisica/reactivo-115-onda-cuerda.png`
 
 ## Reactivos con tabla horizontal
 
 - 15.
 - 72.
+- 106.
 
 ## Reactivos con píldora visual
 
 - Español: 29 al 40.
 - Habilidad verbal: 77 al 92.
 
-## Errores detectados
+## Errores detectados y corregidos
 
-- Falta Física 105-116.
-- Falta generar o incorporar assets visuales V2.
-- `exam-data.js` existe en modo parcial para que puedan revisarse los 116 reactivos disponibles.
-
-## Correcciones aplicadas
-
-- Se adaptó el parser para no mostrar instrucciones internas.
-- Se separó el contenido visible de las instrucciones operativas.
-- Se reemplazó el render hardcodeado de cápsulas por datos derivados del TXT.
-- Se agregó render de tablas con desplazamiento horizontal.
-- Se limpió la carpeta `assets/` para no conservar visuales reciclados de la simulación 1.
-- Se agregó modo `--partial` para mostrar contenido disponible sin declarar completo el examen.
+- Física 105-116 ya fue integrada en el TXT.
+- Se generaron los assets visuales obligatorios.
+- Se agregó soporte para tabla e imagen simultáneas en el reactivo 106.
+- Se eliminó de `exam-data.js` cualquier metadato interno de `$imagegen` o `GPT-Image 2`.
+- Se quitó de la portada el panel de advertencia sobre refrescar página.

@@ -2,18 +2,18 @@
 
 ## Estado general
 
-La base técnica de la simulación 2 está preparada en local a partir de la simulación 1. El proyecto conserva identidad IFR, estructura estática, app shell, cronómetro, métricas, bloqueo secuencial, retroalimentación y resultado final descargable.
+La simulación 2 está preparada en local a partir de la simulación 1. El proyecto conserva identidad IFR, estructura estática, app shell, cronómetro, métricas, bloqueo secuencial, retroalimentación y resultado final descargable.
 
-La aplicación ya muestra el contenido disponible en modo revisión interna. Todavía no es publicable como examen completo porque falta el paquete de Física, reactivos 105 al 116, y faltan assets visuales nuevos.
+El contenido ya está completo: 128 reactivos, 10 áreas y Física integrada del 105 al 116.
 
 ## Decisiones tomadas
 
-- No se genera `exam-data.js` de producción mientras el examen tenga 116 reactivos.
-- Sí se permite `exam-data.js` parcial con `node build-exam-data.js --partial` para revisar contenido disponible.
-- Las instrucciones internas del TXT se filtran y no forman parte del contenido visible.
-- Las píldoras visuales se derivan del TXT y no de mapas hardcodeados de la simulación 1.
+- `exam-data.js` de producción solo se genera cuando existen 128 reactivos y todos los assets obligatorios.
+- `visuals[]` es la fuente completa para apoyos visuales; `visual` se conserva como compatibilidad heredada.
+- El reactivo 106 puede mostrar tabla horizontal e imagen en el mismo reactivo.
+- Las instrucciones internas del TXT se filtran y no forman parte de `exam-data.js`.
+- Las píldoras visuales se derivan del TXT.
 - Las tablas marcadas se convierten en tablas renderizables con desplazamiento horizontal.
-- Las imágenes de la simulación 1 no se reutilizan como contenido final.
 - El nombre de descarga queda como `resultado-ecoems-ifr-simulacion-2.png`.
 
 ## Comandos
@@ -26,17 +26,19 @@ python -m http.server 4173
 
 ## Última validación local
 
-Fecha: 7 de mayo de 2026.
+`node build-exam-data.js` generó `exam-data.js` con 128 reactivos y 10 áreas.
 
-`node build-exam-data.js` leyó el TXT, imprimió distribución de respuestas y bloqueó producción por:
+`node qa/run-exam-qa.js` validó datos, opciones, pistas, argumentos, assets, distribución de respuestas y ausencia de contenido interno en `exam-data.js`.
 
-- Física faltante 105-116.
-- Total detectado de 116 reactivos.
-- 9 áreas detectadas.
-- 11 assets visuales pendientes.
+Validación en navegador local:
 
-`node build-exam-data.js --partial` generó `exam-data.js` con 116 reactivos visibles para revisión interna.
+- Portada con título `Examen simulación 2 ECOEMS`.
+- Conteo inicial: 128 reactivos y 10 áreas.
+- Física aparece como presente con 12 reactivos disponibles.
+- No aparece el panel de advertencia sobre refrescar página.
+- Inicio de examen funcional.
+- Reactivo 5 carga imagen real en móvil.
 
 ## Siguiente hito
 
-Integrar Física 105-116, generar assets y ejecutar QA completa con navegador real.
+Confirmar que Vercel refleje el último push y revisar la URL pública.

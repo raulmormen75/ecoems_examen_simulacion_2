@@ -48,6 +48,12 @@ function runBuildGate(args = []) {
     return false;
   }
 
+  if (result.status !== 0 && output.includes('requiere imagen') && output.includes('no se encontró el asset')) {
+    log('Build de producción bloqueado correctamente por assets visuales faltantes.');
+    log('Este estado es válido solo para revisión técnica interna, no para publicación.');
+    return false;
+  }
+
   if (result.status !== 0) {
     console.error(output);
     throw new Error('El build falló por un motivo distinto al bloqueo esperado.');
@@ -78,6 +84,16 @@ function visibleTextForExercise(exercise) {
   ].filter(Boolean).join('\n');
 }
 
+function getExerciseVisuals(exercise) {
+  if (Array.isArray(exercise.visuals)) {
+    return exercise.visuals.filter((visual) => visual && visual.kind && visual.kind !== 'none');
+  }
+  if (exercise.visual && exercise.visual.kind && exercise.visual.kind !== 'none') {
+    return [exercise.visual];
+  }
+  return [];
+}
+
 function validateData(data, { partial = false } = {}) {
   assert.ok(data, 'No se cargó window.IFR_APP_DATA.');
   assert.equal(data.meta.title, 'Examen simulación 2 ECOEMS');
@@ -85,10 +101,15 @@ function validateData(data, { partial = false } = {}) {
   assert.equal(data.meta.totalExercises, data.exercises.length);
   assert.equal(data.areas.length, EXPECTED_AREAS.length);
 
+  const serializedData = JSON.stringify(data);
+  for (const pattern of INTERNAL_PATTERNS) {
+    assert.equal(serializedData.includes(pattern), false, `exam-data.js conserva contenido interno: ${pattern}.`);
+  }
+
   if (partial) {
     assert.equal(data.meta.contentStatus.partial, true, 'El build parcial debe marcar contentStatus.partial.');
-    assert.equal(data.exercises.length, 116, 'El build parcial debe exponer los 116 reactivos disponibles.');
-    assert.deepEqual(data.meta.contentStatus.missingNumbers, [105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116], 'El build parcial debe declarar Física faltante.');
+    const missingNumbers = data.meta.contentStatus.missingNumbers || [];
+    assert.equal(data.exercises.length, EXPECTED_TOTAL - missingNumbers.length, 'El build parcial debe exponer todos los reactivos disponibles.');
   } else {
     assert.equal(data.exercises.length, EXPECTED_TOTAL);
   }
@@ -101,10 +122,11 @@ function validateData(data, { partial = false } = {}) {
   }
 
   const numbers = data.exercises.map((exercise) => exercise.number).sort((a, b) => a - b);
+  const missingNumbers = data.meta.contentStatus.missingNumbers || [];
   const expectedNumbers = partial
-    ? [...Array.from({ length: 104 }, (_, index) => index + 1), ...Array.from({ length: 12 }, (_, index) => index + 117)]
+    ? Array.from({ length: EXPECTED_TOTAL }, (_, index) => index + 1).filter((number) => !missingNumbers.includes(number))
     : Array.from({ length: EXPECTED_TOTAL }, (_, index) => index + 1);
-  assert.deepEqual(numbers, expectedNumbers, partial ? 'La numeración parcial no coincide con los 116 reactivos disponibles.' : 'La numeración no cubre 1-128 sin huecos.');
+  assert.deepEqual(numbers, expectedNumbers, partial ? 'La numeración parcial no coincide con los reactivos disponibles.' : 'La numeración no cubre 1-128 sin huecos.');
 
   const distribution = LETTERS.reduce((accumulator, letter) => {
     accumulator[letter] = [];
@@ -127,20 +149,22 @@ function validateData(data, { partial = false } = {}) {
       assert.equal(visibleText.includes(pattern), false, `Reactivo ${exercise.number}: contenido interno visible: ${pattern}.`);
     }
 
-    if (exercise.visual && exercise.visual.kind === 'image' && exercise.visual.required) {
-      assert.ok(exercise.visual.alt, `Reactivo ${exercise.number}: imagen sin texto alternativo.`);
-      assert.ok(fs.existsSync(path.join(ROOT, exercise.visual.src)), `Reactivo ${exercise.number}: asset faltante ${exercise.visual.src}.`);
-    }
+    for (const visual of getExerciseVisuals(exercise)) {
+      if (visual.kind === 'image' && visual.required) {
+        assert.ok(visual.alt, `Reactivo ${exercise.number}: imagen sin texto alternativo.`);
+        assert.ok(fs.existsSync(path.join(ROOT, visual.src)), `Reactivo ${exercise.number}: asset faltante ${visual.src}.`);
+      }
 
-    if (exercise.visual && exercise.visual.kind === 'pending-image') {
-      assert.equal(partial, true, `Reactivo ${exercise.number}: solo el build parcial puede exponer imagen pendiente.`);
-      assert.ok(exercise.visual.content.includes('Apoyo visual pendiente'), `Reactivo ${exercise.number}: placeholder visual inválido.`);
-    }
+      if (visual.kind === 'pending-image') {
+        assert.equal(partial, true, `Reactivo ${exercise.number}: solo el build parcial puede exponer imagen pendiente.`);
+        assert.ok(visual.content.includes('Apoyo visual pendiente'), `Reactivo ${exercise.number}: placeholder visual inválido.`);
+      }
 
-    if (exercise.visual && exercise.visual.kind === 'table') {
-      assert.equal(exercise.visual.hasHorizontalScroll, true, `Reactivo ${exercise.number}: tabla sin scroll horizontal.`);
-      assert.ok(exercise.visual.headers.length > 0, `Reactivo ${exercise.number}: tabla sin encabezados.`);
-      assert.ok(exercise.visual.rows.length > 0, `Reactivo ${exercise.number}: tabla sin filas.`);
+      if (visual.kind === 'table') {
+        assert.equal(visual.hasHorizontalScroll, true, `Reactivo ${exercise.number}: tabla sin scroll horizontal.`);
+        assert.ok(visual.headers.length > 0, `Reactivo ${exercise.number}: tabla sin encabezados.`);
+        assert.ok(visual.rows.length > 0, `Reactivo ${exercise.number}: tabla sin filas.`);
+      }
     }
 
     distribution[exercise.correctOption].push(exercise.number);
@@ -165,7 +189,7 @@ function validateData(data, { partial = false } = {}) {
   }
 
   log(partial
-    ? 'Datos parciales validados: 116 reactivos disponibles, 10 áreas esperadas, contenido limpio y placeholders de assets.'
+    ? `Datos parciales validados: ${data.exercises.length} reactivos disponibles, 10 áreas esperadas, contenido limpio y placeholders de assets.`
     : 'Datos completos validados: 128 reactivos, 10 áreas, opciones, pistas, argumentos, assets y distribución.');
 }
 
@@ -189,7 +213,7 @@ function main() {
   }
   assert.ok(fs.existsSync(DATA_FILE), 'El build indicó éxito, pero no existe exam-data.js.');
   validateData(loadData(), { partial: true });
-  log('QA parcial completada. Sigue pendiente Física 105-116 antes de publicar como examen completo.');
+  log('QA parcial completada. El examen no debe publicarse hasta resolver los faltantes reportados.');
 }
 
 main();

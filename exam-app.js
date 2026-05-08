@@ -380,8 +380,19 @@
     return '';
   }
 
+  function getExerciseVisuals(exercise) {
+    if (Array.isArray(exercise.visuals)) {
+      return exercise.visuals.filter((visual) => visual && visual.kind && visual.kind !== 'none');
+    }
+    if (exercise.visual && exercise.visual.kind && exercise.visual.kind !== 'none') {
+      return [exercise.visual];
+    }
+    return [];
+  }
+
   function renderExercisePrompt(exercise) {
     const parts = [];
+    const visuals = getExerciseVisuals(exercise);
 
     if (exercise.basePill) {
       parts.push(renderReadingCapsule(exercise.basePill, exercise.number));
@@ -389,15 +400,15 @@
       parts.push(textToParagraphs(exercise.baseText, exercise.promptMarks));
     }
 
-    if (exercise.visual && exercise.visual.position === 'base') {
-      parts.push(renderVisual(exercise.visual));
-    }
+    visuals
+      .filter((visual) => visual.position === 'base')
+      .forEach((visual) => parts.push(renderVisual(visual)));
 
     parts.push(textToParagraphs(exercise.prompt, exercise.promptMarks));
 
-    if (exercise.visual && exercise.visual.position !== 'base') {
-      parts.push(renderVisual(exercise.visual));
-    }
+    visuals
+      .filter((visual) => visual.position !== 'base')
+      .forEach((visual) => parts.push(renderVisual(visual)));
 
     return parts.filter(Boolean).join('');
   }
@@ -685,7 +696,11 @@
 
   function summarizeExercisePrompt(exercise) {
     const prompt = String(exercise.prompt || '').trim();
-    const visualAlt = exercise.visual && exercise.visual.alt ? String(exercise.visual.alt).trim() : '';
+    const visualAlt = getExerciseVisuals(exercise)
+      .map((visual) => visual.alt)
+      .filter(Boolean)
+      .join(' ')
+      .trim();
     const usesVisual = visualAlt && /\b(figura|imagen|tabla|gráfica|grafica|observa|siguiente)\b/i.test(prompt);
     const source = usesVisual ? `${prompt} ${visualAlt}` : prompt;
     return trimPromptSummary(source);

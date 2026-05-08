@@ -4,73 +4,15 @@ window.IFR_APP_DATA = {
     "title": "Examen simulación 2 ECOEMS",
     "institution": "Instituto Fernando Ramírez",
     "durationSeconds": 10800,
-    "totalExercises": 116,
+    "totalExercises": 128,
     "expectedTotalExercises": 128,
     "scoreMode": "raw-and-percent",
     "contentStatus": {
-      "partial": true,
-      "label": "Revisión interna",
-      "message": "Contenido disponible para revisión interna: faltan Física 105-116 y assets visuales obligatorios.",
-      "missingNumbers": [
-        105,
-        106,
-        107,
-        108,
-        109,
-        110,
-        111,
-        112,
-        113,
-        114,
-        115,
-        116
-      ],
-      "missingAssets": [
-        {
-          "number": 5,
-          "src": "assets/habilidad-matematica/reactivo-05-serie-cuadricula.png"
-        },
-        {
-          "number": 6,
-          "src": "assets/habilidad-matematica/reactivo-06-cruces-mosaicos.png"
-        },
-        {
-          "number": 7,
-          "src": "assets/habilidad-matematica/reactivo-07-rotacion-90.png"
-        },
-        {
-          "number": 8,
-          "src": "assets/habilidad-matematica/reactivo-08-rotacion-180.png"
-        },
-        {
-          "number": 9,
-          "src": "assets/habilidad-matematica/reactivo-09-cuadricula-3x3.png"
-        },
-        {
-          "number": 10,
-          "src": "assets/habilidad-matematica/reactivo-10-triangulos.png"
-        },
-        {
-          "number": 19,
-          "src": "assets/biologia/reactivo-19-fotosintesis-almidon.png"
-        },
-        {
-          "number": 44,
-          "src": "assets/quimica/reactivo-44-modelos-particulas.png"
-        },
-        {
-          "number": 73,
-          "src": "assets/matematicas/reactivo-73-grafica-consumo-agua.png"
-        },
-        {
-          "number": 74,
-          "src": "assets/matematicas/reactivo-74-angulos-alternos-internos.png"
-        },
-        {
-          "number": 94,
-          "src": "assets/geografia/reactivo-94-coordenadas-p.png"
-        }
-      ]
+      "partial": false,
+      "label": "Completo",
+      "message": "Contenido completo validado.",
+      "missingNumbers": [],
+      "missingAssets": []
     }
   },
   "areas": [
@@ -135,7 +77,7 @@ window.IFR_APP_DATA = {
       "name": "Física",
       "rangeStart": 105,
       "rangeEnd": 116,
-      "totalExercises": 0
+      "totalExercises": 12
     },
     {
       "id": "formacion-civica-etica",
@@ -191,6 +133,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 1,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -240,6 +183,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 2,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -289,6 +233,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 3,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -338,6 +283,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 4,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -384,13 +330,23 @@ window.IFR_APP_DATA = {
         "e": "El punto negro está bien colocado, pero el triángulo debería regresar al centro."
       },
       "visual": {
-        "kind": "pending-image",
+        "kind": "image",
         "position": "base",
         "required": true,
         "src": "assets/habilidad-matematica/reactivo-05-serie-cuadricula.png",
         "alt": "Habilidad matemática, reactivo 5: Generar apoyo visual de serie de figuras en cuadrícula 3 × 3 y cinco opciones.",
-        "content": "Apoyo visual pendiente: assets/habilidad-matematica/reactivo-05-serie-cuadricula.png"
+        "internalInstructionRemoved": true
       },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/habilidad-matematica/reactivo-05-serie-cuadricula.png",
+          "alt": "Habilidad matemática, reactivo 5: Generar apoyo visual de serie de figuras en cuadrícula 3 × 3 y cinco opciones.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 5,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -437,13 +393,23 @@ window.IFR_APP_DATA = {
         "e": "29: aumenta demasiado respecto del patrón observado."
       },
       "visual": {
-        "kind": "pending-image",
+        "kind": "image",
         "position": "base",
         "required": true,
         "src": "assets/habilidad-matematica/reactivo-06-cruces-mosaicos.png",
         "alt": "Habilidad matemática, reactivo 6: Generar apoyo visual de una serie de cruces formadas con mosaicos cuadrados.",
-        "content": "Apoyo visual pendiente: assets/habilidad-matematica/reactivo-06-cruces-mosaicos.png"
+        "internalInstructionRemoved": true
       },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/habilidad-matematica/reactivo-06-cruces-mosaicos.png",
+          "alt": "Habilidad matemática, reactivo 6: Generar apoyo visual de una serie de cruces formadas con mosaicos cuadrados.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 6,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -490,13 +456,23 @@ window.IFR_APP_DATA = {
         "d": "Representa un giro de 90° en sentido contrario al solicitado."
       },
       "visual": {
-        "kind": "pending-image",
+        "kind": "image",
         "position": "base",
         "required": true,
         "src": "assets/habilidad-matematica/reactivo-07-rotacion-90.png",
         "alt": "Habilidad matemática, reactivo 7: Generar apoyo visual de rotación de figura 90° en sentido de las manecillas del reloj.",
-        "content": "Apoyo visual pendiente: assets/habilidad-matematica/reactivo-07-rotacion-90.png"
+        "internalInstructionRemoved": true
       },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/habilidad-matematica/reactivo-07-rotacion-90.png",
+          "alt": "Habilidad matemática, reactivo 7: Generar apoyo visual de rotación de figura 90° en sentido de las manecillas del reloj.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 7,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -543,13 +519,23 @@ window.IFR_APP_DATA = {
         "e": "Cambia el orden de algunos símbolos y no conserva el resultado exacto del giro."
       },
       "visual": {
-        "kind": "pending-image",
+        "kind": "image",
         "position": "base",
         "required": true,
         "src": "assets/habilidad-matematica/reactivo-08-rotacion-180.png",
         "alt": "Habilidad matemática, reactivo 8: Generar apoyo visual de rotación de figura 180°.",
-        "content": "Apoyo visual pendiente: assets/habilidad-matematica/reactivo-08-rotacion-180.png"
+        "internalInstructionRemoved": true
       },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/habilidad-matematica/reactivo-08-rotacion-180.png",
+          "alt": "Habilidad matemática, reactivo 8: Generar apoyo visual de rotación de figura 180°.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 8,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -596,13 +582,23 @@ window.IFR_APP_DATA = {
         "e": "16: agrega figuras que no son cuadrados completos."
       },
       "visual": {
-        "kind": "pending-image",
+        "kind": "image",
         "position": "base",
         "required": true,
         "src": "assets/habilidad-matematica/reactivo-09-cuadricula-3x3.png",
         "alt": "Habilidad matemática, reactivo 9: Generar apoyo visual para conteo de cuadrados.",
-        "content": "Apoyo visual pendiente: assets/habilidad-matematica/reactivo-09-cuadricula-3x3.png"
+        "internalInstructionRemoved": true
       },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/habilidad-matematica/reactivo-09-cuadricula-3x3.png",
+          "alt": "Habilidad matemática, reactivo 9: Generar apoyo visual para conteo de cuadrados.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 9,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -649,13 +645,23 @@ window.IFR_APP_DATA = {
         "e": "15: corresponde a un conteo excesivo, incluyendo combinaciones que no forman triángulos válidos."
       },
       "visual": {
-        "kind": "pending-image",
+        "kind": "image",
         "position": "base",
         "required": true,
         "src": "assets/habilidad-matematica/reactivo-10-triangulos.png",
         "alt": "Habilidad matemática, reactivo 10: Generar apoyo visual para conteo de triángulos.",
-        "content": "Apoyo visual pendiente: assets/habilidad-matematica/reactivo-10-triangulos.png"
+        "internalInstructionRemoved": true
       },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/habilidad-matematica/reactivo-10-triangulos.png",
+          "alt": "Habilidad matemática, reactivo 10: Generar apoyo visual para conteo de triángulos.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 10,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -705,6 +711,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 11,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -754,6 +761,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 12,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -803,6 +811,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 13,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -852,6 +861,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 14,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -929,6 +939,40 @@ window.IFR_APP_DATA = {
           ]
         ]
       },
+      "visuals": [
+        {
+          "kind": "table",
+          "position": "base",
+          "hasHorizontalScroll": true,
+          "caption": "La siguiente tabla muestra el trabajo de cinco equipos durante una actividad.",
+          "headers": [
+            "Dato",
+            "Equipo A",
+            "Equipo B",
+            "Equipo C",
+            "Equipo D",
+            "Equipo E"
+          ],
+          "rows": [
+            [
+              "Paquetes entregados",
+              "48",
+              "54",
+              "63",
+              "72",
+              "84"
+            ],
+            [
+              "Tiempo empleado en minutos",
+              "6",
+              "9",
+              "7",
+              "12",
+              "14"
+            ]
+          ]
+        }
+      ],
       "sourceOrder": 15,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -978,6 +1022,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 16,
       "rangeStart": 1,
       "rangeEnd": 16
@@ -1027,6 +1072,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 17,
       "rangeStart": 17,
       "rangeEnd": 28
@@ -1076,6 +1122,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 18,
       "rangeStart": 17,
       "rangeEnd": 28
@@ -1122,13 +1169,23 @@ window.IFR_APP_DATA = {
         "e": "El almidón se produce igual en cualquier condición: el experimento muestra diferencia entre la zona iluminada y la zona cubierta."
       },
       "visual": {
-        "kind": "pending-image",
+        "kind": "image",
         "position": "base",
         "required": true,
         "src": "assets/biologia/reactivo-19-fotosintesis-almidon.png",
         "alt": "Biología, reactivo 19: Generar apoyo visual de un experimento sencillo sobre fotosíntesis y producción de almidón.",
-        "content": "Apoyo visual pendiente: assets/biologia/reactivo-19-fotosintesis-almidon.png"
+        "internalInstructionRemoved": true
       },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/biologia/reactivo-19-fotosintesis-almidon.png",
+          "alt": "Biología, reactivo 19: Generar apoyo visual de un experimento sencillo sobre fotosíntesis y producción de almidón.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 19,
       "rangeStart": 17,
       "rangeEnd": 28
@@ -1178,6 +1235,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 20,
       "rangeStart": 17,
       "rangeEnd": 28
@@ -1227,6 +1285,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 21,
       "rangeStart": 17,
       "rangeEnd": 28
@@ -1276,6 +1335,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 22,
       "rangeStart": 17,
       "rangeEnd": 28
@@ -1325,6 +1385,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 23,
       "rangeStart": 17,
       "rangeEnd": 28
@@ -1374,6 +1435,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 24,
       "rangeStart": 17,
       "rangeEnd": 28
@@ -1423,6 +1485,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 25,
       "rangeStart": 17,
       "rangeEnd": 28
@@ -1472,6 +1535,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 26,
       "rangeStart": 17,
       "rangeEnd": 28
@@ -1521,6 +1585,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 27,
       "rangeStart": 17,
       "rangeEnd": 28
@@ -1570,6 +1635,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 28,
       "rangeStart": 17,
       "rangeEnd": 28
@@ -1632,6 +1698,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 29,
       "rangeStart": 29,
       "rangeEnd": 40
@@ -1693,6 +1760,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 30,
       "rangeStart": 29,
       "rangeEnd": 40
@@ -1751,6 +1819,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 31,
       "rangeStart": 29,
       "rangeEnd": 40
@@ -1809,6 +1878,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 32,
       "rangeStart": 29,
       "rangeEnd": 40
@@ -1871,6 +1941,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 33,
       "rangeStart": 29,
       "rangeEnd": 40
@@ -1929,6 +2000,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 34,
       "rangeStart": 29,
       "rangeEnd": 40
@@ -1989,6 +2061,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 35,
       "rangeStart": 29,
       "rangeEnd": 40
@@ -2047,6 +2120,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 36,
       "rangeStart": 29,
       "rangeEnd": 40
@@ -2111,6 +2185,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 37,
       "rangeStart": 29,
       "rangeEnd": 40
@@ -2170,6 +2245,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 38,
       "rangeStart": 29,
       "rangeEnd": 40
@@ -2228,6 +2304,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 39,
       "rangeStart": 29,
       "rangeEnd": 40
@@ -2286,6 +2363,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 40,
       "rangeStart": 29,
       "rangeEnd": 40
@@ -2335,6 +2413,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 41,
       "rangeStart": 41,
       "rangeEnd": 52
@@ -2384,6 +2463,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 42,
       "rangeStart": 41,
       "rangeEnd": 52
@@ -2433,6 +2513,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 43,
       "rangeStart": 41,
       "rangeEnd": 52
@@ -2479,13 +2560,23 @@ window.IFR_APP_DATA = {
         "e": "A es compuesto, B es mezcla y C es elemento: clasifica incorrectamente los tres modelos."
       },
       "visual": {
-        "kind": "pending-image",
+        "kind": "image",
         "position": "base",
         "required": true,
         "src": "assets/quimica/reactivo-44-modelos-particulas.png",
         "alt": "Química, reactivo 44: Generar apoyo visual de tres modelos de partículas para distinguir mezcla, elemento y compuesto.",
-        "content": "Apoyo visual pendiente: assets/quimica/reactivo-44-modelos-particulas.png"
+        "internalInstructionRemoved": true
       },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/quimica/reactivo-44-modelos-particulas.png",
+          "alt": "Química, reactivo 44: Generar apoyo visual de tres modelos de partículas para distinguir mezcla, elemento y compuesto.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 44,
       "rangeStart": 41,
       "rangeEnd": 52
@@ -2535,6 +2626,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 45,
       "rangeStart": 41,
       "rangeEnd": 52
@@ -2584,6 +2676,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 46,
       "rangeStart": 41,
       "rangeEnd": 52
@@ -2633,6 +2726,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 47,
       "rangeStart": 41,
       "rangeEnd": 52
@@ -2682,6 +2776,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 48,
       "rangeStart": 41,
       "rangeEnd": 52
@@ -2731,6 +2826,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 49,
       "rangeStart": 41,
       "rangeEnd": 52
@@ -2780,6 +2876,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 50,
       "rangeStart": 41,
       "rangeEnd": 52
@@ -2829,6 +2926,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 51,
       "rangeStart": 41,
       "rangeEnd": 52
@@ -2878,6 +2976,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 52,
       "rangeStart": 41,
       "rangeEnd": 52
@@ -2927,6 +3026,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 53,
       "rangeStart": 53,
       "rangeEnd": 64
@@ -2976,6 +3076,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 54,
       "rangeStart": 53,
       "rangeEnd": 64
@@ -3025,6 +3126,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 55,
       "rangeStart": 53,
       "rangeEnd": 64
@@ -3074,6 +3176,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 56,
       "rangeStart": 53,
       "rangeEnd": 64
@@ -3123,6 +3226,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 57,
       "rangeStart": 53,
       "rangeEnd": 64
@@ -3172,6 +3276,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 58,
       "rangeStart": 53,
       "rangeEnd": 64
@@ -3221,6 +3326,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 59,
       "rangeStart": 53,
       "rangeEnd": 64
@@ -3270,6 +3376,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 60,
       "rangeStart": 53,
       "rangeEnd": 64
@@ -3319,6 +3426,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 61,
       "rangeStart": 53,
       "rangeEnd": 64
@@ -3368,6 +3476,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 62,
       "rangeStart": 53,
       "rangeEnd": 64
@@ -3417,6 +3526,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 63,
       "rangeStart": 53,
       "rangeEnd": 64
@@ -3466,6 +3576,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 64,
       "rangeStart": 53,
       "rangeEnd": 64
@@ -3515,6 +3626,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 65,
       "rangeStart": 65,
       "rangeEnd": 76
@@ -3564,6 +3676,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 66,
       "rangeStart": 65,
       "rangeEnd": 76
@@ -3613,6 +3726,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 67,
       "rangeStart": 65,
       "rangeEnd": 76
@@ -3662,6 +3776,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 68,
       "rangeStart": 65,
       "rangeEnd": 76
@@ -3711,6 +3826,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 69,
       "rangeStart": 65,
       "rangeEnd": 76
@@ -3760,6 +3876,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 70,
       "rangeStart": 65,
       "rangeEnd": 76
@@ -3809,6 +3926,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 71,
       "rangeStart": 65,
       "rangeEnd": 76
@@ -3902,6 +4020,56 @@ window.IFR_APP_DATA = {
           ]
         ]
       },
+      "visuals": [
+        {
+          "kind": "table",
+          "position": "base",
+          "hasHorizontalScroll": true,
+          "caption": "La siguiente tabla muestra la asistencia a talleres de regularización durante una semana.",
+          "headers": [
+            "Taller",
+            "Lunes",
+            "Martes",
+            "Miércoles",
+            "Jueves",
+            "Viernes"
+          ],
+          "rows": [
+            [
+              "Taller A",
+              "18",
+              "20",
+              "15",
+              "17",
+              "16"
+            ],
+            [
+              "Taller B",
+              "14",
+              "24",
+              "19",
+              "18",
+              "15"
+            ],
+            [
+              "Taller C",
+              "20",
+              "16",
+              "18",
+              "12",
+              "17"
+            ],
+            [
+              "Taller D",
+              "16",
+              "17",
+              "20",
+              "19",
+              "14"
+            ]
+          ]
+        }
+      ],
       "sourceOrder": 72,
       "rangeStart": 65,
       "rangeEnd": 76
@@ -3948,13 +4116,23 @@ window.IFR_APP_DATA = {
         "d": "Lunes a viernes: compara días no consecutivos, pero el planteamiento pide dos días consecutivos."
       },
       "visual": {
-        "kind": "pending-image",
+        "kind": "image",
         "position": "base",
         "required": true,
         "src": "assets/matematicas/reactivo-73-grafica-consumo-agua.png",
         "alt": "Matemáticas, reactivo 73: Generar apoyo visual de gráfica de líneas para lectura de cambios diarios.",
-        "content": "Apoyo visual pendiente: assets/matematicas/reactivo-73-grafica-consumo-agua.png"
+        "internalInstructionRemoved": true
       },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/matematicas/reactivo-73-grafica-consumo-agua.png",
+          "alt": "Matemáticas, reactivo 73: Generar apoyo visual de gráfica de líneas para lectura de cambios diarios.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 73,
       "rangeStart": 65,
       "rangeEnd": 76
@@ -4001,13 +4179,23 @@ window.IFR_APP_DATA = {
         "e": "2 y 7: ambos son exteriores, no interiores."
       },
       "visual": {
-        "kind": "pending-image",
+        "kind": "image",
         "position": "base",
         "required": true,
         "src": "assets/matematicas/reactivo-74-angulos-alternos-internos.png",
         "alt": "Matemáticas, reactivo 74: Generar apoyo visual de dos rectas paralelas cortadas por una transversal con ángulos numerados.",
-        "content": "Apoyo visual pendiente: assets/matematicas/reactivo-74-angulos-alternos-internos.png"
+        "internalInstructionRemoved": true
       },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/matematicas/reactivo-74-angulos-alternos-internos.png",
+          "alt": "Matemáticas, reactivo 74: Generar apoyo visual de dos rectas paralelas cortadas por una transversal con ángulos numerados.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 74,
       "rangeStart": 65,
       "rangeEnd": 76
@@ -4057,6 +4245,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 75,
       "rangeStart": 65,
       "rangeEnd": 76
@@ -4106,6 +4295,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 76,
       "rangeStart": 65,
       "rangeEnd": 76
@@ -4168,6 +4358,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 77,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4228,6 +4419,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 78,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4286,6 +4478,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 79,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4346,6 +4539,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 80,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4406,6 +4600,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 81,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4468,6 +4663,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 82,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4526,6 +4722,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 83,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4584,6 +4781,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 84,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4642,6 +4840,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 85,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4700,6 +4899,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 86,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4758,6 +4958,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 87,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4816,6 +5017,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 88,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4874,6 +5076,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 89,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4932,6 +5135,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 90,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -4990,6 +5194,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 91,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -5048,6 +5253,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 92,
       "rangeStart": 77,
       "rangeEnd": 92
@@ -5097,6 +5303,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 93,
       "rangeStart": 93,
       "rangeEnd": 104
@@ -5143,13 +5350,23 @@ window.IFR_APP_DATA = {
         "e": "20° S, 40° E: ubica bien la latitud sur, pero cambia oeste por este."
       },
       "visual": {
-        "kind": "pending-image",
+        "kind": "image",
         "position": "base",
         "required": true,
         "src": "assets/geografia/reactivo-94-coordenadas-p.png",
         "alt": "Geografía, reactivo 94: Generar apoyo visual para identificar coordenadas geográficas.",
-        "content": "Apoyo visual pendiente: assets/geografia/reactivo-94-coordenadas-p.png"
+        "internalInstructionRemoved": true
       },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/geografia/reactivo-94-coordenadas-p.png",
+          "alt": "Geografía, reactivo 94: Generar apoyo visual para identificar coordenadas geográficas.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 94,
       "rangeStart": 93,
       "rangeEnd": 104
@@ -5199,6 +5416,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 95,
       "rangeStart": 93,
       "rangeEnd": 104
@@ -5248,6 +5466,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 96,
       "rangeStart": 93,
       "rangeEnd": 104
@@ -5297,6 +5516,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 97,
       "rangeStart": 93,
       "rangeEnd": 104
@@ -5346,6 +5566,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 98,
       "rangeStart": 93,
       "rangeEnd": 104
@@ -5395,6 +5616,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 99,
       "rangeStart": 93,
       "rangeEnd": 104
@@ -5444,6 +5666,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 100,
       "rangeStart": 93,
       "rangeEnd": 104
@@ -5493,6 +5716,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 101,
       "rangeStart": 93,
       "rangeEnd": 104
@@ -5542,6 +5766,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 102,
       "rangeStart": 93,
       "rangeEnd": 104
@@ -5591,6 +5816,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 103,
       "rangeStart": 93,
       "rangeEnd": 104
@@ -5640,9 +5866,715 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 104,
       "rangeStart": 93,
       "rangeEnd": 104
+    },
+    {
+      "id": "reactivo-105",
+      "number": 105,
+      "areaId": "fisica",
+      "areaName": "Física",
+      "block": "Rapidez y velocidad: interpretación y cálculo básico",
+      "baseText": null,
+      "basePill": null,
+      "prompt": "Un ciclista recorre 540 metros en línea recta durante 3 minutos. Si mantiene el mismo sentido de movimiento, ¿cuál es su rapidez promedio?",
+      "options": [
+        {
+          "label": "a",
+          "text": "\\(1\\ \\text{m/s}\\)"
+        },
+        {
+          "label": "b",
+          "text": "\\(2\\ \\text{m/s}\\)"
+        },
+        {
+          "label": "c",
+          "text": "\\(3\\ \\text{m/s}\\)"
+        },
+        {
+          "label": "d",
+          "text": "\\(9\\ \\text{m/s}\\)"
+        },
+        {
+          "label": "e",
+          "text": "\\(180\\ \\text{m/s}\\)"
+        }
+      ],
+      "correctOption": "c",
+      "correctOptionText": "\\(3\\ \\text{m/s}\\)",
+      "hint": "Convierte los minutos a segundos antes de dividir la distancia entre el tiempo.",
+      "correctArgument": "La rapidez promedio se calcula con la expresión:\n\n\\[\nv = \\frac{d}{t}\n\\]\n\nLa distancia es:\n\n\\[\nd = 540\\ \\text{m}\n\\]\n\nEl tiempo es de 3 minutos. Convertimos a segundos:\n\n\\[\n3\\ \\text{min} = 3 \\times 60 = 180\\ \\text{s}\n\\]\n\nAhora calculamos:\n\n\\[\nv = \\frac{540}{180} = 3\n\\]\n\nPor eso la rapidez promedio es:\n\n\\[\n3\\ \\text{m/s}\n\\]",
+      "incorrectArgumentsByOption": {
+        "a": "\\(1\\ \\text{m/s}\\): resulta de dividir de manera incorrecta la distancia entre el tiempo.",
+        "b": "\\(2\\ \\text{m/s}\\): queda por debajo del valor obtenido al convertir correctamente los minutos a segundos.",
+        "d": "\\(9\\ \\text{m/s}\\): no corresponde a la división \\(540 \\div 180\\).",
+        "e": "\\(180\\ \\text{m/s}\\): corresponde al tiempo en segundos, no a la rapidez."
+      },
+      "visual": {
+        "kind": "none",
+        "content": ""
+      },
+      "visuals": [],
+      "sourceOrder": 105,
+      "rangeStart": 105,
+      "rangeEnd": 116
+    },
+    {
+      "id": "reactivo-106",
+      "number": 106,
+      "areaId": "fisica",
+      "areaName": "Física",
+      "block": "Tablas y gráficas: leer movimiento y cambios con el tiempo",
+      "baseText": "La siguiente tabla muestra la posición de un carrito en distintos tiempos.",
+      "basePill": null,
+      "prompt": "¿En qué intervalo de tiempo el carrito tuvo la mayor rapidez media?",
+      "options": [
+        {
+          "label": "a",
+          "text": "De 6 s a 8 s"
+        },
+        {
+          "label": "b",
+          "text": "De 0 s a 2 s"
+        },
+        {
+          "label": "c",
+          "text": "De 2 s a 4 s"
+        },
+        {
+          "label": "d",
+          "text": "De 4 s a 6 s"
+        },
+        {
+          "label": "e",
+          "text": "De 0 s a 8 s"
+        }
+      ],
+      "correctOption": "a",
+      "correctOptionText": "De 6 s a 8 s",
+      "hint": "Compara cuánto cambia la posición en cada intervalo de 2 segundos.",
+      "correctArgument": "Calculamos el cambio de posición en cada intervalo:\n\nDe 0 s a 2 s:\n\n\\[\n5 - 0 = 5\\ \\text{m}\n\\]\n\nDe 2 s a 4 s:\n\n\\[\n20 - 5 = 15\\ \\text{m}\n\\]\n\nDe 4 s a 6 s:\n\n\\[\n45 - 20 = 25\\ \\text{m}\n\\]\n\nDe 6 s a 8 s:\n\n\\[\n80 - 45 = 35\\ \\text{m}\n\\]\n\nTodos los intervalos duran 2 segundos, así que el mayor cambio de posición corresponde a la mayor rapidez media. El mayor cambio es de 35 m, entre 6 s y 8 s.",
+      "incorrectArgumentsByOption": {
+        "b": "De 0 s a 2 s: solo avanza 5 m, que es el menor cambio de la tabla.",
+        "c": "De 2 s a 4 s: avanza 15 m, pero no es el mayor cambio.",
+        "d": "De 4 s a 6 s: avanza 25 m, menos que en el intervalo de 6 s a 8 s.",
+        "e": "De 0 s a 8 s: compara todo el recorrido, pero el planteamiento pide el intervalo donde la rapidez media fue mayor."
+      },
+      "visual": {
+        "kind": "table",
+        "position": "base",
+        "hasHorizontalScroll": true,
+        "caption": "La siguiente tabla muestra la posición de un carrito en distintos tiempos.",
+        "headers": [
+          "Tiempo \\(t\\) en segundos",
+          "0",
+          "2",
+          "4",
+          "6",
+          "8"
+        ],
+        "rows": [
+          [
+            "Posición \\(x\\) en metros",
+            "0",
+            "5",
+            "20",
+            "45",
+            "80"
+          ]
+        ]
+      },
+      "visuals": [
+        {
+          "kind": "table",
+          "position": "base",
+          "hasHorizontalScroll": true,
+          "caption": "La siguiente tabla muestra la posición de un carrito en distintos tiempos.",
+          "headers": [
+            "Tiempo \\(t\\) en segundos",
+            "0",
+            "2",
+            "4",
+            "6",
+            "8"
+          ],
+          "rows": [
+            [
+              "Posición \\(x\\) en metros",
+              "0",
+              "5",
+              "20",
+              "45",
+              "80"
+            ]
+          ]
+        },
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/fisica/reactivo-106-grafica-posicion-tiempo.png",
+          "alt": "Física, reactivo 106: Generar apoyo visual de gráfica posición tiempo para interpretar rapidez media por intervalos.",
+          "internalInstructionRemoved": true
+        }
+      ],
+      "sourceOrder": 106,
+      "rangeStart": 105,
+      "rangeEnd": 116
+    },
+    {
+      "id": "reactivo-107",
+      "number": 107,
+      "areaId": "fisica",
+      "areaName": "Física",
+      "block": "Fuerza y aceleración: uso de F = ma en problemas",
+      "baseText": null,
+      "basePill": null,
+      "prompt": "Sobre un carrito de \\(6\\ \\text{kg}\\) actúa una fuerza neta de \\(24\\ \\text{N}\\). ¿Qué aceleración adquiere?",
+      "options": [
+        {
+          "label": "a",
+          "text": "\\(2\\ \\text{m/s}^2\\)"
+        },
+        {
+          "label": "b",
+          "text": "\\(3\\ \\text{m/s}^2\\)"
+        },
+        {
+          "label": "c",
+          "text": "\\(6\\ \\text{m/s}^2\\)"
+        },
+        {
+          "label": "d",
+          "text": "\\(24\\ \\text{m/s}^2\\)"
+        },
+        {
+          "label": "e",
+          "text": "\\(4\\ \\text{m/s}^2\\)"
+        }
+      ],
+      "correctOption": "e",
+      "correctOptionText": "\\(4\\ \\text{m/s}^2\\)",
+      "hint": "Usa la relación \\(F = ma\\) y despeja la aceleración.",
+      "correctArgument": "La relación entre fuerza, masa y aceleración es:\n\n\\[\nF = ma\n\\]\n\nDespejamos la aceleración:\n\n\\[\na = \\frac{F}{m}\n\\]\n\nSustituimos los datos:\n\n\\[\na = \\frac{24\\ \\text{N}}{6\\ \\text{kg}}\n\\]\n\n\\[\na = 4\\ \\text{m/s}^2\n\\]\n\nPor eso la aceleración del carrito es:\n\n\\[\n4\\ \\text{m/s}^2\n\\]",
+      "incorrectArgumentsByOption": {
+        "a": "\\(2\\ \\text{m/s}^2\\): no corresponde a dividir \\(24\\) entre \\(6\\).",
+        "b": "\\(3\\ \\text{m/s}^2\\): resulta de una división incorrecta.",
+        "c": "\\(6\\ \\text{m/s}^2\\): corresponde a la masa dada, no a la aceleración.",
+        "d": "\\(24\\ \\text{m/s}^2\\): corresponde a la fuerza numérica, pero no al resultado de aplicar \\(a = \\frac{F}{m}\\)."
+      },
+      "visual": {
+        "kind": "none",
+        "content": ""
+      },
+      "visuals": [],
+      "sourceOrder": 107,
+      "rangeStart": 105,
+      "rangeEnd": 116
+    },
+    {
+      "id": "reactivo-108",
+      "number": 108,
+      "areaId": "fisica",
+      "areaName": "Física",
+      "block": "Equilibrio: resultante R = 0 en situaciones simples",
+      "baseText": "Una caja está sobre una mesa. Dos personas la jalan hacia la derecha con fuerzas de \\(18\\ \\text{N}\\) y \\(7\\ \\text{N}\\). Para que la caja permanezca en equilibrio, otra persona debe jalarla hacia la izquierda.",
+      "basePill": null,
+      "prompt": "¿Qué fuerza debe aplicarse hacia la izquierda para que la caja esté en equilibrio?",
+      "options": [
+        {
+          "label": "a",
+          "text": "\\(11\\ \\text{N}\\)"
+        },
+        {
+          "label": "b",
+          "text": "\\(25\\ \\text{N}\\)"
+        },
+        {
+          "label": "c",
+          "text": "\\(18\\ \\text{N}\\)"
+        },
+        {
+          "label": "d",
+          "text": "\\(7\\ \\text{N}\\)"
+        },
+        {
+          "label": "e",
+          "text": "\\(30\\ \\text{N}\\)"
+        }
+      ],
+      "correctOption": "b",
+      "correctOptionText": "\\(25\\ \\text{N}\\)",
+      "hint": "Para que haya equilibrio, la suma de fuerzas hacia la derecha debe igualar la fuerza hacia la izquierda.",
+      "correctArgument": "En equilibrio, la fuerza resultante debe ser cero:\n\n\\[\nR = 0\n\\]\n\nPrimero sumamos las fuerzas hacia la derecha:\n\n\\[\n18\\ \\text{N} + 7\\ \\text{N} = 25\\ \\text{N}\n\\]\n\nPara equilibrarlas, se necesita una fuerza igual hacia la izquierda:\n\n\\[\nF = 25\\ \\text{N}\n\\]\n\nPor eso la fuerza requerida es \\(25\\ \\text{N}\\) hacia la izquierda.",
+      "incorrectArgumentsByOption": {
+        "a": "\\(11\\ \\text{N}\\): resulta de restar \\(18 - 7\\), pero las fuerzas dadas van en la misma dirección y deben sumarse.",
+        "c": "\\(18\\ \\text{N}\\): solo iguala una de las fuerzas hacia la derecha, pero deja sin equilibrar la de \\(7\\ \\text{N}\\).",
+        "d": "\\(7\\ \\text{N}\\): solo iguala la fuerza menor, no la suma total.",
+        "e": "\\(30\\ \\text{N}\\): excede la suma de las fuerzas hacia la derecha, por lo que la caja ya no estaría en equilibrio."
+      },
+      "visual": {
+        "kind": "image",
+        "position": "base",
+        "required": true,
+        "src": "assets/fisica/reactivo-108-equilibrio-fuerzas.png",
+        "alt": "Física, reactivo 108: Generar apoyo visual de equilibrio de fuerzas horizontales sobre una caja.",
+        "internalInstructionRemoved": true
+      },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/fisica/reactivo-108-equilibrio-fuerzas.png",
+          "alt": "Física, reactivo 108: Generar apoyo visual de equilibrio de fuerzas horizontales sobre una caja.",
+          "internalInstructionRemoved": true
+        }
+      ],
+      "sourceOrder": 108,
+      "rangeStart": 105,
+      "rangeEnd": 116
+    },
+    {
+      "id": "reactivo-109",
+      "number": 109,
+      "areaId": "fisica",
+      "areaName": "Física",
+      "block": "Calor y temperatura: diferencias y ejemplos en la vida diaria",
+      "baseText": null,
+      "basePill": null,
+      "prompt": "Una cuchara metálica se deja dentro de una taza con agua caliente. Después de unos minutos, el mango de la cuchara también se siente caliente.\n\n¿Qué explicación es la más adecuada?",
+      "options": [
+        {
+          "label": "a",
+          "text": "La temperatura es una sustancia que se mueve por la cuchara."
+        },
+        {
+          "label": "b",
+          "text": "El metal impide por completo el paso de energía."
+        },
+        {
+          "label": "c",
+          "text": "El calor se transfiere del agua caliente hacia la cuchara por conducción."
+        },
+        {
+          "label": "d",
+          "text": "La cuchara produce frío para equilibrar el agua."
+        },
+        {
+          "label": "e",
+          "text": "El agua deja de tener energía cuando toca el metal."
+        }
+      ],
+      "correctOption": "c",
+      "correctOptionText": "El calor se transfiere del agua caliente hacia la cuchara por conducción.",
+      "hint": "Piensa en cómo se transfiere energía térmica a través de un sólido.",
+      "correctArgument": "El calor es energía que se transfiere de un cuerpo con mayor temperatura a otro con menor temperatura. En este caso, la energía térmica pasa del agua caliente a la cuchara metálica y se distribuye por el metal mediante conducción.",
+      "incorrectArgumentsByOption": {
+        "a": "La temperatura es una sustancia que se mueve por la cuchara: la temperatura no es una sustancia, sino una medida relacionada con el movimiento de las partículas.",
+        "b": "El metal impide por completo el paso de energía: los metales suelen conducir bien el calor.",
+        "d": "La cuchara produce frío para equilibrar el agua: la cuchara no produce frío; recibe energía térmica.",
+        "e": "El agua deja de tener energía cuando toca el metal: el agua puede transferir parte de su energía, pero no se queda sin energía."
+      },
+      "visual": {
+        "kind": "none",
+        "content": ""
+      },
+      "visuals": [],
+      "sourceOrder": 109,
+      "rangeStart": 105,
+      "rangeEnd": 116
+    },
+    {
+      "id": "reactivo-110",
+      "number": 110,
+      "areaId": "fisica",
+      "areaName": "Física",
+      "block": "Trabajo y energía: significado de trabajo mecánico",
+      "baseText": null,
+      "basePill": null,
+      "prompt": "Una persona empuja una caja con una fuerza constante de \\(30\\ \\text{N}\\) y la desplaza \\(4\\ \\text{m}\\) en la misma dirección de la fuerza.\n\n¿Cuánto trabajo mecánico realiza?",
+      "options": [
+        {
+          "label": "a",
+          "text": "\\(7.5\\ \\text{J}\\)"
+        },
+        {
+          "label": "b",
+          "text": "\\(26\\ \\text{J}\\)"
+        },
+        {
+          "label": "c",
+          "text": "\\(34\\ \\text{J}\\)"
+        },
+        {
+          "label": "d",
+          "text": "\\(120\\ \\text{J}\\)"
+        },
+        {
+          "label": "e",
+          "text": "\\(300\\ \\text{J}\\)"
+        }
+      ],
+      "correctOption": "d",
+      "correctOptionText": "\\(120\\ \\text{J}\\)",
+      "hint": "Cuando la fuerza y el desplazamiento tienen la misma dirección, el trabajo se calcula multiplicando fuerza por distancia.",
+      "correctArgument": "El trabajo mecánico se calcula con:\n\n\\[\nW = Fd\n\\]\n\nSustituimos los datos:\n\n\\[\nW = 30\\ \\text{N} \\times 4\\ \\text{m}\n\\]\n\n\\[\nW = 120\\ \\text{J}\n\\]\n\nPor eso el trabajo realizado es:\n\n\\[\n120\\ \\text{J}\n\\]",
+      "incorrectArgumentsByOption": {
+        "a": "\\(7.5\\ \\text{J}\\): resulta de dividir \\(30\\) entre \\(4\\), pero el trabajo se calcula multiplicando.",
+        "b": "\\(26\\ \\text{J}\\): se obtiene al restar los datos, operación que no corresponde.",
+        "c": "\\(34\\ \\text{J}\\): se obtiene al sumar los datos, pero el trabajo no se calcula así.",
+        "e": "\\(300\\ \\text{J}\\): multiplica por un valor que no corresponde al desplazamiento dado."
+      },
+      "visual": {
+        "kind": "none",
+        "content": ""
+      },
+      "visuals": [],
+      "sourceOrder": 110,
+      "rangeStart": 105,
+      "rangeEnd": 116
+    },
+    {
+      "id": "reactivo-111",
+      "number": 111,
+      "areaId": "fisica",
+      "areaName": "Física",
+      "block": "Electricidad estática: carga por frotamiento y atracción",
+      "baseText": null,
+      "basePill": null,
+      "prompt": "Después de frotar un globo con el cabello seco, el globo puede atraer pequeños pedazos de papel.\n\n¿Qué fenómeno explica mejor esta situación?",
+      "options": [
+        {
+          "label": "a",
+          "text": "Electricidad estática producida por frotamiento"
+        },
+        {
+          "label": "b",
+          "text": "Magnetismo producido por una pila"
+        },
+        {
+          "label": "c",
+          "text": "Corriente eléctrica en un cable"
+        },
+        {
+          "label": "d",
+          "text": "Reflexión de la luz en el papel"
+        },
+        {
+          "label": "e",
+          "text": "Evaporación del agua del cabello"
+        }
+      ],
+      "correctOption": "a",
+      "correctOptionText": "Electricidad estática producida por frotamiento",
+      "hint": "La fricción puede provocar que un objeto gane o pierda carga eléctrica.",
+      "correctArgument": "Al frotar el globo con el cabello, puede transferirse carga eléctrica entre ambos. Esa acumulación de carga produce electricidad estática, capaz de atraer objetos ligeros como pequeños pedazos de papel.",
+      "incorrectArgumentsByOption": {
+        "b": "Magnetismo producido por una pila: no hay imanes ni corriente de una pila en la situación.",
+        "c": "Corriente eléctrica en un cable: no se menciona un circuito ni flujo continuo de carga.",
+        "d": "Reflexión de la luz en el papel: la luz no explica la atracción de los pedazos de papel.",
+        "e": "Evaporación del agua del cabello: no es el fenómeno que provoca la atracción eléctrica."
+      },
+      "visual": {
+        "kind": "none",
+        "content": ""
+      },
+      "visuals": [],
+      "sourceOrder": 111,
+      "rangeStart": 105,
+      "rangeEnd": 116
+    },
+    {
+      "id": "reactivo-112",
+      "number": 112,
+      "areaId": "fisica",
+      "areaName": "Física",
+      "block": "Magnetismo: brújula y campo magnético terrestre",
+      "baseText": "Una brújula se coloca sobre una mesa lejos de objetos metálicos. Después de moverse un poco, su aguja se orienta aproximadamente en dirección norte sur.",
+      "basePill": null,
+      "prompt": "¿Por qué la aguja de la brújula se orienta de esa manera?",
+      "options": [
+        {
+          "label": "a",
+          "text": "Porque la brújula mide la temperatura del aire."
+        },
+        {
+          "label": "b",
+          "text": "Porque la aguja responde al sonido del ambiente."
+        },
+        {
+          "label": "c",
+          "text": "Porque la gravedad cambia de dirección cada minuto."
+        },
+        {
+          "label": "d",
+          "text": "Porque la luz del Sol empuja la aguja hacia el norte."
+        },
+        {
+          "label": "e",
+          "text": "Porque la aguja imantada interactúa con el campo magnético terrestre."
+        }
+      ],
+      "correctOption": "e",
+      "correctOptionText": "Porque la aguja imantada interactúa con el campo magnético terrestre.",
+      "hint": "La brújula funciona gracias al magnetismo, no por calor, sonido o luz.",
+      "correctArgument": "La aguja de una brújula es un pequeño imán. Como la Tierra tiene un campo magnético, la aguja se orienta aproximadamente en la dirección norte sur al interactuar con ese campo.",
+      "incorrectArgumentsByOption": {
+        "a": "Porque la brújula mide la temperatura del aire: la brújula no mide temperatura; para eso se usa un termómetro.",
+        "b": "Porque la aguja responde al sonido del ambiente: el sonido no orienta la aguja de la brújula.",
+        "c": "Porque la gravedad cambia de dirección cada minuto: la gravedad no cambia así ni explica la orientación norte sur.",
+        "d": "Porque la luz del Sol empuja la aguja hacia el norte: la luz no es la causa del funcionamiento normal de una brújula."
+      },
+      "visual": {
+        "kind": "image",
+        "position": "base",
+        "required": true,
+        "src": "assets/fisica/reactivo-112-brujula.png",
+        "alt": "Física, reactivo 112: Generar apoyo visual de brújula orientada por el campo magnético terrestre.",
+        "internalInstructionRemoved": true
+      },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/fisica/reactivo-112-brujula.png",
+          "alt": "Física, reactivo 112: Generar apoyo visual de brújula orientada por el campo magnético terrestre.",
+          "internalInstructionRemoved": true
+        }
+      ],
+      "sourceOrder": 112,
+      "rangeStart": 105,
+      "rangeEnd": 116
+    },
+    {
+      "id": "reactivo-113",
+      "number": 113,
+      "areaId": "fisica",
+      "areaName": "Física",
+      "block": "Corriente y magnetismo: corriente que genera campo magnético",
+      "baseText": "Un alambre conectado a una pila pasa cerca de una brújula. Cuando se cierra el circuito y circula corriente, la aguja de la brújula se desvía.",
+      "basePill": null,
+      "prompt": "¿Qué muestra mejor este experimento?",
+      "options": [
+        {
+          "label": "a",
+          "text": "Que una brújula solo funciona dentro del agua."
+        },
+        {
+          "label": "b",
+          "text": "Que una corriente eléctrica puede generar un campo magnético."
+        },
+        {
+          "label": "c",
+          "text": "Que la pila enfría el alambre hasta mover la aguja."
+        },
+        {
+          "label": "d",
+          "text": "Que el alambre pierde toda su masa cuando circula corriente."
+        },
+        {
+          "label": "e",
+          "text": "Que el interruptor cambia la gravedad alrededor de la brújula."
+        }
+      ],
+      "correctOption": "b",
+      "correctOptionText": "Que una corriente eléctrica puede generar un campo magnético.",
+      "hint": "Observa qué ocurre cuando empieza a circular corriente por el alambre.",
+      "correctArgument": "Cuando circula corriente por un alambre, se produce un campo magnético alrededor de él. Ese campo puede interactuar con la aguja imantada de la brújula y desviarla.",
+      "incorrectArgumentsByOption": {
+        "a": "Que una brújula solo funciona dentro del agua: la brújula puede funcionar fuera del agua.",
+        "c": "Que la pila enfría el alambre hasta mover la aguja: el movimiento de la aguja se relaciona con magnetismo, no con enfriamiento.",
+        "d": "Que el alambre pierde toda su masa cuando circula corriente: la corriente no implica pérdida total de masa.",
+        "e": "Que el interruptor cambia la gravedad alrededor de la brújula: el interruptor permite o impide el paso de corriente, no modifica la gravedad."
+      },
+      "visual": {
+        "kind": "image",
+        "position": "base",
+        "required": true,
+        "src": "assets/fisica/reactivo-113-corriente-brujula.png",
+        "alt": "Física, reactivo 113: Generar apoyo visual de corriente eléctrica que desvía una brújula.",
+        "internalInstructionRemoved": true
+      },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/fisica/reactivo-113-corriente-brujula.png",
+          "alt": "Física, reactivo 113: Generar apoyo visual de corriente eléctrica que desvía una brújula.",
+          "internalInstructionRemoved": true
+        }
+      ],
+      "sourceOrder": 113,
+      "rangeStart": 105,
+      "rangeEnd": 116
+    },
+    {
+      "id": "reactivo-114",
+      "number": 114,
+      "areaId": "fisica",
+      "areaName": "Física",
+      "block": "Gases: teoría cinética, partículas en movimiento y temperatura",
+      "baseText": null,
+      "basePill": null,
+      "prompt": "Un globo con aire se coloca en agua tibia durante algunos minutos. Después se observa que el globo aumenta ligeramente su tamaño.\n\n¿Cuál explicación se relaciona mejor con la teoría cinética de los gases?",
+      "options": [
+        {
+          "label": "a",
+          "text": "Las partículas del aire se detienen y ocupan menos espacio."
+        },
+        {
+          "label": "b",
+          "text": "El aire se transforma en metal dentro del globo."
+        },
+        {
+          "label": "c",
+          "text": "Al aumentar la temperatura, las partículas del gas se mueven más rápido y chocan más con las paredes del globo."
+        },
+        {
+          "label": "d",
+          "text": "El agua tibia elimina todas las partículas del gas."
+        },
+        {
+          "label": "e",
+          "text": "El globo crece porque la masa del aire se duplica de inmediato."
+        }
+      ],
+      "correctOption": "c",
+      "correctOptionText": "Al aumentar la temperatura, las partículas del gas se mueven más rápido y chocan más con las paredes del globo.",
+      "hint": "Relaciona temperatura con movimiento de partículas.",
+      "correctArgument": "Según la teoría cinética, las partículas de un gas están en movimiento constante. Cuando aumenta la temperatura, se mueven más rápido y chocan con mayor frecuencia e intensidad contra las paredes del recipiente. Por eso el globo puede expandirse.",
+      "incorrectArgumentsByOption": {
+        "a": "Las partículas del aire se detienen y ocupan menos espacio: ocurre lo contrario, al calentarse se mueven más.",
+        "b": "El aire se transforma en metal dentro del globo: no hay cambio de sustancia de ese tipo.",
+        "d": "El agua tibia elimina todas las partículas del gas: el aire sigue dentro del globo.",
+        "e": "El globo crece porque la masa del aire se duplica de inmediato: el aumento de tamaño se explica por el movimiento de partículas, no por duplicación inmediata de masa."
+      },
+      "visual": {
+        "kind": "none",
+        "content": ""
+      },
+      "visuals": [],
+      "sourceOrder": 114,
+      "rangeStart": 105,
+      "rangeEnd": 116
+    },
+    {
+      "id": "reactivo-115",
+      "number": 115,
+      "areaId": "fisica",
+      "areaName": "Física",
+      "block": "Ondas: transmisión de energía",
+      "baseText": "Una estudiante mueve hacia arriba y abajo un extremo de una cuerda tensa. Se observa una perturbación que avanza por la cuerda hasta llegar al otro extremo.",
+      "basePill": null,
+      "prompt": "¿Qué se transmite principalmente mediante la onda que avanza por la cuerda?",
+      "options": [
+        {
+          "label": "a",
+          "text": "Energía"
+        },
+        {
+          "label": "b",
+          "text": "Masa de toda la cuerda"
+        },
+        {
+          "label": "c",
+          "text": "Aire caliente"
+        },
+        {
+          "label": "d",
+          "text": "Carga eléctrica permanente"
+        },
+        {
+          "label": "e",
+          "text": "Luz visible"
+        }
+      ],
+      "correctOption": "a",
+      "correctOptionText": "Energía",
+      "hint": "La cuerda vibra, pero no viaja completa de un extremo al otro.",
+      "correctArgument": "Una onda transporta energía de un punto a otro sin trasladar toda la materia del medio. En este caso, la cuerda vibra, pero lo que se propaga a lo largo de ella es la perturbación que transporta energía.",
+      "incorrectArgumentsByOption": {
+        "b": "Masa de toda la cuerda: la cuerda no se mueve completa de un extremo al otro.",
+        "c": "Aire caliente: no es lo que se propaga por la cuerda.",
+        "d": "Carga eléctrica permanente: no corresponde al fenómeno descrito.",
+        "e": "Luz visible: la situación describe una onda mecánica en una cuerda, no una onda luminosa."
+      },
+      "visual": {
+        "kind": "image",
+        "position": "base",
+        "required": true,
+        "src": "assets/fisica/reactivo-115-onda-cuerda.png",
+        "alt": "Física, reactivo 115: Generar apoyo visual de una onda transversal en una cuerda.",
+        "internalInstructionRemoved": true
+      },
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/fisica/reactivo-115-onda-cuerda.png",
+          "alt": "Física, reactivo 115: Generar apoyo visual de una onda transversal en una cuerda.",
+          "internalInstructionRemoved": true
+        }
+      ],
+      "sourceOrder": 115,
+      "rangeStart": 105,
+      "rangeEnd": 116
+    },
+    {
+      "id": "reactivo-116",
+      "number": 116,
+      "areaId": "fisica",
+      "areaName": "Física",
+      "block": "Luz visible: relación entre longitud de onda y color",
+      "baseText": null,
+      "basePill": null,
+      "prompt": "En la luz visible, el color rojo tiene una longitud de onda mayor que el color azul.\n\nCon base en esta relación, ¿cuál afirmación es correcta?",
+      "options": [
+        {
+          "label": "a",
+          "text": "La luz azul tiene siempre mayor longitud de onda que la roja."
+        },
+        {
+          "label": "b",
+          "text": "La luz roja tiene mayor longitud de onda que la azul."
+        },
+        {
+          "label": "c",
+          "text": "Todos los colores visibles tienen exactamente la misma longitud de onda."
+        },
+        {
+          "label": "d",
+          "text": "La longitud de onda no se relaciona con el color."
+        },
+        {
+          "label": "e",
+          "text": "La luz visible no forma parte de las ondas electromagnéticas."
+        }
+      ],
+      "correctOption": "b",
+      "correctOptionText": "La luz roja tiene mayor longitud de onda que la azul.",
+      "hint": "Compara solo la longitud de onda entre rojo y azul dentro del espectro visible.",
+      "correctArgument": "Dentro del espectro visible, los colores se relacionan con diferentes longitudes de onda. El rojo tiene una longitud de onda mayor que el azul, por eso la afirmación correcta es que la luz roja tiene mayor longitud de onda.",
+      "incorrectArgumentsByOption": {
+        "a": "La luz azul tiene siempre mayor longitud de onda que la roja: invierte la relación indicada.",
+        "c": "Todos los colores visibles tienen exactamente la misma longitud de onda: si fueran iguales, no se distinguirían por color.",
+        "d": "La longitud de onda no se relaciona con el color: en la luz visible, el color sí se relaciona con la longitud de onda.",
+        "e": "La luz visible no forma parte de las ondas electromagnéticas: la luz visible sí pertenece al espectro electromagnético."
+      },
+      "visual": {
+        "kind": "none",
+        "content": ""
+      },
+      "visuals": [],
+      "sourceOrder": 116,
+      "rangeStart": 105,
+      "rangeEnd": 116
     },
     {
       "id": "reactivo-117",
@@ -5689,6 +6621,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 117,
       "rangeStart": 117,
       "rangeEnd": 128
@@ -5738,6 +6671,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 118,
       "rangeStart": 117,
       "rangeEnd": 128
@@ -5787,6 +6721,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 119,
       "rangeStart": 117,
       "rangeEnd": 128
@@ -5836,6 +6771,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 120,
       "rangeStart": 117,
       "rangeEnd": 128
@@ -5885,6 +6821,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 121,
       "rangeStart": 117,
       "rangeEnd": 128
@@ -5934,6 +6871,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 122,
       "rangeStart": 117,
       "rangeEnd": 128
@@ -5983,6 +6921,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 123,
       "rangeStart": 117,
       "rangeEnd": 128
@@ -6032,6 +6971,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 124,
       "rangeStart": 117,
       "rangeEnd": 128
@@ -6081,6 +7021,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 125,
       "rangeStart": 117,
       "rangeEnd": 128
@@ -6130,6 +7071,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 126,
       "rangeStart": 117,
       "rangeEnd": 128
@@ -6179,6 +7121,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 127,
       "rangeStart": 117,
       "rangeEnd": 128
@@ -6228,6 +7171,7 @@ window.IFR_APP_DATA = {
         "kind": "none",
         "content": ""
       },
+      "visuals": [],
       "sourceOrder": 128,
       "rangeStart": 117,
       "rangeEnd": 128

@@ -145,6 +145,27 @@ function assetAlt(area, number, usage) {
   return `${area}, reactivo ${number}: apoyo visual del planteamiento`;
 }
 
+function buildImageVisualFromInstruction(instruction, areaName, number) {
+  return {
+    kind: 'image',
+    position: 'base',
+    required: true,
+    src: instruction.suggestedDestination,
+    alt: assetAlt(areaName || instruction.area, number, instruction.usage),
+    internalInstructionRemoved: true
+  };
+}
+
+function getExerciseVisuals(exercise) {
+  if (Array.isArray(exercise.visuals)) {
+    return exercise.visuals.filter((visual) => visual && visual.kind && visual.kind !== 'none');
+  }
+  if (exercise.visual && exercise.visual.kind && exercise.visual.kind !== 'none') {
+    return [exercise.visual];
+  }
+  return [];
+}
+
 function extractInstructionBlocks(lines) {
   const cleaned = [];
   const instructions = [];
@@ -355,20 +376,14 @@ function parseReactivoBlock(blockLines) {
     }, {});
 
   const expectedArea = getExpectedAreaByNumber(number);
-  const imageInstruction = base.instructions.find((instruction) => instruction.suggestedDestination);
-  const visual = base.tableVisual || (imageInstruction ? {
-    kind: 'image',
-    position: 'base',
-    required: true,
-    src: imageInstruction.suggestedDestination,
-    alt: assetAlt(areaName || imageInstruction.area, number, imageInstruction.usage),
-    internalInstructionRemoved: true,
-    instruction: {
-      tool: imageInstruction.tool,
-      imageType: imageInstruction.imageType,
-      validation: imageInstruction.validation
-    }
-  } : { kind: 'none', content: '' });
+  const imageVisuals = base.instructions
+    .filter((instruction) => instruction.suggestedDestination)
+    .map((instruction) => buildImageVisualFromInstruction(instruction, areaName, number));
+  const visuals = [
+    ...(base.tableVisual ? [base.tableVisual] : []),
+    ...imageVisuals
+  ];
+  const visual = visuals[0] || { kind: 'none', content: '' };
 
   return {
     id: `reactivo-${number}`,
@@ -386,6 +401,7 @@ function parseReactivoBlock(blockLines) {
     correctArgument,
     incorrectArgumentsByOption: incorrectArguments,
     visual,
+    visuals,
     sourceOrder: number,
     rangeStart: expectedArea ? expectedArea.rangeStart : null,
     rangeEnd: expectedArea ? expectedArea.rangeEnd : null
@@ -540,19 +556,21 @@ function validateExercises(exercises) {
       errors.push(`ERROR: Se detectó una instrucción interna en contenido visible del reactivo ${exercise.number}. Debe filtrarse antes de renderizar.`);
     }
 
-    if (exercise.visual && exercise.visual.kind === 'image' && exercise.visual.required) {
-      const assetPath = path.join(ROOT, exercise.visual.src);
-      if (!fs.existsSync(assetPath)) {
-        errors.push(`ERROR: El reactivo ${exercise.number} requiere imagen, pero no se encontró el asset en ${exercise.visual.src}.`);
+    for (const visual of getExerciseVisuals(exercise)) {
+      if (visual.kind === 'image' && visual.required) {
+        const assetPath = path.join(ROOT, visual.src);
+        if (!fs.existsSync(assetPath)) {
+          errors.push(`ERROR: El reactivo ${exercise.number} requiere imagen, pero no se encontró el asset en ${visual.src}.`);
+        }
       }
-    }
 
-    if (exercise.visual && exercise.visual.kind === 'table') {
-      if (!exercise.visual.hasHorizontalScroll) {
-        errors.push(`ERROR: El reactivo ${exercise.number} contiene tabla marcada para desplazamiento horizontal, pero no fue envuelta en contenedor responsive.`);
-      }
-      if (!exercise.visual.headers.length || !exercise.visual.rows.length) {
-        errors.push(`ERROR: El reactivo ${exercise.number} contiene tabla marcada, pero no se pudo leer como tabla Markdown.`);
+      if (visual.kind === 'table') {
+        if (!visual.hasHorizontalScroll) {
+          errors.push(`ERROR: El reactivo ${exercise.number} contiene tabla marcada para desplazamiento horizontal, pero no fue envuelta en contenedor responsive.`);
+        }
+        if (!visual.headers.length || !visual.rows.length) {
+          errors.push(`ERROR: El reactivo ${exercise.number} contiene tabla marcada, pero no se pudo leer como tabla Markdown.`);
+        }
       }
     }
   }
@@ -584,12 +602,13 @@ function getMissingNumbers(exercises) {
 
 function getMissingAssets(exercises) {
   return exercises
-    .filter((exercise) => exercise.visual && exercise.visual.kind === 'image' && exercise.visual.required)
-    .filter((exercise) => !fs.existsSync(path.join(ROOT, exercise.visual.src)))
-    .map((exercise) => ({
-      number: exercise.number,
-      src: exercise.visual.src
-    }));
+    .flatMap((exercise) => getExerciseVisuals(exercise)
+      .filter((visual) => visual.kind === 'image' && visual.required)
+      .filter((visual) => !fs.existsSync(path.join(ROOT, visual.src)))
+      .map((visual) => ({
+        number: exercise.number,
+        src: visual.src
+      })));
 }
 
 function isAllowedPartialError(error) {
@@ -604,31 +623,54 @@ function isAllowedPartialError(error) {
 }
 
 function prepareExercisesForOutput(exercises, allowPartial) {
+  const prepareVisual = (visual) => {
+    if (
+      allowPartial
+      && visual
+      && visual.kind === 'image'
+      && visual.required
+      && !fs.existsSync(path.join(ROOT, visual.src))
+    ) {
+      return {
+        kind: 'pending-image',
+        position: visual.position || 'base',
+        required: true,
+        src: visual.src,
+        alt: visual.alt,
+        content: `Apoyo visual pendiente: ${visual.src}`
+      };
+    }
+    return visual;
+  };
+
   return [...exercises]
     .sort((a, b) => a.number - b.number)
     .map((exercise) => {
-      const visual = exercise.visual;
-      if (
-        allowPartial
-        && visual
-        && visual.kind === 'image'
-        && visual.required
-        && !fs.existsSync(path.join(ROOT, visual.src))
-      ) {
-        return {
-          ...exercise,
-          visual: {
-            kind: 'pending-image',
-            position: visual.position || 'base',
-            required: true,
-            src: visual.src,
-            alt: visual.alt,
-            content: `Apoyo visual pendiente: ${visual.src}`
-          }
-        };
-      }
-      return exercise;
+      const visuals = getExerciseVisuals(exercise).map(prepareVisual);
+      return {
+        ...exercise,
+        visual: visuals[0] || { kind: 'none', content: '' },
+        visuals
+      };
     });
+}
+
+function buildContentStatusMessage(allowPartial, missingNumbers, missingAssets) {
+  if (!allowPartial) return 'Contenido completo validado.';
+
+  if (missingNumbers.length && missingAssets.length) {
+    return 'Contenido disponible para revisión interna: faltan reactivos y assets visuales obligatorios.';
+  }
+
+  if (missingNumbers.length) {
+    return 'Contenido disponible para revisión interna: faltan reactivos obligatorios del examen completo.';
+  }
+
+  if (missingAssets.length) {
+    return 'Contenido disponible para revisión interna: faltan assets visuales obligatorios.';
+  }
+
+  return 'Contenido disponible para revisión interna.';
 }
 
 function buildData(exercises, validation, allowPartial = false) {
@@ -651,9 +693,7 @@ function buildData(exercises, validation, allowPartial = false) {
       contentStatus: {
         partial: allowPartial,
         label: allowPartial ? 'Revisión interna' : 'Completo',
-        message: allowPartial
-          ? 'Contenido disponible para revisión interna: faltan Física 105-116 y assets visuales obligatorios.'
-          : 'Contenido completo validado.',
+        message: buildContentStatusMessage(allowPartial, missingNumbers, missingAssets),
         missingNumbers,
         missingAssets
       }

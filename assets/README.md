@@ -1,10 +1,16 @@
-# Assets de Examen simulación 2
+# Assets de la simulación 2
 
-Esta carpeta reserva la estructura de apoyos visuales de la segunda evaluación ECOEMS IFR.
+Los assets visuales obligatorios de la simulación 2 están generados como PNG estables, por carpeta temática.
 
-No se deben reutilizar imágenes de la simulación 1. Los assets finales deben generarse a partir de las instrucciones internas del archivo `Examen simulación 2.txt` y validarse antes de publicar.
+## Generación
 
-Assets pendientes detectados:
+Script reproducible:
+
+```powershell
+python tools/generate_exam_assets.py
+```
+
+## Assets actuales
 
 - `assets/habilidad-matematica/reactivo-05-serie-cuadricula.png`
 - `assets/habilidad-matematica/reactivo-06-cruces-mosaicos.png`
@@ -17,5 +23,10 @@ Assets pendientes detectados:
 - `assets/matematicas/reactivo-73-grafica-consumo-agua.png`
 - `assets/matematicas/reactivo-74-angulos-alternos-internos.png`
 - `assets/geografia/reactivo-94-coordenadas-p.png`
+- `assets/fisica/reactivo-106-grafica-posicion-tiempo.png`
+- `assets/fisica/reactivo-108-equilibrio-fuerzas.png`
+- `assets/fisica/reactivo-112-brujula.png`
+- `assets/fisica/reactivo-113-corriente-brujula.png`
+- `assets/fisica/reactivo-115-onda-cuerda.png`
 
-Física puede agregar más assets cuando el paquete de reactivos 105 al 116 sea entregado.
+No deben sustituirse por assets de la simulación 1.
