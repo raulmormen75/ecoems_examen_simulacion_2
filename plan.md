@@ -32,7 +32,13 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
    - Reactivos 3 y 4 convertidos a tablas visuales.
    - QA reforzada contra artefactos LaTeX o Markdown visibles.
 
-6. Cerrar en GitHub.
+6. Ejecutar depuración de texto en reactivos con imagen.
+   - Reactivo 5 sin bloque descriptivo redundante de figuras.
+   - Reactivos con imagen revisados para mostrar instrucción u objetivo visible.
+   - Opciones visuales de los reactivos 5, 7 y 8 compactadas para no duplicar la imagen.
+   - Textos alternativos de imágenes ajustados para no conservar frases de generación.
+
+7. Cerrar en GitHub.
    - Commit y push a `main` después de QA.
 
 ## Criterios de aceptación actuales
@@ -43,6 +49,9 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
 - Assets obligatorios existentes.
 - QA automatizada sin errores.
 - Sin artefactos tipo LaTeX o Markdown en contenido visible para el alumno.
+- Reactivos con imagen revisados sin descripciones redundantes en el texto base visible.
+- Opciones visuales compactas cuando la imagen ya muestra las alternativas.
+- Textos alternativos de imágenes sin instrucciones de generación.
 - Revisión local en navegador realizada.
 - Documentación actualizada.
 

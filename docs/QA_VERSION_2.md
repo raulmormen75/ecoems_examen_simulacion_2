@@ -48,6 +48,9 @@ Validó:
 - Assets existentes.
 - Tablas con desplazamiento horizontal.
 - Ausencia de artefactos visibles tipo LaTeX o Markdown en planteamientos, opciones, pistas, argumentos y celdas de tablas.
+- Textos base breves en reactivos con imagen revisados: 5, 6, 7, 8, 9, 10, 44, 73, 74, 94, 106, 108 y 112.
+- Opciones visuales compactas en reactivos 5, 7 y 8.
+- Textos alternativos de imágenes sin frases de generación ni instrucciones internas.
 - Distribución de respuestas dentro de rango.
 - Sin tres respuestas iguales consecutivas.
 - Sin instrucciones internas en `exam-data.js`.
@@ -81,7 +84,9 @@ Validado:
 - Reactivo 1 se muestra como reactivo activo.
 - Reactivos 3 y 4 muestran tablas visuales, no pipes Markdown en el planteamiento.
 - Reactivos numéricos representativos muestran operaciones limpias sin `\(`, `\[`, `\frac`, `\text{}` ni comandos similares.
-- Reactivo 5 carga imagen real en vista móvil.
+- Reactivo 5 carga imagen real en vista móvil y ya no muestra el bloque descriptivo de «Figura 1» a «Figura 4».
+- Reactivos 5, 7 y 8 muestran opciones visuales compactas A-E, no matrices o descripciones largas duplicadas.
+- Reactivos con imagen representativos muestran una instrucción breve u objetivo de resolución, no una descripción redundante de la imagen.
 
 ## Evidencia
 

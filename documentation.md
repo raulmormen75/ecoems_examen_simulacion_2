@@ -15,6 +15,9 @@ El contenido ya está completo: 128 reactivos, 10 áreas y Física integrada del
 - Las píldoras visuales se derivan del TXT.
 - Las tablas marcadas se convierten en tablas renderizables con desplazamiento horizontal.
 - Los planteamientos y argumentos de áreas numéricas deben mostrarse con notación escolar limpia, sin sintaxis tipo LaTeX o Markdown visible para el alumno.
+- En reactivos con apoyo visual, el texto base visible debe funcionar como instrucción u objetivo; las descripciones largas de la imagen se reservan para el apoyo visual o el texto alternativo.
+- Cuando las opciones ya están representadas en la imagen, el texto visible de las opciones puede compactarse como «Opción visual A-E».
+- Los textos alternativos de imágenes deben ser útiles para el alumno y no conservar frases internas de generación.
 - El nombre de descarga queda como `resultado-ecoems-ifr-simulacion-2.png`.
 
 ## Comandos
@@ -29,7 +32,7 @@ python -m http.server 4173
 
 `node build-exam-data.js` generó `exam-data.js` con 128 reactivos y 10 áreas.
 
-`node qa/run-exam-qa.js` validó datos, opciones, pistas, argumentos, assets, distribución de respuestas, ausencia de contenido interno en `exam-data.js` y ausencia de artefactos LaTeX/Markdown en textos visibles.
+`node qa/run-exam-qa.js` validó datos, opciones, pistas, argumentos, assets, distribución de respuestas, ausencia de contenido interno en `exam-data.js`, ausencia de artefactos LaTeX/Markdown en textos visibles, textos base breves en reactivos con imagen revisados y textos alternativos sin frases de generación.
 
 Validación en navegador local:
 
@@ -39,7 +42,8 @@ Validación en navegador local:
 - No aparece el panel de advertencia sobre refrescar página.
 - Inicio de examen funcional.
 - Reactivos 3 y 4 con tablas visuales en lugar de tablas Markdown crudas.
-- Reactivo 5 carga imagen real en móvil.
+- Reactivo 5 carga imagen real en móvil y muestra una instrucción breve, sin el bloque descriptivo de figuras.
+- Reactivos con imagen revisados mantienen objetivo de trabajo visible y assets reales.
 
 ## Siguiente hito
 

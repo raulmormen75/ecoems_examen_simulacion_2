@@ -51,6 +51,25 @@ const FORBIDDEN_STUDENT_MARKUP_PATTERNS = [
   ['salto HTML <br>', /<br\s*\/?>/i],
   ['espacio HTML &nbsp;', /&nbsp;/i]
 ];
+const EXPECTED_VISUAL_OBJECTIVE_BASE_TEXTS = new Map([
+  [5, 'Observa la serie. Identifica el patrón de movimiento del punto y del triángulo.'],
+  [6, 'Observa la serie de cruces. Identifica cómo aumenta la cantidad de mosaicos.'],
+  [7, 'Observa la figura original y aplica un giro de 90° en sentido horario.'],
+  [8, 'Observa la figura original y aplica un giro de 180°.'],
+  [9, 'Observa la cuadrícula y cuenta todos los cuadrados posibles.'],
+  [10, 'Observa la figura y cuenta todos los triángulos posibles.'],
+  [44, 'Observa los modelos A, B y C. Clasifícalos según el tipo de partículas que muestran.'],
+  [73, 'Observa la gráfica y compara los cambios entre días consecutivos.'],
+  [74, 'Observa el diagrama e identifica el par de ángulos alternos internos.'],
+  [94, 'Observa el mapa y ubica el punto P según su latitud y longitud.'],
+  [106, 'Observa la tabla y la gráfica. Compara la rapidez media del carrito en cada intervalo.'],
+  [108, 'Observa el diagrama de fuerzas sobre la caja y calcula la fuerza necesaria para mantener el equilibrio.'],
+  [112, 'Observa la orientación de la aguja de la brújula.']
+]);
+const EXPECTED_PROMPTS_BY_EXERCISE = new Map([
+  [44, 'Con base en los modelos, ¿cómo se clasifican correctamente A, B y C?']
+]);
+const EXPECTED_VISUAL_OPTION_EXERCISES = new Set([5, 7, 8]);
 
 function log(message) {
   console.log(`[qa-v2] ${message}`);
@@ -211,9 +230,43 @@ function validateData(data, { partial = false } = {}) {
       }
     }
 
+    if (EXPECTED_VISUAL_OBJECTIVE_BASE_TEXTS.has(exercise.number)) {
+      assert.equal(
+        exercise.baseText,
+        EXPECTED_VISUAL_OBJECTIVE_BASE_TEXTS.get(exercise.number),
+        `Reactivo ${exercise.number}: el texto base debe ser una instrucción breve, no una descripción redundante de la imagen.`
+      );
+    }
+
+    if (EXPECTED_PROMPTS_BY_EXERCISE.has(exercise.number)) {
+      assert.equal(
+        exercise.prompt,
+        EXPECTED_PROMPTS_BY_EXERCISE.get(exercise.number),
+        `Reactivo ${exercise.number}: planteamiento esperado no coincide.`
+      );
+    }
+
+    if (EXPECTED_VISUAL_OPTION_EXERCISES.has(exercise.number)) {
+      assert.deepEqual(
+        exercise.options.map((option) => option.text),
+        LETTERS.map((letter) => `Opción visual ${letter.toUpperCase()}`),
+        `Reactivo ${exercise.number}: las opciones visuales deben quedar compactas y no duplicar la imagen.`
+      );
+      assert.equal(
+        exercise.correctOptionText,
+        `Opción visual ${exercise.correctOption.toUpperCase()}`,
+        `Reactivo ${exercise.number}: texto de respuesta correcta visual no coincide.`
+      );
+    }
+
     for (const visual of getExerciseVisuals(exercise)) {
       if (visual.kind === 'image' && visual.required) {
         assert.ok(visual.alt, `Reactivo ${exercise.number}: imagen sin texto alternativo.`);
+        assert.equal(
+          /Generar apoyo visual|GPT-Image|imagegen|Destino sugerido/i.test(visual.alt),
+          false,
+          `Reactivo ${exercise.number}: texto alternativo de imagen conserva instrucciones de generación.`
+        );
         assert.ok(fs.existsSync(path.join(ROOT, visual.src)), `Reactivo ${exercise.number}: asset faltante ${visual.src}.`);
       }
 

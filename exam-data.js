@@ -408,33 +408,33 @@ window.IFR_APP_DATA = {
       "areaId": "habilidad-matematica",
       "areaName": "Habilidad matemática",
       "block": "Figuras en secuencia",
-      "baseText": "Serie de figuras en cuadrícula 3 × 3.\n\nFigura 1:\nPunto negro en esquina superior izquierda.\nTriángulo en el centro.\n\nFigura 2:\nPunto negro en casilla superior central.\nTriángulo en casilla inferior central.\n\nFigura 3:\nPunto negro en esquina superior derecha.\nTriángulo en el centro.\n\nFigura 4:\nPunto negro en casilla central derecha.\nTriángulo en casilla inferior central.",
+      "baseText": "Observa la serie. Identifica el patrón de movimiento del punto y del triángulo.",
       "basePill": null,
       "prompt": "¿Cuál es la figura que continúa la serie?",
       "options": [
         {
           "label": "a",
-          "text": "Cuadrícula 3 × 3 con punto negro en esquina inferior izquierda y triángulo en el centro."
+          "text": "Opción visual A"
         },
         {
           "label": "b",
-          "text": "Cuadrícula 3 × 3 con punto negro en casilla central derecha y triángulo en casilla inferior central."
+          "text": "Opción visual B"
         },
         {
           "label": "c",
-          "text": "Cuadrícula 3 × 3 con punto negro en esquina inferior derecha y triángulo en el centro."
+          "text": "Opción visual C"
         },
         {
           "label": "d",
-          "text": "Cuadrícula 3 × 3 con punto negro en esquina superior derecha y triángulo en casilla inferior central."
+          "text": "Opción visual D"
         },
         {
           "label": "e",
-          "text": "Cuadrícula 3 × 3 con punto negro en esquina inferior derecha y triángulo en casilla inferior central."
+          "text": "Opción visual E"
         }
       ],
       "correctOption": "c",
-      "correctOptionText": "Cuadrícula 3 × 3 con punto negro en esquina inferior derecha y triángulo en el centro.",
+      "correctOptionText": "Opción visual C",
       "hint": "Observa dos cambios al mismo tiempo: el punto se mueve por el contorno y el triángulo alterna entre dos posiciones.",
       "correctArgument": "El punto negro se mueve una posición por el contorno de la cuadrícula en sentido horario:\nesquina superior izquierda, superior centro, esquina superior derecha, centro derecha, esquina inferior derecha.\n\nAl mismo tiempo, el triángulo alterna entre el centro y la casilla inferior central:\ncentro, inferior central, centro, inferior central, centro.\n\nPor eso la siguiente figura debe tener el punto negro en la esquina inferior derecha y el triángulo en el centro.",
       "incorrectArgumentsByOption": {
@@ -448,7 +448,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/habilidad-matematica/reactivo-05-serie-cuadricula.png",
-        "alt": "Habilidad matemática, reactivo 5: Generar apoyo visual de serie de figuras en cuadrícula 3 × 3 y cinco opciones.",
+        "alt": "Habilidad matemática, reactivo 5: Serie visual en cuadrícula 3 × 3. Figuras de referencia: el punto avanza por el contorno en sentido horario y el triángulo alterna centro e inferior central. Opciones A-E muestran posibles continuaciones sin marcar la respuesta.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -457,7 +457,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/habilidad-matematica/reactivo-05-serie-cuadricula.png",
-          "alt": "Habilidad matemática, reactivo 5: Generar apoyo visual de serie de figuras en cuadrícula 3 × 3 y cinco opciones.",
+          "alt": "Habilidad matemática, reactivo 5: Serie visual en cuadrícula 3 × 3. Figuras de referencia: el punto avanza por el contorno en sentido horario y el triángulo alterna centro e inferior central. Opciones A-E muestran posibles continuaciones sin marcar la respuesta.",
           "internalInstructionRemoved": true
         }
       ],
@@ -471,7 +471,7 @@ window.IFR_APP_DATA = {
       "areaId": "habilidad-matematica",
       "areaName": "Habilidad matemática",
       "block": "Figuras en secuencia",
-      "baseText": "Serie de figuras hechas con mosaicos cuadrados.\n\nFigura 1:\nCruz formada por 5 mosaicos.\n\nFigura 2:\nCruz formada por 9 mosaicos.\n\nFigura 3:\nCruz formada por 13 mosaicos.\n\nFigura 4:\nCruz formada por 17 mosaicos.",
+      "baseText": "Observa la serie de cruces. Identifica cómo aumenta la cantidad de mosaicos.",
       "basePill": null,
       "prompt": "Si la regla de crecimiento se mantiene, ¿cuántos mosaicos tendrá la figura 6?",
       "options": [
@@ -511,7 +511,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/habilidad-matematica/reactivo-06-cruces-mosaicos.png",
-        "alt": "Habilidad matemática, reactivo 6: Generar apoyo visual de una serie de cruces formadas con mosaicos cuadrados.",
+        "alt": "Habilidad matemática, reactivo 6: Serie de cruces formadas con mosaicos cuadrados para identificar el crecimiento de la figura.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -520,7 +520,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/habilidad-matematica/reactivo-06-cruces-mosaicos.png",
-          "alt": "Habilidad matemática, reactivo 6: Generar apoyo visual de una serie de cruces formadas con mosaicos cuadrados.",
+          "alt": "Habilidad matemática, reactivo 6: Serie de cruces formadas con mosaicos cuadrados para identificar el crecimiento de la figura.",
           "internalInstructionRemoved": true
         }
       ],
@@ -534,33 +534,33 @@ window.IFR_APP_DATA = {
       "areaId": "habilidad-matematica",
       "areaName": "Habilidad matemática",
       "block": "Giros de figuras, rotación de 90°",
-      "baseText": "Figura original en cuadrícula 3 × 3:\n\nFila 1: ▲, □, vacío\nFila 2: ●, vacío, ■\nFila 3: vacío, ○, vacío",
+      "baseText": "Observa la figura original y aplica un giro de 90° en sentido horario.",
       "basePill": null,
       "prompt": "Selecciona la opción que representa la figura después de girarla 90° en el sentido de las manecillas del reloj.",
       "options": [
         {
           "label": "a",
-          "text": "Fila 1: vacío, ▲, ●\nFila 2: □, vacío, ○\nFila 3: vacío, ■, vacío"
+          "text": "Opción visual A"
         },
         {
           "label": "b",
-          "text": "Fila 1: vacío, ○, vacío\nFila 2: ■, vacío, ●\nFila 3: vacío, □, ▲"
+          "text": "Opción visual B"
         },
         {
           "label": "c",
-          "text": "Fila 1: ▲, □, vacío\nFila 2: ●, vacío, ■\nFila 3: vacío, ○, vacío"
+          "text": "Opción visual C"
         },
         {
           "label": "d",
-          "text": "Fila 1: vacío, ■, vacío\nFila 2: □, vacío, ○\nFila 3: ▲, ●, vacío"
+          "text": "Opción visual D"
         },
         {
           "label": "e",
-          "text": "Fila 1: vacío, ●, ▲\nFila 2: ○, vacío, □\nFila 3: vacío, ■, vacío"
+          "text": "Opción visual E"
         }
       ],
       "correctOption": "e",
-      "correctOptionText": "Fila 1: vacío, ●, ▲\nFila 2: ○, vacío, □\nFila 3: vacío, ■, vacío",
+      "correctOptionText": "Opción visual E",
       "hint": "Al girar 90° a la derecha, la columna izquierda de la figura original se convierte en la fila superior.",
       "correctArgument": "En una rotación de 90° en sentido horario, cada elemento cambia de posición así:\n\nEl triángulo que estaba arriba a la izquierda pasa arriba a la derecha.\nEl círculo sólido que estaba al centro izquierda pasa arriba al centro.\nEl círculo vacío que estaba abajo al centro pasa al centro izquierda.\nEl cuadrado vacío que estaba arriba al centro pasa al centro derecha.\nEl cuadrado sólido que estaba al centro derecha pasa abajo al centro.\n\nEsa distribución coincide con la opción e).",
       "incorrectArgumentsByOption": {
@@ -574,7 +574,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/habilidad-matematica/reactivo-07-rotacion-90.png",
-        "alt": "Habilidad matemática, reactivo 7: Generar apoyo visual de rotación de figura 90° en sentido de las manecillas del reloj.",
+        "alt": "Habilidad matemática, reactivo 7: Figura original y cinco opciones en cuadrícula 3 × 3 para elegir la rotación de 90° en sentido horario. La imagen muestra la figura inicial, las opciones A-E y no marca la respuesta.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -583,7 +583,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/habilidad-matematica/reactivo-07-rotacion-90.png",
-          "alt": "Habilidad matemática, reactivo 7: Generar apoyo visual de rotación de figura 90° en sentido de las manecillas del reloj.",
+          "alt": "Habilidad matemática, reactivo 7: Figura original y cinco opciones en cuadrícula 3 × 3 para elegir la rotación de 90° en sentido horario. La imagen muestra la figura inicial, las opciones A-E y no marca la respuesta.",
           "internalInstructionRemoved": true
         }
       ],
@@ -597,33 +597,33 @@ window.IFR_APP_DATA = {
       "areaId": "habilidad-matematica",
       "areaName": "Habilidad matemática",
       "block": "Giros de figuras, rotación de 180°",
-      "baseText": "Figura original en arreglo de 2 filas y 4 columnas:\n\nFila 1: ★, ○, vacío, △\nFila 2: ■, vacío, ●, □",
+      "baseText": "Observa la figura original y aplica un giro de 180°.",
       "basePill": null,
       "prompt": "¿Cuál opción representa la figura después de girarla 180°?",
       "options": [
         {
           "label": "a",
-          "text": "Fila 1: ★, ○, vacío, △\nFila 2: ■, vacío, ●, □"
+          "text": "Opción visual A"
         },
         {
           "label": "b",
-          "text": "Fila 1: □, ●, vacío, ■\nFila 2: △, vacío, ○, ★"
+          "text": "Opción visual B"
         },
         {
           "label": "c",
-          "text": "Fila 1: ■, vacío, ●, □\nFila 2: ★, ○, vacío, △"
+          "text": "Opción visual C"
         },
         {
           "label": "d",
-          "text": "Fila 1: △, vacío, ○, ★\nFila 2: □, ●, vacío, ■"
+          "text": "Opción visual D"
         },
         {
           "label": "e",
-          "text": "Fila 1: □, vacío, ●, ■\nFila 2: △, ○, vacío, ★"
+          "text": "Opción visual E"
         }
       ],
       "correctOption": "b",
-      "correctOptionText": "Fila 1: □, ●, vacío, ■\nFila 2: △, vacío, ○, ★",
+      "correctOptionText": "Opción visual B",
       "hint": "Un giro de 180° deja arriba lo que estaba abajo y también invierte izquierda y derecha.",
       "correctArgument": "Al girar 180°, la segunda fila pasa arriba, pero en orden invertido:\n■, vacío, ●, □\nse convierte en:\n□, ●, vacío, ■\n\nLa primera fila pasa abajo, también en orden invertido:\n★, ○, vacío, △\nse convierte en:\n△, vacío, ○, ★\n\nPor eso la opción correcta es b).",
       "incorrectArgumentsByOption": {
@@ -637,7 +637,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/habilidad-matematica/reactivo-08-rotacion-180.png",
-        "alt": "Habilidad matemática, reactivo 8: Generar apoyo visual de rotación de figura 180°.",
+        "alt": "Habilidad matemática, reactivo 8: Figura original y cinco opciones en arreglo 2 × 4 para elegir la rotación de 180°. La imagen muestra la figura inicial, las opciones A-E y no marca la respuesta.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -646,7 +646,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/habilidad-matematica/reactivo-08-rotacion-180.png",
-          "alt": "Habilidad matemática, reactivo 8: Generar apoyo visual de rotación de figura 180°.",
+          "alt": "Habilidad matemática, reactivo 8: Figura original y cinco opciones en arreglo 2 × 4 para elegir la rotación de 180°. La imagen muestra la figura inicial, las opciones A-E y no marca la respuesta.",
           "internalInstructionRemoved": true
         }
       ],
@@ -660,7 +660,7 @@ window.IFR_APP_DATA = {
       "areaId": "habilidad-matematica",
       "areaName": "Habilidad matemática",
       "block": "Conteo visual de cuadrados",
-      "baseText": "Figura: cuadrícula completa de 3 × 3 cuadrados iguales.",
+      "baseText": "Observa la cuadrícula y cuenta todos los cuadrados posibles.",
       "basePill": null,
       "prompt": "¿Cuántos cuadrados hay en total en la figura?",
       "options": [
@@ -700,7 +700,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/habilidad-matematica/reactivo-09-cuadricula-3x3.png",
-        "alt": "Habilidad matemática, reactivo 9: Generar apoyo visual para conteo de cuadrados.",
+        "alt": "Habilidad matemática, reactivo 9: Cuadrícula 3 × 3 para contar todos los cuadrados posibles.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -709,7 +709,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/habilidad-matematica/reactivo-09-cuadricula-3x3.png",
-          "alt": "Habilidad matemática, reactivo 9: Generar apoyo visual para conteo de cuadrados.",
+          "alt": "Habilidad matemática, reactivo 9: Cuadrícula 3 × 3 para contar todos los cuadrados posibles.",
           "internalInstructionRemoved": true
         }
       ],
@@ -723,7 +723,7 @@ window.IFR_APP_DATA = {
       "areaId": "habilidad-matematica",
       "areaName": "Habilidad matemática",
       "block": "Conteo visual de triángulos",
-      "baseText": "Figura: triángulo grande con tres líneas interiores trazadas desde el vértice superior hasta la base, de modo que la base queda dividida en cuatro partes.",
+      "baseText": "Observa la figura y cuenta todos los triángulos posibles.",
       "basePill": null,
       "prompt": "¿Cuántos triángulos hay en total en la figura?",
       "options": [
@@ -763,7 +763,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/habilidad-matematica/reactivo-10-triangulos.png",
-        "alt": "Habilidad matemática, reactivo 10: Generar apoyo visual para conteo de triángulos.",
+        "alt": "Habilidad matemática, reactivo 10: Triángulo dividido desde el vértice superior para contar todos los triángulos posibles.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -772,7 +772,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/habilidad-matematica/reactivo-10-triangulos.png",
-          "alt": "Habilidad matemática, reactivo 10: Generar apoyo visual para conteo de triángulos.",
+          "alt": "Habilidad matemática, reactivo 10: Triángulo dividido desde el vértice superior para contar todos los triángulos posibles.",
           "internalInstructionRemoved": true
         }
       ],
@@ -1287,7 +1287,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/biologia/reactivo-19-fotosintesis-almidon.png",
-        "alt": "Biología, reactivo 19: Generar apoyo visual de un experimento sencillo sobre fotosíntesis y producción de almidón.",
+        "alt": "Biología, reactivo 19: Experimento con hoja parcialmente cubierta, luz y yodo para interpretar la producción de almidón.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -1296,7 +1296,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/biologia/reactivo-19-fotosintesis-almidon.png",
-          "alt": "Biología, reactivo 19: Generar apoyo visual de un experimento sencillo sobre fotosíntesis y producción de almidón.",
+          "alt": "Biología, reactivo 19: Experimento con hoja parcialmente cubierta, luz y yodo para interpretar la producción de almidón.",
           "internalInstructionRemoved": true
         }
       ],
@@ -2638,9 +2638,9 @@ window.IFR_APP_DATA = {
       "areaId": "quimica",
       "areaName": "Química",
       "block": "Sustancias puras y mezclas: lectura de modelos de partículas",
-      "baseText": "Se observan tres modelos de partículas:\n\nModelo A:\nContiene partículas de dos tipos diferentes sin estar unidas entre sí.\n\nModelo B:\nContiene solo partículas iguales formadas por átomos del mismo tipo.\n\nModelo C:\nContiene partículas iguales formadas por átomos de dos tipos unidos.",
+      "baseText": "Observa los modelos A, B y C. Clasifícalos según el tipo de partículas que muestran.",
       "basePill": null,
-      "prompt": "Con base en la descripción, ¿cómo se clasifican correctamente los modelos A, B y C?",
+      "prompt": "Con base en los modelos, ¿cómo se clasifican correctamente A, B y C?",
       "options": [
         {
           "label": "a",
@@ -2678,7 +2678,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/quimica/reactivo-44-modelos-particulas.png",
-        "alt": "Química, reactivo 44: Generar apoyo visual de tres modelos de partículas para distinguir mezcla, elemento y compuesto.",
+        "alt": "Química, reactivo 44: Tres modelos de partículas identificados como A, B y C para clasificar mezcla, elemento y compuesto.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -2687,7 +2687,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/quimica/reactivo-44-modelos-particulas.png",
-          "alt": "Química, reactivo 44: Generar apoyo visual de tres modelos de partículas para distinguir mezcla, elemento y compuesto.",
+          "alt": "Química, reactivo 44: Tres modelos de partículas identificados como A, B y C para clasificar mezcla, elemento y compuesto.",
           "internalInstructionRemoved": true
         }
       ],
@@ -4194,7 +4194,7 @@ window.IFR_APP_DATA = {
       "areaId": "matematicas",
       "areaName": "Matemáticas",
       "block": "Lectura de gráficas sencillas",
-      "baseText": "Gráfica de líneas sobre consumo diario de agua en litros.\n\nValores:\nLunes: 96 litros\nMartes: 88 litros\nMiércoles: 78 litros\nJueves: 82 litros\nViernes: 66 litros",
+      "baseText": "Observa la gráfica y compara los cambios entre días consecutivos.",
       "basePill": null,
       "prompt": "De acuerdo con la gráfica, ¿entre qué dos días consecutivos hubo la mayor disminución en el consumo de agua?",
       "options": [
@@ -4234,7 +4234,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/matematicas/reactivo-73-grafica-consumo-agua.png",
-        "alt": "Matemáticas, reactivo 73: Generar apoyo visual de gráfica de líneas para lectura de cambios diarios.",
+        "alt": "Matemáticas, reactivo 73: Gráfica de líneas del consumo diario de agua para comparar cambios entre días consecutivos.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -4243,7 +4243,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/matematicas/reactivo-73-grafica-consumo-agua.png",
-          "alt": "Matemáticas, reactivo 73: Generar apoyo visual de gráfica de líneas para lectura de cambios diarios.",
+          "alt": "Matemáticas, reactivo 73: Gráfica de líneas del consumo diario de agua para comparar cambios entre días consecutivos.",
           "internalInstructionRemoved": true
         }
       ],
@@ -4257,7 +4257,7 @@ window.IFR_APP_DATA = {
       "areaId": "matematicas",
       "areaName": "Matemáticas",
       "block": "Geometría: ángulos alternos internos",
-      "baseText": "Dos rectas paralelas r y s son cortadas por una transversal.\n\nEn la intersección superior:\n1 está arriba a la izquierda.\n2 está arriba a la derecha.\n3 está abajo a la izquierda.\n4 está abajo a la derecha.\n\nEn la intersección inferior:\n5 está arriba a la izquierda.\n6 está arriba a la derecha.\n7 está abajo a la izquierda.\n8 está abajo a la derecha.",
+      "baseText": "Observa el diagrama e identifica el par de ángulos alternos internos.",
       "basePill": null,
       "prompt": "¿Cuál de los siguientes pares forma ángulos alternos internos?",
       "options": [
@@ -4297,7 +4297,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/matematicas/reactivo-74-angulos-alternos-internos.png",
-        "alt": "Matemáticas, reactivo 74: Generar apoyo visual de dos rectas paralelas cortadas por una transversal con ángulos numerados.",
+        "alt": "Matemáticas, reactivo 74: Diagrama de dos rectas paralelas cortadas por una transversal con ángulos numerados.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -4306,7 +4306,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/matematicas/reactivo-74-angulos-alternos-internos.png",
-          "alt": "Matemáticas, reactivo 74: Generar apoyo visual de dos rectas paralelas cortadas por una transversal con ángulos numerados.",
+          "alt": "Matemáticas, reactivo 74: Diagrama de dos rectas paralelas cortadas por una transversal con ángulos numerados.",
           "internalInstructionRemoved": true
         }
       ],
@@ -5428,7 +5428,7 @@ window.IFR_APP_DATA = {
       "areaId": "geografia",
       "areaName": "Geografía",
       "block": "Coordenadas: latitud y longitud",
-      "baseText": "Mapa de coordenadas con paralelos y meridianos. El punto P se ubica al sur del ecuador y al oeste del meridiano de Greenwich.",
+      "baseText": "Observa el mapa y ubica el punto P según su latitud y longitud.",
       "basePill": null,
       "prompt": "¿Cuáles son las coordenadas geográficas del punto P?",
       "options": [
@@ -5468,7 +5468,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/geografia/reactivo-94-coordenadas-p.png",
-        "alt": "Geografía, reactivo 94: Generar apoyo visual para identificar coordenadas geográficas.",
+        "alt": "Geografía, reactivo 94: Mapa de coordenadas con punto P para identificar latitud y longitud.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -5477,7 +5477,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/geografia/reactivo-94-coordenadas-p.png",
-          "alt": "Geografía, reactivo 94: Generar apoyo visual para identificar coordenadas geográficas.",
+          "alt": "Geografía, reactivo 94: Mapa de coordenadas con punto P para identificar latitud y longitud.",
           "internalInstructionRemoved": true
         }
       ],
@@ -6041,7 +6041,7 @@ window.IFR_APP_DATA = {
       "areaId": "fisica",
       "areaName": "Física",
       "block": "Tablas y gráficas: leer movimiento y cambios con el tiempo",
-      "baseText": "La siguiente tabla muestra la posición de un carrito en distintos tiempos.",
+      "baseText": "Observa la tabla y la gráfica. Compara la rapidez media del carrito en cada intervalo.",
       "basePill": null,
       "prompt": "¿En qué intervalo de tiempo el carrito tuvo la mayor rapidez media?",
       "options": [
@@ -6080,7 +6080,7 @@ window.IFR_APP_DATA = {
         "kind": "table",
         "position": "base",
         "hasHorizontalScroll": true,
-        "caption": "La siguiente tabla muestra la posición de un carrito en distintos tiempos.",
+        "caption": "Observa la tabla y la gráfica. Compara la rapidez media del carrito en cada intervalo.",
         "headers": [
           "Tiempo t en segundos",
           "0",
@@ -6105,7 +6105,7 @@ window.IFR_APP_DATA = {
           "kind": "table",
           "position": "base",
           "hasHorizontalScroll": true,
-          "caption": "La siguiente tabla muestra la posición de un carrito en distintos tiempos.",
+          "caption": "Observa la tabla y la gráfica. Compara la rapidez media del carrito en cada intervalo.",
           "headers": [
             "Tiempo t en segundos",
             "0",
@@ -6130,7 +6130,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/fisica/reactivo-106-grafica-posicion-tiempo.png",
-          "alt": "Física, reactivo 106: Generar apoyo visual de gráfica posición tiempo para interpretar rapidez media por intervalos.",
+          "alt": "Física, reactivo 106: Gráfica posición-tiempo para interpretar la rapidez media por intervalos.",
           "internalInstructionRemoved": true
         }
       ],
@@ -6194,7 +6194,7 @@ window.IFR_APP_DATA = {
       "areaId": "fisica",
       "areaName": "Física",
       "block": "Equilibrio: resultante R = 0 en situaciones simples",
-      "baseText": "Una caja está sobre una mesa. Dos personas la jalan hacia la derecha con fuerzas de 18 N y 7 N. Para que la caja permanezca en equilibrio, otra persona debe jalarla hacia la izquierda.",
+      "baseText": "Observa el diagrama de fuerzas sobre la caja y calcula la fuerza necesaria para mantener el equilibrio.",
       "basePill": null,
       "prompt": "¿Qué fuerza debe aplicarse hacia la izquierda para que la caja esté en equilibrio?",
       "options": [
@@ -6234,7 +6234,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/fisica/reactivo-108-equilibrio-fuerzas.png",
-        "alt": "Física, reactivo 108: Generar apoyo visual de equilibrio de fuerzas horizontales sobre una caja.",
+        "alt": "Física, reactivo 108: Diagrama de fuerzas horizontales sobre una caja para analizar equilibrio.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -6243,7 +6243,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/fisica/reactivo-108-equilibrio-fuerzas.png",
-          "alt": "Física, reactivo 108: Generar apoyo visual de equilibrio de fuerzas horizontales sobre una caja.",
+          "alt": "Física, reactivo 108: Diagrama de fuerzas horizontales sobre una caja para analizar equilibrio.",
           "internalInstructionRemoved": true
         }
       ],
@@ -6407,7 +6407,7 @@ window.IFR_APP_DATA = {
       "areaId": "fisica",
       "areaName": "Física",
       "block": "Magnetismo: brújula y campo magnético terrestre",
-      "baseText": "Una brújula se coloca sobre una mesa lejos de objetos metálicos. Después de moverse un poco, su aguja se orienta aproximadamente en dirección norte sur.",
+      "baseText": "Observa la orientación de la aguja de la brújula.",
       "basePill": null,
       "prompt": "¿Por qué la aguja de la brújula se orienta de esa manera?",
       "options": [
@@ -6447,7 +6447,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/fisica/reactivo-112-brujula.png",
-        "alt": "Física, reactivo 112: Generar apoyo visual de brújula orientada por el campo magnético terrestre.",
+        "alt": "Física, reactivo 112: Brújula con aguja orientada norte-sur para interpretar el campo magnético terrestre.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -6456,7 +6456,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/fisica/reactivo-112-brujula.png",
-          "alt": "Física, reactivo 112: Generar apoyo visual de brújula orientada por el campo magnético terrestre.",
+          "alt": "Física, reactivo 112: Brújula con aguja orientada norte-sur para interpretar el campo magnético terrestre.",
           "internalInstructionRemoved": true
         }
       ],
@@ -6510,7 +6510,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/fisica/reactivo-113-corriente-brujula.png",
-        "alt": "Física, reactivo 113: Generar apoyo visual de corriente eléctrica que desvía una brújula.",
+        "alt": "Física, reactivo 113: Circuito con alambre y brújula cercana para observar el efecto magnético de la corriente eléctrica.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -6519,7 +6519,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/fisica/reactivo-113-corriente-brujula.png",
-          "alt": "Física, reactivo 113: Generar apoyo visual de corriente eléctrica que desvía una brújula.",
+          "alt": "Física, reactivo 113: Circuito con alambre y brújula cercana para observar el efecto magnético de la corriente eléctrica.",
           "internalInstructionRemoved": true
         }
       ],
@@ -6623,7 +6623,7 @@ window.IFR_APP_DATA = {
         "position": "base",
         "required": true,
         "src": "assets/fisica/reactivo-115-onda-cuerda.png",
-        "alt": "Física, reactivo 115: Generar apoyo visual de una onda transversal en una cuerda.",
+        "alt": "Física, reactivo 115: Onda transversal en una cuerda para reconocer la transmisión de energía.",
         "internalInstructionRemoved": true
       },
       "visuals": [
@@ -6632,7 +6632,7 @@ window.IFR_APP_DATA = {
           "position": "base",
           "required": true,
           "src": "assets/fisica/reactivo-115-onda-cuerda.png",
-          "alt": "Física, reactivo 115: Generar apoyo visual de una onda transversal en una cuerda.",
+          "alt": "Física, reactivo 115: Onda transversal en una cuerda para reconocer la transmisión de energía.",
           "internalInstructionRemoved": true
         }
       ],

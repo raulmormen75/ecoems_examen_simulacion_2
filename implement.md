@@ -9,7 +9,9 @@
 4. Ejecutar `node build-exam-data.js` después de cambios de parser o contenido.
 5. Ejecutar `node qa/run-exam-qa.js` antes de commit.
 6. Servir con `python -m http.server 4173` y probar en navegador real.
-7. Hacer commit y push al terminar cada entrega solicitada.
+7. En reactivos con imagen, mantener texto visible breve y orientado a la tarea; evitar descripciones largas que repitan la figura.
+8. En reactivos cuyas opciones ya están dibujadas en la imagen, usar opciones visibles compactas A-E.
+9. Hacer commit y push al terminar cada entrega solicitada.
 
 ## Qué no debe alterarse
 
@@ -46,4 +48,7 @@ Generado exam-data.js con 128 reactivos y 10 áreas.
 4. Confirmar que los reactivos con imagen cargan assets reales.
 5. Confirmar que las tablas 3, 4, 15, 72 y 106 conservan desplazamiento horizontal.
 6. Confirmar que Español y Habilidad verbal conservan píldoras visuales.
-7. Commit y push.
+7. Confirmar que los reactivos con imagen revisados usan instrucción u objetivo visible, no descripción redundante.
+8. Confirmar que las opciones visuales compactas no dupliquen matrices o descripciones largas.
+9. Confirmar que los textos alternativos de imagen no conserven frases de generación.
+10. Commit y push.

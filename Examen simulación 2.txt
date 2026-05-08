@@ -259,28 +259,12 @@ Bloque que corresponde al área temática:
 Figuras en secuencia
 
 Texto base:
-Serie de figuras en cuadrícula 3 × 3.
-
-Figura 1:
-Punto negro en esquina superior izquierda.
-Triángulo en el centro.
-
-Figura 2:
-Punto negro en casilla superior central.
-Triángulo en casilla inferior central.
-
-Figura 3:
-Punto negro en esquina superior derecha.
-Triángulo en el centro.
-
-Figura 4:
-Punto negro en casilla central derecha.
-Triángulo en casilla inferior central.
+Observa la serie. Identifica el patrón de movimiento del punto y del triángulo.
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Habilidad matemática
 Reactivo: 5
-Uso: Generar apoyo visual de serie de figuras en cuadrícula 3 × 3 y cinco opciones.
+Uso: Serie visual en cuadrícula 3 × 3. Figuras de referencia: el punto avanza por el contorno en sentido horario y el triángulo alterna centro e inferior central. Opciones A-E muestran posibles continuaciones sin marcar la respuesta.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: serie visual con cuatro figuras de referencia y cinco opciones pequeñas.
 Descripción técnica:
@@ -297,17 +281,17 @@ Planteamiento:
 ¿Cuál es la figura que continúa la serie?
 
 Opciones:
-a) Cuadrícula 3 × 3 con punto negro en esquina inferior izquierda y triángulo en el centro.
-b) Cuadrícula 3 × 3 con punto negro en casilla central derecha y triángulo en casilla inferior central.
-c) Cuadrícula 3 × 3 con punto negro en esquina inferior derecha y triángulo en el centro.
-d) Cuadrícula 3 × 3 con punto negro en esquina superior derecha y triángulo en casilla inferior central.
-e) Cuadrícula 3 × 3 con punto negro en esquina inferior derecha y triángulo en casilla inferior central.
+a) Opción visual A
+b) Opción visual B
+c) Opción visual C
+d) Opción visual D
+e) Opción visual E
 
 Pista:
 Observa dos cambios al mismo tiempo: el punto se mueve por el contorno y el triángulo alterna entre dos posiciones.
 
 Respuesta correcta:
-c) Cuadrícula 3 × 3 con punto negro en esquina inferior derecha y triángulo en el centro.
+c) Opción visual C
 
 Argumento de la respuesta correcta:
 El punto negro se mueve una posición por el contorno de la cuadrícula en sentido horario:
@@ -334,24 +318,12 @@ Bloque que corresponde al área temática:
 Figuras en secuencia
 
 Texto base:
-Serie de figuras hechas con mosaicos cuadrados.
-
-Figura 1:
-Cruz formada por 5 mosaicos.
-
-Figura 2:
-Cruz formada por 9 mosaicos.
-
-Figura 3:
-Cruz formada por 13 mosaicos.
-
-Figura 4:
-Cruz formada por 17 mosaicos.
+Observa la serie de cruces. Identifica cómo aumenta la cantidad de mosaicos.
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Habilidad matemática
 Reactivo: 6
-Uso: Generar apoyo visual de una serie de cruces formadas con mosaicos cuadrados.
+Uso: Serie de cruces formadas con mosaicos cuadrados para identificar el crecimiento de la figura.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: secuencia de cuatro figuras con mosaicos cuadrados.
 Descripción técnica:
@@ -412,16 +384,12 @@ Bloque que corresponde al área temática:
 Giros de figuras, rotación de 90°
 
 Texto base:
-Figura original en cuadrícula 3 × 3:
-
-Fila 1: ▲, □, vacío
-Fila 2: ●, vacío, ■
-Fila 3: vacío, ○, vacío
+Observa la figura original y aplica un giro de 90° en sentido horario.
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Habilidad matemática
 Reactivo: 7
-Uso: Generar apoyo visual de rotación de figura 90° en sentido de las manecillas del reloj.
+Uso: Figura original y cinco opciones en cuadrícula 3 × 3 para elegir la rotación de 90° en sentido horario. La imagen muestra la figura inicial, las opciones A-E y no marca la respuesta.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: figura original y cinco opciones en cuadrícula 3 × 3.
 Descripción técnica:
@@ -438,39 +406,17 @@ Planteamiento:
 Selecciona la opción que representa la figura después de girarla 90° en el sentido de las manecillas del reloj.
 
 Opciones:
-a)
-Fila 1: vacío, ▲, ●
-Fila 2: □, vacío, ○
-Fila 3: vacío, ■, vacío
-
-b)
-Fila 1: vacío, ○, vacío
-Fila 2: ■, vacío, ●
-Fila 3: vacío, □, ▲
-
-c)
-Fila 1: ▲, □, vacío
-Fila 2: ●, vacío, ■
-Fila 3: vacío, ○, vacío
-
-d)
-Fila 1: vacío, ■, vacío
-Fila 2: □, vacío, ○
-Fila 3: ▲, ●, vacío
-
-e)
-Fila 1: vacío, ●, ▲
-Fila 2: ○, vacío, □
-Fila 3: vacío, ■, vacío
+a) Opción visual A
+b) Opción visual B
+c) Opción visual C
+d) Opción visual D
+e) Opción visual E
 
 Pista:
 Al girar 90° a la derecha, la columna izquierda de la figura original se convierte en la fila superior.
 
 Respuesta correcta:
-e)
-Fila 1: vacío, ●, ▲
-Fila 2: ○, vacío, □
-Fila 3: vacío, ■, vacío
+e) Opción visual E
 
 Argumento de la respuesta correcta:
 En una rotación de 90° en sentido horario, cada elemento cambia de posición así:
@@ -499,15 +445,12 @@ Bloque que corresponde al área temática:
 Giros de figuras, rotación de 180°
 
 Texto base:
-Figura original en arreglo de 2 filas y 4 columnas:
-
-Fila 1: ★, ○, vacío, △
-Fila 2: ■, vacío, ●, □
+Observa la figura original y aplica un giro de 180°.
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Habilidad matemática
 Reactivo: 8
-Uso: Generar apoyo visual de rotación de figura 180°.
+Uso: Figura original y cinco opciones en arreglo 2 × 4 para elegir la rotación de 180°. La imagen muestra la figura inicial, las opciones A-E y no marca la respuesta.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: figura original y cinco opciones en arreglo 2 × 4.
 Descripción técnica:
@@ -524,33 +467,17 @@ Planteamiento:
 ¿Cuál opción representa la figura después de girarla 180°?
 
 Opciones:
-a)
-Fila 1: ★, ○, vacío, △
-Fila 2: ■, vacío, ●, □
-
-b)
-Fila 1: □, ●, vacío, ■
-Fila 2: △, vacío, ○, ★
-
-c)
-Fila 1: ■, vacío, ●, □
-Fila 2: ★, ○, vacío, △
-
-d)
-Fila 1: △, vacío, ○, ★
-Fila 2: □, ●, vacío, ■
-
-e)
-Fila 1: □, vacío, ●, ■
-Fila 2: △, ○, vacío, ★
+a) Opción visual A
+b) Opción visual B
+c) Opción visual C
+d) Opción visual D
+e) Opción visual E
 
 Pista:
 Un giro de 180° deja arriba lo que estaba abajo y también invierte izquierda y derecha.
 
 Respuesta correcta:
-b)
-Fila 1: □, ●, vacío, ■
-Fila 2: △, vacío, ○, ★
+b) Opción visual B
 
 Argumento de la respuesta correcta:
 Al girar 180°, la segunda fila pasa arriba, pero en orden invertido:
@@ -581,12 +508,12 @@ Bloque que corresponde al área temática:
 Conteo visual de cuadrados
 
 Texto base:
-Figura: cuadrícula completa de 3 × 3 cuadrados iguales.
+Observa la cuadrícula y cuenta todos los cuadrados posibles.
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Habilidad matemática
 Reactivo: 9
-Uso: Generar apoyo visual para conteo de cuadrados.
+Uso: Cuadrícula 3 × 3 para contar todos los cuadrados posibles.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: cuadrícula 3 × 3.
 Descripción técnica:
@@ -648,12 +575,12 @@ Bloque que corresponde al área temática:
 Conteo visual de triángulos
 
 Texto base:
-Figura: triángulo grande con tres líneas interiores trazadas desde el vértice superior hasta la base, de modo que la base queda dividida en cuatro partes.
+Observa la figura y cuenta todos los triángulos posibles.
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Habilidad matemática
 Reactivo: 10
-Uso: Generar apoyo visual para conteo de triángulos.
+Uso: Triángulo dividido desde el vértice superior para contar todos los triángulos posibles.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: triángulo grande dividido desde el vértice superior.
 Descripción técnica:
@@ -1186,7 +1113,7 @@ Un equipo cubre con papel aluminio una parte de una hoja de geranio y deja la pl
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Biología
 Reactivo: 19
-Uso: Generar apoyo visual de un experimento sencillo sobre fotosíntesis y producción de almidón.
+Uso: Experimento con hoja parcialmente cubierta, luz y yodo para interpretar la producción de almidón.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: diagrama escolar de experimento con hoja parcialmente cubierta.
 Descripción técnica:
@@ -2381,21 +2308,12 @@ Bloque que corresponde al área temática:
 Sustancias puras y mezclas: lectura de modelos de partículas
 
 Texto base:
-Se observan tres modelos de partículas:
-
-Modelo A:
-Contiene partículas de dos tipos diferentes sin estar unidas entre sí.
-
-Modelo B:
-Contiene solo partículas iguales formadas por átomos del mismo tipo.
-
-Modelo C:
-Contiene partículas iguales formadas por átomos de dos tipos unidos.
+Observa los modelos A, B y C. Clasifícalos según el tipo de partículas que muestran.
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Química
 Reactivo: 44
-Uso: Generar apoyo visual de tres modelos de partículas para distinguir mezcla, elemento y compuesto.
+Uso: Tres modelos de partículas identificados como A, B y C para clasificar mezcla, elemento y compuesto.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: diagrama escolar de partículas en tres recuadros.
 Descripción técnica:
@@ -2409,7 +2327,7 @@ Validación: los tres modelos deben diferenciar claramente partículas separadas
 [/INSTRUCCIÓN INTERNA PARA CODEX]
 
 Planteamiento:
-Con base en la descripción, ¿cómo se clasifican correctamente los modelos A, B y C?
+Con base en los modelos, ¿cómo se clasifican correctamente A, B y C?
 
 Opciones:
 a) A es elemento, B es mezcla y C es compuesto.
@@ -3876,19 +3794,12 @@ Bloque que corresponde al área temática:
 Lectura de gráficas sencillas
 
 Texto base:
-Gráfica de líneas sobre consumo diario de agua en litros.
-
-Valores:
-Lunes: 96 litros
-Martes: 88 litros
-Miércoles: 78 litros
-Jueves: 82 litros
-Viernes: 66 litros
+Observa la gráfica y compara los cambios entre días consecutivos.
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Matemáticas
 Reactivo: 73
-Uso: Generar apoyo visual de gráfica de líneas para lectura de cambios diarios.
+Uso: Gráfica de líneas del consumo diario de agua para comparar cambios entre días consecutivos.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: gráfica de líneas sencilla.
 Descripción técnica:
@@ -3954,24 +3865,12 @@ Bloque que corresponde al área temática:
 Geometría: ángulos alternos internos
 
 Texto base:
-Dos rectas paralelas r y s son cortadas por una transversal.
-
-En la intersección superior:
-1 está arriba a la izquierda.
-2 está arriba a la derecha.
-3 está abajo a la izquierda.
-4 está abajo a la derecha.
-
-En la intersección inferior:
-5 está arriba a la izquierda.
-6 está arriba a la derecha.
-7 está abajo a la izquierda.
-8 está abajo a la derecha.
+Observa el diagrama e identifica el par de ángulos alternos internos.
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Matemáticas
 Reactivo: 74
-Uso: Generar apoyo visual de dos rectas paralelas cortadas por una transversal con ángulos numerados.
+Uso: Diagrama de dos rectas paralelas cortadas por una transversal con ángulos numerados.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: diagrama geométrico.
 Descripción técnica:
@@ -5063,12 +4962,12 @@ Bloque que corresponde al área temática:
 Coordenadas: latitud y longitud
 
 Texto base:
-Mapa de coordenadas con paralelos y meridianos. El punto P se ubica al sur del ecuador y al oeste del meridiano de Greenwich.
+Observa el mapa y ubica el punto P según su latitud y longitud.
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Geografía
 Reactivo: 94
-Uso: Generar apoyo visual para identificar coordenadas geográficas.
+Uso: Mapa de coordenadas con punto P para identificar latitud y longitud.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: mapa de coordenadas simplificado.
 Descripción técnica:
@@ -5633,7 +5532,7 @@ Tablas y gráficas: leer movimiento y cambios con el tiempo
 
 Texto base:
 [RENDERIZAR COMO TABLA CON CONTENEDOR DE DESPLAZAMIENTO HORIZONTAL Y BARRA VISIBLE]
-La siguiente tabla muestra la posición de un carrito en distintos tiempos.
+Observa la tabla y la gráfica. Compara la rapidez media del carrito en cada intervalo.
 
 | Tiempo t en segundos | 0 | 2 | 4 | 6 | 8 |
 |---|---:|---:|---:|---:|---:|
@@ -5643,7 +5542,7 @@ La siguiente tabla muestra la posición de un carrito en distintos tiempos.
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Física
 Reactivo: 106
-Uso: Generar apoyo visual de gráfica posición tiempo para interpretar rapidez media por intervalos.
+Uso: Gráfica posición-tiempo para interpretar la rapidez media por intervalos.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: gráfica de línea posición contra tiempo.
 Descripción técnica:
@@ -5762,12 +5661,12 @@ Bloque que corresponde al área temática:
 Equilibrio: resultante R = 0 en situaciones simples
 
 Texto base:
-Una caja está sobre una mesa. Dos personas la jalan hacia la derecha con fuerzas de 18 N y 7 N. Para que la caja permanezca en equilibrio, otra persona debe jalarla hacia la izquierda.
+Observa el diagrama de fuerzas sobre la caja y calcula la fuerza necesaria para mantener el equilibrio.
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Física
 Reactivo: 108
-Uso: Generar apoyo visual de equilibrio de fuerzas horizontales sobre una caja.
+Uso: Diagrama de fuerzas horizontales sobre una caja para analizar equilibrio.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: diagrama de cuerpo simple con flechas horizontales.
 Descripción técnica:
@@ -5956,12 +5855,12 @@ Bloque que corresponde al área temática:
 Magnetismo: brújula y campo magnético terrestre
 
 Texto base:
-Una brújula se coloca sobre una mesa lejos de objetos metálicos. Después de moverse un poco, su aguja se orienta aproximadamente en dirección norte sur.
+Observa la orientación de la aguja de la brújula.
 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Física
 Reactivo: 112
-Uso: Generar apoyo visual de brújula orientada por el campo magnético terrestre.
+Uso: Brújula con aguja orientada norte-sur para interpretar el campo magnético terrestre.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: ilustración escolar de una brújula.
 Descripción técnica:
@@ -6014,7 +5913,7 @@ Un alambre conectado a una pila pasa cerca de una brújula. Cuando se cierra el 
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Física
 Reactivo: 113
-Uso: Generar apoyo visual de corriente eléctrica que desvía una brújula.
+Uso: Circuito con alambre y brújula cercana para observar el efecto magnético de la corriente eléctrica.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: diagrama escolar de circuito simple con brújula cercana.
 Descripción técnica:
@@ -6106,7 +6005,7 @@ Una estudiante mueve hacia arriba y abajo un extremo de una cuerda tensa. Se obs
 [INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
 Área: Física
 Reactivo: 115
-Uso: Generar apoyo visual de una onda transversal en una cuerda.
+Uso: Onda transversal en una cuerda para reconocer la transmisión de energía.
 Herramienta: $imagegen con GPT-Image 2.
 Tipo de imagen: diagrama escolar de onda en cuerda.
 Descripción técnica:
