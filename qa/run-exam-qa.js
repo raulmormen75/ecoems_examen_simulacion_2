@@ -352,30 +352,44 @@ function validateResultDownloadControls() {
 
   const requiredAppFragments = [
     ['detección de iOS/iPadOS', 'isIOSLikeDevice'],
+    ['detección de Android', 'isAndroidLikeDevice'],
+    ['detección de Windows', 'isWindowsLikeDevice'],
+    ['contexto de plataforma para la vista previa', 'getResultImageDeviceContext'],
     ['fallback de canvas a Blob', 'canvasToPngBlob'],
     ['fallback de canvas por data URL', 'toDataURL'],
     ['timeout para carga de fuentes', 'waitForFontsReady'],
     ['Web Share API para archivos', 'navigator.share'],
     ['validación canShare para PNG', 'canShareFile'],
-    ['modal de imagen para iPhone', 'renderResultImageModal'],
+    ['modal de imagen multiplataforma', 'renderResultImageModal'],
+    ['texto alterno cuando no hay Web Share', 'textNoShare'],
     ['acción para compartir resultado', 'share-result-image'],
     ['acción para abrir imagen', 'open-result-image'],
+    ['acción para descargar desde la vista previa', 'download-result-image'],
     ['acción para cerrar vista de imagen', 'close-result-image'],
+    ['revocación diferida para evitar carreras en móviles', 'delay: 60000'],
+    ['descarga directa con atributo download', 'link.download'],
     ['archivo PNG con nombre correcto', 'resultado-ecoems-ifr-simulacion-2.png'],
-    ['instrucción visible para guardar en Fotos', 'Guardar imagen']
+    ['instrucción visible para guardar imagen', 'Guardar imagen']
   ];
 
   for (const [label, fragment] of requiredAppFragments) {
-    assert.ok(appSource.includes(fragment), `Descarga de resultado en iOS: falta ${label}.`);
+    assert.ok(appSource.includes(fragment), `Descarga de resultado multiplataforma: falta ${label}.`);
   }
 
   assert.ok(/📲\s*Guarda tu resultado en iPhone/.test(appSource), 'Descarga de resultado en iOS: falta título con emoji para iPhone.');
-  assert.ok(/📤\s*Compartir o guardar/.test(appSource), 'Descarga de resultado en iOS: falta botón para compartir o guardar.');
-  assert.ok(/🖼️\s*Abrir imagen/.test(appSource), 'Descarga de resultado en iOS: falta botón para abrir imagen.');
-  assert.ok(styleSource.includes('.result-image-frame'), 'Descarga de resultado en iOS: faltan estilos de vista previa.');
-  assert.ok(styleSource.includes('-webkit-touch-callout:default'), 'Descarga de resultado en iOS: falta soporte de menú táctil para guardar imagen.');
+  assert.ok(/📲\s*Guarda tu resultado en Android/.test(appSource), 'Descarga de resultado en Android: falta título con emoji.');
+  assert.ok(/🖥️\s*Guarda tu resultado en Windows/.test(appSource), 'Descarga de resultado en Windows: falta título con emoji.');
+  assert.ok(/📤\s*Compartir o guardar/.test(appSource), 'Descarga de resultado multiplataforma: falta botón para compartir o guardar.');
+  assert.ok(/💾\s*Descargar imagen/.test(appSource), 'Descarga de resultado multiplataforma: falta botón para descargar imagen.');
+  assert.ok(/🖼️\s*Abrir imagen/.test(appSource), 'Descarga de resultado multiplataforma: falta botón para abrir imagen.');
+  assert.ok(!/const\s+isIOSDevice\s*=/.test(appSource), 'Descarga de resultado: la vista previa no debe estar limitada por una variable isIOSDevice.');
+  assert.ok(!/if\s*\(\s*isIOSDevice\s*\)/.test(appSource), 'Descarga de resultado: la vista previa no debe estar limitada a iOS.');
+  assert.ok(styleSource.includes('.result-image-frame'), 'Descarga de resultado multiplataforma: faltan estilos de vista previa.');
+  assert.ok(/\.result-image-frame\{[\s\S]*max-height:52vh/.test(styleSource), 'Descarga de resultado multiplataforma: falta altura máxima para la vista previa.');
+  assert.ok(/\.result-image-frame\{[\s\S]*overflow:auto/.test(styleSource), 'Descarga de resultado multiplataforma: falta scroll interno para la vista previa.');
+  assert.ok(styleSource.includes('-webkit-touch-callout:default'), 'Descarga de resultado multiplataforma: falta soporte de menú táctil para guardar imagen.');
 
-  log('QA de descarga: ruta iOS con compartir, abrir imagen y vista previa guardable presentes.');
+  log('QA de descarga: vista previa, compartir, descarga y apertura de imagen presentes para iOS, Android y Windows.');
 }
 
 function main() {

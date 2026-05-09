@@ -21,7 +21,7 @@ El contenido ya está completo: 128 reactivos, 10 áreas y Física integrada del
 - El progreso del intento se guarda en `localStorage` con una llave exclusiva de simulación 2 y una firma del contenido completo; al recargar, la app muestra una modal para continuar sin reiniciar o borrar el intento.
 - La modal de recarga usa el tono IFR, botones con emojis y conserva el cronómetro con una fecha límite real, incluso si el navegador pausa temporizadores.
 - El nombre de descarga queda como `resultado-ecoems-ifr-simulacion-2.png`.
-- La descarga de resultados conserva descarga directa en escritorio y agrega flujo iOS: compartir/guardar, abrir imagen y vista previa para mantener presionada en Safari o Chrome de iPhone.
+- La descarga de resultados usa una vista previa multiplataforma para iOS, Android y Windows, con compartir/guardar cuando el navegador lo permite, descarga directa desde el modal y apertura de imagen.
 - La generación del PNG tiene timeout para fuentes y fallback `toDataURL()` si `canvas.toBlob()` no responde.
 
 ## Comandos
@@ -29,6 +29,7 @@ El contenido ya está completo: 128 reactivos, 10 áreas y Física integrada del
 ```powershell
 node build-exam-data.js
 node qa/run-exam-qa.js
+node qa/run-result-download-browser-qa.js
 python -m http.server 4173
 ```
 
@@ -37,6 +38,8 @@ python -m http.server 4173
 `node build-exam-data.js` generó `exam-data.js` con 128 reactivos y 10 áreas.
 
 `node qa/run-exam-qa.js` validó datos, opciones, pistas, argumentos, assets, distribución de respuestas, ausencia de contenido interno en `exam-data.js`, ausencia de artefactos LaTeX/Markdown en textos visibles, textos base breves en reactivos con imagen revisados, textos alternativos sin frases de generación y presencia del flujo de persistencia de progreso.
+
+`node qa/run-result-download-browser-qa.js` abrió Chrome o Edge por DevTools y validó la vista previa del resultado en perfiles Windows, Android e iPhone: imagen `blob:`, botones de compartir, descargar y abrir imagen, nombre del PNG y ausencia de desplazamiento horizontal.
 
 Validación en navegador local:
 
@@ -50,8 +53,8 @@ Validación en navegador local:
 - Botón `🧹 Reiniciar desde cero` borra el intento guardado y vuelve a portada limpia.
 - Storage corrupto se descarta sin romper la app.
 - Cronómetro probado con pestaña bloqueada: cierra por tiempo al reconciliar contra la fecha límite real.
-- Descarga de resultado probada en modo escritorio: descarga directa del PNG.
-- Descarga de resultado probada con user-agent de iPhone: modal `📲 Guarda tu resultado en iPhone`, imagen `blob:` visible, botones de compartir/abrir y sin overflow móvil.
+- Descarga de resultado probada en modo escritorio Windows: modal `🖥️ Guarda tu resultado en Windows`, imagen `blob:` visible, descarga desde el modal y apertura de imagen.
+- Descarga de resultado probada con perfiles móviles iPhone y Android: modal de plataforma, imagen `blob:` visible, botones disponibles según navegador y sin overflow móvil.
 - Reactivos 3 y 4 con tablas visuales en lugar de tablas Markdown crudas.
 - Reactivo 5 carga imagen real en móvil y muestra una instrucción breve, sin el bloque descriptivo de figuras.
 - Reactivos con imagen revisados mantienen objetivo de trabajo visible y assets reales.

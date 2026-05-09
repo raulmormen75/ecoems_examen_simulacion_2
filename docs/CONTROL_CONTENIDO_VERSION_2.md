@@ -81,5 +81,6 @@ No se detectaron tres respuestas iguales consecutivas.
 - Se agregó recarga segura del intento: si existe progreso guardado, la app pregunta si se quiere continuar sin reiniciar o borrar el intento desde cero.
 - El avance guardado conserva respuestas, reactivo activo, métricas y cronómetro; el tiempo se calcula contra una fecha límite real para evitar pausas por suspensión o pestaña inactiva.
 - El intento guardado se invalida si cambia la firma del contenido estructurado del examen.
-- Se mejoró la descarga del resultado PNG para iPhone: si Safari o Chrome no descargan el `blob:` directamente, se muestra una vista previa guardable y opciones para compartir o abrir la imagen.
+- Se mejoró la descarga del resultado PNG para iOS, Android y Windows: se muestra una vista previa guardable con opciones para compartir cuando el navegador lo permite, descargar la imagen o abrirla en otra pestaña.
+- La URL `blob:` de la vista previa se conserva de forma diferida al cerrar la modal para evitar carreras mientras el navegador abre o descarga la imagen.
 - La generación del PNG ya no depende indefinidamente de `document.fonts.ready` ni de `canvas.toBlob()`: ambos tienen una ruta de salida segura.

@@ -18,13 +18,14 @@ También se generaron los assets visuales obligatorios en `assets/` y se validó
 
 La aplicación conserva el progreso del intento si se refresca la página. Al volver a cargar, muestra una notificación con dos opciones: continuar sin reiniciar o borrar el intento para empezar desde cero.
 
-La descarga del resultado PNG mantiene descarga directa en escritorio y agrega una ruta compatible con iPhone: vista previa guardable, apertura de imagen y uso de compartir cuando el navegador lo permite.
+La descarga del resultado PNG muestra una vista previa guardable en iPhone, Android y Windows, con opciones para compartir cuando el navegador lo permite, descargar la imagen o abrirla en otra pestaña.
 
 ## Comandos locales
 
 ```powershell
 node build-exam-data.js
 node qa/run-exam-qa.js
+node qa/run-result-download-browser-qa.js
 python -m http.server 4173
 ```
 
@@ -39,12 +40,13 @@ Abrir `http://127.0.0.1:4173/` para revisar la aplicación.
 - Pistas: obligatorias en todos los reactivos.
 - Resultado final: descargable como `resultado-ecoems-ifr-simulacion-2.png`.
 - Recarga segura: progreso persistente con decisión explícita.
-- Compatibilidad iOS: alternativa para guardar el resultado desde Safari o Chrome en iPhone.
+- Descarga alternativa del resultado: vista previa con botones para compartir, descargar o abrir imagen en iOS, Android y Windows.
 
 ## Requisitos para publicar
 
 - Ejecutar `node build-exam-data.js` sin errores.
 - Ejecutar `node qa/run-exam-qa.js` sin errores.
+- Ejecutar `node qa/run-result-download-browser-qa.js` cuando cambie el flujo de descarga del resultado.
 - Revisar portada, inicio del examen, reactivos con imagen y responsividad en navegador real.
 - Confirmar que Vercel sirve la versión más reciente después del push.
 

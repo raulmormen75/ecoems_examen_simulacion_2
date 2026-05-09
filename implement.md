@@ -8,11 +8,12 @@
 3. No editar contenido académico para inventar reactivos.
 4. Ejecutar `node build-exam-data.js` después de cambios de parser o contenido.
 5. Ejecutar `node qa/run-exam-qa.js` antes de commit.
-6. Servir con `python -m http.server 4173` y probar en navegador real.
-7. En reactivos con imagen, mantener texto visible breve y orientado a la tarea; evitar descripciones largas que repitan la figura.
-8. En reactivos cuyas opciones ya están dibujadas en la imagen, usar opciones visibles compactas A-E.
-9. Conservar la recarga segura: si existe progreso guardado, mostrar una modal para continuar sin reiniciar o borrar el intento.
-10. Hacer commit y push al terminar cada entrega solicitada.
+6. Ejecutar `node qa/run-result-download-browser-qa.js` cuando cambie la descarga del resultado.
+7. Servir con `python -m http.server 4173` y probar en navegador real.
+8. En reactivos con imagen, mantener texto visible breve y orientado a la tarea; evitar descripciones largas que repitan la figura.
+9. En reactivos cuyas opciones ya están dibujadas en la imagen, usar opciones visibles compactas A-E.
+10. Conservar la recarga segura: si existe progreso guardado, mostrar una modal para continuar sin reiniciar o borrar el intento.
+11. Hacer commit y push al terminar cada entrega solicitada.
 
 ## Qué no debe alterarse
 
@@ -24,7 +25,7 @@
 - Retroalimentación diferenciada para respuesta correcta e incorrecta.
 - Resultado final y descarga PNG.
 - Persistencia de progreso con decisión explícita al recargar.
-- Ruta de guardado compatible con iPhone para el PNG final.
+- Ruta de guardado multiplataforma para el PNG final en iOS, Android y Windows.
 - Identidad IFR, escudo institucional y Plus Jakarta Sans.
 
 ## Estado actual esperado
@@ -57,5 +58,5 @@ Generado exam-data.js con 128 reactivos y 10 áreas.
 10. Confirmar que la recarga restaura avance, respuestas, reactivo activo y cronómetro.
 11. Confirmar que el cronómetro se calcula contra una fecha límite real, no solo contra `setInterval`.
 12. Confirmar que `🧹 Reiniciar desde cero` borra el storage y vuelve a estado inicial.
-13. Confirmar que la descarga del resultado funciona en escritorio y que en iPhone muestra alternativa para compartir, abrir o guardar la imagen.
+13. Confirmar que la descarga del resultado abre la vista previa en iOS, Android y Windows, con descarga, apertura de imagen y compartir cuando el navegador lo permita.
 14. Commit y push.

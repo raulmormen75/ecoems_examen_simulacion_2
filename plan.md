@@ -46,10 +46,11 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
    - Firma del contenido completo para evitar restaurar intentos incompatibles.
    - Storage inválido descartado sin romper la app.
 
-8. Mejorar descarga del resultado en iPhone.
-   - Descarga directa conservada para escritorio.
-   - Detección de iPhone/iPad para no depender de `download` en enlaces `blob:`.
-   - Modal `📲 Guarda tu resultado en iPhone` con vista previa, compartir/guardar y abrir imagen.
+8. Mejorar descarga del resultado con vista previa multiplataforma.
+   - Modal de resultado para iOS, Android y Windows.
+   - Vista previa `blob:` con descarga directa desde el modal, compartir/guardar cuando el navegador lo permite y apertura de imagen.
+   - Textos específicos para iPhone/iPad, Android y Windows.
+   - QA de navegador reproducible para perfiles Windows, Android e iPhone.
    - Timeout para fuentes y fallback `toDataURL()` si `canvas.toBlob()` no responde.
 
 9. Cerrar en GitHub.
@@ -68,7 +69,7 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
 - Textos alternativos de imágenes sin instrucciones de generación.
 - Revisión local en navegador realizada.
 - Recarga segura validada en escritorio y móvil.
-- Descarga PNG validada en escritorio y ruta iPhone simulada.
+- Descarga PNG validada con vista previa en perfiles Windows, Android e iPhone.
 - Documentación actualizada.
 
 ## Criterios de publicación

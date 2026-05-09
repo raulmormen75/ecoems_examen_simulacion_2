@@ -31,7 +31,7 @@ Se reutiliza de la simulación 1:
 - Soporte de `visuals[]` para más de un apoyo visual por reactivo.
 - Bloqueo de producción cuando faltan reactivos o assets.
 - Recarga segura con progreso persistente y decisión explícita para continuar o reiniciar.
-- Descarga de resultado compatible con iPhone mediante compartir, abrir imagen y vista previa guardable.
+- Descarga de resultado con vista previa guardable en iOS, Android y Windows mediante compartir, descargar o abrir imagen.
 
 ## Estado del contenido
 
@@ -67,13 +67,14 @@ El build de producción genera `exam-data.js` completo y sin faltantes.
 - Distribución de respuestas por letra.
 - Detección de más de un visual por reactivo.
 - Validación de presencia del flujo de persistencia de progreso en `qa/run-exam-qa.js`.
-- Validación de presencia del flujo alternativo de descarga en iOS.
+- Validación de presencia del flujo alternativo de descarga en iOS, Android y Windows.
+- QA de navegador reproducible para descarga del resultado: `node qa/run-result-download-browser-qa.js`.
 
 ## QA ejecutada
 
 - `node build-exam-data.js`.
 - `node qa/run-exam-qa.js`.
-- Revisión local en navegador con portada, conteo 128/10, Física presente, imagen real en reactivo 5, recarga segura en escritorio/móvil y descarga de resultado en modo escritorio/iPhone simulado.
+- Revisión local en navegador con portada, conteo 128/10, Física presente, imagen real en reactivo 5, recarga segura en escritorio/móvil y descarga de resultado con perfiles Windows, Android e iPhone.
 
 ## Pendientes
 

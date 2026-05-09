@@ -52,7 +52,7 @@ Validó:
 - Opciones visuales compactas en reactivos 5, 7 y 8.
 - Textos alternativos de imágenes sin frases de generación ni instrucciones internas.
 - Flujo de persistencia de progreso: llave exclusiva, firma completa del contenido, fecha límite real del cronómetro, modal de recarga, botones con emojis, guardado en `pagehide` y `visibilitychange`.
-- Descarga del resultado: ruta iOS con detección de iPhone/iPad, Web Share API, vista previa guardable, apertura de imagen y fallback de canvas.
+- Descarga del resultado: vista previa guardable para iOS, Android y Windows, Web Share API opcional, descarga desde modal, apertura de imagen y fallback de canvas.
 - Distribución de respuestas dentro de rango.
 - Sin tres respuestas iguales consecutivas.
 - Sin instrucciones internas en `exam-data.js`.
@@ -95,8 +95,26 @@ Validado:
 - En móvil, la modal no genera desplazamiento horizontal y los botones se ajustan al ancho disponible.
 - Storage corrupto o inválido se descarta sin romper la aplicación.
 - El cronómetro cierra por tiempo aunque el hilo del navegador quede bloqueado más tiempo que el restante.
-- En modo escritorio, la descarga directa genera `resultado-ecoems-ifr-simulacion-2.png`.
-- Con user-agent de iPhone, la descarga muestra la modal `📲 Guarda tu resultado en iPhone`, incluye imagen `blob:`, botones `📤 Compartir o guardar` y `🖼️ Abrir imagen`, sin desplazamiento horizontal.
+- En modo escritorio Windows, la descarga muestra la modal `🖥️ Guarda tu resultado en Windows`, incluye imagen `blob:`, botón `💾 Descargar imagen` y apertura de imagen.
+- Con perfiles móviles iPhone y Android, la descarga muestra modal específica de plataforma, imagen `blob:`, botones disponibles según soporte del navegador y sin desplazamiento horizontal.
+
+### QA automatizada de navegador para descarga
+
+Comando:
+
+```powershell
+node qa/run-result-download-browser-qa.js
+```
+
+Resultado: pasó.
+
+Validó:
+
+- Perfil Windows Chrome: modal `🖥️ Guarda tu resultado en Windows`, imagen `blob:`, compartir simulado, apertura de imagen y descarga `resultado-ecoems-ifr-simulacion-2.png`.
+- Perfil Android Chrome: modal `📲 Guarda tu resultado en Android`, imagen `blob:`, compartir simulado, apertura de imagen, descarga y ausencia de desplazamiento horizontal.
+- Perfil iPhone Safari: modal `📲 Guarda tu resultado en iPhone`, imagen `blob:`, compartir simulado, apertura de imagen, descarga y ausencia de desplazamiento horizontal.
+- El botón `💾 Descargar imagen` usa el nombre correcto del PNG.
+- El botón `🖼️ Abrir imagen` abre una URL `blob:`.
 
 ## Evidencia
 

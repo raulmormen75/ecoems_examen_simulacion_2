@@ -444,6 +444,55 @@
       || (platform === 'MacIntel' && Number(window.navigator.maxTouchPoints) > 1);
   }
 
+  function isAndroidLikeDevice() {
+    return /Android/i.test(window.navigator.userAgent || '');
+  }
+
+  function isWindowsLikeDevice() {
+    return /Windows/i.test(window.navigator.userAgent || '')
+      || /Win/i.test(window.navigator.platform || '');
+  }
+
+  function getResultImageDeviceContext() {
+    if (isIOSLikeDevice()) {
+      return {
+        key: 'ios',
+        title: '📲 Guarda tu resultado en iPhone',
+        text: 'En iPhone o iPad, Safari y Chrome pueden abrir la imagen en lugar de descargarla. Usa compartir, abre la imagen o mantenla presionada para guardarla en Fotos.',
+        textNoShare: 'En iPhone o iPad, Safari y Chrome pueden abrir la imagen en lugar de descargarla. Descarga el PNG, abre la imagen o mantenla presionada para guardarla en Fotos.',
+        note: 'Si no aparece el guardado automático, toca «Compartir» y elige «Guardar imagen», o mantén presionada la vista previa.'
+      };
+    }
+
+    if (isAndroidLikeDevice()) {
+      return {
+        key: 'android',
+        title: '📲 Guarda tu resultado en Android',
+        text: 'En Android puedes compartir el PNG, descargarlo o abrirlo en otra pestaña. Si Chrome abre la imagen, usa el menú del navegador para guardarla.',
+        textNoShare: 'En Android puedes descargar el PNG o abrirlo en otra pestaña. Si Chrome abre la imagen, usa el menú del navegador para guardarla.',
+        note: 'Si tu navegador no muestra la descarga al primer intento, abre la imagen y usa el menú para guardarla.'
+      };
+    }
+
+    if (isWindowsLikeDevice()) {
+      return {
+        key: 'windows',
+        title: '🖥️ Guarda tu resultado en Windows',
+        text: 'En Windows puedes descargar el PNG, abrirlo en una pestaña nueva o compartirlo si tu navegador lo permite.',
+        textNoShare: 'En Windows puedes descargar el PNG o abrirlo en una pestaña nueva para guardarlo desde el navegador.',
+        note: 'Si la descarga no inicia, abre la imagen y usa la opción de guardar del navegador.'
+      };
+    }
+
+    return {
+      key: 'generic',
+      title: '🖼️ Guarda tu resultado',
+      text: 'Puedes descargar el PNG, abrirlo en una pestaña nueva o compartirlo si tu navegador lo permite.',
+      textNoShare: 'Puedes descargar el PNG o abrirlo en una pestaña nueva para guardarlo desde el navegador.',
+      note: 'Si la descarga no inicia, abre la imagen y usa la opción de guardar del navegador.'
+    };
+  }
+
   function canShareFile(file) {
     return Boolean(
       window.navigator.canShare
@@ -452,9 +501,14 @@
     );
   }
 
-  function revokeResultImageUrl() {
+  function revokeResultImageUrl({ delay = 0 } = {}) {
     if (STATE.resultImage && STATE.resultImage.url) {
-      URL.revokeObjectURL(STATE.resultImage.url);
+      const url = STATE.resultImage.url;
+      if (delay > 0) {
+        window.setTimeout(() => URL.revokeObjectURL(url), delay);
+      } else {
+        URL.revokeObjectURL(url);
+      }
     }
     STATE.resultImage = null;
   }
@@ -477,6 +531,17 @@
   function openResultImage() {
     if (!STATE.resultImage || !STATE.resultImage.url) return;
     window.open(STATE.resultImage.url, '_blank', 'noopener');
+  }
+
+  function downloadResultImageFromPreview() {
+    if (!STATE.resultImage || !STATE.resultImage.url) return;
+
+    const link = document.createElement('a');
+    link.href = STATE.resultImage.url;
+    link.download = STATE.resultImage.filename || 'resultado-ecoems-ifr-simulacion-2.png';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
   }
 
   function dataUrlToBlob(dataUrl) {
@@ -1191,13 +1256,13 @@
         </div>
         <div class="final-result-head-actions">
           <p>${esc(modeText)}</p>
-          <button class="download-results-btn" type="button" data-action="download-results">Descargar mis resultados</button>
+          <button class="download-results-btn" type="button" data-action="download-results">Guardar mis resultados</button>
         </div>
       </div>
       ${renderFinalMetrics(summary)}
       ${renderReinforcementList(summary)}
       <div class="final-actions final-actions-bottom">
-        <button class="download-results-btn" type="button" data-action="download-results">Descargar mis resultados</button>
+        <button class="download-results-btn" type="button" data-action="download-results">Guardar mis resultados</button>
       </div>
     </section>`;
   }
@@ -1321,24 +1386,29 @@
   function renderResultImageModal() {
     const image = STATE.resultImage;
     if (!image) return '';
+    const context = image.context || getResultImageDeviceContext();
+    const description = image.canShare ? context.text : (context.textNoShare || context.text);
 
     const shareButton = image.canShare
       ? '<button class="modal-btn primary" type="button" data-action="share-result-image" data-autofocus="true">📤 Compartir o guardar</button>'
       : '';
+    const downloadButtonClass = image.canShare ? 'modal-btn' : 'modal-btn primary';
+    const downloadAutofocus = image.canShare ? '' : ' data-autofocus="true"';
 
     return `<div class="modal-head result-image-head">
       <span class="pill">Resultado listo</span>
-      <h2 id="resultImageTitle">📲 Guarda tu resultado en iPhone</h2>
-      <p id="resultImageText">En iPhone, Safari y Chrome pueden abrir la imagen en lugar de descargarla. Usa la opción de compartir o abre la imagen y mantenla presionada para guardarla en Fotos.</p>
+      <h2 id="resultImageTitle">${esc(context.title)}</h2>
+      <p id="resultImageText">${esc(description)}</p>
     </div>
     <section class="result-image-preview" aria-label="Vista previa del resultado en imagen">
       <div class="result-image-frame">
         <img src="${esc(image.url)}" alt="Resultado del Examen simulación 2 ECOEMS en formato PNG">
       </div>
-      <p>Si no aparece el guardado automático, toca «Compartir» y elige «Guardar imagen», o mantén presionada la vista previa.</p>
+      <p>${esc(context.note)}</p>
     </section>
     <div class="modal-actions result-image-actions">
       ${shareButton}
+      <button class="${downloadButtonClass}" type="button" data-action="download-result-image"${downloadAutofocus}>💾 Descargar imagen</button>
       <button class="modal-btn" type="button" data-action="open-result-image">🖼️ Abrir imagen</button>
       <button class="modal-btn warning" type="button" data-action="close-result-image">Cerrar</button>
     </div>`;
@@ -1762,7 +1832,7 @@
       const shared = await shareResultImage();
       if (shared) {
         STATE.modalStep = null;
-        revokeResultImageUrl();
+        revokeResultImageUrl({ delay: 60000 });
         renderModal();
       }
       return;
@@ -1773,9 +1843,14 @@
       return;
     }
 
+    if (action === 'download-result-image') {
+      downloadResultImageFromPreview();
+      return;
+    }
+
     if (action === 'close-result-image') {
       STATE.modalStep = null;
-      revokeResultImageUrl();
+      revokeResultImageUrl({ delay: 60000 });
       renderModal();
       return;
     }
@@ -2063,33 +2138,19 @@
       const resultFile = typeof File === 'function'
         ? new File([blob], filename, { type: 'image/png' })
         : null;
-      const isIOSDevice = isIOSLikeDevice();
       const shareAvailable = Boolean(resultFile && canShareFile(resultFile));
 
-      if (isIOSDevice) {
-        STATE.resultImage = {
-          url: pngUrl,
-          file: resultFile,
-          filename,
-          canShare: shareAvailable
-        };
+      revokeResultImageUrl();
+      STATE.resultImage = {
+        url: pngUrl,
+        file: resultFile,
+        filename,
+        canShare: shareAvailable,
+        context: getResultImageDeviceContext()
+      };
 
-        STATE.modalStep = 'resultImage';
-        renderModal();
-        buttons.forEach((button, index) => {
-          button.disabled = false;
-          button.textContent = originalButtonTexts[index];
-        });
-        return;
-      }
-
-      const link = document.createElement('a');
-      link.href = pngUrl;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.setTimeout(() => URL.revokeObjectURL(pngUrl), 1000);
+      STATE.modalStep = 'resultImage';
+      renderModal();
     } catch (error) {
       console.error('No se pudo descargar el resultado final.', error);
       buttons.forEach((button) => {
@@ -2141,6 +2202,7 @@
       || action === 'reset-progress'
       || action === 'share-result-image'
       || action === 'open-result-image'
+      || action === 'download-result-image'
       || action === 'close-result-image'
       || action === 'modal-review'
       || action === 'modal-close'
