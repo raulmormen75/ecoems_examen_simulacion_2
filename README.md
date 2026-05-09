@@ -18,6 +18,8 @@ También se generaron los assets visuales obligatorios en `assets/` y se validó
 
 La aplicación conserva el progreso del intento si se refresca la página. Al volver a cargar, muestra una notificación con dos opciones: continuar sin reiniciar o borrar el intento para empezar desde cero.
 
+La descarga del resultado PNG mantiene descarga directa en escritorio y agrega una ruta compatible con iPhone: vista previa guardable, apertura de imagen y uso de compartir cuando el navegador lo permite.
+
 ## Comandos locales
 
 ```powershell
@@ -37,6 +39,7 @@ Abrir `http://127.0.0.1:4173/` para revisar la aplicación.
 - Pistas: obligatorias en todos los reactivos.
 - Resultado final: descargable como `resultado-ecoems-ifr-simulacion-2.png`.
 - Recarga segura: progreso persistente con decisión explícita.
+- Compatibilidad iOS: alternativa para guardar el resultado desde Safari o Chrome en iPhone.
 
 ## Requisitos para publicar
 

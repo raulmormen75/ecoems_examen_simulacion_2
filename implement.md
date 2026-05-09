@@ -24,6 +24,7 @@
 - Retroalimentación diferenciada para respuesta correcta e incorrecta.
 - Resultado final y descarga PNG.
 - Persistencia de progreso con decisión explícita al recargar.
+- Ruta de guardado compatible con iPhone para el PNG final.
 - Identidad IFR, escudo institucional y Plus Jakarta Sans.
 
 ## Estado actual esperado
@@ -56,4 +57,5 @@ Generado exam-data.js con 128 reactivos y 10 áreas.
 10. Confirmar que la recarga restaura avance, respuestas, reactivo activo y cronómetro.
 11. Confirmar que el cronómetro se calcula contra una fecha límite real, no solo contra `setInterval`.
 12. Confirmar que `🧹 Reiniciar desde cero` borra el storage y vuelve a estado inicial.
-13. Commit y push.
+13. Confirmar que la descarga del resultado funciona en escritorio y que en iPhone muestra alternativa para compartir, abrir o guardar la imagen.
+14. Commit y push.

@@ -52,6 +52,7 @@ Validó:
 - Opciones visuales compactas en reactivos 5, 7 y 8.
 - Textos alternativos de imágenes sin frases de generación ni instrucciones internas.
 - Flujo de persistencia de progreso: llave exclusiva, firma completa del contenido, fecha límite real del cronómetro, modal de recarga, botones con emojis, guardado en `pagehide` y `visibilitychange`.
+- Descarga del resultado: ruta iOS con detección de iPhone/iPad, Web Share API, vista previa guardable, apertura de imagen y fallback de canvas.
 - Distribución de respuestas dentro de rango.
 - Sin tres respuestas iguales consecutivas.
 - Sin instrucciones internas en `exam-data.js`.
@@ -94,6 +95,8 @@ Validado:
 - En móvil, la modal no genera desplazamiento horizontal y los botones se ajustan al ancho disponible.
 - Storage corrupto o inválido se descarta sin romper la aplicación.
 - El cronómetro cierra por tiempo aunque el hilo del navegador quede bloqueado más tiempo que el restante.
+- En modo escritorio, la descarga directa genera `resultado-ecoems-ifr-simulacion-2.png`.
+- Con user-agent de iPhone, la descarga muestra la modal `📲 Guarda tu resultado en iPhone`, incluye imagen `blob:`, botones `📤 Compartir o guardar` y `🖼️ Abrir imagen`, sin desplazamiento horizontal.
 
 ## Evidencia
 

@@ -346,12 +346,45 @@ function validateProgressPersistenceControls() {
   log('QA de persistencia: guardado, modal de recarga y reinicio explícito presentes.');
 }
 
+function validateResultDownloadControls() {
+  const appSource = fs.readFileSync(APP_FILE, 'utf8');
+  const styleSource = fs.readFileSync(path.join(ROOT, 'exam-styles.css'), 'utf8');
+
+  const requiredAppFragments = [
+    ['detección de iOS/iPadOS', 'isIOSLikeDevice'],
+    ['fallback de canvas a Blob', 'canvasToPngBlob'],
+    ['fallback de canvas por data URL', 'toDataURL'],
+    ['timeout para carga de fuentes', 'waitForFontsReady'],
+    ['Web Share API para archivos', 'navigator.share'],
+    ['validación canShare para PNG', 'canShareFile'],
+    ['modal de imagen para iPhone', 'renderResultImageModal'],
+    ['acción para compartir resultado', 'share-result-image'],
+    ['acción para abrir imagen', 'open-result-image'],
+    ['acción para cerrar vista de imagen', 'close-result-image'],
+    ['archivo PNG con nombre correcto', 'resultado-ecoems-ifr-simulacion-2.png'],
+    ['instrucción visible para guardar en Fotos', 'Guardar imagen']
+  ];
+
+  for (const [label, fragment] of requiredAppFragments) {
+    assert.ok(appSource.includes(fragment), `Descarga de resultado en iOS: falta ${label}.`);
+  }
+
+  assert.ok(/📲\s*Guarda tu resultado en iPhone/.test(appSource), 'Descarga de resultado en iOS: falta título con emoji para iPhone.');
+  assert.ok(/📤\s*Compartir o guardar/.test(appSource), 'Descarga de resultado en iOS: falta botón para compartir o guardar.');
+  assert.ok(/🖼️\s*Abrir imagen/.test(appSource), 'Descarga de resultado en iOS: falta botón para abrir imagen.');
+  assert.ok(styleSource.includes('.result-image-frame'), 'Descarga de resultado en iOS: faltan estilos de vista previa.');
+  assert.ok(styleSource.includes('-webkit-touch-callout:default'), 'Descarga de resultado en iOS: falta soporte de menú táctil para guardar imagen.');
+
+  log('QA de descarga: ruta iOS con compartir, abrir imagen y vista previa guardable presentes.');
+}
+
 function main() {
   const buildSucceeded = runBuildGate();
   if (buildSucceeded) {
     assert.ok(fs.existsSync(DATA_FILE), 'El build indicó éxito, pero no existe exam-data.js.');
     validateData(loadData());
     validateProgressPersistenceControls();
+    validateResultDownloadControls();
     log('QA automatizada de datos completada. Ejecutar validación de navegador real antes de publicar en Vercel.');
     return;
   }

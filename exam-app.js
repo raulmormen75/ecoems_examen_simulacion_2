@@ -23,6 +23,7 @@
     expandedAnswered: Object.create(null),
     floatingReviewId: null,
     pendingSavedProgress: null,
+    resultImage: null,
     summary: null,
     modalStep: null,
     deadlineAt: null,
@@ -434,6 +435,103 @@
       clearPersistedProgress();
       return null;
     }
+  }
+
+  function isIOSLikeDevice() {
+    const userAgent = window.navigator.userAgent || '';
+    const platform = window.navigator.platform || '';
+    return /iPad|iPhone|iPod/i.test(userAgent)
+      || (platform === 'MacIntel' && Number(window.navigator.maxTouchPoints) > 1);
+  }
+
+  function canShareFile(file) {
+    return Boolean(
+      window.navigator.canShare
+      && window.navigator.share
+      && window.navigator.canShare({ files: [file] })
+    );
+  }
+
+  function revokeResultImageUrl() {
+    if (STATE.resultImage && STATE.resultImage.url) {
+      URL.revokeObjectURL(STATE.resultImage.url);
+    }
+    STATE.resultImage = null;
+  }
+
+  async function shareResultImage() {
+    if (!STATE.resultImage || !STATE.resultImage.file || !canShareFile(STATE.resultImage.file)) return false;
+
+    try {
+      await window.navigator.share({
+        files: [STATE.resultImage.file],
+        title: 'Resultado ECOEMS IFR',
+        text: 'Resultado del Examen simulación 2 ECOEMS.'
+      });
+      return true;
+    } catch (error) {
+      return error && error.name === 'AbortError' ? false : false;
+    }
+  }
+
+  function openResultImage() {
+    if (!STATE.resultImage || !STATE.resultImage.url) return;
+    window.open(STATE.resultImage.url, '_blank', 'noopener');
+  }
+
+  function dataUrlToBlob(dataUrl) {
+    const [header, body] = String(dataUrl || '').split(',');
+    const mimeMatch = /data:([^;]+);base64/i.exec(header || '');
+    if (!body || !mimeMatch) return null;
+
+    const binary = window.atob(body);
+    const bytes = new Uint8Array(binary.length);
+    for (let index = 0; index < binary.length; index += 1) {
+      bytes[index] = binary.charCodeAt(index);
+    }
+    return new Blob([bytes], { type: mimeMatch[1] || 'image/png' });
+  }
+
+  function canvasToPngBlob(canvas) {
+    return new Promise((resolve) => {
+      let settled = false;
+      const finish = (blob) => {
+        if (settled) return;
+        settled = true;
+        resolve(blob);
+      };
+
+      const fallbackTimer = window.setTimeout(() => {
+        try {
+          finish(dataUrlToBlob(canvas.toDataURL('image/png', 1)));
+        } catch (error) {
+          finish(null);
+        }
+      }, 1400);
+
+      if (typeof canvas.toBlob !== 'function') {
+        window.clearTimeout(fallbackTimer);
+        try {
+          finish(dataUrlToBlob(canvas.toDataURL('image/png', 1)));
+        } catch (error) {
+          finish(null);
+        }
+        return;
+      }
+
+      canvas.toBlob((blob) => {
+        window.clearTimeout(fallbackTimer);
+        finish(blob);
+      }, 'image/png', 1);
+    });
+  }
+
+  function waitForFontsReady(timeout = 1400) {
+    if (!document.fonts || !document.fonts.ready) return Promise.resolve();
+    return Promise.race([
+      document.fonts.ready.catch(() => null),
+      new Promise((resolve) => window.setTimeout(resolve, timeout))
+    ]);
   }
 
   function formatPercent(value) {
@@ -1220,6 +1318,32 @@
     </div>`;
   }
 
+  function renderResultImageModal() {
+    const image = STATE.resultImage;
+    if (!image) return '';
+
+    const shareButton = image.canShare
+      ? '<button class="modal-btn primary" type="button" data-action="share-result-image" data-autofocus="true">📤 Compartir o guardar</button>'
+      : '';
+
+    return `<div class="modal-head result-image-head">
+      <span class="pill">Resultado listo</span>
+      <h2 id="resultImageTitle">📲 Guarda tu resultado en iPhone</h2>
+      <p id="resultImageText">En iPhone, Safari y Chrome pueden abrir la imagen en lugar de descargarla. Usa la opción de compartir o abre la imagen y mantenla presionada para guardarla en Fotos.</p>
+    </div>
+    <section class="result-image-preview" aria-label="Vista previa del resultado en imagen">
+      <div class="result-image-frame">
+        <img src="${esc(image.url)}" alt="Resultado del Examen simulación 2 ECOEMS en formato PNG">
+      </div>
+      <p>Si no aparece el guardado automático, toca «Compartir» y elige «Guardar imagen», o mantén presionada la vista previa.</p>
+    </section>
+    <div class="modal-actions result-image-actions">
+      ${shareButton}
+      <button class="modal-btn" type="button" data-action="open-result-image">🖼️ Abrir imagen</button>
+      <button class="modal-btn warning" type="button" data-action="close-result-image">Cerrar</button>
+    </div>`;
+  }
+
   function renderSummaryModal(summary) {
     const title = summary.mode === 'time_expired' ? 'Tiempo límite alcanzado' : 'Examen concluido';
     const message = summary.mode === 'time_expired'
@@ -1316,6 +1440,15 @@
       nodes.modalShell.setAttribute('aria-labelledby', 'resumeChoiceTitle');
       nodes.modalShell.setAttribute('aria-describedby', 'resumeChoiceText');
       nodes.modalCard.innerHTML = renderResumeChoiceModal(STATE.pendingSavedProgress);
+      window.requestAnimationFrame(focusModalPrimaryAction);
+      return;
+    }
+
+    if (STATE.modalStep === 'resultImage' && STATE.resultImage) {
+      nodes.modalShell.hidden = false;
+      nodes.modalShell.setAttribute('aria-labelledby', 'resultImageTitle');
+      nodes.modalShell.setAttribute('aria-describedby', 'resultImageText');
+      nodes.modalCard.innerHTML = renderResultImageModal();
       window.requestAnimationFrame(focusModalPrimaryAction);
       return;
     }
@@ -1428,6 +1561,7 @@
 
   function resetExamProgress() {
     clearTimer();
+    revokeResultImageUrl();
     STATE.status = 'idle';
     STATE.activeIndex = 0;
     STATE.remainingSeconds = DURATION;
@@ -1438,6 +1572,7 @@
     STATE.expandedAnswered = Object.create(null);
     STATE.floatingReviewId = null;
     STATE.pendingSavedProgress = null;
+    STATE.resultImage = null;
     STATE.summary = null;
     STATE.modalStep = null;
     clearPersistedProgress();
@@ -1505,6 +1640,7 @@
 
   function startExam() {
     if (STATE.status !== 'idle') return;
+    revokeResultImageUrl();
     STATE.status = 'running';
     STATE.activeIndex = 0;
     setDeadlineFromRemaining(DURATION);
@@ -1514,6 +1650,7 @@
     STATE.reinforcementLog = [];
     STATE.floatingReviewId = null;
     STATE.pendingSavedProgress = null;
+    STATE.resultImage = null;
     STATE.summary = null;
     STATE.modalStep = null;
     startTimer();
@@ -1610,7 +1747,7 @@
     persistProgress({ force: true });
   }
 
-  function handleModalAction(action) {
+  async function handleModalAction(action) {
     if (action === 'restore-progress') {
       applySavedProgress(STATE.pendingSavedProgress);
       return;
@@ -1618,6 +1755,28 @@
 
     if (action === 'reset-progress') {
       resetExamProgress();
+      return;
+    }
+
+    if (action === 'share-result-image') {
+      const shared = await shareResultImage();
+      if (shared) {
+        STATE.modalStep = null;
+        revokeResultImageUrl();
+        renderModal();
+      }
+      return;
+    }
+
+    if (action === 'open-result-image') {
+      openResultImage();
+      return;
+    }
+
+    if (action === 'close-result-image') {
+      STATE.modalStep = null;
+      revokeResultImageUrl();
+      renderModal();
       return;
     }
 
@@ -1881,9 +2040,7 @@
     });
 
     try {
-      if (document.fonts && document.fonts.ready) {
-        await document.fonts.ready;
-      }
+      await waitForFontsReady();
 
       const measuringCanvas = document.createElement('canvas');
       const measuringContext = measuringCanvas.getContext('2d');
@@ -1898,13 +2055,37 @@
       context.scale(safeScale, safeScale);
       renderResultCanvasContent(context, STATE.summary, true, exportHeight);
 
-      const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png', 1));
+      const blob = await canvasToPngBlob(canvas);
       if (!blob) throw new Error('No se pudo generar la imagen PNG.');
 
+      const filename = 'resultado-ecoems-ifr-simulacion-2.png';
       const pngUrl = URL.createObjectURL(blob);
+      const resultFile = typeof File === 'function'
+        ? new File([blob], filename, { type: 'image/png' })
+        : null;
+      const isIOSDevice = isIOSLikeDevice();
+      const shareAvailable = Boolean(resultFile && canShareFile(resultFile));
+
+      if (isIOSDevice) {
+        STATE.resultImage = {
+          url: pngUrl,
+          file: resultFile,
+          filename,
+          canShare: shareAvailable
+        };
+
+        STATE.modalStep = 'resultImage';
+        renderModal();
+        buttons.forEach((button, index) => {
+          button.disabled = false;
+          button.textContent = originalButtonTexts[index];
+        });
+        return;
+      }
+
       const link = document.createElement('a');
       link.href = pngUrl;
-      link.download = 'resultado-ecoems-ifr-simulacion-2.png';
+      link.download = filename;
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -1955,7 +2136,15 @@
       return;
     }
 
-    if (action === 'restore-progress' || action === 'reset-progress' || action === 'modal-review' || action === 'modal-close') {
+    if (
+      action === 'restore-progress'
+      || action === 'reset-progress'
+      || action === 'share-result-image'
+      || action === 'open-result-image'
+      || action === 'close-result-image'
+      || action === 'modal-review'
+      || action === 'modal-close'
+    ) {
       handleModalAction(action);
       return;
     }
