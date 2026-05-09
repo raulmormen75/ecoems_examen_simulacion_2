@@ -20,6 +20,8 @@ La aplicación conserva el progreso del intento si se refresca la página. Al vo
 
 La descarga del resultado PNG muestra una vista previa guardable en iPhone, Android y Windows, con opciones para compartir cuando el navegador lo permite, descargar la imagen o abrirla en otra pestaña.
 
+En Español, los bloques azules de lectura se conservan, pero los resaltados y subrayados solo se muestran cuando el planteamiento pide explícitamente leer palabras o expresiones resaltadas o subrayadas.
+
 ## Comandos locales
 
 ```powershell
@@ -41,6 +43,7 @@ Abrir `http://127.0.0.1:4173/` para revisar la aplicación.
 - Resultado final: descargable como `resultado-ecoems-ifr-simulacion-2.png`.
 - Recarga segura: progreso persistente con decisión explícita.
 - Descarga alternativa del resultado: vista previa con botones para compartir, descargar o abrir imagen en iOS, Android y Windows.
+- Bloques de Español: sin marcas visuales que revelen la respuesta cuando no son parte explícita de la consigna.
 
 ## Requisitos para publicar
 

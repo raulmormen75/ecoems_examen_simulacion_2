@@ -1583,9 +1583,6 @@ Editorial: Río Claro
 Lugar de publicación: Puebla
 Año: 2022
 
-Marcas de énfasis:
-- Resaltar: «Autor», «Título», «Editorial», «Lugar de publicación», «Año»
-- Subrayar: «datos de una fuente consultada»
 [/TEXTO EN PÍLDORA VISUAL ESPECIAL]
 
 Planteamiento:
@@ -1631,9 +1628,6 @@ II. Días antes, la coordinadora pidió a los voluntarios reunir libros donados.
 III. Más tarde, separaron los ejemplares por edad, tema y estado de conservación.
 IV. El sábado por la mañana, limpiaron el salón y acomodaron mesas para revisar los libros.
 
-Marcas de énfasis:
-- Resaltar: «Días antes», «El sábado por la mañana», «Más tarde», «Al finalizar»
-- Subrayar: «orden cronológico»
 [/TEXTO EN PÍLDORA VISUAL ESPECIAL]
 
 Planteamiento:
@@ -1674,9 +1668,6 @@ Texto base:
 [TEXTO EN PÍLDORA VISUAL ESPECIAL]
 El consumo responsable consiste en adquirir productos después de pensar si realmente se necesitan, cuánto durarán y qué efecto tendrán en el ambiente. En otras palabras, implica comprar con conciencia y no por impulso.
 
-Marcas de énfasis:
-- Resaltar: «El consumo responsable consiste en adquirir productos después de pensar si realmente se necesitan»
-- Subrayar: «En otras palabras»
 [/TEXTO EN PÍLDORA VISUAL ESPECIAL]
 
 Planteamiento:
@@ -1718,7 +1709,6 @@ Texto base:
 El entrenamiento se suspendió debido a que la cancha quedó inundada por la lluvia.
 
 Marcas de énfasis:
-- Resaltar: «El entrenamiento se suspendió»
 - Subrayar: «debido a que»
 [/TEXTO EN PÍLDORA VISUAL ESPECIAL]
 
@@ -1762,7 +1752,6 @@ Primero, los alumnos revisaron las instrucciones del experimento; después, reun
 
 Marcas de énfasis:
 - Resaltar: «Primero», «después», «finalmente»
-- Subrayar: «revisaron», «reunieron», «anotaron»
 [/TEXTO EN PÍLDORA VISUAL ESPECIAL]
 
 Planteamiento:
@@ -1804,7 +1793,6 @@ Texto base:
 La escuela instaló nuevos botes para separar residuos; sin embargo, varios estudiantes todavía mezclan papel, plástico y restos de comida.
 
 Marcas de énfasis:
-- Resaltar: «La escuela instaló nuevos botes para separar residuos»
 - Subrayar: «sin embargo»
 [/TEXTO EN PÍLDORA VISUAL ESPECIAL]
 
@@ -1846,9 +1834,6 @@ Texto base:
 [TEXTO EN PÍLDORA VISUAL ESPECIAL]
 En el festival escolar, el grupo de música interpretó sones, jarabes y huapangos__ el taller de arte mostró grabados, acuarelas y máscaras__ y el club de lectura presentó cuentos, crónicas y poemas.
 
-Marcas de énfasis:
-- Resaltar: «sones, jarabes y huapangos», «grabados, acuarelas y máscaras», «cuentos, crónicas y poemas»
-- Subrayar: «__»
 [/TEXTO EN PÍLDORA VISUAL ESPECIAL]
 
 Planteamiento:
@@ -1889,9 +1874,6 @@ Texto base:
 [TEXTO EN PÍLDORA VISUAL ESPECIAL]
 Para la práctica de ciencias se pidieron estos materiales__ vaso medidor, sal, agua, cuchara y recipiente transparente.
 
-Marcas de énfasis:
-- Resaltar: «estos materiales»
-- Subrayar: «__»
 [/TEXTO EN PÍLDORA VISUAL ESPECIAL]
 
 Planteamiento:
@@ -1933,7 +1915,6 @@ Texto base:
 El informe entregado por el equipo incluía gráficas revisadas, conclusiones corregidas y fotografías seleccionadas.
 
 Marcas de énfasis:
-- Resaltar: «informe», «gráficas», «conclusiones», «fotografías»
 - Subrayar: «entregado», «revisadas», «corregidas», «seleccionadas»
 [/TEXTO EN PÍLDORA VISUAL ESPECIAL]
 
@@ -1975,9 +1956,6 @@ Texto base:
 [TEXTO EN PÍLDORA VISUAL ESPECIAL]
 Considero que las bibliotecas escolares deben abrir por las tardes, porque muchos estudiantes no tienen un espacio tranquilo para leer en casa. Además, ampliar su horario permitiría consultar libros después de clases y aprovechar mejor los recursos de la escuela.
 
-Marcas de énfasis:
-- Resaltar: «Considero que»
-- Subrayar: «porque», «Además»
 [/TEXTO EN PÍLDORA VISUAL ESPECIAL]
 
 Planteamiento:
@@ -2024,9 +2002,6 @@ Fragmentos publicitarios para comparar:
 «Más fresco que la mañana»
 «El color que viste tus días»
 
-Marcas de énfasis:
-- Resaltar: «Ahorra agua»
-- Subrayar: «cierra la llave mientras te cepillas»
 [/TEXTO EN PÍLDORA VISUAL ESPECIAL]
 
 Planteamiento:
@@ -2073,9 +2048,6 @@ Textos publicitarios para comparar:
 «Agua natural sin azúcar añadida»
 «Cuaderno con cien hojas rayadas»
 
-Marcas de énfasis:
-- Resaltar: «Tan suave que hasta las nubes lo envidian»
-- Subrayar: «hasta las nubes lo envidian»
 [/TEXTO EN PÍLDORA VISUAL ESPECIAL]
 
 Planteamiento:
@@ -2136,7 +2108,7 @@ Los 12 reactivos son nuevos.
 No se reutilizan planteamientos, textos, ejemplos ni contextos de la primera evaluación ni de las guías resueltas.
 La dificultad aumenta mediante inferencia, identificación funcional de conectores, puntuación en contextos con mayor detalle, clasificación gramatical y análisis de intención publicitaria.
 Todos los textos y fragmentos de lectura del área aparecen en píldoras visuales especiales.
-Se conservaron marcas de énfasis para palabras, frases o fragmentos que deben resaltarse o subrayarse.
+Las marcas de énfasis se conservan solo cuando el planteamiento pide explícitamente leer palabras o expresiones resaltadas o subrayadas.
 
 Observaciones técnicas:
 No hay reactivos que requieran imagen.

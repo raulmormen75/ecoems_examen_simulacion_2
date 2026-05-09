@@ -72,6 +72,12 @@ const EXPECTED_PROMPTS_BY_EXERCISE = new Map([
   [44, 'Con base en los modelos, ¿cómo se clasifican correctamente A, B y C?']
 ]);
 const EXPECTED_VISUAL_OPTION_EXERCISES = new Set([5, 7, 8]);
+const EXPECTED_SPANISH_PILL_MARKS = new Map([
+  [32, { highlights: [], underlines: ['debido a que'] }],
+  [33, { highlights: ['Primero', 'después', 'finalmente'], underlines: [] }],
+  [34, { highlights: [], underlines: ['sin embargo'] }],
+  [37, { highlights: [], underlines: ['entregado', 'revisadas', 'corregidas', 'seleccionadas'] }]
+]);
 
 function log(message) {
   console.log(`[qa-v2] ${message}`);
@@ -166,6 +172,27 @@ function visibleArtifactEntriesForExercise(exercise) {
   return entries.filter(([, value]) => value !== null && value !== undefined && String(value).trim());
 }
 
+function getPillMarks(exercise, field) {
+  if (!exercise.basePill || !Array.isArray(exercise.basePill[field])) return [];
+  return exercise.basePill[field];
+}
+
+function validateSpanishPillMarks(exercise) {
+  if (exercise.areaName !== 'Español' || !exercise.basePill) return;
+
+  const expected = EXPECTED_SPANISH_PILL_MARKS.get(exercise.number) || { highlights: [], underlines: [] };
+  assert.deepEqual(
+    getPillMarks(exercise, 'highlights'),
+    expected.highlights,
+    `Reactivo ${exercise.number}: marcas de resaltado no permitidas o incompletas en Español.`
+  );
+  assert.deepEqual(
+    getPillMarks(exercise, 'underlines'),
+    expected.underlines,
+    `Reactivo ${exercise.number}: marcas de subrayado no permitidas o incompletas en Español.`
+  );
+}
+
 function validateData(data, { partial = false } = {}) {
   assert.ok(data, 'No se cargó window.IFR_APP_DATA.');
   assert.equal(data.meta.title, 'Examen simulación 2 ECOEMS');
@@ -231,6 +258,8 @@ function validateData(data, { partial = false } = {}) {
         );
       }
     }
+
+    validateSpanishPillMarks(exercise);
 
     if (EXPECTED_VISUAL_OBJECTIVE_BASE_TEXTS.has(exercise.number)) {
       assert.equal(

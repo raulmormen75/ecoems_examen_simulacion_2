@@ -1764,16 +1764,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "En una actividad escolar se registraron estos datos:\n\nAutor: Laura Mendoza Ruiz\nTítulo: Caminos de la lluvia\nEditorial: Río Claro\nLugar de publicación: Puebla\nAño: 2022",
-        "highlights": [
-          "Autor",
-          "Título",
-          "Editorial",
-          "Lugar de publicación",
-          "Año"
-        ],
-        "underlines": [
-          "datos de una fuente consultada"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "¿Qué tipo de ficha permite conservar estos datos para identificar una obra consultada?",
       "options": [
@@ -1827,15 +1819,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "Ordena los siguientes enunciados para formar un texto con sentido cronológico.\n\nI. Al finalizar, los vecinos colocaron etiquetas en los estantes y abrieron la biblioteca comunitaria.\nII. Días antes, la coordinadora pidió a los voluntarios reunir libros donados.\nIII. Más tarde, separaron los ejemplares por edad, tema y estado de conservación.\nIV. El sábado por la mañana, limpiaron el salón y acomodaron mesas para revisar los libros.",
-        "highlights": [
-          "Días antes",
-          "El sábado por la mañana",
-          "Más tarde",
-          "Al finalizar"
-        ],
-        "underlines": [
-          "orden cronológico"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "¿Cuál es el orden correcto de los enunciados?",
       "options": [
@@ -1889,12 +1874,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "El consumo responsable consiste en adquirir productos después de pensar si realmente se necesitan, cuánto durarán y qué efecto tendrán en el ambiente. En otras palabras, implica comprar con conciencia y no por impulso.",
-        "highlights": [
-          "El consumo responsable consiste en adquirir productos después de pensar si realmente se necesitan"
-        ],
-        "underlines": [
-          "En otras palabras"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "¿Qué recurso se emplea principalmente para desarrollar la idea?",
       "options": [
@@ -1948,9 +1929,7 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "El entrenamiento se suspendió debido a que la cancha quedó inundada por la lluvia.",
-        "highlights": [
-          "El entrenamiento se suspendió"
-        ],
+        "highlights": [],
         "underlines": [
           "debido a que"
         ]
@@ -2012,11 +1991,7 @@ window.IFR_APP_DATA = {
           "después",
           "finalmente"
         ],
-        "underlines": [
-          "revisaron",
-          "reunieron",
-          "anotaron"
-        ]
+        "underlines": []
       },
       "prompt": "Las palabras resaltadas sirven para",
       "options": [
@@ -2070,9 +2045,7 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "La escuela instaló nuevos botes para separar residuos; sin embargo, varios estudiantes todavía mezclan papel, plástico y restos de comida.",
-        "highlights": [
-          "La escuela instaló nuevos botes para separar residuos"
-        ],
+        "highlights": [],
         "underlines": [
           "sin embargo"
         ]
@@ -2129,14 +2102,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "En el festival escolar, el grupo de música interpretó sones, jarabes y huapangos__ el taller de arte mostró grabados, acuarelas y máscaras__ y el club de lectura presentó cuentos, crónicas y poemas.",
-        "highlights": [
-          "sones, jarabes y huapangos",
-          "grabados, acuarelas y máscaras",
-          "cuentos, crónicas y poemas"
-        ],
-        "underlines": [
-          "__"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "¿Qué signo de puntuación debe colocarse en los espacios en blanco?",
       "options": [
@@ -2190,12 +2157,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "Para la práctica de ciencias se pidieron estos materiales__ vaso medidor, sal, agua, cuchara y recipiente transparente.",
-        "highlights": [
-          "estos materiales"
-        ],
-        "underlines": [
-          "__"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "¿Qué signo de puntuación debe colocarse después de «estos materiales»?",
       "options": [
@@ -2249,12 +2212,7 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "El informe entregado por el equipo incluía gráficas revisadas, conclusiones corregidas y fotografías seleccionadas.",
-        "highlights": [
-          "informe",
-          "gráficas",
-          "conclusiones",
-          "fotografías"
-        ],
+        "highlights": [],
         "underlines": [
           "entregado",
           "revisadas",
@@ -2314,13 +2272,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "Considero que las bibliotecas escolares deben abrir por las tardes, porque muchos estudiantes no tienen un espacio tranquilo para leer en casa. Además, ampliar su horario permitiría consultar libros después de clases y aprovechar mejor los recursos de la escuela.",
-        "highlights": [
-          "Considero que"
-        ],
-        "underlines": [
-          "porque",
-          "Además"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "El fragmento se clasifica principalmente como texto de opinión porque",
       "options": [
@@ -2374,12 +2327,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "Fragmentos publicitarios para comparar:\n\n«Tu sonrisa, nuestra mejor carta»\n«El sabor de casa en cada bocado»\n«Ahorra agua: cierra la llave mientras te cepillas»\n«Más fresco que la mañana»\n«El color que viste tus días»",
-        "highlights": [
-          "Ahorra agua"
-        ],
-        "underlines": [
-          "cierra la llave mientras te cepillas"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "¿Cuál eslogan pretende lograr un cambio de conducta en el receptor?",
       "options": [
@@ -2433,12 +2382,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "Textos publicitarios para comparar:\n\n«Pan horneado todos los días»\n«Tan suave que hasta las nubes lo envidian»\n«Crema para manos de uso diario»\n«Agua natural sin azúcar añadida»\n«Cuaderno con cien hojas rayadas»",
-        "highlights": [
-          "Tan suave que hasta las nubes lo envidian"
-        ],
-        "underlines": [
-          "hasta las nubes lo envidian"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "Selecciona el ejemplo donde se exageran las cualidades de un producto.",
       "options": [

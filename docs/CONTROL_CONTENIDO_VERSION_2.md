@@ -66,6 +66,13 @@ No se detectaron tres respuestas iguales consecutivas.
 - Español: 29 al 40.
 - Habilidad verbal: 77 al 92.
 
+En Español, las píldoras conservan el bloque azul de lectura. Las marcas visuales se limitan a las consignas explícitas:
+
+- 32: subrayado de «debido a que».
+- 33: resaltado de «Primero», «después» y «finalmente».
+- 34: subrayado de «sin embargo».
+- 37: subrayado de «entregado», «revisadas», «corregidas» y «seleccionadas».
+
 ## Errores detectados y corregidos
 
 - Física 105-116 ya fue integrada en el TXT.
@@ -84,3 +91,4 @@ No se detectaron tres respuestas iguales consecutivas.
 - Se mejoró la descarga del resultado PNG para iOS, Android y Windows: se muestra una vista previa guardable con opciones para compartir cuando el navegador lo permite, descargar la imagen o abrirla en otra pestaña.
 - La URL `blob:` de la vista previa se conserva de forma diferida al cerrar la modal para evitar carreras mientras el navegador abre o descarga la imagen.
 - La generación del PNG ya no depende indefinidamente de `document.fonts.ready` ni de `canvas.toBlob()`: ambos tienen una ruta de salida segura.
+- En Español se retiraron resaltados y subrayados que adelantaban la respuesta en 29, 30, 31, 35, 36, 38, 39 y 40; en 32, 33, 34 y 37 se conserva solo la marca visual que el planteamiento pide explícitamente.

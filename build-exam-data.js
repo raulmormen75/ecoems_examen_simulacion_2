@@ -264,6 +264,24 @@ function parsePillBlock(lines) {
   };
 }
 
+function promptAllowsHighlightMarks(prompt) {
+  return /\b(resaltad[ao]s?|sombread[ao]s?)\b/i.test(String(prompt || ''));
+}
+
+function promptAllowsUnderlineMarks(prompt) {
+  return /\bsubrayad[ao]s?\b/i.test(String(prompt || ''));
+}
+
+function normalizePillMarksForExercise(basePill, prompt, expectedArea) {
+  if (!basePill || !expectedArea || expectedArea.id !== 'espanol') return basePill;
+
+  return {
+    ...basePill,
+    highlights: promptAllowsHighlightMarks(prompt) ? basePill.highlights : [],
+    underlines: promptAllowsUnderlineMarks(prompt) ? basePill.underlines : []
+  };
+}
+
 function parseMarkdownTable(lines) {
   const tableLines = trimBlock(lines).filter((line) => /^\s*\|.*\|\s*$/.test(line));
   if (tableLines.length < 2) return { headers: [], rows: [] };
@@ -376,6 +394,7 @@ function parseReactivoBlock(blockLines) {
     }, {});
 
   const expectedArea = getExpectedAreaByNumber(number);
+  const basePill = normalizePillMarksForExercise(base.basePill, prompt, expectedArea);
   const imageVisuals = base.instructions
     .filter((instruction) => instruction.suggestedDestination)
     .map((instruction) => buildImageVisualFromInstruction(instruction, areaName, number));
@@ -392,7 +411,7 @@ function parseReactivoBlock(blockLines) {
     areaName,
     block: blockName,
     baseText: base.baseText || null,
-    basePill: base.basePill,
+    basePill,
     prompt,
     options,
     correctOption: correctAnswer ? correctAnswer.label : '',

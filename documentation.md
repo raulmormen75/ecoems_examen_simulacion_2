@@ -13,6 +13,7 @@ El contenido ya está completo: 128 reactivos, 10 áreas y Física integrada del
 - El reactivo 106 puede mostrar tabla horizontal e imagen en el mismo reactivo.
 - Las instrucciones internas del TXT se filtran y no forman parte de `exam-data.js`.
 - Las píldoras visuales se derivan del TXT.
+- En Español, las píldoras visuales conservan el bloque azul de lectura, pero los resaltados y subrayados solo se renderizan cuando el planteamiento los menciona de forma explícita.
 - Las tablas marcadas se convierten en tablas renderizables con desplazamiento horizontal.
 - Los planteamientos y argumentos de áreas numéricas deben mostrarse con notación escolar limpia, sin sintaxis tipo LaTeX o Markdown visible para el alumno.
 - En reactivos con apoyo visual, el texto base visible debe funcionar como instrucción u objetivo; las descripciones largas de la imagen se reservan para el apoyo visual o el texto alternativo.
@@ -38,6 +39,8 @@ python -m http.server 4173
 `node build-exam-data.js` generó `exam-data.js` con 128 reactivos y 10 áreas.
 
 `node qa/run-exam-qa.js` validó datos, opciones, pistas, argumentos, assets, distribución de respuestas, ausencia de contenido interno en `exam-data.js`, ausencia de artefactos LaTeX/Markdown en textos visibles, textos base breves en reactivos con imagen revisados, textos alternativos sin frases de generación y presencia del flujo de persistencia de progreso.
+
+También valida que Español no conserve resaltados o subrayados dentro de los bloques azules salvo en los reactivos 32, 33, 34 y 37, donde el planteamiento pide explícitamente leer una expresión subrayada o palabras resaltadas.
 
 `node qa/run-result-download-browser-qa.js` abrió Chrome o Edge por DevTools y validó la vista previa del resultado en perfiles Windows, Android e iPhone: imagen `blob:`, botones de compartir, descargar y abrir imagen, nombre del PNG y ausencia de desplazamiento horizontal.
 
