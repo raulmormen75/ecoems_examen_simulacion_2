@@ -60,7 +60,7 @@ Validación en navegador local:
 - Descarga de resultado probada con perfiles móviles iPhone y Android: modal de plataforma, imagen `blob:` visible, botones disponibles según navegador y sin overflow móvil.
 - Reactivos 3 y 4 con tablas visuales en lugar de tablas Markdown crudas.
 - Reactivo 5 carga imagen real en móvil y muestra una instrucción breve, sin el bloque descriptivo de figuras.
-- Reactivos con imagen revisados mantienen objetivo de trabajo visible y assets reales; el reactivo 75 ya incluye apoyo visual neutral de figura compuesta.
+- Reactivos con imagen revisados mantienen objetivo de trabajo visible y assets reales; los reactivos 75 y 76 ya incluyen apoyos visuales neutrales.
 
 ## Siguiente hito
 

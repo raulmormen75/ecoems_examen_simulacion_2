@@ -4364,10 +4364,23 @@ window.IFR_APP_DATA = {
         "e": "343 cm³: es el volumen del cubo, pero el planteamiento pide cuánto mayor es respecto al prisma."
       },
       "visual": {
-        "kind": "none",
-        "content": ""
+        "kind": "image",
+        "position": "base",
+        "required": true,
+        "src": "assets/matematicas/reactivo-76-volumen-solidos.png",
+        "alt": "Matemáticas, reactivo 76: Diagrama comparativo neutral de un cubo y un prisma rectangular con sus medidas.",
+        "internalInstructionRemoved": true
       },
-      "visuals": [],
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/matematicas/reactivo-76-volumen-solidos.png",
+          "alt": "Matemáticas, reactivo 76: Diagrama comparativo neutral de un cubo y un prisma rectangular con sus medidas.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 76,
       "rangeStart": 65,
       "rangeEnd": 76

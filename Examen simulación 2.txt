@@ -3261,7 +3261,7 @@ TABLA DE CONTROL DEL PAQUETE
 | 73 | Matemáticas | Lectura de gráficas sencillas | e) | Sí | No | No | Medio: la gráfica debe mostrar con claridad los valores y no sugerir la respuesta |
 | 74 | Matemáticas | Geometría: ángulos alternos internos | d) | Sí | No | No | Medio: la numeración de ángulos debe coincidir exactamente con el texto |
 | 75 | Matemáticas | Medición: área de figura compuesta | b) | Sí | No | No | Bajo: distinguir área de rectángulo y área de triángulo |
-| 76 | Matemáticas | Medición: volumen y comparación de sólidos | c) | No | No | No | Bajo: comparar volúmenes después de calcularlos por separado |
+| 76 | Matemáticas | Medición: volumen y comparación de sólidos | c) | Sí | No | No | Bajo: comparar volúmenes después de calcularlos por separado |
 
 
 REACTIVO 65
@@ -3976,6 +3976,22 @@ Medición: volumen y comparación de sólidos
 
 Texto base:
 No aplica.
+
+[INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
+Área: Matemáticas
+Reactivo: 76
+Uso: Diagrama comparativo neutral de un cubo y un prisma rectangular con sus medidas.
+Herramienta: $imagegen con GPT-Image 2.
+Tipo de imagen: diagrama geométrico de sólidos.
+Descripción técnica:
+Dibujar dos sólidos separados: un cubo con aristas de 7 cm y un prisma rectangular con medidas 10 cm de largo, 4 cm de ancho y 5 cm de alto. Usar guías de dimensión legibles junto a cada sólido, sin destacar cuál tiene mayor volumen.
+Estilo: limpio, académico, legible en móvil, con líneas azul IFR o azul marino y fondo claro.
+Texto visible permitido: «7 cm», «10 cm», «4 cm», «5 cm».
+Texto visible prohibido: no incluir fórmula, volumen calculado, diferencia, respuesta correcta, pista, explicación, signo de comparación ni marcas que indiquen cuál sólido es mayor.
+Formato sugerido: PNG o WebP, 1024 × 768 px.
+Destino sugerido: /assets/matematicas/reactivo-76-volumen-solidos.png
+Validación: el cubo debe mostrar aristas de 7 cm; el prisma debe mostrar 10 cm, 4 cm y 5 cm; la imagen no debe resolver ni sugerir la diferencia de volúmenes.
+[/INSTRUCCIÓN INTERNA PARA CODEX]
 
 Planteamiento:
 Un cubo tiene aristas de 7 cm. Un prisma rectangular mide 10 cm de largo, 4 cm de ancho y 5 cm de alto.

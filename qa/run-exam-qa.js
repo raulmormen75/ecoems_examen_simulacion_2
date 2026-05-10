@@ -72,7 +72,8 @@ const EXPECTED_PROMPTS_BY_EXERCISE = new Map([
   [44, 'Con base en los modelos, ¿cómo se clasifican correctamente A, B y C?']
 ]);
 const EXPECTED_IMAGE_VISUALS_BY_EXERCISE = new Map([
-  [75, 'assets/matematicas/reactivo-75-area-figura-compuesta.png']
+  [75, 'assets/matematicas/reactivo-75-area-figura-compuesta.png'],
+  [76, 'assets/matematicas/reactivo-76-volumen-solidos.png']
 ]);
 const EXPECTED_VISUAL_OPTION_EXERCISES = new Set([5, 7, 8]);
 const EXPECTED_SPANISH_PILL_MARKS = new Map([

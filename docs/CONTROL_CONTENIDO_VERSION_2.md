@@ -47,6 +47,7 @@ No se detectaron tres respuestas iguales consecutivas.
 - 73: `assets/matematicas/reactivo-73-grafica-consumo-agua.png`
 - 74: `assets/matematicas/reactivo-74-angulos-alternos-internos.png`
 - 75: `assets/matematicas/reactivo-75-area-figura-compuesta.png`
+- 76: `assets/matematicas/reactivo-76-volumen-solidos.png`
 - 94: `assets/geografia/reactivo-94-coordenadas-p.png`
 - 106: `assets/fisica/reactivo-106-grafica-posicion-tiempo.png`
 - 108: `assets/fisica/reactivo-108-equilibrio-fuerzas.png`
@@ -88,6 +89,7 @@ En Español, las píldoras conservan el bloque azul de lectura. Las marcas visua
 - Los textos alternativos de imágenes se ajustaron para describir el apoyo visual al alumno, con más contexto accesible en 5, 7 y 8, y ya no conservar frases de generación.
 - El diagrama del reactivo 74 se reemplazó con una imagen generada mediante `imagegen`, ajustada a 1024 × 768 px y con numeración corregida: 3, 4, 5 y 6 como ángulos interiores.
 - El reactivo 75 recibió un apoyo visual neutral de figura compuesta: rectángulo de 18 m por 9 m y triángulo con base de 6 m y altura de 9 m, sin fórmulas, áreas calculadas ni marcas de solución.
+- El reactivo 76 recibió un apoyo visual neutral de sólidos: cubo de 7 cm de arista y prisma rectangular de 10 cm, 4 cm y 5 cm, sin volúmenes, diferencia ni marcas de comparación.
 - Se agregó recarga segura del intento: si existe progreso guardado, la app pregunta si se quiere continuar sin reiniciar o borrar el intento desde cero.
 - El avance guardado conserva respuestas, reactivo activo, métricas y cronómetro; el tiempo se calcula contra una fecha límite real para evitar pausas por suspensión o pestaña inactiva.
 - El intento guardado se invalida si cambia la firma del contenido estructurado del examen.
