@@ -121,6 +121,7 @@ Validó:
 
 - Captura local generada por Playwright MCP: `docs/qa/ecoems-simulacion-2-mobile-reactivo-5.png`.
 - Captura móvil del reactivo 40 sin resaltado ni subrayado indebido: `docs/qa/ecoems-simulacion-2-mobile-espanol-marcas.png`.
+- Captura móvil del reactivo 74 con diagrama generado por `imagegen`: `docs/qa/ecoems-simulacion-2-mobile-reactivo-74-imagegen.png`.
 
 ## Estado de publicación
 
