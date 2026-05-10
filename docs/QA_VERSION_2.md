@@ -49,6 +49,7 @@ Validó:
 - Tablas con desplazamiento horizontal.
 - Ausencia de artefactos visibles tipo LaTeX o Markdown en planteamientos, opciones, pistas, argumentos y celdas de tablas.
 - Textos base breves en reactivos con imagen revisados: 5, 6, 7, 8, 9, 10, 44, 73, 74, 94, 106, 108 y 112.
+- Reactivo 75 con apoyo visual neutral de figura compuesta y planteamiento completo conservado.
 - Opciones visuales compactas en reactivos 5, 7 y 8.
 - Textos alternativos de imágenes sin frases de generación ni instrucciones internas.
 - Flujo de persistencia de progreso: llave exclusiva, firma completa del contenido, fecha límite real del cronómetro, modal de recarga, botones con emojis, guardado en `pagehide` y `visibilitychange`.
@@ -122,6 +123,7 @@ Validó:
 - Captura local generada por Playwright MCP: `docs/qa/ecoems-simulacion-2-mobile-reactivo-5.png`.
 - Captura móvil del reactivo 40 sin resaltado ni subrayado indebido: `docs/qa/ecoems-simulacion-2-mobile-espanol-marcas.png`.
 - Captura móvil del reactivo 74 con diagrama generado por `imagegen`: `docs/qa/ecoems-simulacion-2-mobile-reactivo-74-imagegen.png`.
+- Captura móvil del reactivo 75 con apoyo visual de figura compuesta: `docs/qa/ecoems-simulacion-2-mobile-reactivo-75-imagegen.png`.
 
 ## Estado de publicación
 

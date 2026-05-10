@@ -22,6 +22,7 @@ python tools/generate_exam_assets.py
 - `assets/quimica/reactivo-44-modelos-particulas.png`
 - `assets/matematicas/reactivo-73-grafica-consumo-agua.png`
 - `assets/matematicas/reactivo-74-angulos-alternos-internos.png`
+- `assets/matematicas/reactivo-75-area-figura-compuesta.png`
 - `assets/geografia/reactivo-94-coordenadas-p.png`
 - `assets/fisica/reactivo-106-grafica-posicion-tiempo.png`
 - `assets/fisica/reactivo-108-equilibrio-fuerzas.png`

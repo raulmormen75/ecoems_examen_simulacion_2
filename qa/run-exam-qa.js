@@ -71,6 +71,9 @@ const EXPECTED_VISUAL_OBJECTIVE_BASE_TEXTS = new Map([
 const EXPECTED_PROMPTS_BY_EXERCISE = new Map([
   [44, 'Con base en los modelos, ¿cómo se clasifican correctamente A, B y C?']
 ]);
+const EXPECTED_IMAGE_VISUALS_BY_EXERCISE = new Map([
+  [75, 'assets/matematicas/reactivo-75-area-figura-compuesta.png']
+]);
 const EXPECTED_VISUAL_OPTION_EXERCISES = new Set([5, 7, 8]);
 const EXPECTED_SPANISH_PILL_MARKS = new Map([
   [32, { highlights: [], underlines: ['debido a que'] }],
@@ -275,6 +278,12 @@ function validateData(data, { partial = false } = {}) {
         EXPECTED_PROMPTS_BY_EXERCISE.get(exercise.number),
         `Reactivo ${exercise.number}: planteamiento esperado no coincide.`
       );
+    }
+
+    if (EXPECTED_IMAGE_VISUALS_BY_EXERCISE.has(exercise.number)) {
+      const expectedSrc = EXPECTED_IMAGE_VISUALS_BY_EXERCISE.get(exercise.number);
+      const imageVisual = getExerciseVisuals(exercise).find((visual) => visual.kind === 'image' && visual.src === expectedSrc);
+      assert.ok(imageVisual, `Reactivo ${exercise.number}: falta imagen esperada ${expectedSrc}.`);
     }
 
     if (EXPECTED_VISUAL_OPTION_EXERCISES.has(exercise.number)) {

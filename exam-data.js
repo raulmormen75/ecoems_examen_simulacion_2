@@ -4301,10 +4301,23 @@ window.IFR_APP_DATA = {
         "e": "270 m²: excede el área real porque no respeta las fórmulas de las figuras."
       },
       "visual": {
-        "kind": "none",
-        "content": ""
+        "kind": "image",
+        "position": "base",
+        "required": true,
+        "src": "assets/matematicas/reactivo-75-area-figura-compuesta.png",
+        "alt": "Matemáticas, reactivo 75: Diagrama de terreno compuesto por un rectángulo y un jardín triangular, solo como referencia visual de medidas.",
+        "internalInstructionRemoved": true
       },
-      "visuals": [],
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/matematicas/reactivo-75-area-figura-compuesta.png",
+          "alt": "Matemáticas, reactivo 75: Diagrama de terreno compuesto por un rectángulo y un jardín triangular, solo como referencia visual de medidas.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 75,
       "rangeStart": 65,
       "rangeEnd": 76

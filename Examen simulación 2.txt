@@ -3260,7 +3260,7 @@ TABLA DE CONTROL DEL PAQUETE
 | 72 | Matemáticas | Lectura de tablas y datos | a) | No | Sí | No | Medio: tabla con varias columnas, requiere barra visible en móvil |
 | 73 | Matemáticas | Lectura de gráficas sencillas | e) | Sí | No | No | Medio: la gráfica debe mostrar con claridad los valores y no sugerir la respuesta |
 | 74 | Matemáticas | Geometría: ángulos alternos internos | d) | Sí | No | No | Medio: la numeración de ángulos debe coincidir exactamente con el texto |
-| 75 | Matemáticas | Medición: área de figura compuesta | b) | No | No | No | Bajo: distinguir área de rectángulo y área de triángulo |
+| 75 | Matemáticas | Medición: área de figura compuesta | b) | Sí | No | No | Bajo: distinguir área de rectángulo y área de triángulo |
 | 76 | Matemáticas | Medición: volumen y comparación de sólidos | c) | No | No | No | Bajo: comparar volúmenes después de calcularlos por separado |
 
 
@@ -3895,6 +3895,22 @@ Medición: área de figura compuesta
 
 Texto base:
 No aplica.
+
+[INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
+Área: Matemáticas
+Reactivo: 75
+Uso: Diagrama de terreno compuesto por un rectángulo y un jardín triangular, solo como referencia visual de medidas.
+Herramienta: $imagegen con GPT-Image 2.
+Tipo de imagen: diagrama geométrico de figura compuesta.
+Descripción técnica:
+Dibujar un rectángulo horizontal con medidas 18 m de largo y 9 m de ancho. En uno de sus lados, agregar un triángulo unido por una base de 6 m. La altura perpendicular del triángulo debe medir 9 m. Usar líneas de dimensión claras fuera de la figura o junto al triángulo, sin colorear regiones como respuesta.
+Estilo: limpio, académico, legible en móvil, con líneas azul IFR o azul marino y fondo claro.
+Texto visible permitido: «18 m», «9 m», «6 m».
+Texto visible prohibido: no incluir fórmula, área calculada, respuesta correcta, pista, explicación, sombreado de solución ni marcas que indiquen qué operaciones realizar.
+Formato sugerido: PNG o WebP, 1024 × 768 px.
+Destino sugerido: /assets/matematicas/reactivo-75-area-figura-compuesta.png
+Validación: el rectángulo debe mostrar 18 m y 9 m; el triángulo debe mostrar base 6 m y altura perpendicular 9 m, sin resolver el área total.
+[/INSTRUCCIÓN INTERNA PARA CODEX]
 
 Planteamiento:
 Un terreno está formado por un rectángulo de 18 m de largo y 9 m de ancho. A uno de sus lados se le agrega un jardín triangular cuya base mide 6 m y cuya altura mide 9 m.
