@@ -75,6 +75,8 @@ En Español, las píldoras conservan el bloque azul de lectura. Las marcas visua
 - 34: subrayado de «sin embargo».
 - 37: subrayado de «entregado», «revisadas», «corregidas» y «seleccionadas».
 
+En Habilidad verbal, las píldoras conservan el bloque azul de lectura. Los reactivos 77 al 88 ya no muestran resaltados ni subrayados salvo cuando el planteamiento lo pide de forma explícita. En 87 y 88 se conserva solo la palabra resaltada; los subrayados auxiliares se eliminan. La misma regla se aplica hasta el reactivo 92.
+
 ## Errores detectados y corregidos
 
 - Física 105-116 ya fue integrada en el TXT.
@@ -97,3 +99,4 @@ En Español, las píldoras conservan el bloque azul de lectura. Las marcas visua
 - La URL `blob:` de la vista previa se conserva de forma diferida al cerrar la modal para evitar carreras mientras el navegador abre o descarga la imagen.
 - La generación del PNG ya no depende indefinidamente de `document.fonts.ready` ni de `canvas.toBlob()`: ambos tienen una ruta de salida segura.
 - En Español se retiraron resaltados y subrayados que adelantaban la respuesta en 29, 30, 31, 35, 36, 38, 39 y 40; en 32, 33, 34 y 37 se conserva solo la marca visual que el planteamiento pide explícitamente.
+- En Habilidad verbal se retiraron resaltados y subrayados que adelantaban pistas visuales en 77, 78, 79, 80, 81, 82, 83, 84, 85, 86 y 90; en 87, 88, 89, 91 y 92 se conserva solo la palabra resaltada porque la consigna la menciona explícitamente.

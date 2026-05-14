@@ -54,7 +54,7 @@ Validó:
 - Textos alternativos de imágenes sin frases de generación ni instrucciones internas.
 - Flujo de persistencia de progreso: llave exclusiva, firma completa del contenido, fecha límite real del cronómetro, modal de recarga, botones con emojis, guardado en `pagehide` y `visibilitychange`.
 - Descarga del resultado: vista previa guardable para iOS, Android y Windows, Web Share API opcional, descarga desde modal, apertura de imagen y fallback de canvas.
-- Control de marcas visuales en Español: sin resaltados ni subrayados cuando el planteamiento no los pide explícitamente; marcas conservadas solo en 32, 33, 34 y 37.
+- Control de marcas visuales en Español y Habilidad verbal: sin resaltados ni subrayados cuando el planteamiento no los pide explícitamente; marcas conservadas solo en los reactivos donde la consigna las solicita.
 - Distribución de respuestas dentro de rango.
 - Sin tres respuestas iguales consecutivas.
 - Sin instrucciones internas en `exam-data.js`.
@@ -122,6 +122,7 @@ Validó:
 
 - Captura local generada por Playwright MCP: `docs/qa/ecoems-simulacion-2-mobile-reactivo-5.png`.
 - Captura móvil del reactivo 40 sin resaltado ni subrayado indebido: `docs/qa/ecoems-simulacion-2-mobile-espanol-marcas.png`.
+- Captura móvil del reactivo 81 sin resaltado ni subrayado indebido: `docs/qa/ecoems-simulacion-2-mobile-habilidad-verbal-marcas.png`.
 - Captura móvil del reactivo 74 con diagrama generado por `imagegen`: `docs/qa/ecoems-simulacion-2-mobile-reactivo-74-imagegen.png`.
 - Captura móvil del reactivo 75 con apoyo visual de figura compuesta: `docs/qa/ecoems-simulacion-2-mobile-reactivo-75-imagegen.png`.
 - Captura móvil del reactivo 76 con apoyo visual de sólidos: `docs/qa/ecoems-simulacion-2-mobile-reactivo-76-imagegen.png`.

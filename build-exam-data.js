@@ -265,15 +265,19 @@ function parsePillBlock(lines) {
 }
 
 function promptAllowsHighlightMarks(prompt) {
-  return /\b(resaltad[ao]s?|sombread[ao]s?)\b/i.test(String(prompt || ''));
+  return /\b(resalt\w*|sombread\w*)\b/i.test(String(prompt || ''));
 }
 
 function promptAllowsUnderlineMarks(prompt) {
-  return /\bsubrayad[ao]s?\b/i.test(String(prompt || ''));
+  return /\bsubray\w*\b/i.test(String(prompt || ''));
+}
+
+function areaUsesExplicitMarkGate(expectedArea) {
+  return expectedArea && ['espanol', 'habilidad-verbal'].includes(expectedArea.id);
 }
 
 function normalizePillMarksForExercise(basePill, prompt, expectedArea) {
-  if (!basePill || !expectedArea || expectedArea.id !== 'espanol') return basePill;
+  if (!basePill || !areaUsesExplicitMarkGate(expectedArea)) return basePill;
 
   return {
     ...basePill,

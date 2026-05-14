@@ -4890,7 +4890,7 @@ Observaciones técnicas:
 No hay reactivos que requieran imagen.
 No hay tablas con desplazamiento horizontal en esta área.
 Todos los reactivos 77 al 92 requieren texto en píldora visual especial.
-Las marcas de énfasis deben conservar resaltados y subrayados sin mostrar la respuesta correcta dentro de la app.
+Las marcas de énfasis solo deben renderizarse cuando el planteamiento mencione explícitamente palabras o frases resaltadas, sombreadas o subrayadas; si no lo menciona, el bloque azul debe mostrarse sin marcas gráficas.
 
 === FIN DEL ÁREA TEMÁTICA: HABILIDAD VERBAL ===
 === LISTO PARA PEGAR EN TXT Y ANALIZAR CON CODEX ===

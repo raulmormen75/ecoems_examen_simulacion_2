@@ -53,7 +53,7 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
    - QA de navegador reproducible para perfiles Windows, Android e iPhone.
    - Timeout para fuentes y fallback `toDataURL()` si `canvas.toBlob()` no responde.
 
-9. Depurar marcas visuales en Español.
+9. Depurar marcas visuales en Español y Habilidad verbal.
    - Bloques azules de lectura conservados.
    - Resaltados y subrayados retirados cuando no son parte explícita de la consigna.
    - Parser y QA reforzados para impedir que esas marcas vuelvan a revelar respuestas.
@@ -75,7 +75,7 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
 - Revisión local en navegador realizada.
 - Recarga segura validada en escritorio y móvil.
 - Descarga PNG validada con vista previa en perfiles Windows, Android e iPhone.
-- Español sin marcas visuales que adelanten respuestas fuera de consignas explícitas.
+- Español y Habilidad verbal sin marcas visuales que adelanten respuestas fuera de consignas explícitas.
 - Documentación actualizada.
 
 ## Criterios de publicación

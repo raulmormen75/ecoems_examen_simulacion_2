@@ -82,6 +82,13 @@ const EXPECTED_SPANISH_PILL_MARKS = new Map([
   [34, { highlights: [], underlines: ['sin embargo'] }],
   [37, { highlights: [], underlines: ['entregado', 'revisadas', 'corregidas', 'seleccionadas'] }]
 ]);
+const EXPECTED_VERBAL_PILL_MARKS = new Map([
+  [87, { highlights: ['POSPONER'], underlines: [] }],
+  [88, { highlights: ['CONFUSA'], underlines: [] }],
+  [89, { highlights: ['ESCASO'], underlines: [] }],
+  [91, { highlights: ['PRECISA'], underlines: [] }],
+  [92, { highlights: ['RESGUARDAR'], underlines: [] }]
+]);
 
 function log(message) {
   console.log(`[qa-v2] ${message}`);
@@ -197,6 +204,22 @@ function validateSpanishPillMarks(exercise) {
   );
 }
 
+function validateVerbalPillMarks(exercise) {
+  if (exercise.areaName !== 'Habilidad verbal' || !exercise.basePill) return;
+
+  const expected = EXPECTED_VERBAL_PILL_MARKS.get(exercise.number) || { highlights: [], underlines: [] };
+  assert.deepEqual(
+    getPillMarks(exercise, 'highlights'),
+    expected.highlights,
+    `Reactivo ${exercise.number}: marcas de resaltado no permitidas o incompletas en Habilidad verbal.`
+  );
+  assert.deepEqual(
+    getPillMarks(exercise, 'underlines'),
+    expected.underlines,
+    `Reactivo ${exercise.number}: marcas de subrayado no permitidas en Habilidad verbal.`
+  );
+}
+
 function validateData(data, { partial = false } = {}) {
   assert.ok(data, 'No se cargó window.IFR_APP_DATA.');
   assert.equal(data.meta.title, 'Examen simulación 2 ECOEMS');
@@ -264,6 +287,7 @@ function validateData(data, { partial = false } = {}) {
     }
 
     validateSpanishPillMarks(exercise);
+    validateVerbalPillMarks(exercise);
 
     if (EXPECTED_VISUAL_OBJECTIVE_BASE_TEXTS.has(exercise.number)) {
       assert.equal(

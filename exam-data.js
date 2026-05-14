@@ -4395,16 +4395,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "Los humedales urbanos suelen parecer terrenos abandonados, pero cumplen funciones ambientales importantes. Durante la temporada de lluvias actúan como esponjas naturales: retienen parte del agua, reducen inundaciones y permiten que algunas sustancias contaminantes se filtren antes de llegar a ríos o lagos. Además, sirven como refugio para aves, insectos, anfibios y plantas que difícilmente sobrevivirían entre avenidas, edificios y estacionamientos.\n\nDurante muchos años, varios humedales fueron rellenados para construir viviendas, centros comerciales o vialidades. Se pensaba que eran espacios inútiles o insalubres. Sin embargo, investigaciones recientes han mostrado que conservarlos puede disminuir daños por lluvias intensas y ayudar a regular la temperatura en zonas urbanas. Aun así, su protección enfrenta obstáculos: presión inmobiliaria, basura, descargas de agua contaminada y falta de vigilancia. Algunos especialistas plantean que restaurar humedales y conectarlos mediante corredores verdes podría mejorar la calidad ambiental de las ciudades.",
-        "highlights": [
-          "humedales urbanos",
-          "esponjas naturales",
-          "presión inmobiliaria",
-          "corredores verdes"
-        ],
-        "underlines": [
-          "conservarlos puede disminuir daños por lluvias intensas",
-          "podría mejorar la calidad ambiental de las ciudades"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "Según el sentido global del texto, los humedales urbanos",
       "options": [
@@ -4458,14 +4450,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "Los humedales urbanos suelen parecer terrenos abandonados, pero cumplen funciones ambientales importantes. Durante la temporada de lluvias actúan como esponjas naturales: retienen parte del agua, reducen inundaciones y permiten que algunas sustancias contaminantes se filtren antes de llegar a ríos o lagos. Además, sirven como refugio para aves, insectos, anfibios y plantas que difícilmente sobrevivirían entre avenidas, edificios y estacionamientos.\n\nDurante muchos años, varios humedales fueron rellenados para construir viviendas, centros comerciales o vialidades. Se pensaba que eran espacios inútiles o insalubres. Sin embargo, investigaciones recientes han mostrado que conservarlos puede disminuir daños por lluvias intensas y ayudar a regular la temperatura en zonas urbanas. Aun así, su protección enfrenta obstáculos: presión inmobiliaria, basura, descargas de agua contaminada y falta de vigilancia. Algunos especialistas plantean que restaurar humedales y conectarlos mediante corredores verdes podría mejorar la calidad ambiental de las ciudades.",
-        "highlights": [
-          "rellenados",
-          "espacios inútiles o insalubres",
-          "investigaciones recientes"
-        ],
-        "underlines": [
-          "Se pensaba que eran espacios inútiles o insalubres"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "De acuerdo con el texto, una causa por la que varios humedales urbanos fueron rellenados fue que",
       "options": [
@@ -4519,12 +4505,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "Los humedales urbanos suelen parecer terrenos abandonados, pero cumplen funciones ambientales importantes. Durante la temporada de lluvias actúan como esponjas naturales: retienen parte del agua, reducen inundaciones y permiten que algunas sustancias contaminantes se filtren antes de llegar a ríos o lagos. Además, sirven como refugio para aves, insectos, anfibios y plantas que difícilmente sobrevivirían entre avenidas, edificios y estacionamientos.\n\nDurante muchos años, varios humedales fueron rellenados para construir viviendas, centros comerciales o vialidades. Se pensaba que eran espacios inútiles o insalubres. Sin embargo, investigaciones recientes han mostrado que conservarlos puede disminuir daños por lluvias intensas y ayudar a regular la temperatura en zonas urbanas. Aun así, su protección enfrenta obstáculos: presión inmobiliaria, basura, descargas de agua contaminada y falta de vigilancia. Algunos especialistas plantean que restaurar humedales y conectarlos mediante corredores verdes podría mejorar la calidad ambiental de las ciudades.",
-        "highlights": [
-          "Algunos especialistas plantean"
-        ],
-        "underlines": [
-          "podría mejorar la calidad ambiental de las ciudades"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "¿Cuál de los siguientes enunciados funciona como una hipótesis dentro del texto?",
       "options": [
@@ -4578,14 +4560,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "Los humedales urbanos suelen parecer terrenos abandonados, pero cumplen funciones ambientales importantes. Durante la temporada de lluvias actúan como esponjas naturales: retienen parte del agua, reducen inundaciones y permiten que algunas sustancias contaminantes se filtren antes de llegar a ríos o lagos. Además, sirven como refugio para aves, insectos, anfibios y plantas que difícilmente sobrevivirían entre avenidas, edificios y estacionamientos.\n\nDurante muchos años, varios humedales fueron rellenados para construir viviendas, centros comerciales o vialidades. Se pensaba que eran espacios inútiles o insalubres. Sin embargo, investigaciones recientes han mostrado que conservarlos puede disminuir daños por lluvias intensas y ayudar a regular la temperatura en zonas urbanas. Aun así, su protección enfrenta obstáculos: presión inmobiliaria, basura, descargas de agua contaminada y falta de vigilancia. Algunos especialistas plantean que restaurar humedales y conectarlos mediante corredores verdes podría mejorar la calidad ambiental de las ciudades.",
-        "highlights": [
-          "humedales urbanos",
-          "funciones ambientales importantes",
-          "conservarlos"
-        ],
-        "underlines": [
-          "restaurar humedales"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "¿Cuál es el tema central del texto?",
       "options": [
@@ -4639,14 +4615,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "El zorro y el cántaro\n\nUn zorro sediento encontró un cántaro medio lleno de agua junto a una cerca. Como la abertura era estrecha, metió la cabeza con cuidado y bebió hasta calmar la sed. Cuando quiso salir, el cuello del cántaro lo atrapó.\n\nUn cuervo, que lo miraba desde una rama, le dijo:\n«Rompe el cántaro contra la piedra y quedarás libre».\n\nEl zorro respondió:\n«No puedo hacerlo. Mira cómo brilla. Sería una lástima romper algo tan hermoso».\n\nPasaron las horas. El dueño del cántaro volvió, encontró al zorro atrapado y lo espantó con un palo. Desde lo alto, el cuervo murmuró:\n«Quien prefiere conservar la apariencia antes que salvarse, termina perdiendo ambas cosas».",
-        "highlights": [
-          "Rompe el cántaro contra la piedra y quedarás libre",
-          "Sería una lástima romper algo tan hermoso"
-        ],
-        "underlines": [
-          "el cuello del cántaro lo atrapó",
-          "termina perdiendo ambas cosas"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "En la fábula, el zorro permanece atrapado principalmente porque",
       "options": [
@@ -4700,16 +4670,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "El zorro y el cántaro\n\nUn zorro sediento encontró un cántaro medio lleno de agua junto a una cerca. Como la abertura era estrecha, metió la cabeza con cuidado y bebió hasta calmar la sed. Cuando quiso salir, el cuello del cántaro lo atrapó.\n\nUn cuervo, que lo miraba desde una rama, le dijo:\n«Rompe el cántaro contra la piedra y quedarás libre».\n\nEl zorro respondió:\n«No puedo hacerlo. Mira cómo brilla. Sería una lástima romper algo tan hermoso».\n\nPasaron las horas. El dueño del cántaro volvió, encontró al zorro atrapado y lo espantó con un palo. Desde lo alto, el cuervo murmuró:\n«Quien prefiere conservar la apariencia antes que salvarse, termina perdiendo ambas cosas».",
-        "highlights": [
-          "Un cuervo",
-          "El zorro respondió",
-          "el cuervo murmuró"
-        ],
-        "underlines": [
-          "le dijo",
-          "respondió",
-          "murmuró"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "En el texto, los animales hablan porque se trata de una fábula en la que",
       "options": [
@@ -4763,12 +4725,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "El zorro y el cántaro\n\nUn zorro sediento encontró un cántaro medio lleno de agua junto a una cerca. Como la abertura era estrecha, metió la cabeza con cuidado y bebió hasta calmar la sed. Cuando quiso salir, el cuello del cántaro lo atrapó.\n\nUn cuervo, que lo miraba desde una rama, le dijo:\n«Rompe el cántaro contra la piedra y quedarás libre».\n\nEl zorro respondió:\n«No puedo hacerlo. Mira cómo brilla. Sería una lástima romper algo tan hermoso».\n\nPasaron las horas. El dueño del cántaro volvió, encontró al zorro atrapado y lo espantó con un palo. Desde lo alto, el cuervo murmuró:\n«Quien prefiere conservar la apariencia antes que salvarse, termina perdiendo ambas cosas».",
-        "highlights": [
-          "Quien prefiere conservar la apariencia antes que salvarse"
-        ],
-        "underlines": [
-          "termina perdiendo ambas cosas"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "¿Cuál es la moraleja que mejor corresponde a la fábula?",
       "options": [
@@ -4822,12 +4780,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "Selecciona la opción con una relación análoga a la siguiente:\n\nTERMÓMETRO : TEMPERATURA",
-        "highlights": [
-          "TERMÓMETRO : TEMPERATURA"
-        ],
-        "underlines": [
-          "relación análoga"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "¿Qué par de palabras mantiene una relación semejante?",
       "options": [
@@ -4881,12 +4835,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "Selecciona la opción con una relación análoga a la siguiente:\n\nSEMILLA : ÁRBOL",
-        "highlights": [
-          "SEMILLA : ÁRBOL"
-        ],
-        "underlines": [
-          "origen y desarrollo"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "¿Qué par de palabras conserva la misma relación?",
       "options": [
@@ -4940,12 +4890,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "Selecciona la opción con una relación análoga a la siguiente:\n\nMAESTRA : ALUMNOS",
-        "highlights": [
-          "MAESTRA : ALUMNOS"
-        ],
-        "underlines": [
-          "relación análoga"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "¿Qué par conserva mejor la relación?",
       "options": [
@@ -5002,9 +4948,7 @@ window.IFR_APP_DATA = {
         "highlights": [
           "POSPONER"
         ],
-        "underlines": [
-          "hasta la próxima semana"
-        ]
+        "underlines": []
       },
       "prompt": "Selecciona la opción que sustituye con un antónimo la palabra resaltada.",
       "options": [
@@ -5061,9 +5005,7 @@ window.IFR_APP_DATA = {
         "highlights": [
           "CONFUSA"
         ],
-        "underlines": [
-          "para la mayoría del grupo"
-        ]
+        "underlines": []
       },
       "prompt": "Selecciona la opción que sustituye con un antónimo la palabra resaltada.",
       "options": [
@@ -5120,9 +5062,7 @@ window.IFR_APP_DATA = {
         "highlights": [
           "ESCASO"
         ],
-        "underlines": [
-          "antónimo"
-        ]
+        "underlines": []
       },
       "prompt": "¿Cuál opción es antónimo de la palabra resaltada?",
       "options": [
@@ -5176,12 +5116,8 @@ window.IFR_APP_DATA = {
       "basePill": {
         "type": "pill",
         "content": "Selecciona la opción que contenga un par de sinónimos.",
-        "highlights": [
-          "sinónimos"
-        ],
-        "underlines": [
-          "par de palabras"
-        ]
+        "highlights": [],
+        "underlines": []
       },
       "prompt": "¿Cuál opción contiene dos palabras con significado semejante?",
       "options": [
@@ -5238,9 +5174,7 @@ window.IFR_APP_DATA = {
         "highlights": [
           "PRECISA"
         ],
-        "underlines": [
-          "resolvió la duda del grupo"
-        ]
+        "underlines": []
       },
       "prompt": "Selecciona la opción que sustituye con un sinónimo la palabra resaltada.",
       "options": [
@@ -5297,9 +5231,7 @@ window.IFR_APP_DATA = {
         "highlights": [
           "RESGUARDAR"
         ],
-        "underlines": [
-          "en una sala seca y segura"
-        ]
+        "underlines": []
       },
       "prompt": "Selecciona la opción que sustituye con un sinónimo la palabra resaltada.",
       "options": [
