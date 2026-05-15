@@ -49,6 +49,7 @@ No se detectaron tres respuestas iguales consecutivas.
 - 75: `assets/matematicas/reactivo-75-area-figura-compuesta.png`
 - 76: `assets/matematicas/reactivo-76-volumen-solidos.png`
 - 94: `assets/geografia/reactivo-94-coordenadas-p.png`
+- 105: `assets/fisica/reactivo-105-ciclista-distancia-tiempo.png`
 - 106: `assets/fisica/reactivo-106-grafica-posicion-tiempo.png`
 - 108: `assets/fisica/reactivo-108-equilibrio-fuerzas.png`
 - 112: `assets/fisica/reactivo-112-brujula.png`
@@ -93,6 +94,7 @@ En Habilidad verbal, las píldoras conservan el bloque azul de lectura. Los reac
 - El reactivo 75 recibió un apoyo visual neutral de figura compuesta: rectángulo de 18 m por 9 m y triángulo con base de 6 m y altura de 9 m, sin fórmulas, áreas calculadas ni marcas de solución.
 - El reactivo 76 recibió un apoyo visual neutral de sólidos: cubo de 7 cm de arista y prisma rectangular de 10 cm, 4 cm y 5 cm, sin volúmenes, diferencia ni marcas de comparación.
 - El apoyo visual del reactivo 94 se reemplazó con una imagen generada mediante `imagegen`: cuadrícula de coordenadas con ecuador, meridiano de Greenwich, paralelos 20° N y 20° S, meridianos 40° W y 40° E, y punto P ubicado sin flechas, respuesta combinada ni explicación visual.
+- El reactivo 105 recibió un apoyo visual neutral generado mediante `imagegen`: ciclista en trayectoria recta con marcadores de inicio y final, distancia de 540 m y tiempo de 3 min, sin fórmula, conversión a segundos ni resultado.
 - Se agregó recarga segura del intento: si existe progreso guardado, la app pregunta si se quiere continuar sin reiniciar o borrar el intento desde cero.
 - El avance guardado conserva respuestas, reactivo activo, métricas y cronómetro; el tiempo se calcula contra una fecha límite real para evitar pausas por suspensión o pestaña inactiva.
 - El intento guardado se invalida si cambia la firma del contenido estructurado del examen.

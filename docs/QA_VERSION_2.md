@@ -48,8 +48,8 @@ Validó:
 - Assets existentes.
 - Tablas con desplazamiento horizontal.
 - Ausencia de artefactos visibles tipo LaTeX o Markdown en planteamientos, opciones, pistas, argumentos y celdas de tablas.
-- Textos base breves en reactivos con imagen revisados: 5, 6, 7, 8, 9, 10, 44, 73, 74, 94, 106, 108 y 112.
-- Reactivos 75 y 76 con apoyos visuales neutrales y planteamiento completo conservado.
+- Textos base breves en reactivos con imagen revisados: 5, 6, 7, 8, 9, 10, 44, 73, 74, 94, 105, 106, 108 y 112.
+- Reactivos 75, 76 y 105 con apoyos visuales neutrales y planteamiento completo conservado.
 - Opciones visuales compactas en reactivos 5, 7 y 8.
 - Textos alternativos de imágenes sin frases de generación ni instrucciones internas.
 - Flujo de persistencia de progreso: llave exclusiva, firma completa del contenido, fecha límite real del cronómetro, modal de recarga, botones con emojis, guardado en `pagehide` y `visibilitychange`.
@@ -127,6 +127,7 @@ Validó:
 - Captura móvil del reactivo 75 con apoyo visual de figura compuesta: `docs/qa/ecoems-simulacion-2-mobile-reactivo-75-imagegen.png`.
 - Captura móvil del reactivo 76 con apoyo visual de sólidos: `docs/qa/ecoems-simulacion-2-mobile-reactivo-76-imagegen.png`.
 - Captura móvil del reactivo 94 con mapa de coordenadas generado por `imagegen`: `docs/qa/ecoems-simulacion-2-mobile-reactivo-94-imagegen.png`.
+- Captura móvil del reactivo 105 con apoyo visual de ciclista generado por `imagegen`: `docs/qa/ecoems-simulacion-2-mobile-reactivo-105-imagegen.png`.
 
 ## Estado de publicación
 

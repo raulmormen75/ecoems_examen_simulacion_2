@@ -25,6 +25,7 @@ python tools/generate_exam_assets.py
 - `assets/matematicas/reactivo-75-area-figura-compuesta.png`
 - `assets/matematicas/reactivo-76-volumen-solidos.png`
 - `assets/geografia/reactivo-94-coordenadas-p.png`
+- `assets/fisica/reactivo-105-ciclista-distancia-tiempo.png`
 - `assets/fisica/reactivo-106-grafica-posicion-tiempo.png`
 - `assets/fisica/reactivo-108-equilibrio-fuerzas.png`
 - `assets/fisica/reactivo-112-brujula.png`

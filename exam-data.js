@@ -5930,10 +5930,23 @@ window.IFR_APP_DATA = {
         "e": "180 m/s: corresponde al tiempo en segundos, no a la rapidez."
       },
       "visual": {
-        "kind": "none",
-        "content": ""
+        "kind": "image",
+        "position": "base",
+        "required": true,
+        "src": "assets/fisica/reactivo-105-ciclista-distancia-tiempo.png",
+        "alt": "Física, reactivo 105: Apoyo visual del recorrido recto de un ciclista con distancia y tiempo.",
+        "internalInstructionRemoved": true
       },
-      "visuals": [],
+      "visuals": [
+        {
+          "kind": "image",
+          "position": "base",
+          "required": true,
+          "src": "assets/fisica/reactivo-105-ciclista-distancia-tiempo.png",
+          "alt": "Física, reactivo 105: Apoyo visual del recorrido recto de un ciclista con distancia y tiempo.",
+          "internalInstructionRemoved": true
+        }
+      ],
       "sourceOrder": 105,
       "rangeStart": 105,
       "rangeEnd": 116

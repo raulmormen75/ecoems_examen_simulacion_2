@@ -5457,7 +5457,7 @@ TABLA DE CONTROL DEL PAQUETE
 
 | Reactivo | Área | Bloque | Letra correcta | Requiere imagen | Tabla con desplazamiento horizontal | Texto en píldora visual | Riesgo editorial o técnico detectado |
 |---:|---|---|---|---|---|---|---|
-| 105 | Física | Rapidez y velocidad: interpretación y cálculo básico | c) | No | No | No | Bajo: distinguir rapidez promedio de dirección del movimiento |
+| 105 | Física | Rapidez y velocidad: interpretación y cálculo básico | c) | Sí | No | No | Bajo: distinguir rapidez promedio de dirección del movimiento |
 | 106 | Física | Tablas y gráficas: leer movimiento y cambios con el tiempo | a) | Sí | Sí | No | Medio: tabla con varias columnas y gráfica deben coincidir exactamente |
 | 107 | Física | Fuerza y aceleración: uso de F = ma en problemas | e) | No | No | No | Bajo: cálculo directo con unidades |
 | 108 | Física | Equilibrio: resultante R = 0 en situaciones simples | b) | Sí | No | No | Medio: la imagen debe mostrar dirección de fuerzas sin resolver el reactivo |
@@ -5481,6 +5481,22 @@ Rapidez y velocidad: interpretación y cálculo básico
 
 Texto base:
 No aplica.
+
+[INSTRUCCIÓN INTERNA PARA CODEX - NO MOSTRAR EN LA APP]
+Área: Física
+Reactivo: 105
+Uso: Apoyo visual del recorrido recto de un ciclista con distancia y tiempo.
+Herramienta: $imagegen con GPT-Image 2.
+Tipo de imagen: diagrama educativo de movimiento rectilíneo.
+Descripción técnica:
+Crear una escena limpia con un ciclista que avanza en línea recta de un punto de inicio a un punto final. Mostrar una trayectoria horizontal y los datos del planteamiento: 540 m de recorrido y 3 min de tiempo. No incluir fórmula, conversión a segundos, resultado en m/s ni explicación.
+Estilo: limpio, académico, legible, sin elementos decorativos innecesarios, con contraste suficiente.
+Texto visible permitido: «Inicio», «Final», «540 m», «3 min».
+Texto visible prohibido: no incluir respuesta correcta, pista, fórmula, conversión, «rapidez», «velocidad», «m/s», «180 s», «3 m/s» ni marcas que resuelvan el reactivo.
+Formato sugerido: PNG o WebP, 1024 × 768 px.
+Destino sugerido: /assets/fisica/reactivo-105-ciclista-distancia-tiempo.png
+Validación: la imagen debe apoyar la lectura de distancia y tiempo sin resolver el cálculo.
+[/INSTRUCCIÓN INTERNA PARA CODEX]
 
 Planteamiento:
 Un ciclista recorre 540 metros en línea recta durante 3 minutos. Si mantiene el mismo sentido de movimiento, ¿cuál es su rapidez promedio?
