@@ -6,6 +6,9 @@ const path = require('path');
 const { spawn } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
+const DOWNLOAD_DIR = 'C:\\Users\\spart\\Downloads';
+const PDF_FILENAME = 'reactivos-que-debo-mejorar-ecoems-ifr-simulacion-2.pdf';
+const PDF_PREFIX = 'reactivos-que-debo-mejorar-ecoems-ifr-simulacion-2';
 
 const MIME_TYPES = {
   '.css': 'text/css; charset=utf-8',
@@ -19,18 +22,17 @@ const MIME_TYPES = {
 const PROFILES = [
   {
     id: 'windows-chrome',
-    title: '🖥️ Guarda tu resultado en Windows',
     width: 1366,
     height: 768,
     mobile: false,
     deviceScaleFactor: 1,
     userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.7103.91 Safari/537.36',
     platform: 'Win32',
-    maxTouchPoints: 0
+    maxTouchPoints: 0,
+    realDownload: true
   },
   {
     id: 'android-chrome',
-    title: '📲 Guarda tu resultado en Android',
     width: 412,
     height: 915,
     mobile: true,
@@ -41,7 +43,6 @@ const PROFILES = [
   },
   {
     id: 'iphone-safari',
-    title: '📲 Guarda tu resultado en iPhone',
     width: 393,
     height: 852,
     mobile: true,
@@ -49,25 +50,39 @@ const PROFILES = [
     userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1',
     platform: 'iPhone',
     maxTouchPoints: 5
+  },
+  {
+    id: 'iphone-chrome',
+    width: 393,
+    height: 852,
+    mobile: true,
+    deviceScaleFactor: 3,
+    userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/136.0.7103.91 Mobile/15E148 Safari/604.1',
+    platform: 'iPhone',
+    maxTouchPoints: 5
   }
 ];
 
 function log(message) {
-  console.log(`[qa-browser] ${message}`);
+  console.log(`[qa-pdf] ${message}`);
 }
 
 function findBrowserExecutable() {
-  const candidates = [
+  const chromeCandidates = [
     process.env.CHROME_PATH,
-    process.env.EDGE_PATH,
     path.join(process.env.ProgramFiles || '', 'Google', 'Chrome', 'Application', 'chrome.exe'),
     path.join(process.env['ProgramFiles(x86)'] || '', 'Google', 'Chrome', 'Application', 'chrome.exe'),
-    path.join(process.env.LOCALAPPDATA || '', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+    path.join(process.env.LOCALAPPDATA || '', 'Google', 'Chrome', 'Application', 'chrome.exe')
+  ].filter(Boolean);
+  const chrome = chromeCandidates.find((candidate) => fs.existsSync(candidate));
+  if (chrome) return chrome;
+
+  const edgeCandidates = [
+    process.env.EDGE_PATH,
     path.join(process.env.ProgramFiles || '', 'Microsoft', 'Edge', 'Application', 'msedge.exe'),
     path.join(process.env['ProgramFiles(x86)'] || '', 'Microsoft', 'Edge', 'Application', 'msedge.exe')
   ].filter(Boolean);
-
-  return candidates.find((candidate) => fs.existsSync(candidate));
+  return edgeCandidates.find((candidate) => fs.existsSync(candidate));
 }
 
 function startStaticServer() {
@@ -133,33 +148,13 @@ function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function waitForFile(filePath, timeout = 10000) {
+async function waitForFile(filePath, timeout = 15000) {
   const started = Date.now();
   while (Date.now() - started < timeout) {
     if (fs.existsSync(filePath)) return fs.readFileSync(filePath, 'utf8');
-    await delay(80);
+    await delay(100);
   }
-  throw new Error(`No se encontró ${filePath}`);
-}
-
-async function stopBrowserProcess(browser) {
-  if (!browser || browser.killed) return;
-  await new Promise((resolve) => {
-    browser.once('exit', resolve);
-    browser.kill();
-    setTimeout(resolve, 1500);
-  });
-}
-
-async function removeDirectoryBestEffort(directory) {
-  for (let attempt = 0; attempt < 5; attempt += 1) {
-    try {
-      fs.rmSync(directory, { recursive: true, force: true });
-      return;
-    } catch (error) {
-      await delay(250);
-    }
-  }
+  throw new Error(`No se encontro ${filePath}`);
 }
 
 class CdpClient {
@@ -205,19 +200,6 @@ class CdpClient {
     });
   }
 
-  waitFor(method, timeout = 10000) {
-    return new Promise((resolve, reject) => {
-      const timer = setTimeout(() => reject(new Error(`Timeout esperando ${method}`)), timeout);
-      const wrappedResolve = (params) => {
-        clearTimeout(timer);
-        resolve(params);
-      };
-      const waiters = this.waiters.get(method) || [];
-      waiters.push(wrappedResolve);
-      this.waiters.set(method, waiters);
-    });
-  }
-
   close() {
     this.socket.close();
   }
@@ -225,9 +207,9 @@ class CdpClient {
 
 async function launchBrowser() {
   const executable = findBrowserExecutable();
-  assert.ok(executable, 'No se encontró Chrome o Edge para ejecutar QA de navegador.');
+  assert.ok(executable, 'No se encontro Chrome o Edge para ejecutar QA de navegador.');
 
-  const userDataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ifr-result-qa-'));
+  const userDataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'ifr-pdf-qa-'));
   const browser = spawn(executable, [
     '--headless=new',
     '--disable-gpu',
@@ -245,13 +227,34 @@ async function launchBrowser() {
 
   const pages = await readJson(`http://127.0.0.1:${debugPort}/json/list`);
   const page = pages.find((entry) => entry.type === 'page');
-  assert.ok(page && page.webSocketDebuggerUrl, 'No se encontró una pestaña DevTools disponible.');
+  assert.ok(page && page.webSocketDebuggerUrl, 'No se encontro una pestana DevTools disponible.');
 
   return {
     browser,
+    executable,
     userDataDir,
     client: new CdpClient(page.webSocketDebuggerUrl)
   };
+}
+
+async function stopBrowserProcess(browser) {
+  if (!browser || browser.killed) return;
+  await new Promise((resolve) => {
+    browser.once('exit', resolve);
+    browser.kill();
+    setTimeout(resolve, 1500);
+  });
+}
+
+async function removeDirectoryBestEffort(directory) {
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    try {
+      fs.rmSync(directory, { recursive: true, force: true });
+      return;
+    } catch (error) {
+      await delay(250);
+    }
+  }
 }
 
 async function evaluate(client, fn, arg) {
@@ -263,10 +266,64 @@ async function evaluate(client, fn, arg) {
   });
 
   if (result.exceptionDetails) {
-    throw new Error(result.exceptionDetails.text || 'Falló Runtime.evaluate');
+    throw new Error(result.exceptionDetails.text || 'Fallo Runtime.evaluate');
   }
 
   return result.result.value;
+}
+
+async function allowDownloads(client) {
+  fs.mkdirSync(DOWNLOAD_DIR, { recursive: true });
+  try {
+    await client.send('Browser.setDownloadBehavior', {
+      behavior: 'allow',
+      downloadPath: DOWNLOAD_DIR,
+      eventsEnabled: true
+    });
+  } catch (error) {
+    await client.send('Page.setDownloadBehavior', {
+      behavior: 'allow',
+      downloadPath: DOWNLOAD_DIR
+    });
+  }
+}
+
+function listMatchingDownloads() {
+  if (!fs.existsSync(DOWNLOAD_DIR)) return [];
+  return fs.readdirSync(DOWNLOAD_DIR)
+    .filter((name) => name.startsWith(PDF_PREFIX) && name.toLowerCase().endsWith('.pdf'))
+    .map((name) => {
+      const fullPath = path.join(DOWNLOAD_DIR, name);
+      const stats = fs.statSync(fullPath);
+      return { name, fullPath, mtimeMs: stats.mtimeMs, size: stats.size };
+    })
+    .sort((a, b) => b.mtimeMs - a.mtimeMs);
+}
+
+async function waitForDownloadedPdf(startedAt) {
+  const timeout = Date.now() + 30000;
+  while (Date.now() < timeout) {
+    const partial = fs.readdirSync(DOWNLOAD_DIR)
+      .some((name) => name.startsWith(PDF_PREFIX) && name.endsWith('.crdownload'));
+    const match = listMatchingDownloads()
+      .find((file) => file.mtimeMs >= startedAt - 1000 && file.size > 10000);
+    if (match && !partial) return match;
+    await delay(250);
+  }
+  throw new Error('No se encontro un PDF descargado en Downloads.');
+}
+
+function inspectPdfFile(filePath) {
+  const buffer = fs.readFileSync(filePath);
+  const head = buffer.subarray(0, 5).toString('ascii');
+  const tail = buffer.subarray(Math.max(0, buffer.length - 2048)).toString('latin1');
+  const text = buffer.toString('latin1');
+  return {
+    size: buffer.length,
+    head,
+    hasEof: /%%EOF/.test(tail),
+    pageCount: (text.match(/\/Type\s*\/Page\b/g) || []).length
+  };
 }
 
 async function runProfile(client, baseUrl, profile) {
@@ -283,25 +340,28 @@ async function runProfile(client, baseUrl, profile) {
     screenHeight: profile.height
   });
 
-  const loaded = client.waitFor('Page.loadEventFired');
-  await client.send('Page.navigate', {
-    url: `${baseUrl}/?qa=result-download-${profile.id}-${Date.now()}`
-  });
-  await loaded;
+  if (profile.realDownload) await allowDownloads(client);
 
+  const loaded = client.waitFor ? client.waitFor('Page.loadEventFired') : null;
+  const loadPromise = new Promise((resolve) => {
+    const waiter = (params) => resolve(params);
+    const waiters = client.waiters.get('Page.loadEventFired') || [];
+    waiters.push(waiter);
+    client.waiters.set('Page.loadEventFired', waiters);
+    setTimeout(resolve, 8000);
+  });
+  await client.send('Page.navigate', {
+    url: `${baseUrl}/?qa=improvement-pdf-${profile.id}-${Date.now()}`
+  });
+  await (loaded || loadPromise);
+
+  const downloadStartedAt = Date.now();
   const result = await evaluate(client, async (currentProfile) => {
     localStorage.clear();
     Object.defineProperty(navigator, 'platform', { value: currentProfile.platform, configurable: true });
     Object.defineProperty(navigator, 'maxTouchPoints', { value: currentProfile.maxTouchPoints, configurable: true });
-    Object.defineProperty(navigator, 'canShare', { value: () => true, configurable: true });
-    Object.defineProperty(navigator, 'share', {
-      value: async () => {
-        window.__shareCalls = (window.__shareCalls || 0) + 1;
-      },
-      configurable: true
-    });
 
-    function waitFor(predicate, timeout = 4000) {
+    function waitFor(predicate, timeout = 15000) {
       const started = Date.now();
       return new Promise((resolve, reject) => {
         const tick = () => {
@@ -320,84 +380,91 @@ async function runProfile(client, baseUrl, profile) {
     }
 
     window.__IFR_EXAM_DEBUG__.startExam();
-    window.__IFR_EXAM_DEBUG__.finishExam('finished');
-    await new Promise((resolve) => requestAnimationFrame(resolve));
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 
-    const resultButton = document.querySelector('[data-action="download-results"]');
-    resultButton.click();
-    await waitFor(() => document.querySelector('#modalShell:not([hidden]) .result-image-frame img'));
-
-    const modal = document.querySelector('#modalShell:not([hidden])');
-    const img = modal.querySelector('.result-image-frame img');
-    if (!img.complete || !img.naturalWidth) {
-      await new Promise((resolve, reject) => {
-        img.addEventListener('load', resolve, { once: true });
-        img.addEventListener('error', reject, { once: true });
-      });
+    const wrongIndexes = new Set([0, 4, 40, 73, 114]);
+    const exercises = window.IFR_APP_DATA.exercises;
+    for (let index = 0; index < exercises.length; index += 1) {
+      const exercise = exercises[index];
+      const selectedOption = wrongIndexes.has(index)
+        ? exercise.options.find((option) => option.label !== exercise.correctOption).label
+        : exercise.correctOption;
+      const button = document.querySelector(`[data-action="answer"][data-id="${exercise.id}"][data-option="${selectedOption}"]`);
+      if (!button) throw new Error(`Missing answer button for ${exercise.id}`);
+      button.click();
+      await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
     }
 
-    const beforeShare = {
-      title: modal.querySelector('#resultImageTitle')?.textContent,
-      buttons: Array.from(modal.querySelectorAll('button')).map((button) => button.textContent.trim()),
-      imageBlob: img.src.startsWith('blob:'),
-      imageNaturalWidth: img.naturalWidth,
-      horizontalOverflow: document.scrollingElement.scrollWidth > window.innerWidth,
-      buttonRestored: Array.from(document.querySelectorAll('[data-action="download-results"]'))
-        .every((button) => !button.disabled && /Guardar mis resultados/.test(button.textContent))
-    };
+    await waitFor(() => document.querySelector('#resultado-final'));
+    const state = window.__IFR_EXAM_DEBUG__.getState();
+    const incorrectCount = Object.values(state.answersById).filter((answer) => answer && !answer.isCorrect).length;
+    const resultButton = document.querySelector('[data-action="download-results"]');
+    if (!resultButton) throw new Error('Missing PDF button');
 
-    modal.querySelector('[data-action="share-result-image"]').click();
-    await waitFor(() => document.querySelector('#modalShell').hidden);
-    const modalHiddenAfterShare = document.querySelector('#modalShell').hidden;
+    let downloadAttempt = null;
+    const originalAnchorClick = HTMLAnchorElement.prototype.click;
+    if (!currentProfile.realDownload) {
+      HTMLAnchorElement.prototype.click = function patchedClick() {
+        downloadAttempt = {
+          href: this.href,
+          download: this.download
+        };
+      };
+    }
 
     resultButton.click();
-    await waitFor(() => document.querySelector('#modalShell:not([hidden]) .result-image-frame img'));
-    const secondModal = document.querySelector('#modalShell:not([hidden])');
+    await waitFor(() => Array.from(document.querySelectorAll('[data-action="download-results"]'))
+      .every((button) => !button.disabled && /Obtener reactivos que debo mejorar/.test(button.textContent)));
 
-    const originalOpen = window.open;
-    window.__openedResultUrl = '';
-    window.open = (url) => {
-      window.__openedResultUrl = String(url || '');
-      return { closed: false };
-    };
-    secondModal.querySelector('[data-action="open-result-image"]').click();
-    window.open = originalOpen;
-
-    const originalAnchorClick = HTMLAnchorElement.prototype.click;
-    window.__downloadAttempt = null;
-    HTMLAnchorElement.prototype.click = function patchedClick() {
-      window.__downloadAttempt = {
-        href: this.href,
-        download: this.download
+    let blobCheck = null;
+    if (!currentProfile.realDownload) {
+      HTMLAnchorElement.prototype.click = originalAnchorClick;
+      await waitFor(() => downloadAttempt && downloadAttempt.href && downloadAttempt.href.startsWith('blob:'));
+      const response = await fetch(downloadAttempt.href);
+      const blob = await response.blob();
+      const bytes = new Uint8Array(await blob.arrayBuffer());
+      const head = String.fromCharCode(...bytes.slice(0, 5));
+      const tailBytes = bytes.slice(Math.max(0, bytes.length - 2048));
+      const tail = String.fromCharCode(...tailBytes);
+      blobCheck = {
+        type: blob.type,
+        size: blob.size,
+        head,
+        hasEof: tail.includes('%%EOF')
       };
-    };
-    secondModal.querySelector('[data-action="download-result-image"]').click();
-    HTMLAnchorElement.prototype.click = originalAnchorClick;
+    }
 
     return {
-      beforeShare,
-      shareCalls: window.__shareCalls || 0,
-      modalHiddenAfterShare,
-      openedBlob: window.__openedResultUrl.startsWith('blob:'),
-      downloadAttempt: window.__downloadAttempt
+      incorrectCount,
+      buttonText: resultButton.textContent.trim(),
+      horizontalOverflow: document.scrollingElement.scrollWidth > window.innerWidth,
+      downloadAttempt,
+      blobCheck
     };
   }, profile);
 
-  assert.strictEqual(result.beforeShare.title, profile.title, `${profile.id}: título de modal incorrecto.`);
-  assert.ok(result.beforeShare.buttons.includes('📤 Compartir o guardar'), `${profile.id}: falta compartir.`);
-  assert.ok(result.beforeShare.buttons.includes('💾 Descargar imagen'), `${profile.id}: falta descargar imagen.`);
-  assert.ok(result.beforeShare.buttons.includes('🖼️ Abrir imagen'), `${profile.id}: falta abrir imagen.`);
-  assert.ok(result.beforeShare.imageBlob, `${profile.id}: la vista previa no usa URL blob.`);
-  assert.ok(result.beforeShare.imageNaturalWidth > 0, `${profile.id}: la imagen no cargó.`);
-  assert.ok(!result.beforeShare.horizontalOverflow, `${profile.id}: hay desbordamiento horizontal.`);
-  assert.ok(result.beforeShare.buttonRestored, `${profile.id}: el botón final no volvió a estado normal.`);
-  assert.strictEqual(result.shareCalls, 1, `${profile.id}: no se llamó navigator.share.`);
-  assert.ok(result.modalHiddenAfterShare, `${profile.id}: la modal no cerró después de compartir.`);
-  assert.ok(result.openedBlob, `${profile.id}: Abrir imagen no usó URL blob.`);
-  assert.ok(result.downloadAttempt && result.downloadAttempt.href.startsWith('blob:'), `${profile.id}: Descargar imagen no usó blob.`);
-  assert.strictEqual(result.downloadAttempt.download, 'resultado-ecoems-ifr-simulacion-2.png', `${profile.id}: nombre de descarga incorrecto.`);
+  assert.strictEqual(result.incorrectCount, 5, `${profile.id}: conteo incorrecto de errores.`);
+  assert.strictEqual(result.buttonText, 'Obtener reactivos que debo mejorar', `${profile.id}: texto de boton incorrecto.`);
+  assert.ok(!result.horizontalOverflow, `${profile.id}: hay desbordamiento horizontal.`);
 
-  log(`${profile.id}: vista previa, compartir, abrir imagen y descarga verificados.`);
+  if (profile.realDownload) {
+    const downloaded = await waitForDownloadedPdf(downloadStartedAt);
+    const inspection = inspectPdfFile(downloaded.fullPath);
+    assert.strictEqual(inspection.head, '%PDF-', `${profile.id}: el archivo no inicia como PDF.`);
+    assert.ok(inspection.hasEof, `${profile.id}: el archivo PDF no contiene cierre EOF.`);
+    assert.ok(inspection.pageCount >= 1, `${profile.id}: el PDF no tiene paginas detectables.`);
+    assert.ok(inspection.size > 10000, `${profile.id}: el PDF pesa demasiado poco.`);
+    log(`${profile.id}: PDF real descargado en ${downloaded.fullPath} (${inspection.size} bytes).`);
+    return;
+  }
+
+  assert.ok(result.downloadAttempt && result.downloadAttempt.href.startsWith('blob:'), `${profile.id}: la descarga no uso blob.`);
+  assert.strictEqual(result.downloadAttempt.download, PDF_FILENAME, `${profile.id}: nombre de PDF incorrecto.`);
+  assert.strictEqual(result.blobCheck.type, 'application/pdf', `${profile.id}: MIME incorrecto.`);
+  assert.strictEqual(result.blobCheck.head, '%PDF-', `${profile.id}: blob no inicia como PDF.`);
+  assert.ok(result.blobCheck.hasEof, `${profile.id}: blob PDF sin EOF.`);
+  assert.ok(result.blobCheck.size > 10000, `${profile.id}: blob PDF pesa demasiado poco.`);
+  log(`${profile.id}: PDF blob validado sin desbordamiento horizontal.`);
 }
 
 async function main() {
@@ -416,23 +483,24 @@ async function main() {
 
     await client.send('Page.enable');
     await client.send('Runtime.enable');
+    log(`Navegador usado: ${launched.executable}`);
 
     for (const profile of PROFILES) {
       await runProfile(client, serverInfo.url, profile);
     }
 
-    log('QA de navegador completada para Windows, Android e iPhone.');
+    log('QA de PDF completada para Windows Chrome/Edge, Android Chrome, iPhone Safari e iPhone Chrome emulados.');
   } finally {
     if (client) client.close();
-    await stopBrowserProcess(browser);
-    if (server) server.close();
-    if (userDataDir) {
-      await removeDirectoryBestEffort(userDataDir);
+    if (browser) await stopBrowserProcess(browser);
+    if (server) {
+      await new Promise((resolve) => server.close(resolve));
     }
+    if (userDataDir) await removeDirectoryBestEffort(userDataDir);
   }
 }
 
 main().catch((error) => {
-  console.error(`[qa-browser] ${error.stack || error.message}`);
+  console.error(error);
   process.exit(1);
 });

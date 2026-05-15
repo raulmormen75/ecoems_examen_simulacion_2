@@ -99,8 +99,8 @@ En Habilidad verbal, las píldoras conservan el bloque azul de lectura. Los reac
 - Se agregó recarga segura del intento: si existe progreso guardado, la app pregunta si se quiere continuar sin reiniciar o borrar el intento desde cero.
 - El avance guardado conserva respuestas, reactivo activo, métricas y cronómetro; el tiempo se calcula contra una fecha límite real para evitar pausas por suspensión o pestaña inactiva.
 - El intento guardado se invalida si cambia la firma del contenido estructurado del examen.
-- Se mejoró la descarga del resultado PNG para iOS, Android y Windows: se muestra una vista previa guardable con opciones para compartir cuando el navegador lo permite, descargar la imagen o abrirla en otra pestaña.
-- La URL `blob:` de la vista previa se conserva de forma diferida al cerrar la modal para evitar carreras mientras el navegador abre o descarga la imagen.
-- La generación del PNG ya no depende indefinidamente de `document.fonts.ready` ni de `canvas.toBlob()`: ambos tienen una ruta de salida segura.
+- Se reemplazó la descarga del resultado PNG por un PDF de reactivos incorrectos para iOS, Android y Windows, con el botón `Obtener reactivos que debo mejorar`.
+- El PDF se genera localmente con `pdfmake`, se descarga como `reactivos-que-debo-mejorar-ecoems-ifr-simulacion-2.pdf` y usa `Blob` con MIME `application/pdf`.
+- El documento usa tamaño carta, márgenes estándar y reglas de paginación para evitar cortes ilegibles entre reactivos o comparaciones de respuesta.
 - En Español se retiraron resaltados y subrayados que adelantaban la respuesta en 29, 30, 31, 35, 36, 38, 39 y 40; en 32, 33, 34 y 37 se conserva solo la marca visual que el planteamiento pide explícitamente.
 - En Habilidad verbal se retiraron resaltados y subrayados que adelantaban pistas visuales en 77, 78, 79, 80, 81, 82, 83, 84, 85, 86 y 90; en 87, 88, 89, 91 y 92 se conserva solo la palabra resaltada porque la consigna la menciona explícitamente.

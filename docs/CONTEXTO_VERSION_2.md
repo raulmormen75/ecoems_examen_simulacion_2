@@ -17,7 +17,7 @@ Se reutiliza de la simulación 1:
 - pista por reactivo;
 - retroalimentación correcta e incorrecta;
 - resultado final;
-- descarga PNG;
+- reporte descargable;
 - estilos IFR con Plus Jakarta Sans.
 
 ## Cambios de V2
@@ -31,7 +31,7 @@ Se reutiliza de la simulación 1:
 - Soporte de `visuals[]` para más de un apoyo visual por reactivo.
 - Bloqueo de producción cuando faltan reactivos o assets.
 - Recarga segura con progreso persistente y decisión explícita para continuar o reiniciar.
-- Descarga de resultado con vista previa guardable en iOS, Android y Windows mediante compartir, descargar o abrir imagen.
+- Descarga de reporte PDF con los reactivos incorrectos, márgenes estándar y cortes de página controlados.
 
 ## Estado del contenido
 
@@ -67,14 +67,14 @@ El build de producción genera `exam-data.js` completo y sin faltantes.
 - Distribución de respuestas por letra.
 - Detección de más de un visual por reactivo.
 - Validación de presencia del flujo de persistencia de progreso en `qa/run-exam-qa.js`.
-- Validación de presencia del flujo alternativo de descarga en iOS, Android y Windows.
+- Validación de presencia del flujo de descarga PDF en iOS, Android y Windows.
 - QA de navegador reproducible para descarga del resultado: `node qa/run-result-download-browser-qa.js`.
 
 ## QA ejecutada
 
 - `node build-exam-data.js`.
 - `node qa/run-exam-qa.js`.
-- Revisión local en navegador con portada, conteo 128/10, Física presente, imagen real en reactivo 5, recarga segura en escritorio/móvil y descarga de resultado con perfiles Windows, Android e iPhone.
+- Revisión local en navegador con portada, conteo 128/10, Física presente, imagen real en reactivo 5, recarga segura en escritorio/móvil y descarga PDF con perfiles Windows, Android e iPhone.
 
 ## Pendientes
 

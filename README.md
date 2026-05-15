@@ -18,7 +18,7 @@ También se generaron los assets visuales obligatorios en `assets/` y se validó
 
 La aplicación conserva el progreso del intento si se refresca la página. Al volver a cargar, muestra una notificación con dos opciones: continuar sin reiniciar o borrar el intento para empezar desde cero.
 
-La descarga del resultado PNG muestra una vista previa guardable en iPhone, Android y Windows, con opciones para compartir cuando el navegador lo permite, descargar la imagen o abrirla en otra pestaña.
+Al final de la evaluación, el botón `Obtener reactivos que debo mejorar` genera y descarga un PDF con los reactivos respondidos de forma incorrecta. El documento usa márgenes de carta, cortes de página controlados y descarga directa compatible con escritorio Windows, Android e iPhone.
 
 En Español y Habilidad verbal, los bloques azules de lectura se conservan, pero los resaltados y subrayados solo se muestran cuando el planteamiento pide explícitamente leer palabras o expresiones resaltadas o subrayadas.
 
@@ -40,9 +40,9 @@ Abrir `http://127.0.0.1:4173/` para revisar la aplicación.
 - Duración: 10,800 segundos.
 - Opciones por reactivo: 5.
 - Pistas: obligatorias en todos los reactivos.
-- Resultado final: descargable como `resultado-ecoems-ifr-simulacion-2.png`.
+- Resultado final: reporte PDF descargable como `reactivos-que-debo-mejorar-ecoems-ifr-simulacion-2.pdf`.
 - Recarga segura: progreso persistente con decisión explícita.
-- Descarga alternativa del resultado: vista previa con botones para compartir, descargar o abrir imagen en iOS, Android y Windows.
+- Descarga de mejora: genera solo los reactivos incorrectos, con respuesta elegida, respuesta correcta y argumentos.
 - Bloques de Español y Habilidad verbal: sin marcas visuales que revelen la respuesta cuando no son parte explícita de la consigna.
 
 ## Requisitos para publicar
@@ -50,7 +50,7 @@ Abrir `http://127.0.0.1:4173/` para revisar la aplicación.
 - Ejecutar `node build-exam-data.js` sin errores.
 - Ejecutar `node qa/run-exam-qa.js` sin errores.
 - Ejecutar `node qa/run-result-download-browser-qa.js` cuando cambie el flujo de descarga del resultado.
-- Revisar portada, inicio del examen, reactivos con imagen y responsividad en navegador real.
+- Revisar portada, inicio del examen, reactivos con imagen, descarga PDF y responsividad en navegador real.
 - Confirmar que Vercel sirve la versión más reciente después del push.
 
 ## Documentación

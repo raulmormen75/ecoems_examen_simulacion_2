@@ -2,7 +2,7 @@
 
 ## Dirección
 
-Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simulación 1. La experiencia conserva portada IFR, escudo, cronómetro de 3 horas, avance secuencial, métricas, retroalimentación inmediata, revisión final y descarga PNG.
+Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simulación 1. La experiencia conserva portada IFR, escudo, cronómetro de 3 horas, avance secuencial, métricas, retroalimentación inmediata, revisión final y reporte PDF de reactivos incorrectos.
 
 ## Hitos ejecutados
 
@@ -46,12 +46,12 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
    - Firma del contenido completo para evitar restaurar intentos incompatibles.
    - Storage inválido descartado sin romper la app.
 
-8. Mejorar descarga del resultado con vista previa multiplataforma.
-   - Modal de resultado para iOS, Android y Windows.
-   - Vista previa `blob:` con descarga directa desde el modal, compartir/guardar cuando el navegador lo permite y apertura de imagen.
-   - Textos específicos para iPhone/iPad, Android y Windows.
-   - QA de navegador reproducible para perfiles Windows, Android e iPhone.
-   - Timeout para fuentes y fallback `toDataURL()` si `canvas.toBlob()` no responde.
+8. Sustituir la descarga de resultado por reporte PDF de mejora.
+   - Botón final `Obtener reactivos que debo mejorar`.
+   - PDF con solo reactivos incorrectos, respuesta elegida, respuesta correcta y argumentos.
+   - Generación local con biblioteca vendorizada y descarga directa mediante `Blob`.
+   - Márgenes carta y paginación controlada para evitar cortes ilegibles.
+   - QA de navegador reproducible para Windows Chrome, Android Chrome, iPhone Safari e iPhone Chrome.
 
 9. Depurar marcas visuales en Español y Habilidad verbal.
    - Bloques azules de lectura conservados.
@@ -74,7 +74,7 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
 - Textos alternativos de imágenes sin instrucciones de generación.
 - Revisión local en navegador realizada.
 - Recarga segura validada en escritorio y móvil.
-- Descarga PNG validada con vista previa en perfiles Windows, Android e iPhone.
+- Descarga PDF validada con archivo real en Windows Chrome y `blob:` PDF en perfiles Android e iPhone.
 - Español y Habilidad verbal sin marcas visuales que adelanten respuestas fuera de consignas explícitas.
 - Documentación actualizada.
 

@@ -413,48 +413,40 @@ function validateProgressPersistenceControls() {
 
 function validateResultDownloadControls() {
   const appSource = fs.readFileSync(APP_FILE, 'utf8');
-  const styleSource = fs.readFileSync(path.join(ROOT, 'exam-styles.css'), 'utf8');
+  const pdfMakeFile = path.join(ROOT, 'vendor', 'pdfmake', 'pdfmake.min.js');
+  const pdfFontsFile = path.join(ROOT, 'vendor', 'pdfmake', 'vfs_fonts.js');
 
   const requiredAppFragments = [
-    ['detección de iOS/iPadOS', 'isIOSLikeDevice'],
-    ['detección de Android', 'isAndroidLikeDevice'],
-    ['detección de Windows', 'isWindowsLikeDevice'],
-    ['contexto de plataforma para la vista previa', 'getResultImageDeviceContext'],
-    ['fallback de canvas a Blob', 'canvasToPngBlob'],
-    ['fallback de canvas por data URL', 'toDataURL'],
+    ['biblioteca PDF local', 'vendor/pdfmake/pdfmake.min.js'],
+    ['fuentes PDF locales', 'vendor/pdfmake/vfs_fonts.js'],
+    ['carga diferida de PDF', 'loadPdfMakeLibrary'],
+    ['modelo de reactivos incorrectos', 'getIncorrectPdfItems'],
+    ['definición del documento PDF', 'buildImprovementPdfDefinition'],
+    ['generación Blob PDF', 'createPdfBlob'],
+    ['descarga directa con atributo download', 'triggerPdfDownload'],
+    ['nombre del PDF', 'reactivos-que-debo-mejorar-ecoems-ifr-simulacion-2.pdf'],
+    ['MIME de PDF', 'application/pdf'],
+    ['márgenes Carta', "pageMargins: [54, 66, 54, 58]"],
+    ['tamaño Carta', "pageSize: 'LETTER'"],
+    ['corte inteligente de encabezados', 'pageBreakBefore'],
+    ['evitar separar comparación de respuestas', 'buildAnswerComparisonPdfTable'],
+    ['incluir solo respuestas incorrectas', 'answer && !answer.isCorrect'],
+    ['botón final actualizado', 'Obtener reactivos que debo mejorar'],
     ['timeout para carga de fuentes', 'waitForFontsReady'],
-    ['Web Share API para archivos', 'navigator.share'],
-    ['validación canShare para PNG', 'canShareFile'],
-    ['modal de imagen multiplataforma', 'renderResultImageModal'],
-    ['texto alterno cuando no hay Web Share', 'textNoShare'],
-    ['acción para compartir resultado', 'share-result-image'],
-    ['acción para abrir imagen', 'open-result-image'],
-    ['acción para descargar desde la vista previa', 'download-result-image'],
-    ['acción para cerrar vista de imagen', 'close-result-image'],
-    ['revocación diferida para evitar carreras en móviles', 'delay: 60000'],
-    ['descarga directa con atributo download', 'link.download'],
-    ['archivo PNG con nombre correcto', 'resultado-ecoems-ifr-simulacion-2.png'],
-    ['instrucción visible para guardar imagen', 'Guardar imagen']
+    ['acción externa conservada', "action === 'download-results'"],
+    ['función pública de depuración local', 'downloadImprovementPdf']
   ];
 
   for (const [label, fragment] of requiredAppFragments) {
-    assert.ok(appSource.includes(fragment), `Descarga de resultado multiplataforma: falta ${label}.`);
+    assert.ok(appSource.includes(fragment), `Descarga PDF de reactivos por mejorar: falta ${label}.`);
   }
 
-  assert.ok(/📲\s*Guarda tu resultado en iPhone/.test(appSource), 'Descarga de resultado en iOS: falta título con emoji para iPhone.');
-  assert.ok(/📲\s*Guarda tu resultado en Android/.test(appSource), 'Descarga de resultado en Android: falta título con emoji.');
-  assert.ok(/🖥️\s*Guarda tu resultado en Windows/.test(appSource), 'Descarga de resultado en Windows: falta título con emoji.');
-  assert.ok(/📤\s*Compartir o guardar/.test(appSource), 'Descarga de resultado multiplataforma: falta botón para compartir o guardar.');
-  assert.ok(/💾\s*Descargar imagen/.test(appSource), 'Descarga de resultado multiplataforma: falta botón para descargar imagen.');
-  assert.ok(/🖼️\s*Abrir imagen/.test(appSource), 'Descarga de resultado multiplataforma: falta botón para abrir imagen.');
-  assert.ok(!/const\s+isIOSDevice\s*=/.test(appSource), 'Descarga de resultado: la vista previa no debe estar limitada por una variable isIOSDevice.');
-  assert.ok(!/if\s*\(\s*isIOSDevice\s*\)/.test(appSource), 'Descarga de resultado: la vista previa no debe estar limitada a iOS.');
-  assert.ok(styleSource.includes('.result-image-frame'), 'Descarga de resultado multiplataforma: faltan estilos de vista previa.');
-  assert.ok(/\.result-image-frame\{[\s\S]*max-height:52vh/.test(styleSource), 'Descarga de resultado multiplataforma: falta altura máxima para la vista previa.');
-  assert.ok(/\.result-image-frame\{[\s\S]*overflow:auto/.test(styleSource), 'Descarga de resultado multiplataforma: falta scroll interno para la vista previa.');
-  assert.ok(styleSource.includes('-webkit-touch-callout:default'), 'Descarga de resultado multiplataforma: falta soporte de menú táctil para guardar imagen.');
+  assert.ok(fs.existsSync(pdfMakeFile), 'Descarga PDF: falta vendor/pdfmake/pdfmake.min.js.');
+  assert.ok(fs.existsSync(pdfFontsFile), 'Descarga PDF: falta vendor/pdfmake/vfs_fonts.js.');
+  assert.ok(!/resultado-ecoems-ifr-simulacion-2\.png/.test(appSource), 'Descarga PDF: no debe conservar el nombre PNG anterior.');
+  assert.ok(!/renderResultImageModal|share-result-image|download-result-image|open-result-image|image\/png|toDataURL/.test(appSource), 'Descarga PDF: no debe conservar flujo de imagen/PNG.');
 
-  log('QA de descarga: vista previa, compartir, descarga y apertura de imagen presentes para iOS, Android y Windows.');
+  log('QA de descarga: PDF de reactivos incorrectos con biblioteca local, descarga directa y paginación controlada presentes.');
 }
 
 function main() {

@@ -1704,36 +1704,6 @@ main{
   line-height:1.6;
 }
 
-.result-image-preview{
-  display:grid;
-  gap:12px;
-}
-
-.result-image-frame{
-  padding:10px;
-  border-radius:22px;
-  border:1px solid var(--line);
-  background:#fff;
-  max-height:52vh;
-  overflow:auto;
-  -webkit-overflow-scrolling:touch;
-}
-
-.result-image-frame img{
-  display:block;
-  width:100%;
-  height:auto;
-  border-radius:14px;
-  user-select:auto;
-  -webkit-user-select:auto;
-  -webkit-touch-callout:default;
-}
-
-.result-image-preview p{
-  color:var(--muted);
-  line-height:1.6;
-}
-
 .summary-card{
   display:grid;
   gap:8px;

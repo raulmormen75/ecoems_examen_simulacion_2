@@ -23,7 +23,6 @@
     expandedAnswered: Object.create(null),
     floatingReviewId: null,
     pendingSavedProgress: null,
-    resultImage: null,
     summary: null,
     modalStep: null,
     deadlineAt: null,
@@ -437,158 +436,21 @@
     }
   }
 
-  function isIOSLikeDevice() {
-    const userAgent = window.navigator.userAgent || '';
-    const platform = window.navigator.platform || '';
-    return /iPad|iPhone|iPod/i.test(userAgent)
-      || (platform === 'MacIntel' && Number(window.navigator.maxTouchPoints) > 1);
-  }
+  const IMPROVEMENT_PDF_FILENAME = 'reactivos-que-debo-mejorar-ecoems-ifr-simulacion-2.pdf';
 
-  function isAndroidLikeDevice() {
-    return /Android/i.test(window.navigator.userAgent || '');
-  }
+  function triggerPdfDownload(blob, filename = IMPROVEMENT_PDF_FILENAME) {
+    if (!blob) return;
 
-  function isWindowsLikeDevice() {
-    return /Windows/i.test(window.navigator.userAgent || '')
-      || /Win/i.test(window.navigator.platform || '');
-  }
-
-  function getResultImageDeviceContext() {
-    if (isIOSLikeDevice()) {
-      return {
-        key: 'ios',
-        title: '📲 Guarda tu resultado en iPhone',
-        text: 'En iPhone o iPad, Safari y Chrome pueden abrir la imagen en lugar de descargarla. Usa compartir, abre la imagen o mantenla presionada para guardarla en Fotos.',
-        textNoShare: 'En iPhone o iPad, Safari y Chrome pueden abrir la imagen en lugar de descargarla. Descarga el PNG, abre la imagen o mantenla presionada para guardarla en Fotos.',
-        note: 'Si no aparece el guardado automático, toca «Compartir» y elige «Guardar imagen», o mantén presionada la vista previa.'
-      };
-    }
-
-    if (isAndroidLikeDevice()) {
-      return {
-        key: 'android',
-        title: '📲 Guarda tu resultado en Android',
-        text: 'En Android puedes compartir el PNG, descargarlo o abrirlo en otra pestaña. Si Chrome abre la imagen, usa el menú del navegador para guardarla.',
-        textNoShare: 'En Android puedes descargar el PNG o abrirlo en otra pestaña. Si Chrome abre la imagen, usa el menú del navegador para guardarla.',
-        note: 'Si tu navegador no muestra la descarga al primer intento, abre la imagen y usa el menú para guardarla.'
-      };
-    }
-
-    if (isWindowsLikeDevice()) {
-      return {
-        key: 'windows',
-        title: '🖥️ Guarda tu resultado en Windows',
-        text: 'En Windows puedes descargar el PNG, abrirlo en una pestaña nueva o compartirlo si tu navegador lo permite.',
-        textNoShare: 'En Windows puedes descargar el PNG o abrirlo en una pestaña nueva para guardarlo desde el navegador.',
-        note: 'Si la descarga no inicia, abre la imagen y usa la opción de guardar del navegador.'
-      };
-    }
-
-    return {
-      key: 'generic',
-      title: '🖼️ Guarda tu resultado',
-      text: 'Puedes descargar el PNG, abrirlo en una pestaña nueva o compartirlo si tu navegador lo permite.',
-      textNoShare: 'Puedes descargar el PNG o abrirlo en una pestaña nueva para guardarlo desde el navegador.',
-      note: 'Si la descarga no inicia, abre la imagen y usa la opción de guardar del navegador.'
-    };
-  }
-
-  function canShareFile(file) {
-    return Boolean(
-      window.navigator.canShare
-      && window.navigator.share
-      && window.navigator.canShare({ files: [file] })
-    );
-  }
-
-  function revokeResultImageUrl({ delay = 0 } = {}) {
-    if (STATE.resultImage && STATE.resultImage.url) {
-      const url = STATE.resultImage.url;
-      if (delay > 0) {
-        window.setTimeout(() => URL.revokeObjectURL(url), delay);
-      } else {
-        URL.revokeObjectURL(url);
-      }
-    }
-    STATE.resultImage = null;
-  }
-
-  async function shareResultImage() {
-    if (!STATE.resultImage || !STATE.resultImage.file || !canShareFile(STATE.resultImage.file)) return false;
-
-    try {
-      await window.navigator.share({
-        files: [STATE.resultImage.file],
-        title: 'Resultado ECOEMS IFR',
-        text: 'Resultado del Examen simulación 2 ECOEMS.'
-      });
-      return true;
-    } catch (error) {
-      return error && error.name === 'AbortError' ? false : false;
-    }
-  }
-
-  function openResultImage() {
-    if (!STATE.resultImage || !STATE.resultImage.url) return;
-    window.open(STATE.resultImage.url, '_blank', 'noopener');
-  }
-
-  function downloadResultImageFromPreview() {
-    if (!STATE.resultImage || !STATE.resultImage.url) return;
-
+    const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.href = STATE.resultImage.url;
-    link.download = STATE.resultImage.filename || 'resultado-ecoems-ifr-simulacion-2.png';
+    link.href = url;
+    link.download = filename;
+    link.rel = 'noopener';
+    link.target = '_blank';
     document.body.appendChild(link);
     link.click();
     link.remove();
-  }
-
-  function dataUrlToBlob(dataUrl) {
-    const [header, body] = String(dataUrl || '').split(',');
-    const mimeMatch = /data:([^;]+);base64/i.exec(header || '');
-    if (!body || !mimeMatch) return null;
-
-    const binary = window.atob(body);
-    const bytes = new Uint8Array(binary.length);
-    for (let index = 0; index < binary.length; index += 1) {
-      bytes[index] = binary.charCodeAt(index);
-    }
-    return new Blob([bytes], { type: mimeMatch[1] || 'image/png' });
-  }
-
-  function canvasToPngBlob(canvas) {
-    return new Promise((resolve) => {
-      let settled = false;
-      const finish = (blob) => {
-        if (settled) return;
-        settled = true;
-        resolve(blob);
-      };
-
-      const fallbackTimer = window.setTimeout(() => {
-        try {
-          finish(dataUrlToBlob(canvas.toDataURL('image/png', 1)));
-        } catch (error) {
-          finish(null);
-        }
-      }, 1400);
-
-      if (typeof canvas.toBlob !== 'function') {
-        window.clearTimeout(fallbackTimer);
-        try {
-          finish(dataUrlToBlob(canvas.toDataURL('image/png', 1)));
-        } catch (error) {
-          finish(null);
-        }
-        return;
-      }
-
-      canvas.toBlob((blob) => {
-        window.clearTimeout(fallbackTimer);
-        finish(blob);
-      }, 'image/png', 1);
-    });
+    window.setTimeout(() => URL.revokeObjectURL(url), 60000);
   }
 
   function waitForFontsReady(timeout = 1400) {
@@ -1256,13 +1118,13 @@
         </div>
         <div class="final-result-head-actions">
           <p>${esc(modeText)}</p>
-          <button class="download-results-btn" type="button" data-action="download-results">Guardar mis resultados</button>
+          <button class="download-results-btn" type="button" data-action="download-results">Obtener reactivos que debo mejorar</button>
         </div>
       </div>
       ${renderFinalMetrics(summary)}
       ${renderReinforcementList(summary)}
       <div class="final-actions final-actions-bottom">
-        <button class="download-results-btn" type="button" data-action="download-results">Guardar mis resultados</button>
+        <button class="download-results-btn" type="button" data-action="download-results">Obtener reactivos que debo mejorar</button>
       </div>
     </section>`;
   }
@@ -1383,37 +1245,6 @@
     </div>`;
   }
 
-  function renderResultImageModal() {
-    const image = STATE.resultImage;
-    if (!image) return '';
-    const context = image.context || getResultImageDeviceContext();
-    const description = image.canShare ? context.text : (context.textNoShare || context.text);
-
-    const shareButton = image.canShare
-      ? '<button class="modal-btn primary" type="button" data-action="share-result-image" data-autofocus="true">📤 Compartir o guardar</button>'
-      : '';
-    const downloadButtonClass = image.canShare ? 'modal-btn' : 'modal-btn primary';
-    const downloadAutofocus = image.canShare ? '' : ' data-autofocus="true"';
-
-    return `<div class="modal-head result-image-head">
-      <span class="pill">Resultado listo</span>
-      <h2 id="resultImageTitle">${esc(context.title)}</h2>
-      <p id="resultImageText">${esc(description)}</p>
-    </div>
-    <section class="result-image-preview" aria-label="Vista previa del resultado en imagen">
-      <div class="result-image-frame">
-        <img src="${esc(image.url)}" alt="Resultado del Examen simulación 2 ECOEMS en formato PNG">
-      </div>
-      <p>${esc(context.note)}</p>
-    </section>
-    <div class="modal-actions result-image-actions">
-      ${shareButton}
-      <button class="${downloadButtonClass}" type="button" data-action="download-result-image"${downloadAutofocus}>💾 Descargar imagen</button>
-      <button class="modal-btn" type="button" data-action="open-result-image">🖼️ Abrir imagen</button>
-      <button class="modal-btn warning" type="button" data-action="close-result-image">Cerrar</button>
-    </div>`;
-  }
-
   function renderSummaryModal(summary) {
     const title = summary.mode === 'time_expired' ? 'Tiempo límite alcanzado' : 'Examen concluido';
     const message = summary.mode === 'time_expired'
@@ -1510,15 +1341,6 @@
       nodes.modalShell.setAttribute('aria-labelledby', 'resumeChoiceTitle');
       nodes.modalShell.setAttribute('aria-describedby', 'resumeChoiceText');
       nodes.modalCard.innerHTML = renderResumeChoiceModal(STATE.pendingSavedProgress);
-      window.requestAnimationFrame(focusModalPrimaryAction);
-      return;
-    }
-
-    if (STATE.modalStep === 'resultImage' && STATE.resultImage) {
-      nodes.modalShell.hidden = false;
-      nodes.modalShell.setAttribute('aria-labelledby', 'resultImageTitle');
-      nodes.modalShell.setAttribute('aria-describedby', 'resultImageText');
-      nodes.modalCard.innerHTML = renderResultImageModal();
       window.requestAnimationFrame(focusModalPrimaryAction);
       return;
     }
@@ -1631,7 +1453,6 @@
 
   function resetExamProgress() {
     clearTimer();
-    revokeResultImageUrl();
     STATE.status = 'idle';
     STATE.activeIndex = 0;
     STATE.remainingSeconds = DURATION;
@@ -1642,7 +1463,6 @@
     STATE.expandedAnswered = Object.create(null);
     STATE.floatingReviewId = null;
     STATE.pendingSavedProgress = null;
-    STATE.resultImage = null;
     STATE.summary = null;
     STATE.modalStep = null;
     clearPersistedProgress();
@@ -1710,7 +1530,6 @@
 
   function startExam() {
     if (STATE.status !== 'idle') return;
-    revokeResultImageUrl();
     STATE.status = 'running';
     STATE.activeIndex = 0;
     setDeadlineFromRemaining(DURATION);
@@ -1720,7 +1539,6 @@
     STATE.reinforcementLog = [];
     STATE.floatingReviewId = null;
     STATE.pendingSavedProgress = null;
-    STATE.resultImage = null;
     STATE.summary = null;
     STATE.modalStep = null;
     startTimer();
@@ -1828,33 +1646,6 @@
       return;
     }
 
-    if (action === 'share-result-image') {
-      const shared = await shareResultImage();
-      if (shared) {
-        STATE.modalStep = null;
-        revokeResultImageUrl({ delay: 60000 });
-        renderModal();
-      }
-      return;
-    }
-
-    if (action === 'open-result-image') {
-      openResultImage();
-      return;
-    }
-
-    if (action === 'download-result-image') {
-      downloadResultImageFromPreview();
-      return;
-    }
-
-    if (action === 'close-result-image') {
-      STATE.modalStep = null;
-      revokeResultImageUrl({ delay: 60000 });
-      renderModal();
-      return;
-    }
-
     if (action === 'modal-review') {
       STATE.modalStep = 'review';
       renderModal();
@@ -1867,242 +1658,385 @@
     }
   }
 
-  function setCanvasFont(context, size, weight = 700) {
-    context.font = `${weight} ${size}px "Plus Jakarta Sans", "Segoe UI", Arial, sans-serif`;
-  }
+  const PDFMAKE_SOURCES = [
+    'vendor/pdfmake/pdfmake.min.js',
+    'vendor/pdfmake/vfs_fonts.js'
+  ];
+  let pdfMakeLoadPromise = null;
 
-  function drawRoundRect(context, x, y, width, height, radius) {
-    const safeRadius = Math.min(radius, width / 2, height / 2);
-    context.beginPath();
-    context.moveTo(x + safeRadius, y);
-    context.arcTo(x + width, y, x + width, y + height, safeRadius);
-    context.arcTo(x + width, y + height, x, y + height, safeRadius);
-    context.arcTo(x, y + height, x, y, safeRadius);
-    context.arcTo(x, y, x + width, y, safeRadius);
-    context.closePath();
-  }
-
-  function fillRoundRect(context, x, y, width, height, radius, fillStyle, strokeStyle = null) {
-    drawRoundRect(context, x, y, width, height, radius);
-    context.fillStyle = fillStyle;
-    context.fill();
-    if (strokeStyle) {
-      context.strokeStyle = strokeStyle;
-      context.lineWidth = 1;
-      context.stroke();
-    }
-  }
-
-  function wrapCanvasText(context, text, maxWidth) {
-    const words = String(text || '').split(/\s+/).filter(Boolean);
-    const lines = [];
-    let line = '';
-
-    words.forEach((word) => {
-      const nextLine = line ? `${line} ${word}` : word;
-      if (context.measureText(nextLine).width <= maxWidth || !line) {
-        line = nextLine;
+  function loadScriptOnce(src) {
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector(`script[data-pdfmake-src="${src}"]`);
+      if (existing && existing.dataset.loaded === 'true') {
+        resolve();
         return;
       }
-      lines.push(line);
-      line = word;
+      if (existing) {
+        existing.addEventListener('load', resolve, { once: true });
+        existing.addEventListener('error', reject, { once: true });
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = src;
+      script.async = true;
+      script.dataset.pdfmakeSrc = src;
+      script.addEventListener('load', () => {
+        script.dataset.loaded = 'true';
+        resolve();
+      }, { once: true });
+      script.addEventListener('error', () => reject(new Error(`No se pudo cargar ${src}`)), { once: true });
+      document.head.appendChild(script);
     });
-
-    if (line) lines.push(line);
-    return lines.length ? lines : [''];
   }
 
-  function drawWrappedText(context, text, x, y, maxWidth, lineHeight, color, size, weight = 600) {
-    setCanvasFont(context, size, weight);
-    context.fillStyle = color;
-    context.textBaseline = 'top';
-    const lines = wrapCanvasText(context, text, maxWidth);
-    lines.forEach((line, index) => {
-      context.fillText(line, x, y + index * lineHeight);
-    });
-    return y + lines.length * lineHeight;
-  }
-
-  function drawCanvasPill(context, text, x, y, options) {
-    setCanvasFont(context, options.size || 14, options.weight || 800);
-    const paddingX = options.paddingX || 14;
-    const height = options.height || 34;
-    const width = Math.min(context.measureText(text).width + paddingX * 2, options.maxWidth || 760);
-    fillRoundRect(context, x, y, width, height, height / 2, options.background, options.border || null);
-    context.fillStyle = options.color;
-    context.textBaseline = 'middle';
-    context.fillText(text, x + paddingX, y + height / 2 + .5);
-    return { width, height };
-  }
-
-  function renderResultCanvasContent(context, summary, draw, totalHeight = 0) {
-    const colors = {
-      background: '#f4f1e8',
-      panel: '#fffefa',
-      line: 'rgba(20,20,58,.16)',
-      ink: '#161a2d',
-      muted: '#5b647f',
-      navy: '#1C1E5A',
-      navy2: '#14143A',
-      navy3: '#2B2F8F',
-      green: '#2CE51E',
-      ok: '#117D21',
-      okSoft: '#e8f8ea',
-      bad: '#C24529',
-      badSoft: '#fdeceb',
-      blueSoft: '#edf1ff',
-      blockSoft: '#e8fbe7',
-      white: '#FFFFFF'
-    };
-    const width = 1180;
-    const outer = 24;
-    const panelX = outer;
-    const panelY = outer;
-    const panelWidth = width - outer * 2;
-    const pad = 32;
-    const contentX = panelX + pad;
-    const contentWidth = panelWidth - pad * 2;
-    let y = panelY + pad;
-
-    if (draw) {
-      context.fillStyle = colors.background;
-      context.fillRect(0, 0, width, totalHeight);
-      fillRoundRect(context, panelX, panelY, panelWidth, totalHeight - outer * 2, 28, colors.panel, colors.line);
+  function loadPdfMakeLibrary() {
+    if (window.pdfMake && window.pdfMake.vfs) return Promise.resolve(window.pdfMake);
+    if (!pdfMakeLoadPromise) {
+      pdfMakeLoadPromise = PDFMAKE_SOURCES
+        .reduce((chain, src) => chain.then(() => loadScriptOnce(src)), Promise.resolve())
+        .then(() => {
+          if (!window.pdfMake || !window.pdfMake.vfs) {
+            throw new Error('La biblioteca PDF no quedó disponible.');
+          }
+          return window.pdfMake;
+        });
     }
+    return pdfMakeLoadPromise;
+  }
 
-    const modeLabel = summary.mode === 'time_expired' ? 'Cierre por tiempo' : 'Cierre por término';
-    const modeText = summary.mode === 'time_expired'
-      ? 'La evaluación se cerró al agotarse el tiempo. El resultado integra solo los reactivos contestados.'
-      : 'La evaluación se cerró al terminar todos los reactivos. El resultado integra el intento completo.';
-    const rightWidth = 430;
-    const rightX = contentX + contentWidth - rightWidth;
-    setCanvasFont(context, 15, 800);
-    const rightLines = wrapCanvasText(context, modeText, rightWidth);
-    const headerHeight = Math.max(124, rightLines.length * 24 + 20);
+  function cleanPdfText(value) {
+    return String(value || '')
+      .replace(/\s+/g, ' ')
+      .replace(/\s+([,.;:!?])/g, '$1')
+      .trim();
+  }
 
-    if (draw) {
-      drawCanvasPill(context, modeLabel, contentX, y, {
-        background: colors.blueSoft,
-        color: colors.navy,
-        size: 14,
-        height: 34
+  function pdfParagraphs(title, value) {
+    const text = cleanPdfText(value);
+    if (!text) return [];
+    return [
+      { text: title, style: 'sectionLabel', margin: [0, 8, 0, 2] },
+      { text, style: 'bodyText' }
+    ];
+  }
+
+  function getExerciseBaseForPdf(exercise) {
+    if (exercise.basePill && exercise.basePill.content) return exercise.basePill.content;
+    return exercise.baseText || '';
+  }
+
+  function getOptionPdfText(option) {
+    const pieces = [option.text, option.imageAlt, option.caption]
+      .filter(Boolean)
+      .map(cleanPdfText)
+      .filter(Boolean);
+    if (!pieces.length && option.kind && option.kind !== 'text') {
+      pieces.push('Opción con apoyo visual.');
+    }
+    return pieces.join(' ');
+  }
+
+  function getIncorrectPdfItems() {
+    return EXERCISES
+      .filter((exercise) => {
+        const answer = STATE.answersById[exercise.id];
+        return Boolean(answer && !answer.isCorrect);
+      })
+      .map((exercise) => {
+        const answer = STATE.answersById[exercise.id];
+        const selectedOption = exercise.options.find((option) => option.label === answer.selectedOption) || null;
+        const correctOption = exercise.options.find((option) => option.label === exercise.correctOption) || null;
+        return {
+          exercise,
+          answer,
+          selectedOption,
+          correctOption,
+          selectedText: selectedOption ? getOptionPdfText(selectedOption) : 'Sin respuesta registrada.',
+          correctText: correctOption ? getOptionPdfText(correctOption) : exercise.correctOptionText,
+          selectedArgument: exercise.incorrectArgumentsByOption[answer.selectedOption] || 'No hay argumento disponible para la opción elegida.',
+          correctArgument: exercise.correctArgument || 'No hay argumento disponible para la respuesta correcta.'
+        };
       });
-      setCanvasFont(context, 46, 800);
-      context.fillStyle = colors.navy2;
-      context.textBaseline = 'top';
-      context.fillText('Resultado final', contentX, y + 46);
-      drawWrappedText(context, modeText, rightX, y + 14, rightWidth, 24, colors.muted, 15, 650);
-    }
-    y += headerHeight + 26;
+  }
 
-    const metricGap = 12;
-    const metricHeight = 126;
-    const metricWidth = (contentWidth - metricGap * 3) / 4;
-    const metrics = [
-      { label: 'Reactivos contestados', value: summary.metrics.answered, note: `de ${TOTAL}`, color: colors.muted, bg: colors.white, border: colors.line },
-      { label: 'Reactivos correctos', value: summary.metrics.correct, note: 'aciertos', color: colors.ok, bg: colors.okSoft, border: 'rgba(17,125,33,.24)' },
-      { label: 'Reactivos incorrectos', value: summary.metrics.incorrect, note: 'errores', color: colors.bad, bg: colors.badSoft, border: 'rgba(194,69,41,.24)' },
-      { label: 'Puntaje', value: `${summary.metrics.rawScore}/${TOTAL}`, note: formatPercent(summary.metrics.percent), color: colors.navy, bg: colors.blueSoft, border: 'rgba(28,30,90,.2)' }
+  function imageBlobToDataUrl(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => resolve(reader.result), { once: true });
+      reader.addEventListener('error', reject, { once: true });
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  async function fetchImageDataUrl(src) {
+    const response = await fetch(src, { cache: 'force-cache' });
+    if (!response.ok) throw new Error(`No se pudo cargar la imagen ${src}`);
+    const blob = await response.blob();
+    return imageBlobToDataUrl(blob);
+  }
+
+  function renderTableVisualForPdf(visual) {
+    const headers = Array.isArray(visual.headers) ? visual.headers : [];
+    const rows = Array.isArray(visual.rows) ? visual.rows : [];
+    if (!headers.length || !rows.length) return [];
+
+    return [{
+      table: {
+        headerRows: 1,
+        widths: headers.map(() => '*'),
+        body: [
+          headers.map((header) => ({ text: cleanPdfText(header), bold: true, fillColor: '#edf1ff', color: '#1C1E5A' })),
+          ...rows.map((row) => headers.map((_, index) => cleanPdfText(row[index])))
+        ]
+      },
+      layout: 'lightHorizontalLines',
+      margin: [0, 6, 0, 4]
+    }];
+  }
+
+  async function buildVisualPdfBlocks(exercise) {
+    const blocks = [];
+    const visuals = getExerciseVisuals(exercise);
+
+    for (const visual of visuals) {
+      if (visual.kind === 'image' && visual.src) {
+        try {
+          const dataUrl = await fetchImageDataUrl(visual.src);
+          blocks.push({
+            image: dataUrl,
+            fit: [410, 170],
+            alignment: 'center',
+            margin: [0, 6, 0, 4]
+          });
+        } catch (error) {
+          if (visual.alt) blocks.push({ text: `Apoyo visual: ${cleanPdfText(visual.alt)}`, style: 'visualNote' });
+        }
+      } else if (visual.kind === 'table') {
+        blocks.push(...renderTableVisualForPdf(visual));
+      } else if (visual.alt) {
+        blocks.push({ text: `Apoyo visual: ${cleanPdfText(visual.alt)}`, style: 'visualNote' });
+      } else if (visual.content) {
+        blocks.push({ text: cleanPdfText(visual.content), style: 'visualNote' });
+      }
+    }
+
+    return blocks;
+  }
+
+  function buildOptionsPdfTable(item) {
+    const body = [
+      [
+        { text: 'Opción', style: 'tableHead' },
+        { text: 'Texto de la opción', style: 'tableHead' }
+      ]
     ];
 
-    if (draw) {
-      metrics.forEach((metric, index) => {
-        const x = contentX + index * (metricWidth + metricGap);
-        fillRoundRect(context, x, y, metricWidth, metricHeight, 22, metric.bg, metric.border);
-        drawWrappedText(context, metric.label.toUpperCase(), x + 16, y + 16, metricWidth - 32, 17, colors.muted, 12, 800);
-        setCanvasFont(context, 34, 800);
-        context.fillStyle = metric.color;
-        context.textBaseline = 'top';
-        context.fillText(String(metric.value), x + 16, y + 52);
-        setCanvasFont(context, 15, 700);
-        context.fillStyle = colors.muted;
-        context.fillText(metric.note, x + 16, y + 94);
-      });
-    }
-    y += metricHeight + 26;
-
-    if (draw) {
-      setCanvasFont(context, 25, 800);
-      context.fillStyle = colors.navy2;
-      context.textBaseline = 'top';
-      context.fillText('Bloques temáticos por reforzar:', contentX, y);
-    }
-    y += 44;
-
-    const groups = summary.reinforcementGroups || [];
-    if (!groups.length) {
-      const emptyHeight = 88;
-      if (draw) {
-        fillRoundRect(context, contentX, y, contentWidth, emptyHeight, 22, colors.okSoft, 'rgba(17,125,33,.24)');
-        setCanvasFont(context, 17, 800);
-        context.fillStyle = colors.ok;
-        context.textBaseline = 'top';
-        context.fillText('No se registraron reactivos incorrectos.', contentX + 18, y + 16);
-        drawWrappedText(context, 'El intento no generó bloques temáticos para reforzar por error. Puedes revisar tus reactivos contestados en modo lectura.', contentX + 18, y + 46, contentWidth - 36, 22, colors.ink, 15, 600);
-      }
-      y += emptyHeight + 18;
-    } else {
-      groups.forEach((group) => {
-        const groupX = contentX;
-        const groupWidth = contentWidth;
-        const listX = groupX + 62;
-        const listWidth = groupWidth - 86;
-        setCanvasFont(context, 15, 650);
-        const itemLayouts = group.exercises.map((item) => {
-          const text = `Reactivo ${item.number}. ${item.summary}`;
-          const lines = wrapCanvasText(context, text, listWidth);
-          return { text, lines, height: lines.length * 23 + 7 };
-        });
-        const listHeight = itemLayouts.reduce((sum, item) => sum + item.height, 0);
-        const groupHeight = 18 + 34 + 10 + 34 + 14 + listHeight + 14;
-
-        if (draw) {
-          fillRoundRect(context, groupX, y, groupWidth, groupHeight, 22, 'rgba(255,255,255,.96)', 'rgba(28,30,90,.12)');
-          setCanvasFont(context, 18, 800);
-          context.fillStyle = colors.navy;
-          context.textBaseline = 'middle';
-          context.fillText('-', groupX + 18, y + 35);
-          drawCanvasPill(context, group.areaName, groupX + 40, y + 18, {
-            background: colors.blueSoft,
-            color: colors.navy,
-            size: 15,
-            height: 34,
-            maxWidth: groupWidth - 72
-          });
-          drawCanvasPill(context, group.block, groupX + 40, y + 62, {
-            background: colors.blockSoft,
-            color: '#0f6d1a',
-            size: 15,
-            height: 34,
-            maxWidth: groupWidth - 72
-          });
-
-          let itemY = y + 110;
-          itemLayouts.forEach((item) => {
-            context.beginPath();
-            context.arc(groupX + 52, itemY + 10, 4, 0, Math.PI * 2);
-            context.fillStyle = colors.green;
-            context.fill();
-            setCanvasFont(context, 15, 650);
-            context.fillStyle = colors.ink;
-            context.textBaseline = 'top';
-            item.lines.forEach((line, index) => {
-              context.fillText(line, listX, itemY + index * 23);
-            });
-            itemY += item.height;
-          });
+    item.exercise.options.forEach((option) => {
+      const isSelected = option.label === item.answer.selectedOption;
+      const isCorrect = option.label === item.exercise.correctOption;
+      const fillColor = isCorrect ? '#e8f8ea' : (isSelected ? '#fdeceb' : '#FFFFFF');
+      const badges = [
+        isSelected ? 'Elegida' : '',
+        isCorrect ? 'Correcta' : ''
+      ].filter(Boolean).join(' · ');
+      body.push([
+        { text: option.label.toUpperCase(), bold: true, color: '#1C1E5A', fillColor },
+        {
+          stack: [
+            { text: getOptionPdfText(option) || 'Sin texto visible.', color: '#161a2d' },
+            badges ? { text: badges, color: isCorrect ? '#117D21' : '#C24529', bold: true, margin: [0, 3, 0, 0] } : {}
+          ].filter((node) => Object.keys(node).length),
+          fillColor
         }
+      ]);
+    });
 
-        y += groupHeight + 14;
-      });
-    }
-
-    y += pad + outer;
-
-    return Math.ceil(y);
+    return {
+      table: {
+        headerRows: 1,
+        widths: [48, '*'],
+        body,
+        dontBreakRows: true
+      },
+      layout: {
+        hLineColor: () => '#dfe1eb',
+        vLineColor: () => '#dfe1eb',
+        paddingTop: () => 6,
+        paddingBottom: () => 6,
+        paddingLeft: () => 7,
+        paddingRight: () => 7
+      },
+      margin: [0, 8, 0, 8]
+    };
   }
 
-  async function downloadResultsPng() {
+  function buildAnswerComparisonPdfTable(item) {
+    return {
+      unbreakable: true,
+      table: {
+        widths: ['*', '*'],
+        body: [
+          [
+            { text: `Tu respuesta: ${item.answer.selectedOption.toUpperCase()}`, style: 'badAnswerHead' },
+            { text: `Respuesta correcta: ${item.exercise.correctOption.toUpperCase()}`, style: 'goodAnswerHead' }
+          ],
+          [
+            { text: item.selectedText, fillColor: '#fdeceb' },
+            { text: item.correctText, fillColor: '#e8f8ea' }
+          ]
+        ]
+      },
+      layout: {
+        hLineColor: () => '#dfe1eb',
+        vLineColor: () => '#dfe1eb',
+        paddingTop: () => 7,
+        paddingBottom: () => 7,
+        paddingLeft: () => 8,
+        paddingRight: () => 8
+      },
+      margin: [0, 8, 0, 8]
+    };
+  }
+
+  async function buildExercisePdfBlock(item) {
+    const exercise = item.exercise;
+    const blocks = [
+      { text: `Reactivo ${exercise.number}`, style: 'exerciseTitle', headlineLevel: 1 },
+      { text: `${exercise.areaName} · ${exercise.block}`, style: 'exerciseMeta' },
+      ...pdfParagraphs('Texto base', getExerciseBaseForPdf(exercise)),
+      ...(await buildVisualPdfBlocks(exercise)),
+      ...pdfParagraphs('Planteamiento', exercise.prompt),
+      { text: 'Opciones', style: 'sectionLabel', margin: [0, 9, 0, 2] },
+      buildOptionsPdfTable(item),
+      buildAnswerComparisonPdfTable(item),
+      ...pdfParagraphs('Por qué conviene revisar este reactivo', item.selectedArgument),
+      ...pdfParagraphs('Argumento de la respuesta correcta', item.correctArgument)
+    ];
+
+    return {
+      stack: blocks,
+      margin: [0, 0, 0, 18]
+    };
+  }
+
+  async function buildImprovementPdfDefinition(summary) {
+    const items = getIncorrectPdfItems();
+    const modeText = summary.mode === 'time_expired'
+      ? 'La evaluación se cerró al agotarse el tiempo.'
+      : 'La evaluación se cerró al terminar todos los reactivos.';
+    const content = [
+      { text: 'Instituto Fernando Ramírez', style: 'brand' },
+      { text: 'ECOEMS 2026 · Examen simulación 2', style: 'subtitle' },
+      { text: 'Reactivos que debo mejorar', style: 'title' },
+      {
+        text: `${modeText} Este reporte incluye únicamente los reactivos respondidos de forma incorrecta para orientar el repaso posterior.`,
+        style: 'intro'
+      },
+      {
+        table: {
+          widths: ['*', '*', '*', '*'],
+          body: [[
+            { text: `Contestados\n${summary.metrics.answered} de ${TOTAL}`, style: 'metricCell' },
+            { text: `Correctos\n${summary.metrics.correct}`, style: 'metricCellGood' },
+            { text: `Incorrectos\n${summary.metrics.incorrect}`, style: 'metricCellBad' },
+            { text: `Puntaje\n${summary.metrics.rawScore}/${TOTAL}`, style: 'metricCell' }
+          ]]
+        },
+        layout: {
+          hLineColor: () => '#dfe1eb',
+          vLineColor: () => '#dfe1eb',
+          paddingTop: () => 9,
+          paddingBottom: () => 9,
+          paddingLeft: () => 8,
+          paddingRight: () => 8
+        },
+        margin: [0, 8, 0, 18],
+        unbreakable: true
+      }
+    ];
+
+    if (!items.length) {
+      content.push({
+        stack: [
+          { text: 'No se registraron reactivos incorrectos.', style: 'emptyTitle' },
+          { text: 'El intento no generó reactivos para mejorar por error. Puedes conservar este PDF como evidencia de que no hubo respuestas incorrectas.', style: 'bodyText' }
+        ],
+        margin: [0, 10, 0, 0],
+        unbreakable: true
+      });
+    } else {
+      content.push({ text: `Reactivos incluidos: ${items.length}`, style: 'sectionHeading' });
+      for (const item of items) {
+        content.push(await buildExercisePdfBlock(item));
+      }
+    }
+
+    return {
+      pageSize: 'LETTER',
+      pageMargins: [54, 66, 54, 58],
+      info: {
+        title: 'Reactivos que debo mejorar · ECOEMS IFR Simulación 2',
+        author: 'Instituto Fernando Ramírez',
+        subject: 'Reporte de reactivos incorrectos'
+      },
+      defaultStyle: {
+        font: 'Roboto',
+        fontSize: 10.5,
+        lineHeight: 1.22,
+        color: '#161a2d'
+      },
+      header: () => ({
+        columns: [
+          { text: 'IFR', bold: true, color: '#1C1E5A', fontSize: 11 },
+          { text: 'Reactivos que debo mejorar', alignment: 'right', color: '#5b647f', fontSize: 9 }
+        ],
+        margin: [54, 26, 54, 0]
+      }),
+      footer: (currentPage, pageCount) => ({
+        columns: [
+          { text: 'Examen simulación 2 ECOEMS', color: '#5b647f', fontSize: 8.5 },
+          { text: `Página ${currentPage} de ${pageCount}`, alignment: 'right', color: '#5b647f', fontSize: 8.5 }
+        ],
+        margin: [54, 18, 54, 0]
+      }),
+      pageBreakBefore(currentNode, followingNodesOnPage) {
+        return currentNode.headlineLevel === 1 && followingNodesOnPage.length < 5;
+      },
+      styles: {
+        brand: { fontSize: 17, bold: true, color: '#1C1E5A' },
+        subtitle: { fontSize: 10, bold: true, color: '#2B2F8F', margin: [0, 2, 0, 8] },
+        title: { fontSize: 24, bold: true, color: '#14143A', margin: [0, 4, 0, 6] },
+        intro: { fontSize: 10.5, color: '#5b647f', margin: [0, 0, 0, 8] },
+        sectionHeading: { fontSize: 14, bold: true, color: '#14143A', margin: [0, 4, 0, 10] },
+        exerciseTitle: { fontSize: 15, bold: true, color: '#14143A', margin: [0, 10, 0, 2] },
+        exerciseMeta: { fontSize: 9.5, bold: true, color: '#1C1E5A', margin: [0, 0, 0, 5] },
+        sectionLabel: { fontSize: 9.5, bold: true, color: '#5b647f' },
+        bodyText: { fontSize: 10.5, color: '#161a2d' },
+        visualNote: { fontSize: 9.5, italics: true, color: '#5b647f', margin: [0, 4, 0, 4] },
+        tableHead: { bold: true, color: '#1C1E5A', fillColor: '#edf1ff' },
+        badAnswerHead: { bold: true, color: '#C24529', fillColor: '#fdeceb' },
+        goodAnswerHead: { bold: true, color: '#117D21', fillColor: '#e8f8ea' },
+        metricCell: { bold: true, color: '#1C1E5A', alignment: 'center' },
+        metricCellGood: { bold: true, color: '#117D21', alignment: 'center' },
+        metricCellBad: { bold: true, color: '#C24529', alignment: 'center' },
+        emptyTitle: { fontSize: 14, bold: true, color: '#117D21', margin: [0, 0, 0, 4] }
+      },
+      content
+    };
+  }
+
+  function createPdfBlob(pdfMake, definition) {
+    return new Promise((resolve, reject) => {
+      try {
+        pdfMake.createPdf(definition).getBlob((blob) => resolve(blob));
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  async function downloadImprovementPdf() {
     const panel = byId('resultado-final');
     if (!panel || !STATE.summary) return;
 
@@ -2111,48 +2045,18 @@
 
     buttons.forEach((button) => {
       button.disabled = true;
-      button.textContent = 'Preparando descarga...';
+      button.textContent = 'Preparando PDF...';
     });
 
     try {
       await waitForFontsReady();
-
-      const measuringCanvas = document.createElement('canvas');
-      const measuringContext = measuringCanvas.getContext('2d');
-      const exportWidth = 1180;
-      const exportHeight = renderResultCanvasContent(measuringContext, STATE.summary, false);
-      const scale = Math.min(2, 30000 / exportWidth, 30000 / exportHeight);
-      const safeScale = Number.isFinite(scale) && scale > 0 ? scale : 1;
-      const canvas = document.createElement('canvas');
-      canvas.width = Math.ceil(exportWidth * safeScale);
-      canvas.height = Math.ceil(exportHeight * safeScale);
-      const context = canvas.getContext('2d');
-      context.scale(safeScale, safeScale);
-      renderResultCanvasContent(context, STATE.summary, true, exportHeight);
-
-      const blob = await canvasToPngBlob(canvas);
-      if (!blob) throw new Error('No se pudo generar la imagen PNG.');
-
-      const filename = 'resultado-ecoems-ifr-simulacion-2.png';
-      const pngUrl = URL.createObjectURL(blob);
-      const resultFile = typeof File === 'function'
-        ? new File([blob], filename, { type: 'image/png' })
-        : null;
-      const shareAvailable = Boolean(resultFile && canShareFile(resultFile));
-
-      revokeResultImageUrl();
-      STATE.resultImage = {
-        url: pngUrl,
-        file: resultFile,
-        filename,
-        canShare: shareAvailable,
-        context: getResultImageDeviceContext()
-      };
-
-      STATE.modalStep = 'resultImage';
-      renderModal();
+      const pdfMake = await loadPdfMakeLibrary();
+      const definition = await buildImprovementPdfDefinition(STATE.summary);
+      const blob = await createPdfBlob(pdfMake, definition);
+      if (!blob || blob.type !== 'application/pdf') throw new Error('No se pudo generar el PDF.');
+      triggerPdfDownload(blob);
     } catch (error) {
-      console.error('No se pudo descargar el resultado final.', error);
+      console.error('No se pudo descargar el PDF de reactivos por mejorar.', error);
       buttons.forEach((button) => {
         button.disabled = false;
         button.textContent = 'Intenta descargar de nuevo';
@@ -2200,10 +2104,6 @@
     if (
       action === 'restore-progress'
       || action === 'reset-progress'
-      || action === 'share-result-image'
-      || action === 'open-result-image'
-      || action === 'download-result-image'
-      || action === 'close-result-image'
       || action === 'modal-review'
       || action === 'modal-close'
     ) {
@@ -2212,7 +2112,7 @@
     }
 
     if (action === 'download-results') {
-      downloadResultsPng();
+      downloadImprovementPdf();
     }
   }
 
@@ -2249,7 +2149,7 @@
         renderTopMetrics();
         persistProgress({ force: true });
       },
-      downloadResultsPng,
+      downloadImprovementPdf,
       clearSavedProgress: clearPersistedProgress,
       readSavedProgress,
       getState() {
