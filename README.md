@@ -18,7 +18,7 @@ También se generaron los assets visuales obligatorios en `assets/` y se validó
 
 La aplicación conserva el progreso del intento si se refresca la página. Al volver a cargar, muestra una notificación con dos opciones: continuar sin reiniciar o borrar el intento para empezar desde cero.
 
-Al final de la evaluación, el botón `Obtener reactivos que debo mejorar` genera y descarga un PDF con los reactivos respondidos de forma incorrecta. El documento usa márgenes de carta, cortes de página controlados y descarga directa compatible con escritorio Windows, Android e iPhone.
+Al final de la evaluación, el botón `Obtener reactivos que debo mejorar` genera primero un reporte HTML imprimible con diseño IFR, fuente Plus Jakarta Sans y escudo institucional. Desde ese documento se guarda o imprime el PDF con márgenes de carta, cortes de página controlados y validación en escritorio Windows, Android e iPhone.
 
 En Español y Habilidad verbal, los bloques azules de lectura se conservan, pero los resaltados y subrayados solo se muestran cuando el planteamiento pide explícitamente leer palabras o expresiones resaltadas o subrayadas.
 

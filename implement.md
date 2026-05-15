@@ -24,9 +24,9 @@
 - Cinco opciones por reactivo.
 - Pista obligatoria.
 - Retroalimentación diferenciada para respuesta correcta e incorrecta.
-- Resultado final y descarga PDF de reactivos incorrectos.
+- Resultado final con reporte HTML imprimible y guardado como PDF de reactivos incorrectos.
 - Persistencia de progreso con decisión explícita al recargar.
-- Ruta de guardado multiplataforma para el PDF final en iOS, Android y Windows.
+- Ruta multiplataforma para abrir el reporte imprimible y guardar el PDF final en iOS, Android y Windows.
 - Identidad IFR, escudo institucional y Plus Jakarta Sans.
 
 ## Estado actual esperado
@@ -60,5 +60,5 @@ Generado exam-data.js con 128 reactivos y 10 áreas.
 11. Confirmar que la recarga restaura avance, respuestas, reactivo activo y cronómetro.
 12. Confirmar que el cronómetro se calcula contra una fecha límite real, no solo contra `setInterval`.
 13. Confirmar que `🧹 Reiniciar desde cero` borra el storage y vuelve a estado inicial.
-14. Confirmar que la descarga del resultado genera un PDF de reactivos incorrectos en iOS, Android y Windows, con nombre correcto, MIME `application/pdf`, márgenes legibles y cortes de página controlados.
+14. Confirmar que el resultado genera un reporte HTML imprimible de reactivos incorrectos en iOS, Android y Windows, con diseño IFR, Plus Jakarta Sans, márgenes legibles y cortes de página controlados para guardar como PDF.
 15. Commit y push.

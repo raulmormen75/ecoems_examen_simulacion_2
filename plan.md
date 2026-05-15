@@ -2,7 +2,7 @@
 
 ## Dirección
 
-Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simulación 1. La experiencia conserva portada IFR, escudo, cronómetro de 3 horas, avance secuencial, métricas, retroalimentación inmediata, revisión final y reporte PDF de reactivos incorrectos.
+Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simulación 1. La experiencia conserva portada IFR, escudo, cronómetro de 3 horas, avance secuencial, métricas, retroalimentación inmediata, revisión final y reporte imprimible de reactivos incorrectos para guardar como PDF.
 
 ## Hitos ejecutados
 
@@ -48,8 +48,8 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
 
 8. Sustituir la descarga de resultado por reporte PDF de mejora.
    - Botón final `Obtener reactivos que debo mejorar`.
-   - PDF con solo reactivos incorrectos, respuesta elegida, respuesta correcta y argumentos.
-   - Generación local con biblioteca vendorizada y descarga directa mediante `Blob`.
+   - Reporte HTML con solo reactivos incorrectos, respuesta elegida, respuesta correcta y argumentos.
+   - Diseño IFR con Plus Jakarta Sans, escudo institucional, banda azul y CSS de impresión.
    - Márgenes carta y paginación controlada para evitar cortes ilegibles.
    - QA de navegador reproducible para Windows Chrome, Android Chrome, iPhone Safari e iPhone Chrome.
 
@@ -74,7 +74,7 @@ Construir la segunda evaluación ECOEMS IFR como evolución técnica de la simul
 - Textos alternativos de imágenes sin instrucciones de generación.
 - Revisión local en navegador realizada.
 - Recarga segura validada en escritorio y móvil.
-- Descarga PDF validada con archivo real en Windows Chrome y `blob:` PDF en perfiles Android e iPhone.
+- Reporte imprimible validado con PDF real en Windows Chrome y sin overflow en perfiles Android e iPhone.
 - Español y Habilidad verbal sin marcas visuales que adelanten respuestas fuera de consignas explícitas.
 - Documentación actualizada.
 

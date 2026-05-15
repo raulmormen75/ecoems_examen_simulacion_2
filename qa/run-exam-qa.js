@@ -413,40 +413,34 @@ function validateProgressPersistenceControls() {
 
 function validateResultDownloadControls() {
   const appSource = fs.readFileSync(APP_FILE, 'utf8');
-  const pdfMakeFile = path.join(ROOT, 'vendor', 'pdfmake', 'pdfmake.min.js');
-  const pdfFontsFile = path.join(ROOT, 'vendor', 'pdfmake', 'vfs_fonts.js');
 
   const requiredAppFragments = [
-    ['biblioteca PDF local', 'vendor/pdfmake/pdfmake.min.js'],
-    ['fuentes PDF locales', 'vendor/pdfmake/vfs_fonts.js'],
-    ['carga diferida de PDF', 'loadPdfMakeLibrary'],
     ['modelo de reactivos incorrectos', 'getIncorrectPdfItems'],
-    ['definición del documento PDF', 'buildImprovementPdfDefinition'],
-    ['generación Blob PDF', 'createPdfBlob'],
-    ['descarga directa con atributo download', 'triggerPdfDownload'],
-    ['nombre del PDF', 'reactivos-que-debo-mejorar-ecoems-ifr-simulacion-2.pdf'],
-    ['MIME de PDF', 'application/pdf'],
-    ['márgenes Carta', "pageMargins: [54, 66, 54, 58]"],
-    ['tamaño Carta', "pageSize: 'LETTER'"],
-    ['corte inteligente de encabezados', 'pageBreakBefore'],
-    ['evitar separar comparación de respuestas', 'buildAnswerComparisonPdfTable'],
+    ['reporte HTML como fuente del PDF', 'buildImprovementReportHtml'],
+    ['CSS del reporte IFR', 'buildReportStyles'],
+    ['fuente institucional Plus Jakarta Sans', 'Plus Jakarta Sans'],
+    ['estructura document-wrapper', 'document-wrapper'],
+    ['portada class-title', 'class-title'],
+    ['tarjetas subsection-card', 'subsection-card'],
+    ['reglas de impresión Carta', '@page{size:letter'],
+    ['control de cortes CSS', 'break-inside:avoid'],
+    ['apertura del reporte HTML', 'openReportHtmlDocument'],
+    ['guardado mediante impresión PDF', 'window.print()'],
     ['incluir solo respuestas incorrectas', 'answer && !answer.isCorrect'],
     ['botón final actualizado', 'Obtener reactivos que debo mejorar'],
     ['timeout para carga de fuentes', 'waitForFontsReady'],
     ['acción externa conservada', "action === 'download-results'"],
-    ['función pública de depuración local', 'downloadImprovementPdf']
+    ['función pública de depuración local', 'buildImprovementReportHtml']
   ];
 
   for (const [label, fragment] of requiredAppFragments) {
     assert.ok(appSource.includes(fragment), `Descarga PDF de reactivos por mejorar: falta ${label}.`);
   }
 
-  assert.ok(fs.existsSync(pdfMakeFile), 'Descarga PDF: falta vendor/pdfmake/pdfmake.min.js.');
-  assert.ok(fs.existsSync(pdfFontsFile), 'Descarga PDF: falta vendor/pdfmake/vfs_fonts.js.');
   assert.ok(!/resultado-ecoems-ifr-simulacion-2\.png/.test(appSource), 'Descarga PDF: no debe conservar el nombre PNG anterior.');
-  assert.ok(!/renderResultImageModal|share-result-image|download-result-image|open-result-image|image\/png|toDataURL/.test(appSource), 'Descarga PDF: no debe conservar flujo de imagen/PNG.');
+  assert.ok(!/renderResultImageModal|share-result-image|download-result-image|open-result-image|canvasToPngBlob|dataUrlToBlob|toDataURL/.test(appSource), 'Descarga PDF: no debe conservar flujo de imagen/PNG.');
 
-  log('QA de descarga: PDF de reactivos incorrectos con biblioteca local, descarga directa y paginación controlada presentes.');
+  log('QA de descarga: reporte HTML con CSS IFR, Plus Jakarta Sans e impresión PDF presentes.');
 }
 
 function main() {

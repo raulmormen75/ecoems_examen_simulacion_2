@@ -436,23 +436,6 @@
     }
   }
 
-  const IMPROVEMENT_PDF_FILENAME = 'reactivos-que-debo-mejorar-ecoems-ifr-simulacion-2.pdf';
-
-  function triggerPdfDownload(blob, filename = IMPROVEMENT_PDF_FILENAME) {
-    if (!blob) return;
-
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = filename;
-    link.rel = 'noopener';
-    link.target = '_blank';
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    window.setTimeout(() => URL.revokeObjectURL(url), 60000);
-  }
-
   function waitForFontsReady(timeout = 1400) {
     if (!document.fonts || !document.fonts.ready) return Promise.resolve();
     return Promise.race([
@@ -1658,67 +1641,13 @@
     }
   }
 
-  const PDFMAKE_SOURCES = [
-    'vendor/pdfmake/pdfmake.min.js',
-    'vendor/pdfmake/vfs_fonts.js'
-  ];
-  let pdfMakeLoadPromise = null;
-
-  function loadScriptOnce(src) {
-    return new Promise((resolve, reject) => {
-      const existing = document.querySelector(`script[data-pdfmake-src="${src}"]`);
-      if (existing && existing.dataset.loaded === 'true') {
-        resolve();
-        return;
-      }
-      if (existing) {
-        existing.addEventListener('load', resolve, { once: true });
-        existing.addEventListener('error', reject, { once: true });
-        return;
-      }
-
-      const script = document.createElement('script');
-      script.src = src;
-      script.async = true;
-      script.dataset.pdfmakeSrc = src;
-      script.addEventListener('load', () => {
-        script.dataset.loaded = 'true';
-        resolve();
-      }, { once: true });
-      script.addEventListener('error', () => reject(new Error(`No se pudo cargar ${src}`)), { once: true });
-      document.head.appendChild(script);
-    });
-  }
-
-  function loadPdfMakeLibrary() {
-    if (window.pdfMake && window.pdfMake.vfs) return Promise.resolve(window.pdfMake);
-    if (!pdfMakeLoadPromise) {
-      pdfMakeLoadPromise = PDFMAKE_SOURCES
-        .reduce((chain, src) => chain.then(() => loadScriptOnce(src)), Promise.resolve())
-        .then(() => {
-          if (!window.pdfMake || !window.pdfMake.vfs) {
-            throw new Error('La biblioteca PDF no quedó disponible.');
-          }
-          return window.pdfMake;
-        });
-    }
-    return pdfMakeLoadPromise;
-  }
+  const PDF_SHIELD_SRC = 'escudo-ifr-real.jpg';
 
   function cleanPdfText(value) {
     return String(value || '')
       .replace(/\s+/g, ' ')
       .replace(/\s+([,.;:!?])/g, '$1')
       .trim();
-  }
-
-  function pdfParagraphs(title, value) {
-    const text = cleanPdfText(value);
-    if (!text) return [];
-    return [
-      { text: title, style: 'sectionLabel', margin: [0, 8, 0, 2] },
-      { text, style: 'bodyText' }
-    ];
   }
 
   function getExerciseBaseForPdf(exercise) {
@@ -1760,280 +1689,343 @@
       });
   }
 
-  function imageBlobToDataUrl(blob) {
+  function imageBlobToDataUrl(blob, fallbackMime = '') {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.addEventListener('load', () => resolve(reader.result), { once: true });
+      reader.addEventListener('load', () => {
+        const result = String(reader.result || '');
+        if (fallbackMime && /^data:[^;]+;base64,/i.test(result)) {
+          resolve(result.replace(/^data:[^;]+;base64,/i, `data:${fallbackMime};base64,`));
+          return;
+        }
+        resolve(result);
+      }, { once: true });
       reader.addEventListener('error', reject, { once: true });
       reader.readAsDataURL(blob);
     });
   }
 
-  async function fetchImageDataUrl(src) {
+  async function fetchImageDataUrl(src, fallbackMime = 'image/png') {
     const response = await fetch(src, { cache: 'force-cache' });
     if (!response.ok) throw new Error(`No se pudo cargar la imagen ${src}`);
     const blob = await response.blob();
-    return imageBlobToDataUrl(blob);
+    const mime = blob.type && blob.type !== 'application/octet-stream' ? blob.type : fallbackMime;
+    return imageBlobToDataUrl(blob, mime);
   }
 
-  function renderTableVisualForPdf(visual) {
+  function buildReportStyles() {
+    return `
+      :root{
+        --ifr-blue:#1C1E5A;
+        --ifr-blue-dark:#14143A;
+        --ifr-blue-light:#2B2F8F;
+        --ifr-green:#2CE51E;
+        --ifr-green-dark:#22B517;
+        --bg-body:#F4F7FB;
+        --white:#FFFFFF;
+        --text-main:#1A1F36;
+        --text-body:#475569;
+        --border-soft:#E2E8F0;
+        --box-blue-bg:#F0F4FA;
+        --box-green-bg:#F2FCF1;
+        --box-red-bg:#FFF1F0;
+        --box-amber-bg:#FFFBF0;
+      }
+      *{box-sizing:border-box}
+      html{font-family:"Plus Jakarta Sans",system-ui,sans-serif;background:var(--bg-body);color:var(--text-main)}
+      body{margin:0;background:var(--bg-body);font-family:"Plus Jakarta Sans",system-ui,sans-serif;line-height:1.62;-webkit-font-smoothing:antialiased}
+      .screen-actions{position:sticky;top:0;z-index:5;display:flex;justify-content:center;gap:12px;padding:14px;background:rgba(244,247,251,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-soft)}
+      .screen-actions button{border:0;border-radius:999px;background:var(--ifr-blue);color:#fff;font:800 14px "Plus Jakarta Sans",system-ui,sans-serif;padding:12px 20px;cursor:pointer;box-shadow:0 10px 24px rgba(28,30,90,.18)}
+      .document-wrapper{max-width:900px;margin:36px auto;background:var(--white);border-radius:24px;box-shadow:0 10px 40px rgba(28,30,90,.08);overflow:hidden}
+      .report-header{display:flex;justify-content:space-between;align-items:center;gap:22px;padding:38px 48px 28px;background:#fff;border-bottom:4px solid var(--ifr-green)}
+      .header-left{display:flex;align-items:center;gap:20px}
+      .school-logo{width:74px;height:74px;object-fit:contain;border-radius:12px;background:#f8fafc;padding:5px;box-shadow:0 4px 10px rgba(0,0,0,.05)}
+      .brand h1{margin:0;color:var(--ifr-blue);font-size:25px;font-weight:800;line-height:1.12}
+      .brand p{margin:6px 0 0;color:var(--text-body);font-weight:800;text-transform:uppercase;font-size:12px;letter-spacing:1px}
+      .meta-data{text-align:right;font-size:13px;color:var(--text-body);font-weight:700;background:var(--box-blue-bg);padding:12px 18px;border-radius:12px;border:1px solid rgba(28,30,90,.1)}
+      .meta-data span{display:block;color:var(--ifr-blue);font-weight:800;text-transform:uppercase;font-size:10px;letter-spacing:1px;margin-bottom:2px}
+      .class-title{background:linear-gradient(135deg,var(--ifr-blue-light) 0%,var(--ifr-blue-dark) 100%);margin:0 48px 36px;padding:38px;border-radius:0 0 24px 24px;position:relative;overflow:hidden;box-shadow:0 10px 30px rgba(28,30,90,.15)}
+      .class-title::before{content:"";position:absolute;top:0;right:-54px;width:250px;height:100%;background:var(--ifr-green);opacity:.9;transform:skewX(-20deg);z-index:0}
+      .class-title::after{content:"";position:absolute;top:0;right:0;width:150px;height:100%;background:rgba(255,255,255,.1);transform:skewX(-20deg);z-index:0}
+      .class-title h2,.class-title p,.class-title .title-chip{position:relative;z-index:1}
+      .title-chip{display:inline-flex;width:max-content;margin-bottom:14px;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.13);color:var(--ifr-green);font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase}
+      .class-title h2{max-width:78%;margin:0 0 12px;color:#fff;font-size:34px;font-weight:800;line-height:1.12}
+      .class-title p{max-width:74%;margin:0;color:rgba(255,255,255,.94);font-size:15px;font-weight:600}
+      .main-content{padding:0 48px 48px}
+      .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 0 42px}
+      .metric-card{background:#fff;border:1px solid var(--border-soft);border-radius:16px;padding:18px;text-align:center;box-shadow:0 6px 16px rgba(0,0,0,.03);border-top:4px solid var(--ifr-blue)}
+      .metric-card.good{background:var(--box-green-bg);border-top-color:var(--ifr-green-dark)}
+      .metric-card.bad{background:var(--box-red-bg);border-top-color:#D84A32}
+      .metric-card span{display:block;color:var(--text-body);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+      .metric-card strong{display:block;margin-top:8px;color:var(--ifr-blue-dark);font-size:25px;font-weight:800;line-height:1}
+      .metric-card small{display:block;margin-top:7px;color:var(--text-body);font-size:12px;font-weight:700}
+      .section-header{display:flex;align-items:center;gap:15px;margin:0 0 26px;padding-bottom:15px;border-bottom:3px solid var(--border-soft);position:relative}
+      .section-header::after{content:"";position:absolute;bottom:-3px;left:0;width:80px;height:3px;background:var(--ifr-green);border-radius:3px}
+      .section-header .emoji{font-size:28px;background:var(--box-blue-bg);width:52px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:14px;box-shadow:0 4px 10px rgba(0,0,0,.04);flex-shrink:0}
+      .section-header h3{margin:0;color:var(--ifr-blue);font-size:23px;font-weight:800;line-height:1.25}
+      .section-header p{margin:3px 0 0;color:var(--text-body);font-size:13px;font-weight:700}
+      .exercise-section{break-inside:auto;page-break-inside:auto;margin-bottom:42px}
+      .exercise-section.first-exercise{break-before:page;page-break-before:always}
+      .subsection-card{background:#fff;border:1px solid var(--border-soft);border-radius:16px;padding:24px;margin-bottom:22px;box-shadow:0 6px 16px rgba(0,0,0,.03);border-top:4px solid var(--ifr-blue)}
+      .subsection-card-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+      .subsection-card-title h4{margin:0;color:var(--ifr-blue-dark);font-size:18px;font-weight:800;line-height:1.25}
+      .area-pill{display:inline-flex;align-items:center;border-radius:999px;background:var(--box-blue-bg);color:var(--ifr-blue);padding:7px 10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap}
+      .text-block{color:var(--text-body);font-size:14px;margin:0 0 14px}
+      .label{display:block;margin:18px 0 7px;color:var(--ifr-blue-light);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px}
+      .support-visual{margin:16px 0;padding:14px;background:#fff;border:1px solid var(--border-soft);border-radius:14px;text-align:center;break-inside:avoid}
+      .support-visual img{max-width:100%;max-height:260px;object-fit:contain}
+      table{width:100%;border-collapse:collapse}
+      .options-table,.visual-table{margin-top:8px;border:1px solid var(--border-soft);border-radius:12px;overflow:hidden;break-inside:avoid;page-break-inside:avoid}
+      th{background:var(--ifr-blue);color:#fff;text-align:left;font-size:12px;font-weight:800;padding:11px 12px}
+      td{border-top:1px solid var(--border-soft);padding:11px 12px;color:var(--text-main);font-size:13px;vertical-align:top}
+      .option-letter{width:74px;text-align:center;color:var(--ifr-blue);font-weight:800}
+      .option-row.selected td{background:var(--box-red-bg)}
+      .option-row.correct td{background:var(--box-green-bg)}
+      .badge{display:inline-block;margin-top:5px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px}
+      .badge.bad{color:#B23926}.badge.good{color:#16801F}
+      .answer-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;break-inside:avoid;page-break-inside:avoid}
+      .answer-box{border-radius:16px;padding:18px;border:2px solid transparent}
+      .answer-box.bad{background:var(--box-red-bg);border-color:rgba(216,74,50,.18)}
+      .answer-box.good{background:var(--box-green-bg);border-color:rgba(44,229,30,.22)}
+      .answer-box h5{margin:0 0 10px;font-size:13px;font-weight:800;color:var(--ifr-blue-dark)}
+      .answer-box.bad h5{color:#9E2F22}.answer-box.good h5{color:#117D21}
+      .answer-box p{margin:0;color:var(--text-main);font-size:13px}
+      .argument-card{border-radius:16px;padding:18px;margin-top:14px;border:2px solid rgba(28,30,90,.08);background:var(--box-blue-bg);break-inside:avoid;page-break-inside:avoid}
+      .argument-card.good{background:var(--box-green-bg);border-color:rgba(44,229,30,.2)}
+      .argument-card h5{margin:0 0 8px;color:var(--ifr-blue);font-size:14px;font-weight:800}
+      .argument-card p{margin:0;color:var(--text-body);font-size:13px}
+      .empty-state{background:var(--box-green-bg);border:2px solid rgba(44,229,30,.2);border-radius:18px;padding:24px}
+      .footer-note{margin-top:34px;padding-top:18px;border-top:1px solid var(--border-soft);color:var(--text-body);font-size:12px;font-weight:700;text-align:center}
+      @media(max-width:720px){
+        .document-wrapper{margin:0;border-radius:0}
+        .report-header,.main-content{padding-left:22px;padding-right:22px}
+        .class-title{margin-left:22px;margin-right:22px;padding:28px}
+        .class-title h2,.class-title p{max-width:100%}
+        .metrics-grid,.answer-grid{grid-template-columns:1fr}
+        .report-header{align-items:flex-start;flex-direction:column}
+        .meta-data{text-align:left}
+      }
+      @page{size:letter;margin:14mm}
+      @media print{
+        html,body{background:#fff}
+        .screen-actions{display:none!important}
+        .document-wrapper{max-width:none;margin:0;background:#fff;border-radius:0;box-shadow:none;overflow:visible}
+        .report-header{padding:0 0 22px;margin:0 0 0;border-bottom:4px solid var(--ifr-green)}
+        .class-title{margin:0 0 28px;border-radius:0 0 20px 20px;box-shadow:none}
+        .main-content{padding:0}
+        .metric-card,.subsection-card{box-shadow:none}
+        .exercise-section{break-inside:auto;page-break-inside:auto}
+        .exercise-section.first-exercise{break-before:page;page-break-before:always}
+        .options-table,.visual-table,.answer-grid,.argument-card,.support-visual{break-inside:avoid;page-break-inside:avoid}
+      }
+    `;
+  }
+
+  function buildReportMetric(label, value, note, className = '') {
+    return `<article class="metric-card ${className}">
+      <span>${esc(label)}</span>
+      <strong>${esc(value)}</strong>
+      <small>${esc(note)}</small>
+    </article>`;
+  }
+
+  function buildReportVisualTableHtml(visual) {
     const headers = Array.isArray(visual.headers) ? visual.headers : [];
     const rows = Array.isArray(visual.rows) ? visual.rows : [];
-    if (!headers.length || !rows.length) return [];
+    if (!headers.length || !rows.length) return '';
 
-    return [{
-      table: {
-        headerRows: 1,
-        widths: headers.map(() => '*'),
-        body: [
-          headers.map((header) => ({ text: cleanPdfText(header), bold: true, fillColor: '#edf1ff', color: '#1C1E5A' })),
-          ...rows.map((row) => headers.map((_, index) => cleanPdfText(row[index])))
-        ]
-      },
-      layout: 'lightHorizontalLines',
-      margin: [0, 6, 0, 4]
-    }];
+    return `<div class="visual-table"><table>
+      <thead><tr>${headers.map((header) => `<th>${esc(cleanPdfText(header))}</th>`).join('')}</tr></thead>
+      <tbody>
+        ${rows.map((row) => `<tr>${headers.map((_, index) => `<td>${esc(cleanPdfText(row[index]))}</td>`).join('')}</tr>`).join('')}
+      </tbody>
+    </table></div>`;
   }
 
-  async function buildVisualPdfBlocks(exercise) {
+  async function buildReportVisualsHtml(exercise) {
     const blocks = [];
     const visuals = getExerciseVisuals(exercise);
 
     for (const visual of visuals) {
       if (visual.kind === 'image' && visual.src) {
         try {
-          const dataUrl = await fetchImageDataUrl(visual.src);
-          blocks.push({
-            image: dataUrl,
-            fit: [410, 170],
-            alignment: 'center',
-            margin: [0, 6, 0, 4]
-          });
+          const dataUrl = await fetchImageDataUrl(visual.src, 'image/png');
+          blocks.push(`<figure class="support-visual"><img src="${esc(dataUrl)}" alt="${esc(visual.alt || 'Apoyo visual del reactivo')}"></figure>`);
         } catch (error) {
-          if (visual.alt) blocks.push({ text: `Apoyo visual: ${cleanPdfText(visual.alt)}`, style: 'visualNote' });
+          if (visual.alt) blocks.push(`<div class="argument-card"><p>${esc(cleanPdfText(visual.alt))}</p></div>`);
         }
       } else if (visual.kind === 'table') {
-        blocks.push(...renderTableVisualForPdf(visual));
-      } else if (visual.alt) {
-        blocks.push({ text: `Apoyo visual: ${cleanPdfText(visual.alt)}`, style: 'visualNote' });
-      } else if (visual.content) {
-        blocks.push({ text: cleanPdfText(visual.content), style: 'visualNote' });
+        blocks.push(buildReportVisualTableHtml(visual));
+      } else if (visual.alt || visual.content) {
+        blocks.push(`<div class="argument-card"><p>${esc(cleanPdfText(visual.alt || visual.content))}</p></div>`);
       }
     }
 
-    return blocks;
+    return blocks.join('');
   }
 
-  function buildOptionsPdfTable(item) {
-    const body = [
-      [
-        { text: 'Opción', style: 'tableHead' },
-        { text: 'Texto de la opción', style: 'tableHead' }
-      ]
-    ];
-
-    item.exercise.options.forEach((option) => {
+  function buildReportOptionsHtml(item) {
+    const rows = item.exercise.options.map((option) => {
       const isSelected = option.label === item.answer.selectedOption;
       const isCorrect = option.label === item.exercise.correctOption;
-      const fillColor = isCorrect ? '#e8f8ea' : (isSelected ? '#fdeceb' : '#FFFFFF');
+      const stateClass = isCorrect ? 'correct' : (isSelected ? 'selected' : '');
       const badges = [
-        isSelected ? 'Elegida' : '',
-        isCorrect ? 'Correcta' : ''
-      ].filter(Boolean).join(' · ');
-      body.push([
-        { text: option.label.toUpperCase(), bold: true, color: '#1C1E5A', fillColor },
-        {
-          stack: [
-            { text: getOptionPdfText(option) || 'Sin texto visible.', color: '#161a2d' },
-            badges ? { text: badges, color: isCorrect ? '#117D21' : '#C24529', bold: true, margin: [0, 3, 0, 0] } : {}
-          ].filter((node) => Object.keys(node).length),
-          fillColor
-        }
-      ]);
-    });
+        isSelected ? '<span class="badge bad">Elegida</span>' : '',
+        isCorrect ? '<span class="badge good">Correcta</span>' : ''
+      ].filter(Boolean).join(' ');
+      return `<tr class="option-row ${stateClass}">
+        <td class="option-letter">${esc(option.label.toUpperCase())}</td>
+        <td>${esc(getOptionPdfText(option) || 'Sin texto visible.')}${badges ? `<br>${badges}` : ''}</td>
+      </tr>`;
+    }).join('');
 
-    return {
-      table: {
-        headerRows: 1,
-        widths: [48, '*'],
-        body,
-        dontBreakRows: true
-      },
-      layout: {
-        hLineColor: () => '#dfe1eb',
-        vLineColor: () => '#dfe1eb',
-        paddingTop: () => 6,
-        paddingBottom: () => 6,
-        paddingLeft: () => 7,
-        paddingRight: () => 7
-      },
-      margin: [0, 8, 0, 8]
-    };
+    return `<div class="options-table"><table>
+      <thead><tr><th>Opción</th><th>Contenido de la opción</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`;
   }
 
-  function buildAnswerComparisonPdfTable(item) {
-    return {
-      unbreakable: true,
-      table: {
-        widths: ['*', '*'],
-        body: [
-          [
-            { text: `Tu respuesta: ${item.answer.selectedOption.toUpperCase()}`, style: 'badAnswerHead' },
-            { text: `Respuesta correcta: ${item.exercise.correctOption.toUpperCase()}`, style: 'goodAnswerHead' }
-          ],
-          [
-            { text: item.selectedText, fillColor: '#fdeceb' },
-            { text: item.correctText, fillColor: '#e8f8ea' }
-          ]
-        ]
-      },
-      layout: {
-        hLineColor: () => '#dfe1eb',
-        vLineColor: () => '#dfe1eb',
-        paddingTop: () => 7,
-        paddingBottom: () => 7,
-        paddingLeft: () => 8,
-        paddingRight: () => 8
-      },
-      margin: [0, 8, 0, 8]
-    };
+  function buildReportAnswerComparisonHtml(item) {
+    return `<div class="answer-grid">
+      <div class="answer-box bad">
+        <h5>Tu respuesta: ${esc(item.answer.selectedOption.toUpperCase())}</h5>
+        <p>${esc(item.selectedText)}</p>
+      </div>
+      <div class="answer-box good">
+        <h5>Respuesta correcta: ${esc(item.exercise.correctOption.toUpperCase())}</h5>
+        <p>${esc(item.correctText)}</p>
+      </div>
+    </div>`;
   }
 
-  async function buildExercisePdfBlock(item) {
+  async function buildReportExerciseHtml(item, index) {
     const exercise = item.exercise;
-    const blocks = [
-      { text: `Reactivo ${exercise.number}`, style: 'exerciseTitle', headlineLevel: 1 },
-      { text: `${exercise.areaName} · ${exercise.block}`, style: 'exerciseMeta' },
-      ...pdfParagraphs('Texto base', getExerciseBaseForPdf(exercise)),
-      ...(await buildVisualPdfBlocks(exercise)),
-      ...pdfParagraphs('Planteamiento', exercise.prompt),
-      { text: 'Opciones', style: 'sectionLabel', margin: [0, 9, 0, 2] },
-      buildOptionsPdfTable(item),
-      buildAnswerComparisonPdfTable(item),
-      ...pdfParagraphs('Por qué conviene revisar este reactivo', item.selectedArgument),
-      ...pdfParagraphs('Argumento de la respuesta correcta', item.correctArgument)
-    ];
+    const baseText = cleanPdfText(getExerciseBaseForPdf(exercise));
+    const visualHtml = await buildReportVisualsHtml(exercise);
 
-    return {
-      stack: blocks,
-      margin: [0, 0, 0, 18]
-    };
+    return `<section class="content-section exercise-section ${index === 0 ? 'first-exercise' : ''}">
+      <div class="section-header">
+        <span class="emoji">${esc(String(exercise.number))}</span>
+        <div>
+          <h3>Reactivo ${esc(exercise.number)}</h3>
+          <p>${esc(exercise.areaName)} · ${esc(exercise.block)}</p>
+        </div>
+      </div>
+      <article class="subsection-card">
+        <div class="subsection-card-title">
+          <h4>${esc(exercise.block)}</h4>
+          <span class="area-pill">${esc(exercise.areaName)}</span>
+        </div>
+        ${baseText ? `<span class="label">Texto base</span><p class="text-block">${esc(baseText)}</p>` : ''}
+        ${visualHtml}
+        <span class="label">Planteamiento</span>
+        <p class="text-block">${esc(cleanPdfText(exercise.prompt))}</p>
+        <span class="label">Opciones</span>
+        ${buildReportOptionsHtml(item)}
+        ${buildReportAnswerComparisonHtml(item)}
+        <div class="argument-card">
+          <h5>Por qué conviene revisar este reactivo</h5>
+          <p>${esc(cleanPdfText(item.selectedArgument))}</p>
+        </div>
+        <div class="argument-card good">
+          <h5>Argumento de la respuesta correcta</h5>
+          <p>${esc(cleanPdfText(item.correctArgument))}</p>
+        </div>
+      </article>
+    </section>`;
   }
 
-  async function buildImprovementPdfDefinition(summary) {
+  async function buildImprovementReportHtml(summary, { autoPrint = true } = {}) {
     const items = getIncorrectPdfItems();
+    let shieldDataUrl = '';
+    try {
+      shieldDataUrl = await fetchImageDataUrl(PDF_SHIELD_SRC, 'image/jpeg');
+    } catch (error) {
+      shieldDataUrl = '';
+    }
     const modeText = summary.mode === 'time_expired'
       ? 'La evaluación se cerró al agotarse el tiempo.'
       : 'La evaluación se cerró al terminar todos los reactivos.';
-    const content = [
-      { text: 'Instituto Fernando Ramírez', style: 'brand' },
-      { text: 'ECOEMS 2026 · Examen simulación 2', style: 'subtitle' },
-      { text: 'Reactivos que debo mejorar', style: 'title' },
-      {
-        text: `${modeText} Este reporte incluye únicamente los reactivos respondidos de forma incorrecta para orientar el repaso posterior.`,
-        style: 'intro'
-      },
-      {
-        table: {
-          widths: ['*', '*', '*', '*'],
-          body: [[
-            { text: `Contestados\n${summary.metrics.answered} de ${TOTAL}`, style: 'metricCell' },
-            { text: `Correctos\n${summary.metrics.correct}`, style: 'metricCellGood' },
-            { text: `Incorrectos\n${summary.metrics.incorrect}`, style: 'metricCellBad' },
-            { text: `Puntaje\n${summary.metrics.rawScore}/${TOTAL}`, style: 'metricCell' }
-          ]]
-        },
-        layout: {
-          hLineColor: () => '#dfe1eb',
-          vLineColor: () => '#dfe1eb',
-          paddingTop: () => 9,
-          paddingBottom: () => 9,
-          paddingLeft: () => 8,
-          paddingRight: () => 8
-        },
-        margin: [0, 8, 0, 18],
-        unbreakable: true
-      }
-    ];
+    const exerciseHtml = items.length
+      ? (await Promise.all(items.map((item, index) => buildReportExerciseHtml(item, index)))).join('')
+      : `<section class="empty-state">
+          <h3>No se registraron reactivos incorrectos.</h3>
+          <p>El intento no generó reactivos para mejorar por error. Puedes conservar este PDF como evidencia de que no hubo respuestas incorrectas.</p>
+        </section>`;
+    const printScript = autoPrint
+      ? `<script>
+          window.addEventListener('load', () => {
+            const ready = document.fonts && document.fonts.ready ? document.fonts.ready.catch(() => null) : Promise.resolve();
+            ready.then(() => window.setTimeout(() => window.print(), 700));
+          });
+        <\/script>`
+      : '';
 
-    if (!items.length) {
-      content.push({
-        stack: [
-          { text: 'No se registraron reactivos incorrectos.', style: 'emptyTitle' },
-          { text: 'El intento no generó reactivos para mejorar por error. Puedes conservar este PDF como evidencia de que no hubo respuestas incorrectas.', style: 'bodyText' }
-        ],
-        margin: [0, 10, 0, 0],
-        unbreakable: true
-      });
-    } else {
-      content.push({ text: `Reactivos incluidos: ${items.length}`, style: 'sectionHeading' });
-      for (const item of items) {
-        content.push(await buildExercisePdfBlock(item));
-      }
-    }
-
-    return {
-      pageSize: 'LETTER',
-      pageMargins: [54, 66, 54, 58],
-      info: {
-        title: 'Reactivos que debo mejorar · ECOEMS IFR Simulación 2',
-        author: 'Instituto Fernando Ramírez',
-        subject: 'Reporte de reactivos incorrectos'
-      },
-      defaultStyle: {
-        font: 'Roboto',
-        fontSize: 10.5,
-        lineHeight: 1.22,
-        color: '#161a2d'
-      },
-      header: () => ({
-        columns: [
-          { text: 'IFR', bold: true, color: '#1C1E5A', fontSize: 11 },
-          { text: 'Reactivos que debo mejorar', alignment: 'right', color: '#5b647f', fontSize: 9 }
-        ],
-        margin: [54, 26, 54, 0]
-      }),
-      footer: (currentPage, pageCount) => ({
-        columns: [
-          { text: 'Examen simulación 2 ECOEMS', color: '#5b647f', fontSize: 8.5 },
-          { text: `Página ${currentPage} de ${pageCount}`, alignment: 'right', color: '#5b647f', fontSize: 8.5 }
-        ],
-        margin: [54, 18, 54, 0]
-      }),
-      pageBreakBefore(currentNode, followingNodesOnPage) {
-        return currentNode.headlineLevel === 1 && followingNodesOnPage.length < 5;
-      },
-      styles: {
-        brand: { fontSize: 17, bold: true, color: '#1C1E5A' },
-        subtitle: { fontSize: 10, bold: true, color: '#2B2F8F', margin: [0, 2, 0, 8] },
-        title: { fontSize: 24, bold: true, color: '#14143A', margin: [0, 4, 0, 6] },
-        intro: { fontSize: 10.5, color: '#5b647f', margin: [0, 0, 0, 8] },
-        sectionHeading: { fontSize: 14, bold: true, color: '#14143A', margin: [0, 4, 0, 10] },
-        exerciseTitle: { fontSize: 15, bold: true, color: '#14143A', margin: [0, 10, 0, 2] },
-        exerciseMeta: { fontSize: 9.5, bold: true, color: '#1C1E5A', margin: [0, 0, 0, 5] },
-        sectionLabel: { fontSize: 9.5, bold: true, color: '#5b647f' },
-        bodyText: { fontSize: 10.5, color: '#161a2d' },
-        visualNote: { fontSize: 9.5, italics: true, color: '#5b647f', margin: [0, 4, 0, 4] },
-        tableHead: { bold: true, color: '#1C1E5A', fillColor: '#edf1ff' },
-        badAnswerHead: { bold: true, color: '#C24529', fillColor: '#fdeceb' },
-        goodAnswerHead: { bold: true, color: '#117D21', fillColor: '#e8f8ea' },
-        metricCell: { bold: true, color: '#1C1E5A', alignment: 'center' },
-        metricCellGood: { bold: true, color: '#117D21', alignment: 'center' },
-        metricCellBad: { bold: true, color: '#C24529', alignment: 'center' },
-        emptyTitle: { fontSize: 14, bold: true, color: '#117D21', margin: [0, 0, 0, 4] }
-      },
-      content
-    };
+    return `<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Reactivos que debo mejorar · ECOEMS IFR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>${buildReportStyles()}</style>
+</head>
+<body>
+  <div class="screen-actions">
+    <button type="button" onclick="window.print()">Guardar como PDF</button>
+  </div>
+  <div class="document-wrapper">
+    <header class="report-header">
+      <div class="header-left">
+        ${shieldDataUrl ? `<img class="school-logo" src="${esc(shieldDataUrl)}" alt="Escudo del Instituto Fernando Ramírez">` : ''}
+        <div class="brand">
+          <h1>Instituto Fernando Ramírez</h1>
+          <p>ECOEMS 2026 · Examen simulación 2</p>
+        </div>
+      </div>
+      <div class="meta-data">
+        <span>Reporte de mejora</span>
+        ${esc(items.length)} reactivos incluidos
+      </div>
+    </header>
+    <section class="class-title">
+      <span class="title-chip">Reporte de mejora</span>
+      <h2>Reactivos que debo mejorar</h2>
+      <p>${esc(modeText)} Este documento concentra únicamente los reactivos respondidos de forma incorrecta para orientar el repaso posterior.</p>
+    </section>
+    <main class="main-content">
+      <section class="metrics-grid" aria-label="Resumen del resultado">
+        ${buildReportMetric('Contestados', String(summary.metrics.answered), `de ${TOTAL}`)}
+        ${buildReportMetric('Correctos', String(summary.metrics.correct), 'aciertos', 'good')}
+        ${buildReportMetric('Incorrectos', String(summary.metrics.incorrect), 'errores', 'bad')}
+        ${buildReportMetric('Puntaje', `${summary.metrics.rawScore}/${TOTAL}`, formatPercent(summary.metrics.percent))}
+      </section>
+      <section class="content-section">
+        <div class="section-header">
+          <span class="emoji">📚</span>
+          <div>
+            <h3>Reactivos incluidos: ${esc(items.length)}</h3>
+            <p>Solo se muestran los errores registrados en el intento.</p>
+          </div>
+        </div>
+      </section>
+      ${exerciseHtml}
+      <p class="footer-note">Examen simulación 2 ECOEMS · Instituto Fernando Ramírez</p>
+    </main>
+  </div>
+  ${printScript}
+</body>
+</html>`;
   }
 
-  function createPdfBlob(pdfMake, definition) {
-    return new Promise((resolve, reject) => {
-      try {
-        pdfMake.createPdf(definition).getBlob((blob) => resolve(blob));
-      } catch (error) {
-        reject(error);
-      }
-    });
+  function openReportHtmlDocument(html) {
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const opened = window.open(url, '_blank');
+    window.setTimeout(() => URL.revokeObjectURL(url), 120000);
+    return opened;
   }
 
   async function downloadImprovementPdf() {
@@ -2045,21 +2037,19 @@
 
     buttons.forEach((button) => {
       button.disabled = true;
-      button.textContent = 'Preparando PDF...';
+      button.textContent = 'Preparando reporte...';
     });
 
     try {
       await waitForFontsReady();
-      const pdfMake = await loadPdfMakeLibrary();
-      const definition = await buildImprovementPdfDefinition(STATE.summary);
-      const blob = await createPdfBlob(pdfMake, definition);
-      if (!blob || blob.type !== 'application/pdf') throw new Error('No se pudo generar el PDF.');
-      triggerPdfDownload(blob);
+      const html = await buildImprovementReportHtml(STATE.summary);
+      const opened = openReportHtmlDocument(html);
+      if (!opened) throw new Error('El navegador bloqueó la apertura del reporte.');
     } catch (error) {
-      console.error('No se pudo descargar el PDF de reactivos por mejorar.', error);
+      console.error('No se pudo abrir el reporte de reactivos por mejorar.', error);
       buttons.forEach((button) => {
         button.disabled = false;
-        button.textContent = 'Intenta descargar de nuevo';
+        button.textContent = 'Intenta abrir el reporte de nuevo';
       });
       return;
     }
@@ -2150,6 +2140,7 @@
         persistProgress({ force: true });
       },
       downloadImprovementPdf,
+      buildImprovementReportHtml,
       clearSavedProgress: clearPersistedProgress,
       readSavedProgress,
       getState() {

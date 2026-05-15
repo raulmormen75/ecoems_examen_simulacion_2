@@ -4,6 +4,7 @@ const http = require('http');
 const os = require('os');
 const path = require('path');
 const { spawn } = require('child_process');
+const { pathToFileURL } = require('url');
 
 const ROOT = path.resolve(__dirname, '..');
 const DOWNLOAD_DIR = 'C:\\Users\\spart\\Downloads';
@@ -13,6 +14,8 @@ const PDF_PREFIX = 'reactivos-que-debo-mejorar-ecoems-ifr-simulacion-2';
 const MIME_TYPES = {
   '.css': 'text/css; charset=utf-8',
   '.html': 'text/html; charset=utf-8',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
   '.js': 'text/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
   '.png': 'image/png',
@@ -326,6 +329,36 @@ function inspectPdfFile(filePath) {
   };
 }
 
+async function navigateAndWait(client, url, timeout = 15000) {
+  const loadPromise = new Promise((resolve) => {
+    const waiters = client.waiters.get('Page.loadEventFired') || [];
+    waiters.push((params) => resolve(params));
+    client.waiters.set('Page.loadEventFired', waiters);
+    setTimeout(resolve, timeout);
+  });
+  await client.send('Page.navigate', { url });
+  await loadPromise;
+}
+
+async function saveReportHtmlAsPdf(client, html) {
+  fs.mkdirSync(DOWNLOAD_DIR, { recursive: true });
+  const htmlPath = path.join(os.tmpdir(), `ifr-report-${Date.now()}.html`);
+  const pdfPath = path.join(DOWNLOAD_DIR, PDF_FILENAME);
+  fs.writeFileSync(htmlPath, html, 'utf8');
+  if (fs.existsSync(pdfPath)) fs.rmSync(pdfPath, { force: true });
+
+  await navigateAndWait(client, pathToFileURL(htmlPath).href);
+  await delay(1500);
+  const printed = await client.send('Page.printToPDF', {
+    printBackground: true,
+    preferCSSPageSize: true,
+    displayHeaderFooter: false
+  });
+  fs.writeFileSync(pdfPath, Buffer.from(printed.data, 'base64'));
+  fs.rmSync(htmlPath, { force: true });
+  return { fullPath: pdfPath, name: PDF_FILENAME };
+}
+
 async function runProfile(client, baseUrl, profile) {
   await client.send('Emulation.setUserAgentOverride', {
     userAgent: profile.userAgent,
@@ -355,7 +388,6 @@ async function runProfile(client, baseUrl, profile) {
   });
   await (loaded || loadPromise);
 
-  const downloadStartedAt = Date.now();
   const result = await evaluate(client, async (currentProfile) => {
     localStorage.clear();
     Object.defineProperty(navigator, 'platform', { value: currentProfile.platform, configurable: true });
@@ -401,70 +433,73 @@ async function runProfile(client, baseUrl, profile) {
     const resultButton = document.querySelector('[data-action="download-results"]');
     if (!resultButton) throw new Error('Missing PDF button');
 
-    let downloadAttempt = null;
-    const originalAnchorClick = HTMLAnchorElement.prototype.click;
-    if (!currentProfile.realDownload) {
-      HTMLAnchorElement.prototype.click = function patchedClick() {
-        downloadAttempt = {
-          href: this.href,
-          download: this.download
-        };
-      };
-    }
+    let reportUrl = null;
+    const originalOpen = window.open;
+    window.open = function patchedOpen(url) {
+      reportUrl = url;
+      return { closed: false, focus() {} };
+    };
 
     resultButton.click();
     await waitFor(() => Array.from(document.querySelectorAll('[data-action="download-results"]'))
       .every((button) => !button.disabled && /Obtener reactivos que debo mejorar/.test(button.textContent)));
 
-    let blobCheck = null;
-    if (!currentProfile.realDownload) {
-      HTMLAnchorElement.prototype.click = originalAnchorClick;
-      await waitFor(() => downloadAttempt && downloadAttempt.href && downloadAttempt.href.startsWith('blob:'));
-      const response = await fetch(downloadAttempt.href);
-      const blob = await response.blob();
-      const bytes = new Uint8Array(await blob.arrayBuffer());
-      const head = String.fromCharCode(...bytes.slice(0, 5));
-      const tailBytes = bytes.slice(Math.max(0, bytes.length - 2048));
-      const tail = String.fromCharCode(...tailBytes);
-      blobCheck = {
-        type: blob.type,
-        size: blob.size,
-        head,
-        hasEof: tail.includes('%%EOF')
-      };
+    window.open = originalOpen;
+    await waitFor(() => reportUrl && reportUrl.startsWith('blob:'));
+    const reportResponse = await fetch(reportUrl);
+    const reportHtml = await reportResponse.text();
+    const iframe = document.createElement('iframe');
+    iframe.setAttribute('title', 'Vista previa del reporte');
+    iframe.style.width = `${currentProfile.width}px`;
+    iframe.style.maxWidth = '100%';
+    iframe.style.height = '1600px';
+    iframe.style.border = '0';
+    document.body.innerHTML = '';
+    document.body.appendChild(iframe);
+    iframe.contentDocument.open();
+    iframe.contentDocument.write(reportHtml);
+    iframe.contentDocument.close();
+    await waitFor(() => iframe.contentDocument.querySelector('.document-wrapper'));
+    if (iframe.contentDocument.fonts && iframe.contentDocument.fonts.ready) {
+      await iframe.contentDocument.fonts.ready.catch(() => null);
     }
 
     return {
       incorrectCount,
       buttonText: resultButton.textContent.trim(),
-      horizontalOverflow: document.scrollingElement.scrollWidth > window.innerWidth,
-      downloadAttempt,
-      blobCheck
+      reportHtml,
+      reportUrl,
+      reportHasJakarta: /Plus Jakarta Sans/.test(reportHtml),
+      reportHasTemplate: /document-wrapper/.test(reportHtml) && /class-title/.test(reportHtml) && /subsection-card/.test(reportHtml),
+      reportHasPrintCss: /@page\{size:letter/.test(reportHtml) && /break-inside:avoid/.test(reportHtml),
+      reportHasAutoPrint: /window\.print\(\)/.test(reportHtml),
+      reportIncludesShield: /school-logo/.test(reportHtml),
+      reportOverflow: iframe.contentDocument.documentElement.scrollWidth > iframe.clientWidth
     };
   }, profile);
 
   assert.strictEqual(result.incorrectCount, 5, `${profile.id}: conteo incorrecto de errores.`);
   assert.strictEqual(result.buttonText, 'Obtener reactivos que debo mejorar', `${profile.id}: texto de boton incorrecto.`);
-  assert.ok(!result.horizontalOverflow, `${profile.id}: hay desbordamiento horizontal.`);
+  assert.ok(result.reportUrl && result.reportUrl.startsWith('blob:'), `${profile.id}: no se abrio el reporte HTML como blob.`);
+  assert.ok(result.reportHasJakarta, `${profile.id}: el reporte no usa Plus Jakarta Sans.`);
+  assert.ok(result.reportHasTemplate, `${profile.id}: el reporte no conserva estructura IFR tipo plantilla.`);
+  assert.ok(result.reportHasPrintCss, `${profile.id}: el reporte no contiene CSS de impresión/paginación.`);
+  assert.ok(result.reportHasAutoPrint, `${profile.id}: el reporte no invoca impresión para guardar PDF.`);
+  assert.ok(result.reportIncludesShield, `${profile.id}: el reporte no incluye el escudo IFR.`);
+  assert.ok(!result.reportOverflow, `${profile.id}: el reporte HTML genera desbordamiento horizontal.`);
 
   if (profile.realDownload) {
-    const downloaded = await waitForDownloadedPdf(downloadStartedAt);
+    const downloaded = await saveReportHtmlAsPdf(client, result.reportHtml);
     const inspection = inspectPdfFile(downloaded.fullPath);
     assert.strictEqual(inspection.head, '%PDF-', `${profile.id}: el archivo no inicia como PDF.`);
     assert.ok(inspection.hasEof, `${profile.id}: el archivo PDF no contiene cierre EOF.`);
     assert.ok(inspection.pageCount >= 1, `${profile.id}: el PDF no tiene paginas detectables.`);
     assert.ok(inspection.size > 10000, `${profile.id}: el PDF pesa demasiado poco.`);
-    log(`${profile.id}: PDF real descargado en ${downloaded.fullPath} (${inspection.size} bytes).`);
+    log(`${profile.id}: PDF impreso desde HTML en ${downloaded.fullPath} (${inspection.size} bytes).`);
     return;
   }
 
-  assert.ok(result.downloadAttempt && result.downloadAttempt.href.startsWith('blob:'), `${profile.id}: la descarga no uso blob.`);
-  assert.strictEqual(result.downloadAttempt.download, PDF_FILENAME, `${profile.id}: nombre de PDF incorrecto.`);
-  assert.strictEqual(result.blobCheck.type, 'application/pdf', `${profile.id}: MIME incorrecto.`);
-  assert.strictEqual(result.blobCheck.head, '%PDF-', `${profile.id}: blob no inicia como PDF.`);
-  assert.ok(result.blobCheck.hasEof, `${profile.id}: blob PDF sin EOF.`);
-  assert.ok(result.blobCheck.size > 10000, `${profile.id}: blob PDF pesa demasiado poco.`);
-  log(`${profile.id}: PDF blob validado sin desbordamiento horizontal.`);
+  log(`${profile.id}: reporte HTML imprimible validado sin desbordamiento horizontal.`);
 }
 
 async function main() {

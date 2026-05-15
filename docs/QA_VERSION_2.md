@@ -53,7 +53,8 @@ Validó:
 - Opciones visuales compactas en reactivos 5, 7 y 8.
 - Textos alternativos de imágenes sin frases de generación ni instrucciones internas.
 - Flujo de persistencia de progreso: llave exclusiva, firma completa del contenido, fecha límite real del cronómetro, modal de recarga, botones con emojis, guardado en `pagehide` y `visibilitychange`.
-- Descarga del resultado: PDF de reactivos incorrectos para iOS, Android y Windows, generación local con `pdfmake`, descarga directa mediante `Blob` y paginación controlada.
+- Descarga del resultado: reporte HTML imprimible de reactivos incorrectos para iOS, Android y Windows, con CSS institucional IFR y paginación controlada para guardar como PDF.
+- Diseño del reporte: portada institucional IFR, escudo visible, Plus Jakarta Sans, banda azul, acento verde, métricas en tarjetas y encabezado editorial por reactivo.
 - Control de marcas visuales en Español y Habilidad verbal: sin resaltados ni subrayados cuando el planteamiento no los pide explícitamente; marcas conservadas solo en los reactivos donde la consigna las solicita.
 - Distribución de respuestas dentro de rango.
 - Sin tres respuestas iguales consecutivas.
@@ -97,8 +98,8 @@ Validado:
 - En móvil, la modal no genera desplazamiento horizontal y los botones se ajustan al ancho disponible.
 - Storage corrupto o inválido se descarta sin romper la aplicación.
 - El cronómetro cierra por tiempo aunque el hilo del navegador quede bloqueado más tiempo que el restante.
-- En modo escritorio Windows, la descarga genera un PDF real en `C:\Users\spart\Downloads`.
-- Con perfiles móviles iPhone y Android, la descarga genera un `blob:` PDF con MIME `application/pdf`, nombre correcto y sin desplazamiento horizontal.
+- En modo escritorio Windows, la QA genera un PDF real desde el HTML imprimible en `C:\Users\spart\Downloads`.
+- Con perfiles móviles iPhone y Android, el reporte imprimible conserva nombre esperado, diseño IFR y ausencia de desplazamiento horizontal.
 
 ### QA automatizada de navegador para descarga
 
@@ -112,10 +113,10 @@ Resultado: pasó.
 
 Validó:
 
-- Perfil Windows Chrome: PDF real descargado como `C:\Users\spart\Downloads\reactivos-que-debo-mejorar-ecoems-ifr-simulacion-2.pdf`, válido, con cierre EOF y páginas detectables.
-- Perfil Android Chrome: PDF `blob:` con MIME `application/pdf`, nombre correcto y ausencia de desplazamiento horizontal.
-- Perfil iPhone Safari: PDF `blob:` con MIME `application/pdf`, nombre correcto y ausencia de desplazamiento horizontal.
-- Perfil iPhone Chrome: PDF `blob:` con MIME `application/pdf`, nombre correcto y ausencia de desplazamiento horizontal.
+- Perfil Windows Chrome: PDF real generado desde el HTML imprimible como `C:\Users\spart\Downloads\reactivos-que-debo-mejorar-ecoems-ifr-simulacion-2.pdf`, válido, con cierre EOF y páginas detectables.
+- Perfil Android Chrome: reporte HTML imprimible con diseño IFR, nombre correcto y ausencia de desplazamiento horizontal.
+- Perfil iPhone Safari: reporte HTML imprimible con diseño IFR, nombre correcto y ausencia de desplazamiento horizontal.
+- Perfil iPhone Chrome: reporte HTML imprimible con diseño IFR, nombre correcto y ausencia de desplazamiento horizontal.
 - El botón final usa exactamente el texto `Obtener reactivos que debo mejorar`.
 
 ## Evidencia
