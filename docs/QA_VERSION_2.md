@@ -126,6 +126,7 @@ Validó:
 - Captura móvil del reactivo 74 con diagrama generado por `imagegen`: `docs/qa/ecoems-simulacion-2-mobile-reactivo-74-imagegen.png`.
 - Captura móvil del reactivo 75 con apoyo visual de figura compuesta: `docs/qa/ecoems-simulacion-2-mobile-reactivo-75-imagegen.png`.
 - Captura móvil del reactivo 76 con apoyo visual de sólidos: `docs/qa/ecoems-simulacion-2-mobile-reactivo-76-imagegen.png`.
+- Captura móvil del reactivo 94 con mapa de coordenadas generado por `imagegen`: `docs/qa/ecoems-simulacion-2-mobile-reactivo-94-imagegen.png`.
 
 ## Estado de publicación
 
