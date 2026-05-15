@@ -477,22 +477,9 @@ def reactivo_113() -> None:
 
 
 def reactivo_115() -> None:
-    image, draw = canvas(1024, 768)
-    # Hand.
-    draw.ellipse((72, 360, 190, 480), fill="#F2C6A0", outline="#B77B5B", width=4)
-    for offset in range(4):
-        draw.rounded_rectangle((150 + offset * 22, 330 - offset * 5, 190 + offset * 22, 395 - offset * 4), radius=16, fill="#F2C6A0", outline="#B77B5B", width=3)
-    draw_arrow(draw, (134, 285), (134, 210), fill=IFR_BLUE_2, width=5)
-    draw_arrow(draw, (134, 515), (134, 590), fill=IFR_BLUE_2, width=5)
-
-    # Transverse wave.
-    points = []
-    for x in range(170, 910, 10):
-        y = 385 + math.sin((x - 170) / 90 * math.pi) * 85
-        points.append((x, y))
-    draw.line(points, fill=IFR_BLUE, width=8)
-    draw_arrow(draw, (735, 245), (870, 245), fill=IFR_GREEN, width=6)
-    save(image, "assets/fisica/reactivo-115-onda-cuerda.png")
+    # Reactivo 115 usa un apoyo visual generado con imagegen.
+    # No se regenera aquí para no restaurar el diagrama vectorial anterior.
+    return
 
 
 def main() -> None:

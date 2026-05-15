@@ -6538,7 +6538,7 @@ window.IFR_APP_DATA = {
         "kind": "image",
         "position": "base",
         "required": true,
-        "src": "assets/fisica/reactivo-115-onda-cuerda.png",
+        "src": "assets/fisica/reactivo-115-onda-cuerda-imagegen.png",
         "alt": "Física, reactivo 115: Onda transversal en una cuerda para reconocer la transmisión de energía.",
         "internalInstructionRemoved": true
       },
@@ -6547,7 +6547,7 @@ window.IFR_APP_DATA = {
           "kind": "image",
           "position": "base",
           "required": true,
-          "src": "assets/fisica/reactivo-115-onda-cuerda.png",
+          "src": "assets/fisica/reactivo-115-onda-cuerda-imagegen.png",
           "alt": "Física, reactivo 115: Onda transversal en una cuerda para reconocer la transmisión de energía.",
           "internalInstructionRemoved": true
         }

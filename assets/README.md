@@ -1,10 +1,10 @@
 # Assets de la simulación 2
 
-Los assets visuales obligatorios de la simulación 2 están generados como PNG estables, por carpeta temática.
+Los assets visuales obligatorios de la simulación 2 están guardados como PNG estables, por carpeta temática.
 
 ## Generación
 
-Script reproducible:
+Script reproducible para los assets determinísticos. Los assets creados con `imagegen` se conservan como PNG versionados en el repositorio y no deben sobrescribirse con diagramas generados por código.
 
 ```powershell
 python tools/generate_exam_assets.py
@@ -30,6 +30,6 @@ python tools/generate_exam_assets.py
 - `assets/fisica/reactivo-108-equilibrio-fuerzas.png`
 - `assets/fisica/reactivo-112-brujula.png`
 - `assets/fisica/reactivo-113-corriente-brujula.png`
-- `assets/fisica/reactivo-115-onda-cuerda.png`
+- `assets/fisica/reactivo-115-onda-cuerda-imagegen.png`
 
 No deben sustituirse por assets de la simulación 1.

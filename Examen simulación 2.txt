@@ -6034,7 +6034,7 @@ Estilo: limpio, académico, legible, sin elementos decorativos innecesarios, con
 Texto visible permitido: ninguno, salvo una flecha simple sin texto.
 Texto visible prohibido: no incluir respuesta correcta, pista, explicación, «energía» ni «materia».
 Formato sugerido: PNG o WebP, 1024 × 768 px.
-Destino sugerido: /assets/fisica/reactivo-115-onda-cuerda.png
+Destino sugerido: /assets/fisica/reactivo-115-onda-cuerda-imagegen.png
 Validación: debe verse que la cuerda se perturba y que la onda avanza a lo largo de ella.
 [/INSTRUCCIÓN INTERNA PARA CODEX]
 
