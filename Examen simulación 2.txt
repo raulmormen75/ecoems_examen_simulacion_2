@@ -4913,7 +4913,7 @@ TABLA DE CONTROL DEL PAQUETE
 | 99 | Geografía | Hidrocarburos en México: regiones vinculadas a actividad petrolera | b) | No | No | No | Medio: evitar confundir regiones petroleras con zonas mineras o turísticas |
 | 100 | Geografía | Transporte marítimo: función y mercancías que mueve | e) | No | No | No | Bajo: reconocer traslado de mercancías pesadas o de gran volumen |
 | 101 | Geografía | Combustibles alternativos: aceites vegetales | a) | No | No | No | Bajo: identificar biodiésel como alternativa energética |
-| 102 | Geografía | Organismos internacionales: FMI | d) | No | No | No | Bajo: mantener explicación escolar, no financiera avanzada |
+| 102 | Geografía | Organizaciones mundiales: cooperación internacional | d) | No | No | No | Bajo: mantener explicación escolar, no financiera avanzada |
 | 103 | Geografía | Cambios geopolíticos: fronteras, Estados y poder territorial | c) | No | No | No | Medio: cuidar que la respuesta no dependa de memorizar un caso específico |
 | 104 | Geografía | Patrimonio cultural en México: sitio y entidad federativa | b) | No | No | No | Bajo: verificar relación sitio cultural y estado |
 
@@ -5297,7 +5297,7 @@ REACTIVO 102
 Geografía
 
 Bloque que corresponde al área temática:
-Organismos internacionales: FMI
+Organizaciones mundiales: cooperación internacional
 
 Texto base:
 No aplica.

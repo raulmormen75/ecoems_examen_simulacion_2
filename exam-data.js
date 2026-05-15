@@ -5743,7 +5743,7 @@ window.IFR_APP_DATA = {
       "number": 102,
       "areaId": "geografia",
       "areaName": "Geografía",
-      "block": "Organismos internacionales: FMI",
+      "block": "Organizaciones mundiales: cooperación internacional",
       "baseText": null,
       "basePill": null,
       "prompt": "Un país enfrenta problemas para pagar compromisos externos y solicita apoyo financiero internacional. También recibe recomendaciones sobre estabilidad económica y manejo de recursos.\n\n¿Qué organismo internacional se relaciona principalmente con este tipo de apoyo?",
